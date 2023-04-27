@@ -23,6 +23,7 @@ body {
 
 .header_menu {
   max-width: 400px !important;
+  
   margin-left: 0 !important;
 }
 
@@ -90,7 +91,7 @@ body {
 
 .header_container {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  /* padding: 10px 0 25px; */
+  padding: 10px 0 25px !important;
 }
 
 
@@ -99,7 +100,10 @@ body {
   background: var(--gosu-red-gradient) !important;
   border-color: var(--gosu-red-gradient) !important;
   margin-left: 40px; 
+  display: flex !important;
   flex-direction: row !important; 
+  align-items: center;
+  justify-content: center;
   width: 153.7px;
   height: 68.74px;
   font-size: 24px;
@@ -111,6 +115,7 @@ body {
 }
 #cart {
   font-size: 24px;
+  margin: 19px 22px 19px 14px;
 }
 
 a {
