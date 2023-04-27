@@ -110,9 +110,29 @@ body {
   border-radius: 25px !important;
 }
 
+.toggle_btn {
+  /* color: black !important;
+  background-color: white !important; */
+  margin-right: 20px !important;
+  border-radius: 0px !important;
+}
+
 .text_size {
   font-size: 24px;
 }
+
+.form_wrapper {
+  margin-top: 23px;
+  display: flex;
+  max-width: 630px;
+}
+
+.form_wrapper label {
+  font-size: 20px;
+  width: 300px !important;
+  margin-right: 20px !important;
+}
+
 #cart {
   font-size: 24px;
   margin: 19px 22px 19px 14px;

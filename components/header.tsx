@@ -6,7 +6,7 @@ import BurgMenu from "./ui-elements/burg-menu";
 import SearchBar from "./ui-elements/search-bar";
 import Login from "./authorize/login";
 import AdressBar from "./ui-elements/address-bar";
-import Cart from "@/pages/cart";
+import Cart from "@/components/cart";
 
 function Header(): JSX.Element {
   const router = useRouter();
