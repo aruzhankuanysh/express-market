@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Header from '@/components/header';
 import PersonalArea from '@/components/authorize/personal-area';
+import Footer from '@/components/footer';
 
 const Index: NextPage = () => {
     return (
@@ -12,6 +13,7 @@ const Index: NextPage = () => {
             <Container >
                 <PersonalArea />
             </Container>
+            <Footer/>
         </>
     )
 }

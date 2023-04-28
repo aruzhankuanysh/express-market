@@ -1,7 +1,7 @@
 :root {
   --gosu-grey: rgba(217, 217, 217, 0.5);
-  --gosu-light-grey: rgba(0, 0, 0, 0.2);
-  --gosu-second-grey: rgba(0, 0, 0, 0.5);
+  --gosu-transparent: rgba(0, 0, 0, 0.2);
+  --gosu-second-transparent: rgba(0, 0, 0, 0.5);
   --gosu-black: black;
   --gosu-red: #d81d24;
   --gosu-red-gradient: linear-gradient(
@@ -9,6 +9,7 @@
     rgba(216, 29, 36, 0.7) 1.59%,
     rgba(241, 103, 31, 0.7) 98.19%
   );
+  --gosu-footer-gradient: linear-gradient(270.06deg, rgba(218, 31, 38, 0.5) 0.05%, rgba(241, 103, 31, 0.5) 99.95%)
 }
 
 * {
@@ -83,6 +84,10 @@ body {
 
 } */
 
+h1 {
+  font-size: 32px !important; 
+}
+
 #adress_bar {
   width: 279.24px;
   height: 68.74px;
@@ -95,6 +100,7 @@ body {
 }
 
 .header_container {
+  max-height: 113px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px 0 25px !important;
 }
@@ -156,7 +162,7 @@ body {
 }
 
 .form_input {
-  border: 1px solid var(--gosu-second-grey) !important;
+  border: 1px solid var(--gosu-transparent) !important;
   max-width: 320px;
   height: 52px !important;
 }
@@ -180,7 +186,58 @@ body {
   margin: 19px 22px 19px 14px;
 }
 
+.footer {
+  background: var(--gosu-footer-gradient) ;
+  height: 502px !important;
+  padding: 0 !important;
+}
+
+.footer_wrapper {
+    display:flex !important;
+    flex-direction: row !important;
+}
+
+.footer_text {
+  color: white;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.footer_text:first-child {
+  color: var(--gosu-second-transparent) ;
+}
+
+.footer_text a {
+  text-decoration-line: underline;
+}
+
+.About_wrapper {
+  color: var(--gosu-second-transparent) ;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.social_wrapper {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-end;
+  margin: 0 !important  ;
+  padding: 0 !important;
+}
+
+.bottom_container {
+  border-top: 1px solid var(--gosu-transparent);
+  color: var(--gosu-second-transparent);
+  font-weight: 500;
+  font-size: 24px;
+
+}
+
+.bottom_container_col {
+  padding-left: 330px !important;
+}
+
+
 a {
-  color: inherit;
-  text-decoration: none;
+  color: inherit !important;
 }
