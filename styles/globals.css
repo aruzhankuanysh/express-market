@@ -1,7 +1,9 @@
 :root {
   --gosu-grey: rgba(217, 217, 217, 0.5);
   --gosu-light-grey: rgba(0, 0, 0, 0.2);
+  --gosu-second-grey: rgba(0, 0, 0, 0.5);
   --gosu-black: black;
+  --gosu-red: #d81d24;
   --gosu-red-gradient: linear-gradient(
     271.02deg,
     rgba(216, 29, 36, 0.7) 1.59%,
@@ -23,7 +25,7 @@ body {
 
 .header_menu {
   max-width: 400px !important;
-  
+
   margin-left: 0 !important;
 }
 
@@ -37,21 +39,25 @@ body {
   border-radius: 25px;
 }
 
+.btn_login {
+  width: 107.85px;
+  height: 68.74px;
+  margin-left: 40px;
+  margin-right: 40px;
+  border-radius: 25px !important;
+}
+
 .btn_primary {
   background: var(--gosu-grey) !important;
   border-color: var(--gosu-grey) !important;
   color: var(--gosu-black) !important;
-  margin-left: 40px;
-  margin-right: 40px ; 
+
   font-size: 24px;
-  width: 107.85px;
-  height: 68.74px;
-  border-radius: 25px !important;
 }
 
 #search_bar {
   background-image: url(../public/search.svg);
-  
+
   background-repeat: no-repeat;
   font-size: 24px;
   background-position: 10px 10px;
@@ -80,9 +86,8 @@ body {
 #adress_bar {
   width: 279.24px;
   height: 68.74px;
-  margin-left: 40px; 
+  margin-left: 40px;
 }
-
 
 .burger_menu:hover {
   transition: 30ms;
@@ -94,27 +99,50 @@ body {
   padding: 10px 0 25px !important;
 }
 
-
-
 .cart_btn {
-  background: var(--gosu-red-gradient) !important;
-  border-color: var(--gosu-red-gradient) !important;
-  margin-left: 40px; 
-  display: flex !important;
-  flex-direction: row !important; 
-  align-items: center;
-  justify-content: center;
   width: 153.7px;
   height: 68.74px;
   font-size: 24px;
+}
+
+.gradient_btn {
+  background: var(--gosu-red-gradient) !important;
+  border-color: var(--gosu-red-gradient) !important;
+  margin-left: 40px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
   border-radius: 25px !important;
+  justify-content: center;
+}
+
+.save_btn_wrap {
+  max-width: 149px !important;
+}
+
+.save_btn {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  width: 148.97px;
+  height: 52.08px;
+  margin: 0 !important;
 }
 
 .toggle_btn {
-  /* color: black !important;
-  background-color: white !important; */
+  display: flex !important;
+  justify-content: flex-start !important ;
+  background-color: white !important;
   margin-right: 20px !important;
   border-radius: 0px !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  width: 203px !important;
+  max-width: 203px !important;
+}
+
+.selected-radio {
+  color: var(--gosu-red) !important;
 }
 
 .text_size {
@@ -124,13 +152,27 @@ body {
 .form_wrapper {
   margin-top: 23px;
   display: flex;
-  max-width: 630px;
+  max-width: 636px;
+}
+
+.form_input {
+  border: 1px solid var(--gosu-second-grey) !important;
+  max-width: 320px;
+  height: 52px !important;
 }
 
 .form_wrapper label {
   font-size: 20px;
-  width: 300px !important;
-  margin-right: 20px !important;
+  width: 340px !important;
+  padding-left: 12px !important;
+}
+
+.logout_btn {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  width: 202.83px !important;
+  height: 52.08px !important;
 }
 
 #cart {

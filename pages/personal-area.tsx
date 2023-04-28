@@ -9,8 +9,8 @@ const Index: NextPage = () => {
     return (
         <>
             <Header/>
-            <Container>
-                <PersonalArea/>
+            <Container >
+                <PersonalArea />
             </Container>
         </>
     )

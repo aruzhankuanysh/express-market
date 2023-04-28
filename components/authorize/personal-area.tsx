@@ -21,10 +21,17 @@ const PersonalArea = (): JSX.Element => {
   // const [gender. setGender] = useState(authState?.user?.gender ?? "male");
   // const [phone, setPhone] = useState(authState?.user?.phone ?? "");
   // const [name, setName] = useState(authState?.user?.name ?? "");
+  const [checked, setChecked] = useState(false);
+  const [radioValue, setRadioValue] = useState("1");
+
+  const radios = [
+    { name: "Профиль", value: "1" },
+    { name: "История заказов", value: "2" },
+  ];
 
   const [orders, setOrders] = useState([]);
 
-//   const dispatch = useDispatch();
+  //   const dispatch = useDispatch();
   const router = useRouter();
 
   // const [birthday, setBirthday] = useState<Date>(() => (authState.user?.birthday ? new Date(authState.user?.birthday.split("T")[0]) : new Date()));
@@ -35,6 +42,10 @@ const PersonalArea = (): JSX.Element => {
     InProgress: "В Работе",
     Succes: "Создан",
   };
+
+  function combineClasses(...classes: (string | undefined | false)[]): string {
+    return classes.filter((c): c is string => typeof c === "string").join(" ");
+  }
 
   // const UpdateData = async () => {
   //     const result = await getEmitHelpers(authState.authToken);
@@ -67,46 +78,70 @@ const PersonalArea = (): JSX.Element => {
   //     setPhone(authState?.user?.phone ?? "");
   //     setName(authState?.user?.name ?? "");
   //   }, [authState?.user])
-//   const [active, setActive] = useState(1);
+  //   const [active, setActive] = useState(1);
 
-//   const handleChange = (value) => {
-//     setActive(value);
-//     const toggleBtn = document.querySelector('.toggle_btn');
-//     if (value === 1) {
-//       toggleBtn.classList.add('profile');
-//       toggleBtn.classList.remove('history');
-//     } else {
-//       toggleBtn.classList.add('history');
-//       toggleBtn.classList.remove('profile');
-//     }
-//   };
+  //   const handleChange = (value) => {
+  //     setActive(value);
+  //     const toggleBtn = document.querySelector('.toggle_btn');
+  //     if (value === 1) {
+  //       toggleBtn.classList.add('profile');
+  //       toggleBtn.classList.remove('history');
+  //     } else {
+  //       toggleBtn.classList.add('history');
+  //       toggleBtn.classList.remove('profile');
+  //     }
+  //   };
 
   return (
     <>
       <Container>
-        <Row>
+        <Row className="my-4">
           <h1>Профиль</h1>
         </Row>
-        <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-            <ToggleButton id="tgb-radio-1" className="toggle_btn" value={1}        > Профиль </ToggleButton>
-            <ToggleButton id="tbg-radio-2" className="toggle_btn" value={2}> История заказов </ToggleButton>
-        </ToggleButtonGroup>
+        <ButtonGroup>
+          {radios.map((radio, idx) => (
+            <ToggleButton
+              key={idx}
+              id={`radio-${idx}`}
+              type="radio"
+              variant={
+                radioValue === radio.value ? "danger" : "outline-secondary"
+              }
+              name="radio"
+              value={radio.value}
+              checked={radioValue === radio.value}
+              onChange={(e) => setRadioValue(e.currentTarget.value)}
+              className={combineClasses(
+                "toggle_btn",
+                radioValue === radio.value && ("selected-radio" as const)
+              )}
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>
         <Form.Group className="form_wrapper">
           <Form.Label>Ваше имя</Form.Label>
-          <Form.Control />
+          <Form.Control className="form_input" />
         </Form.Group>
         <Form.Group className="form_wrapper">
           <Form.Label>Мобильный телефон</Form.Label>
-          <Form.Control />
+          <Form.Control className="form_input" />
         </Form.Group>
         <Form.Group className="form_wrapper">
           <Form.Label>Дата рождения</Form.Label>
-          <Form.Control />
+          <Form.Control className="form_input" />
         </Form.Group>
-        <Form.Group className="form_wrapper">
+        <Form.Group className="form_wrapper" controlId="exampleForm.ControlInput1">
           <Form.Label>Электронная почта</Form.Label>
-          <Form.Control />
+          <Form.Control className="form_input" placeholder="yourmail@gmail.com"/>
         </Form.Group>
+        <Col md={{ span: 3, offset: 3 }} className="my-5 save_btn_wrap" style={{ maxWidth: '149px !important' }}>
+          <Button className="gradient_btn save_btn" >Сохранить</Button>
+        </Col>
+        <Col>
+            <Button className="btn_primary logout_btn">Выйти из аккаунта</Button>
+        </Col>
       </Container>
     </>
   );
