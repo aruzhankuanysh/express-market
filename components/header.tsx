@@ -12,7 +12,7 @@ function Header(): JSX.Element {
   const router = useRouter();
   return (
     <>
-      <Navbar bg="light" expand="lg" className="header_container px-4 py-3">
+      <Navbar bg="light" expand="lg" className="header_container mb-4 px-4 py-3">
         <Container className="d-flex ps-3">
           <Row>
             <Col>
