@@ -94,8 +94,8 @@ const PersonalArea = (): JSX.Element => {
 
   return (
     <>
-      <Container>
-        <Row className="my-4">
+      <Container className="mb-5">
+        <Row className="my-4 ">
           <h1>Профиль</h1>
         </Row>
         <ButtonGroup>

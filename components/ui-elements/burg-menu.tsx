@@ -11,7 +11,7 @@ function BurgMenu(): JSX.Element {
   return (
     <>
       <button className="burger_menu" onClick={handleShow}>
-        <Image src="burger.svg" />
+        <Image className="burger_menu_image" src="burger.svg" />
       </button>
 
       <Modal show={show} onHide={handleClose}>

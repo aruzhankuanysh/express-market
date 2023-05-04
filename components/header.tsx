@@ -12,32 +12,43 @@ function Header(): JSX.Element {
   const router = useRouter();
   return (
     <>
-    
-      <Navbar bg="light" expand="lg" className="my-3 header_container">
-        <Container fluid>
-          <Container className="header_menu d-flex justify-content-start pl-3 flex-grow-1" style={{ marginRight: '40px' }}>
-            <Row>
-              <Col>
-                <Image src="express-logo.svg"></Image>
-              </Col>
-              <Col>
+      <Navbar
+        bg="light"
+        expand="lg"
+        className="header_container mb-4 px-4 py-3"
+      >
+        <Container className="d-flex ps-3">
+          <Row>
+            <Col>
+              <Image
+                fluid
+                src="img/express-logo.svg"
+                alt=""
+                style={{ height: "42px" }}
+              />
+            </Col>
+            <Col md="auto">
               {/* Нужно деоделать модальное окно */}
-                <BurgMenu /> 
-              </Col>
-            </Row>
-          </Container>
-
-          <div className="d-flex align-items-center flex-grow-1 mr-3">
-            <SearchBar />
-          </div>
-
-          <Nav className="nav ml-auto d-flex align-items-center justify-content-end " style={{ flexWrap: 'nowrap', fontSize: '14px', letterSpacing: '-0.5px' }}>
-            {/* Нужно деоделать модальное окно */}
-            <AdressBar />
-            <Cart />
-            <Login />
-          </Nav>
+              <BurgMenu />
+            </Col>
+          </Row>
         </Container>
+
+        <SearchBar />
+
+        <Nav
+          className="nav d-flex align-items-center justify-content-end "
+          style={{
+            flexWrap: "nowrap",
+            fontSize: "14px",
+            letterSpacing: "-0.5px",
+          }}
+        >
+          {/* Нужно деоделать модальное окно */}
+          <AdressBar />
+          <Cart />
+          <Login />
+        </Nav>
       </Navbar>
     </>
   );
