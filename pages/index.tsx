@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import MenuSideNav from '@/components/catalog/menu-side-nav';
+import MenuSpecialOffers from '@/components/catalog/menu-offers';
+import Advice from '@/components/catalog/menu-advice';
 
 export default function Home() {
   return (
@@ -12,18 +14,16 @@ export default function Home() {
       <Header />
       <Container id='comp_content'>
         <Row>
-          <Col xs="3" lg="3" xl='3' className=''>
+          <Col xs="3" lg="3" xl='3' className='me-4'>
             <h5>Каталог</h5>
             <MenuSideNav />
           </Col>
-          <Col xs="9" lg xl >
-            <Container>
-              <Row>
-              </Row>
-              <Row>
+          <Col xs="9" lg xl className='pe-0'>
 
-              </Row>
-            </Container>
+            <MenuSpecialOffers />
+
+            {/* <Advice /> */}
+
           </Col>
         </Row>
       </Container>

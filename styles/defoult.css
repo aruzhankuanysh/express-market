@@ -1,66 +1,91 @@
-.accordion{
-    --bs-accordion-active-color: #000000;
-    --bs-accordion-btn-icon-transform: rotate(0deg);
-    --bs-accordion-btn-icon-transform-no-active: rotate(-90deg);
+.accordion {
+  --bs-accordion-active-color: #000000;
+  --bs-accordion-btn-icon-transform: rotate(0deg);
+  --bs-accordion-btn-icon-transform-no-active: rotate(-90deg);
 }
 .accordion-button {
-    padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
-    padding-left: 0;
-    font-size: 1rem;
-    color: var(--bs-accordion-btn-color);
-    text-align: left;
-    background-color: var(--gosu-bg);
-    border: 0;
-    border-radius: 0;
-    overflow-anchor: none;
-    transition: var(--bs-accordion-transition);
+  padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+  padding-left: 0;
+  padding-bottom: 0;
+  font-size: 1rem;
+  color: var(--bs-accordion-btn-color);
+  text-align: left;
+  background-color: var(--gosu-bg);
+  border: 0;
+  border-radius: 0;
+  overflow-anchor: none;
+  transition: var(--bs-accordion-transition);
 }
-.accordion-button:hover{
-    color: var(--gosu-second-transparent);
+.accordion-button:hover {
+  color: var(--gosu-second-transparent);
 }
 .accordion-button:focus {
-    border-color: var(--bs-accordion-btn-focus-border-color);
-    outline: 0;
-    box-shadow: none;
+  border-color: var(--bs-accordion-btn-focus-border-color);
+  outline: 0;
+  box-shadow: none;
 }
 .accordion-button::after {
-    flex-shrink: 0;
-    width: var(--bs-accordion-btn-icon-width);
-    height: var(--bs-accordion-btn-icon-width);
-    margin-left: auto;
-    content: "";
-    background-image: var(--bs-accordion-btn-icon);
-    transform: var(--bs-accordion-btn-icon-transform-no-active);
-    background-repeat: no-repeat;
-    background-size: var(--bs-accordion-btn-icon-width);
-    transition: var(--bs-accordion-btn-icon-transition);
+  flex-shrink: 0;
+  width: var(--bs-accordion-btn-icon-width);
+  height: var(--bs-accordion-btn-icon-width);
+  margin-left: auto;
+  content: "";
+  background-image: var(--bs-accordion-btn-icon);
+  transform: var(--bs-accordion-btn-icon-transform-no-active);
+  background-repeat: no-repeat;
+  background-size: var(--bs-accordion-btn-icon-width);
+  transition: var(--bs-accordion-btn-icon-transition);
 }
 .accordion-button:not(.collapsed) {
-    color: var(--gosu-black);
-    background-color: var(--gosu-bg);
+  color: var(--gosu-black);
+  background-color: var(--gosu-bg);
+  border-bottom: 1px solid #00000017;
 }
 .accordion-item {
-    color: var(--bs-accordion-color);
-    background-color: var(--gosu-bg);
-    border: 0;
+  color: var(--bs-accordion-color);
+  background-color: var(--gosu-bg);
+  border: 0;
 }
 .accordion-button:not(.collapsed)::after {
-    background-image: var(--bs-accordion-btn-icon);
-    transform: var(--bs-accordion-btn-icon-transform);
+  background-image: var(--bs-accordion-btn-icon);
+  transform: var(--bs-accordion-btn-icon-transform);
 }
 .btn-primary {
-    --bs-btn-color: var(--gosu-black);
-    --bs-btn-bg: var(--gosu-bg);
-    --bs-btn-border-color: var(--gosu-bg);
-    --bs-btn-hover-color: var(--gosu-second-transparent);
-    --bs-btn-hover-bg:  var(--gosu-bg);
-    --bs-btn-hover-border-color: var(--gosu-bg);
-    --bs-btn-focus-shadow-rgb: var(--gosu-bg);
-    --bs-btn-active-color: var(--gosu-black);
-    --bs-btn-active-bg: var(--gosu-bg);
-    --bs-btn-active-border-color: var(--gosu-bg);
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0);
-    --bs-btn-disabled-color: var(--gosu-bg);
-    --bs-btn-disabled-bg: var(--gosu-bg);
-    --bs-btn-disabled-border-color: var(--gosu-bg);
+  --bs-btn-color: var(--gosu-black);
+  --bs-btn-bg: var(--gosu-bg);
+  --bs-btn-border-color: var(--gosu-bg);
+  --bs-btn-hover-color: var(--gosu-second-transparent);
+  --bs-btn-hover-bg: var(--gosu-bg);
+  --bs-btn-hover-border-color: var(--gosu-bg);
+  --bs-btn-focus-shadow-rgb: var(--gosu-bg);
+  --bs-btn-active-color: var(--gosu-black);
+  --bs-btn-active-bg: var(--gosu-bg);
+  --bs-btn-active-border-color: var(--gosu-bg);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0);
+  --bs-btn-disabled-color: var(--gosu-bg);
+  --bs-btn-disabled-bg: var(--gosu-bg);
+  --bs-btn-disabled-border-color: var(--gosu-bg);
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
