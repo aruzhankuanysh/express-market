@@ -18,6 +18,8 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  counter-reset: none;
+  /* overflow: auto; */
 }
 
 html,
@@ -26,8 +28,9 @@ body {
   overflow-x: hidden;
   background-color: var(--gosu-bg);
 }
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
-  margin-bottom: 0;
+
+.bg-orange{
+  background: linear-gradient(268.94deg, rgba(218, 53, 56, 0.7) -2.09%, rgba(242, 109, 53, 0.7) 102.18%);
 }
 
 #comp_content{
@@ -86,6 +89,19 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 
 #adress_bar {
   width: 256px;
+}
+
+.action-tag{
+  transform: rotate(-7.2deg);
+}
+
+.text-strikethrough{
+  position: absolute;
+  left: -8px;
+  top: -12px;
+  transform: rotate(-10deg);
+  color: #d81d24 !important;
+  font-weight: 900;
 }
 
 

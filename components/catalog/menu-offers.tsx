@@ -15,11 +15,11 @@ const MenuSpecialOffers = ({  }): JSX.Element => {
           </Button>
         </Col>
         <Col className=''>
-          <Button className='text-light p-0 mb-3'>
+          <Button className='position-relative text-light p-0 mb-3'>
             <h2 className='position-absolute fw-bold p-4'>Так еще вкуснее</h2>
             <Image fluid src='/img/tastier.svg' />
           </Button>
-          <Button className='text-light p-0'>
+          <Button className='position-relative text-light p-0'>
             <h2 className='position-absolute fw-bold p-4'>Без сахара</h2>
             <Image fluid src='/img/sugarless.svg' />
           </Button>

@@ -14,15 +14,15 @@ export default function Home() {
       <Header />
       <Container id='comp_content'>
         <Row>
-          <Col xs="3" lg="3" xl='3' className='me-4'>
+          <Col xs="3" lg="3" xl='3' className='pe-4'>
             <h5>Каталог</h5>
             <MenuSideNav />
           </Col>
-          <Col xs="9" lg xl className='pe-0'>
+          <Col xs="9" lg='9' xl='9' className='pe-0'>
 
             <MenuSpecialOffers />
+            <Advice />
 
-            {/* <Advice /> */}
 
           </Col>
         </Row>
