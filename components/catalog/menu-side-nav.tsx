@@ -4,7 +4,7 @@ import { Button, Container, Navbar } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 
 
-const MenuSideNav = ({ r }): JSX.Element => {
+const MenuSideNav = ({  }): JSX.Element => {
 
   return (
     <>
