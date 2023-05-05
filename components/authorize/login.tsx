@@ -19,13 +19,13 @@ function Login(): JSX.Element {
   };
   return (
     <>
-      <Button className="btn_primary btn_login" size="sm" onClick={handleShow}>
-        <span className="text_size">Войти</span>
-      </Button>
+         <Button className='btn_grey ms-4 rounded-4 height-3 px-3' onClick={handleShow}>
+           <span className="text_size"><h5>Войти</h5></span>
+        </Button>
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header className="modal_header" closeButton></Modal.Header>
-        <Image className="login_logo" src="login_logo.svg" />
+        <Image className="login_logo" src="img/login_logo.svg" />
 
         <Modal.Body>
           <Modal.Title className="modal_heading">

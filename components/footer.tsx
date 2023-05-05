@@ -7,7 +7,7 @@ function Footer(): JSX.Element {
         <Container className="footer_container" fluid>
           <Container className="mt-2 pt-3">
             <Col className="mt-4">
-              <Image className="footer_logo" src="express-logo.svg" />
+              <Image className="footer_logo" src="img/express-logo.svg" />
             </Col>
             <Container fluid className="footer_wrapper">
               <Container>
@@ -34,13 +34,13 @@ function Footer(): JSX.Element {
               <Container className="social_wrapper">
                 <Row>
                   <Col>
-                    <Image src="facebook.svg" />
+                    <Image src="img/facebook.svg" />
                   </Col>
                   <Col>
-                    <Image src="instagram.svg" />
+                    <Image src="img/instagram.svg" />
                   </Col>
                   <Col>
-                    <Image src="whatsapp.svg" />
+                    <Image src="img/whatsapp.svg" />
                   </Col>
                 </Row>
               </Container>

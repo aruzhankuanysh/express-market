@@ -2,11 +2,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Container, Image, Nav, Navbar } from "react-bootstrap";
 import { useRouter } from "next/router";
-import BurgMenu from "./ui-elements/burg-menu";
 import SearchBar from "./ui-elements/search-bar";
 import Login from "./authorize/login";
 import AdressBar from "./ui-elements/address-bar";
 import Cart from "@/components/cart";
+import DropdownMenu from "./ui-elements/dropdown-menu";
+
 
 function Header(): JSX.Element {
   const router = useRouter();
@@ -29,7 +30,7 @@ function Header(): JSX.Element {
             </Col>
             <Col md="auto">
               {/* Нужно деоделать модальное окно */}
-              <BurgMenu />
+              <DropdownMenu />
             </Col>
           </Row>
         </Container>

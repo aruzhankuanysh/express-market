@@ -1,9 +1,10 @@
-import "@/styles/globals.css";
 import { AppType } from 'next/app';
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Provider } from "react-redux";
-import '../styles/globals.css';
+import '../styles/styles.css';
+import '../styles/default.css';
+import '../styles/fonts.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from "react-bootstrap";
 import dynamic from 'next/dynamic';

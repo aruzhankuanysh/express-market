@@ -3,9 +3,9 @@ import { Button, Col, Image, Row } from "react-bootstrap";
 function Cart(): JSX.Element {
   return (
     <>
-      <Button className="cart_btn gradient_btn">
-        <Image src="cart.svg" />
-        <p id="cart">300$</p>
+      <Button className="cart_btn btn_orange_gradient rounded-4 height-3 ms-4 px-4" variant="light">
+        <Image className="" src="img/cart.svg" alt="" style={{height:'25px'}} />
+        <h5 className="m-0 ps-3">0$</h5>
       </Button>
     </>
   );

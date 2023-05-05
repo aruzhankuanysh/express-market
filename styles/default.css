@@ -1,0 +1,110 @@
+.accordion {
+  --bs-accordion-active-color: #000000 !important;
+  --bs-accordion-btn-icon-transform: rotate(0deg);
+  --bs-accordion-btn-icon-transform-no-active: rotate(-90deg);
+}
+.accordion-button {
+  padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+  padding-left: 0;
+  padding-bottom: 0;
+  font-size: 1rem;
+  color: var(--bs-accordion-btn-color);
+  text-align: left;
+  background-color: var(--gosu-bg) !important;
+  border: 0;
+  border-radius: 0;
+  overflow-anchor: none;
+  transition: var(--bs-accordion-transition) !important;
+}
+.accordion-button:hover {
+  color: var(--gosu-second-transparent) !important;
+}
+.accordion-button:focus {
+  border-color: var(--bs-accordion-btn-focus-border-color) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.accordion-button::after {
+  flex-shrink: 0;
+  width: var(--bs-accordion-btn-icon-width);
+  height: var(--bs-accordion-btn-icon-width);
+  margin-left: auto;
+  content: "";
+  background-image: var(--bs-accordion-btn-icon);
+  transform: var(--bs-accordion-btn-icon-transform-no-active);
+  background-repeat: no-repeat;
+  background-size: var(--bs-accordion-btn-icon-width);
+  transition: var(--bs-accordion-btn-icon-transition) !;
+}
+.accordion-button:not(.collapsed) {
+  color: var(--gosu-black);
+  background-color: var(--gosu-bg) !important;
+  border-bottom: 1px solid #00000017;
+}
+.accordion-item {
+  color: var(--bs-accordion-color);
+  background-color: var(--gosu-bg) !important;
+  border: 0 !important;
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: var(--bs-accordion-btn-icon);
+  transform: var(--bs-accordion-btn-icon-transform);
+}
+.btn-primary {
+  --bs-btn-color: var(--gosu-black) !important;
+  --bs-btn-bg: var(--gosu-bg) !important;
+  --bs-btn-border-color: var(--gosu-bg) !important;
+  --bs-btn-hover-color: var(--gosu-second-transparent) !important;
+  --bs-btn-hover-bg: var(--gosu-bg) !important;
+  --bs-btn-hover-border-color: var(--gosu-bg) !important;
+  --bs-btn-focus-shadow-rgb: var(--gosu-bg) !important;
+  --bs-btn-active-color: var(--gosu-black) !important;
+  --bs-btn-active-bg: var(--gosu-bg) !important;
+  --bs-btn-active-border-color: var(--gosu-bg) !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0) !important;
+  --bs-btn-disabled-color: var(--gosu-bg) !important;
+  --bs-btn-disabled-bg: var(--gosu-bg) !important;
+  --bs-btn-disabled-border-color: var(--gosu-bg) !important;
+}
+
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+}
+
+.swiper-button-prev, .swiper-rtl .swiper-button-next {
+    left: 5px !important;
+    right: auto;
+}
+
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+    right: 5px !important;
+    left: auto;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: var(--swiper-navigation-top-offset,40%) !important;
+    width: var(--swiper-navigation-size) !important;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5rem;
+    z-index: 9;
+    color: var(--gosu-second-transparent) !important;
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 20px !important;
+}
