@@ -7,6 +7,7 @@ import Footer from '@/components/footer';
 import MenuSideNav from '@/components/catalog/menu-side-nav';
 import MenuSpecialOffers from '@/components/catalog/menu-offers';
 import Advice from '@/components/catalog/menu-advice';
+import Catalog from '@/components/catalog/menu-catalog';
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
 
             <MenuSpecialOffers />
             <Advice />
+            <Catalog />
 
 
           </Col>

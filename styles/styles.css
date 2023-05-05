@@ -1,10 +1,11 @@
 @charset "UTF-8";
 :root {
+  --gosu-secong: rgba(245, 245, 245);
   --gosu-grey: rgba(217, 217, 217, 0.5);
   --gosu-transparent: rgba(0, 0, 0, 0.2);
   --gosu-second-transparent: rgba(0, 0, 0, 0.5);
-  --gosu-black: black;
-  --gosu-red: #d81d24;
+  --gosu-black: rgb(0, 0, 0);
+  --gosu-red: rgb(216, 29, 36), 76%, 48%);
   --gosu-red-gradient: linear-gradient(
     271.02deg,
     rgba(216, 29, 36, 0.7) 1.59%,
