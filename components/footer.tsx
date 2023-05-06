@@ -3,7 +3,8 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 function Footer(): JSX.Element {
   return (
     <>
-      <Container fluid className="footer fixed-bottom ">
+    <footer className="page-footer font-small blue pt-4">
+      <Container fluid className="footer ">
         <Container className="footer_container" fluid>
           <Container className="mt-2 pt-3">
             <Col className="mt-4">
@@ -54,6 +55,7 @@ function Footer(): JSX.Element {
                 </Col>
             </Container>
       </Container>
+      </footer>
     </>
   );
 }

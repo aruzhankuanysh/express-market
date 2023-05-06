@@ -18,8 +18,6 @@
   --gosu-bg: rgb(245, 245, 245);
 }
 
-
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -108,10 +106,7 @@ body {
 
 h1 {
   font-size: 32px !important;
-
 }
-
-
 
 #adress_bar {
   width: 279.24px;
@@ -409,8 +404,21 @@ h1 {
 }
 
 .dropdown_wrapper {
+  border-radius: 20px !important;
   background-color: var(--gosu-bg) !important;
-  width: 300px ;
+  width: 300px;
+}
+
+.cart_btn h5 {
+  color: white !important;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.btn_grey h5 {
+  padding-top: 4px;
+  font-weight: 400 !important;
+  font-size: 20px;
 }
 
 a {

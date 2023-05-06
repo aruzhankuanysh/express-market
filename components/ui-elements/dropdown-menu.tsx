@@ -17,12 +17,12 @@ function DropdownMenu() {
 
   return (
     <Dropdown
-      show={show}
+      
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Dropdown.Toggle as={BurgMenu}>Каталог</Dropdown.Toggle>
-      <Dropdown.Menu className="dropdown_wrapper">
+      <Dropdown.Menu show={show} className="dropdown_wrapper">
         <MenuSideNav/>
       </Dropdown.Menu>
     </Dropdown>
