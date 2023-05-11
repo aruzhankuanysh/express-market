@@ -421,6 +421,41 @@ h1 {
   font-size: 20px;
 }
 
+.count_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--gosu-transparent);
+  border-radius: 25px;
+  height: 77px;
+}
+
+.text_grey {
+    color: var(--gosu-second-transparent);
+}
+
+.counter_button {
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--gosu-red-gradient);
+  width: 140px;
+}
+
+.counter_button button {
+  color: white;
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.counter_button span {
+  color: white;
+  font-weight: 600;
+}
+
 a {
   color: inherit !important;
 }
