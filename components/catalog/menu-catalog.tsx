@@ -2,6 +2,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Container, Image, Navbar } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
+import { useRouter } from "next/router";
 
 const Catalog = ({}): JSX.Element => {
   const products = [
@@ -213,6 +214,7 @@ const Catalog = ({}): JSX.Element => {
       ],
     },
   ];
+  const router = useRouter();
   return (
     <>
       <Row className="mb-5">
@@ -222,20 +224,10 @@ const Catalog = ({}): JSX.Element => {
               <h1 className="mb-4">{product.title}</h1>
               {(product.categories ?? []).map((index) => (
                 <Col key={index.productId} style={{padding: '0', minWidth: '20%'}}>
-                    <Button
-                      style={{
-                      backgroundImage:`url(${index.imageUrl})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      width:'100%',
-                      height: '200px',
-                      borderRadius:'2rem',
-                      padding:'1rem',
-                      border: '4px solid var(--gosu-secong)',
-                      display: 'flex',
-                      alignItems: 'top',
-                      textAlign: 'start'
-                    }}
+                    <Button 
+                      className="catalog_button" 
+                      style={{backgroundImage:`url(${index.imageUrl})`}}
+                      onClick={() => router.push(`/menu/${index.productId}`)}
                     >
                       <h4>{index.name}</h4>
                     </Button>

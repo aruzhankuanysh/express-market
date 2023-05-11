@@ -5,7 +5,7 @@
   --gosu-transparent: rgba(0, 0, 0, 0.2);
   --gosu-second-transparent: rgba(0, 0, 0, 0.5);
   --gosu-black: rgb(0, 0, 0);
-  --gosu-red: rgb(216, 29, 36), 76%, 48%);
+  --gosu-red: rgb(216, 29, 36);
   --gosu-red-gradient: linear-gradient(
     271.02deg,
     rgba(216, 29, 36, 0.7) 1.59%,
@@ -103,6 +103,20 @@ body {
   transform: rotate(-10deg);
   color: #d81d24 !important;
   font-weight: 900;
+}
+
+.catalog_button{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width:100%;
+  height: 200px;
+  border-radius:2rem;
+  padding:1rem;
+  border: 4px solid var(--gosu-secong);
+  display: flex;
+  align-items: top;
+  text-align: start;
 }
 
 
