@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Button, Dropdown } from 'react-bootstrap';
-import BurgMenu from './burg-button';
-import MenuSideNav from '../catalog/menu-side-nav';
-
+import React, { useState } from "react";
+import { Dropdown } from "react-bootstrap";
+import BurgMenu from "./burg-button";
+import MenuSideNav from "../catalog/menu-side-nav";
 
 function DropdownMenu() {
   const [show, setShow] = useState(false);
@@ -16,17 +15,13 @@ function DropdownMenu() {
   };
 
   return (
-    <Dropdown
-      
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <Dropdown onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Dropdown.Toggle as={BurgMenu}>Каталог</Dropdown.Toggle>
       <Dropdown.Menu show={show} className="dropdown_wrapper">
-        <MenuSideNav/>
+        <MenuSideNav />
       </Dropdown.Menu>
     </Dropdown>
   );
 }
-
+  
 export default DropdownMenu;
