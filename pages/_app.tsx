@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'react-bootstrap';
 import '../styles/styles.css';
-import '../styles/defoult.css';
+import '../styles/default.css';
 import '../styles/fonts.css';
 import { wrapper } from "../store/store";
 import {Provider} from 'react-redux';
@@ -24,7 +24,7 @@ const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
       <>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>Доставка Японской еды</title>
+          <title>Expres Market</title>
         </Head>
         <Provider store={store}>
             <ThemeProvider

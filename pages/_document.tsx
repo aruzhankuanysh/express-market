@@ -1,3 +1,4 @@
+
 /* eslint-disable react/display-name */
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import Script from 'next/script';
@@ -95,4 +96,5 @@ export default class CustomDocument extends Document {
       </Html>
     );
   }
+
 }

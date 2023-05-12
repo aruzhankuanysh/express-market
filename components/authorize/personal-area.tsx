@@ -14,6 +14,14 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "react-bootstrap";
+import SwitchButton from "../ui-elements/swtich-button";
+
+// const customSwitchStyle: React.CSSProperties = {
+//   // backgroundolor: 'red', // Задайте свой цвет фона
+//   color: 'white', // Задайте свой цвет текста
+//   borderRadius: '10px', // Задайте свои радиусы границ
+//   // Другие пользовательские стили
+// };
 
 const PersonalArea = (): JSX.Element => {
   // const authState = useSelector(selectAuthState);
@@ -94,11 +102,11 @@ const PersonalArea = (): JSX.Element => {
 
   return (
     <>
-      <Container>
-        <Row className="my-4">
+      <Container className="mb-5">
+        <Row className="my-4 ">
           <h1>Профиль</h1>
         </Row>
-        <ButtonGroup>
+        <ButtonGroup className="d-none d-sm-flex">
           {radios.map((radio, idx) => (
             <ToggleButton
               key={idx}
@@ -112,7 +120,7 @@ const PersonalArea = (): JSX.Element => {
               checked={radioValue === radio.value}
               onChange={(e) => setRadioValue(e.currentTarget.value)}
               className={combineClasses(
-                "toggle_btn",
+                "toggle_btn ",
                 radioValue === radio.value && ("selected-radio" as const)
               )}
             >
@@ -120,28 +128,54 @@ const PersonalArea = (): JSX.Element => {
             </ToggleButton>
           ))}
         </ButtonGroup>
-        <Form.Group className="form_wrapper">
-          <Form.Label>Ваше имя</Form.Label>
-          <Form.Control className="form_input" />
-        </Form.Group>
-        <Form.Group className="form_wrapper">
-          <Form.Label>Мобильный телефон</Form.Label>
-          <Form.Control className="form_input" />
-        </Form.Group>
-        <Form.Group className="form_wrapper">
-          <Form.Label>Дата рождения</Form.Label>
-          <Form.Control className="form_input" />
-        </Form.Group>
-        <Form.Group className="form_wrapper" controlId="exampleForm.ControlInput1">
-          <Form.Label>Электронная почта</Form.Label>
-          <Form.Control className="form_input" placeholder="yourmail@gmail.com"/>
-        </Form.Group>
-        <Col md={{ span: 3, offset: 3 }} className="my-5 save_btn_wrap" style={{ maxWidth: '149px !important' }}>
-          <Button className="gradient_btn save_btn" >Сохранить</Button>
-        </Col>
-        <Col>
-            <Button className="btn_primary logout_btn">Выйти из аккаунта</Button>
-        </Col>
+        <Container className="d-block d-md-none">
+          <SwitchButton
+            checked
+            disabled={false}
+            onlabel="Профиль"
+            offlabel="Заказы"
+            onstyle="success"
+            offstyle="sucess"
+            size="lg"
+            style="styles"
+            color=""
+          />
+        </Container>
+        <Container>
+          <Form.Group className="form_wrapper">
+            <Form.Label>Ваше имя</Form.Label>
+            <Form.Control className="form_input" />
+          </Form.Group>
+          <Form.Group className="form_wrapper">
+            <Form.Label>Мобильный телефон </Form.Label>
+            <Form.Control className="form_input" type="tel" />
+          </Form.Group>
+          <Form.Group className="form_wrapper">
+            <Form.Label>Дата рождения</Form.Label>
+            <Form.Control className="form_input" />
+          </Form.Group>
+          <Form.Group
+            className="form_wrapper"
+            controlId="exampleForm.ControlInput1"
+          >
+            <Form.Label>Электронная почта</Form.Label>
+            <Form.Control
+              className="form_input"
+              placeholder="yourmail@gmail.com"
+            />
+          </Form.Group>
+          <Row className="my-5 save_btn_wrap">
+            <Col>
+              <Button className="gradient_btn save_btn"> Сохранить</Button>
+            </Col>
+            <Col className="d-block d-sm-none">
+              <Button className="btn_primary logout_btn">Выйти</Button>
+            </Col>
+          </Row>
+          <Col className="d-none d-sm-block">
+            <Button className="btn_primary logout_btn">Выйти</Button>
+          </Col>
+        </Container>
       </Container>
     </>
   );

@@ -1,5 +1,5 @@
 .accordion {
-  --bs-accordion-active-color: #000000;
+  --bs-accordion-active-color: #000000 !important;
   --bs-accordion-btn-icon-transform: rotate(0deg);
   --bs-accordion-btn-icon-transform-no-active: rotate(-90deg);
 }
@@ -10,19 +10,19 @@
   font-size: 1rem;
   color: var(--bs-accordion-btn-color);
   text-align: left;
-  background-color: var(--gosu-bg);
+  background-color: var(--gosu-bg) !important;
   border: 0;
   border-radius: 0;
   overflow-anchor: none;
-  transition: var(--bs-accordion-transition);
+  transition: var(--bs-accordion-transition) !important;
 }
 .accordion-button:hover {
-  color: var(--gosu-second-transparent);
+  color: var(--gosu-second-transparent) !important;
 }
 .accordion-button:focus {
-  border-color: var(--bs-accordion-btn-focus-border-color);
-  outline: 0;
-  box-shadow: none;
+  border-color: var(--bs-accordion-btn-focus-border-color) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 .accordion-button::after {
   flex-shrink: 0;
@@ -34,37 +34,37 @@
   transform: var(--bs-accordion-btn-icon-transform-no-active);
   background-repeat: no-repeat;
   background-size: var(--bs-accordion-btn-icon-width);
-  transition: var(--bs-accordion-btn-icon-transition);
+  transition: var(--bs-accordion-btn-icon-transition) !;
 }
 .accordion-button:not(.collapsed) {
   color: var(--gosu-black);
-  background-color: var(--gosu-bg);
+  background-color: var(--gosu-bg) !important;
   border-bottom: 1px solid #00000017;
 }
 .accordion-item {
   color: var(--bs-accordion-color);
-  background-color: var(--gosu-bg);
-  border: 0;
+  background-color: var(--gosu-bg) !important;
+  border: 0 !important;
 }
 .accordion-button:not(.collapsed)::after {
   background-image: var(--bs-accordion-btn-icon);
   transform: var(--bs-accordion-btn-icon-transform);
 }
 .btn-primary {
-  --bs-btn-color: var(--gosu-black);
-  --bs-btn-bg: var(--gosu-bg);
-  --bs-btn-border-color: var(--gosu-bg);
-  --bs-btn-hover-color: var(--gosu-second-transparent);
-  --bs-btn-hover-bg: var(--gosu-bg);
-  --bs-btn-hover-border-color: var(--gosu-bg);
-  --bs-btn-focus-shadow-rgb: var(--gosu-bg);
-  --bs-btn-active-color: var(--gosu-black);
-  --bs-btn-active-bg: var(--gosu-bg);
-  --bs-btn-active-border-color: var(--gosu-bg);
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0);
-  --bs-btn-disabled-color: var(--gosu-bg);
-  --bs-btn-disabled-bg: var(--gosu-bg);
-  --bs-btn-disabled-border-color: var(--gosu-bg);
+  --bs-btn-color: var(--gosu-black) !important;
+  --bs-btn-bg: var(--gosu-bg) !important;
+  --bs-btn-border-color: var(--gosu-bg) !important;
+  --bs-btn-hover-color: var(--gosu-second-transparent) !important;
+  --bs-btn-hover-bg: var(--gosu-bg) !important;
+  --bs-btn-hover-border-color: var(--gosu-bg) !important;
+  --bs-btn-focus-shadow-rgb: var(--gosu-bg) !important;
+  --bs-btn-active-color: var(--gosu-black) !important;
+  --bs-btn-active-bg: var(--gosu-bg) !important;
+  --bs-btn-active-border-color: var(--gosu-bg) !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0) !important;
+  --bs-btn-disabled-color: var(--gosu-bg) !important;
+  --bs-btn-disabled-bg: var(--gosu-bg) !important;
+  --bs-btn-disabled-border-color: var(--gosu-bg) !important;
 }
 
 .swiper {
