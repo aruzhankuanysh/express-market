@@ -1,15 +1,14 @@
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Button, Container, Navbar } from 'react-bootstrap';
-import Accordion from 'react-bootstrap/Accordion';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { Button, Container, Image, Navbar } from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
+import { useRouter } from "next/router";
 
-
-const MenuSideNav = ({  }): JSX.Element => {
+const Catalog = ({}): JSX.Element => {
   const products = [
     {
       id: "1",
       title: "Овощной прилавок",
-      imgCatalog: "/img/aplle.svg",
       categories: [
         {
           productId: "1",
@@ -26,7 +25,6 @@ const MenuSideNav = ({  }): JSX.Element => {
     {
       id: "2",
       title: "Молочный прилавок",
-      imgCatalog: "/img/milk.svg",
       categories: [
         {
           productId: "2",
@@ -58,7 +56,6 @@ const MenuSideNav = ({  }): JSX.Element => {
     {
       id: "3",
       title: "Булочная",
-      imgCatalog: "/img/bakery.svg",
       categories: [
         {
           productId: "3",
@@ -80,7 +77,6 @@ const MenuSideNav = ({  }): JSX.Element => {
     {
       id: "4",
       title: "Вода и напитки",
-      imgCatalog: "/img/water.svg",
       categories: [
         {
           productId: "3",
@@ -112,7 +108,6 @@ const MenuSideNav = ({  }): JSX.Element => {
     {
       id: "5",
       title: "Сладкое и снеки",
-      imgCatalog: "/img/sweet.svg",
       categories: [
         {
           productId: "3",
@@ -154,7 +149,6 @@ const MenuSideNav = ({  }): JSX.Element => {
     {
       id: "6",
       title: "Мясо, птицы, рыба",
-      imgCatalog: "/img/aplle.svg",
       categories: [
         {
           productId: "3",
@@ -181,7 +175,6 @@ const MenuSideNav = ({  }): JSX.Element => {
     {
       id: "7",
       title: "Заморозка",
-      imgCatalog: "/img/aplle.svg",
       categories: [
         {
           productId: "3",
@@ -221,27 +214,31 @@ const MenuSideNav = ({  }): JSX.Element => {
       ],
     },
   ];
+  const router = useRouter();
   return (
     <>
-      <Navbar>
-        <Accordion defaultActiveKey="0" className='w-100'>
+      <Row className="mb-5">
+        <Container>
           {products.map((product) => (
-          <Accordion.Item eventKey={product.id}>
-            <Accordion.Header>
-              <img style={{width:'40px'}} className='me-1' src={`${product.imgCatalog}`} alt="" />
-              {product.title}
-            </Accordion.Header>
-            <Accordion.Body className='d-flex flex-column' style={{paddingLeft:'30px'}}>
+            <Row key={product.id} className="mb-5">
+              <h1 className="mb-4">{product.title}</h1>
               {(product.categories ?? []).map((index) => (
-                <Button key={index.productId} className='text-start'>{index.name}</Button>
+                <Col key={index.productId} style={{padding: '0', minWidth: '20%'}}>
+                    <Button 
+                      className="catalog_button" 
+                      style={{backgroundImage:`url(${index.imageUrl})`}}
+                      onClick={() => router.push(`/menu/${index.productId}`)}
+                    >
+                      <h4>{index.name}</h4>
+                    </Button>
+                </Col>
               ))}
-            </Accordion.Body>
-          </Accordion.Item>
+            </Row>
           ))}
-        </Accordion>
-      </Navbar>
+        </Container>
+      </Row>
     </>
   );
-}
+};
 
-export default MenuSideNav;
+export default Catalog;

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import Advice from "@/components/catalog/menu-advice";
+import Advice from "@/components/catalog/menu-advice-slide";
 import Header from "@/components/header";
 import { Container, Breadcrumb, Row, Col, Form } from "react-bootstrap";
 import Footer from "@/components/footer";

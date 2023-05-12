@@ -1,23 +1,19 @@
+@charset "UTF-8";
 :root {
+  --gosu-secong: rgba(245, 245, 245);
   --gosu-grey: rgba(217, 217, 217, 0.5);
   --gosu-transparent: rgba(0, 0, 0, 0.2);
   --gosu-second-transparent: rgba(0, 0, 0, 0.5);
-  --gosu-black: black;
-  --gosu-red: #d81d24;
+  --gosu-black: rgb(0, 0, 0);
+  --gosu-red: rgb(216, 29, 36);
   --gosu-red-gradient: linear-gradient(
     271.02deg,
     rgba(216, 29, 36, 0.7) 1.59%,
     rgba(241, 103, 31, 0.7) 98.19%
   );
-  --gosu-footer-gradient: linear-gradient(
-    270.06deg,
-    rgba(218, 31, 38, 0.5) 0.05%,
-    rgba(241, 103, 31, 0.5) 99.95%
-  );
-  --gosu-modal-gradient: linear-gradient(270deg, #d91f25 0%, #f06520 100%);
-  --gosu-bg: rgb(245, 245, 245);
+  --gosu-footer-gradient: linear-gradient(270.06deg, rgba(218, 31, 38, 0.5) 0.05%, rgba(241, 103, 31, 0.5) 99.95%);
+  --gosu-bg: rgb(245, 245, 245)
 }
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -138,7 +134,6 @@ h1 {
   max-height: 80px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-top: 0 !important;
-  padding: 34px 0 34px !important;
 }
 
 .cart_btn {
@@ -212,6 +207,8 @@ h1 {
   width: 340px !important;
   padding-left: 12px !important;
 }
+
+
 
 .logout_btn {
   background-color: var(--gosu-grey) !important;
@@ -416,6 +413,20 @@ h1 {
   color: white;
   font-weight: 600;
 }
+.catalog_button{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width:100%;
+  height: 200px;
+  border-radius:2rem;
+  padding:1rem;
+  border: 4px solid var(--gosu-secong);
+  display: flex;
+  align-items: top;
+  text-align: start;
+}
+
 
 a {
   color: inherit !important;
@@ -445,9 +456,7 @@ a {
 	bottom: 0;
 	left: 0;
 	transition: left 0.35s;
-	-webkit-transition: left 0.35s;
-	-moz-user-select: none;
-	-webkit-user-select: none;
+	
 }
 .switch.off .switch-group {
 	left: -100%;
@@ -493,8 +502,7 @@ a {
 	opacity: 0.5;
 } 
 
-/* NOTE: Must come first, so classes below override as needed */
-/* bootstrap-4.x .form-control {height} values used as `min-height` to mirror output sizes */
+
 
 .switch.btn { min-width: 3.7rem; min-height: calc(1.5em + .75rem + 2px); }
 .switch-on.btn { padding-right: 1.5rem; }
@@ -508,8 +516,3 @@ a {
 .switch.btn-sm { min-width: 3.25rem; min-height: calc(1.5em + .5rem + 2px); }
 .switch-on.btn-sm { padding-right: 1rem; }
 .switch-off.btn-sm { padding-left: 1rem; }
-
-/* `xs` (bootstrap-3.3 - .btn - h:22px) */
-.switch.btn-xs { min-width: 3.125rem; min-height: 1.375rem; }
-.switch-on.btn-xs { padding-right: .8rem; }
-.switch-off.btn-xs { padding-left: .8rem; }

@@ -12,26 +12,28 @@ function Header(): JSX.Element {
   const router = useRouter();
   return (
     <>
-      <Navbar className="d-block d-sm-none header_container mb-4 px-4 py-3 ">
-        <Row>
-          <Col >
-            <DropdownMenu />
-          </Col>
-          <Col>
-            <Image
-              fluid
-              src="img/express-logo.svg"
-              alt=""
-              style={{ height: "42px" }}
-            />
-          </Col>
-        </Row>
+      <Navbar className="d-block d-lg-none header_container mb-4 px-4  ">
+      <Container className="d-flex ps-3">
+          <Row>
+            <Col>
+              <Image
+                fluid
+                src="img/express-logo.svg"
+                alt=""
+                style={{ height: "42px" }}
+              />
+            </Col>
+            <Col md="auto">
+              <DropdownMenu />
+            </Col>
+          </Row>
+        </Container>
       </Navbar>
 
       <Navbar
         bg="light"
         expand="lg"
-        className="header_container mb-4 px-4 py-3 d-none d-sm-flex"
+        className="header_container mb-4 px-4 py-3 d-none d-lg-flex"
       >
         <Container className="d-flex ps-3">
           <Row>

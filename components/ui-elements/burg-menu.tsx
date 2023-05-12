@@ -1,14 +1,18 @@
-import { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Image from "react-bootstrap/Image";
 
-function AdressBar(): JSX.Element {
+function BurgMenu(): JSX.Element {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button id="adress_bar" className="input rounded-4 height-3 ms-4" onClick={handleShow}></Button>
+      <button className="burger_menu rounded-4" onClick={handleShow}>
+        <i className="bi bi-list h3"></i>
+      </button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -21,4 +25,4 @@ function AdressBar(): JSX.Element {
   );
 }
 
-export default AdressBar;
+export default BurgMenu;

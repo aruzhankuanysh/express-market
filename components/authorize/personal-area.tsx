@@ -106,7 +106,7 @@ const PersonalArea = (): JSX.Element => {
         <Row className="my-4 ">
           <h1>Профиль</h1>
         </Row>
-        <ButtonGroup>
+        <ButtonGroup className="d-none d-sm-flex">
           {radios.map((radio, idx) => (
             <ToggleButton
               key={idx}
@@ -120,7 +120,7 @@ const PersonalArea = (): JSX.Element => {
               checked={radioValue === radio.value}
               onChange={(e) => setRadioValue(e.currentTarget.value)}
               className={combineClasses(
-                "toggle_btn d-none d-sm-block",
+                "toggle_btn ",
                 radioValue === radio.value && ("selected-radio" as const)
               )}
             >

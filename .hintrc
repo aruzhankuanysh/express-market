@@ -26,6 +26,7 @@
       {
         "image-alt": "off"
       }
-    ]
+    ],
+    "apple-touch-icons": "off"
   }
 }
