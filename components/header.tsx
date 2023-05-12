@@ -16,7 +16,7 @@ function Header(): JSX.Element {
         <Container className="d-flex ps-3">
           <Row>
             <Col>
-              <Image fluid src="img/express-logo.svg"  alt="" style={{"height":"42px"}}/>
+              <Image fluid src="/img/express-logo.svg"  alt="" style={{"height":"42px"}}/>
             </Col>
             <Col md='auto'>
             {/* Нужно деоделать модальное окно */}
