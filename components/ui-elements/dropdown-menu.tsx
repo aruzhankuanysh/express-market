@@ -1,27 +1,32 @@
 import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import BurgMenu from "./burg-button";
 import MenuSideNav from "../catalog/menu-side-nav";
 
 function DropdownMenu() {
-  const [show, setShow] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
-    setShow(true);
+    setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
-    setShow(false);
+    setIsHovered(false);
   };
 
   return (
-    <Dropdown onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Dropdown.Toggle as={BurgMenu}>Каталог</Dropdown.Toggle>
-      <Dropdown.Menu show={show} className="dropdown_wrapper">
+    <Dropdown
+      show={isHovered}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Dropdown.Toggle className="burger_menu" disabled>
+        <img className="burger_menu_image" src="img/burger.svg" />
+      </Dropdown.Toggle>
+      <Dropdown.Menu className="dropdown_wrapper">
         <MenuSideNav />
       </Dropdown.Menu>
     </Dropdown>
   );
 }
-  
+
 export default DropdownMenu;

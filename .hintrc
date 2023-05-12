@@ -20,6 +20,12 @@
           "text-align: -webkit-match-parent"
         ]
       }
+    ],
+    "axe/text-alternatives": [
+      "default",
+      {
+        "image-alt": "off"
+      }
     ]
   }
 }

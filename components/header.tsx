@@ -8,15 +8,30 @@ import AdressBar from "./ui-elements/address-bar";
 import Cart from "@/components/cart";
 import DropdownMenu from "./ui-elements/dropdown-menu";
 
-
 function Header(): JSX.Element {
   const router = useRouter();
   return (
     <>
+      <Navbar className="d-block d-sm-none header_container mb-4 px-4 py-3 ">
+        <Row>
+          <Col >
+            <DropdownMenu />
+          </Col>
+          <Col>
+            <Image
+              fluid
+              src="img/express-logo.svg"
+              alt=""
+              style={{ height: "42px" }}
+            />
+          </Col>
+        </Row>
+      </Navbar>
+
       <Navbar
         bg="light"
         expand="lg"
-        className="header_container mb-4 px-4 py-3"
+        className="header_container mb-4 px-4 py-3 d-none d-sm-flex"
       >
         <Container className="d-flex ps-3">
           <Row>
@@ -29,7 +44,6 @@ function Header(): JSX.Element {
               />
             </Col>
             <Col md="auto">
-              {/* Нужно деоделать модальное окно */}
               <DropdownMenu />
             </Col>
           </Row>

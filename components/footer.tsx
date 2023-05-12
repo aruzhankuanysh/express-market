@@ -3,7 +3,7 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 function Footer(): JSX.Element {
   return (
     <>
-    <footer className="page-footer pt-4">
+    <footer className="page-footer mt-auto d-none d-sm-block">
       <Container fluid className="footer ">
         <Container className="footer_container" fluid>
           <Container className="mt-2 pt-3">
