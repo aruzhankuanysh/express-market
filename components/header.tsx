@@ -23,7 +23,7 @@ function Header(): JSX.Element {
                 style={{ height: "42px" }}
               />
             </Col>
-            <Col md="auto">
+            <Col>
               <DropdownMenu />
             </Col>
           </Row>
