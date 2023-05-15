@@ -1,9 +1,9 @@
-.accordion {
+#indexCategorie .accordion {
   --bs-accordion-active-color: #000000 !important;
   --bs-accordion-btn-icon-transform: rotate(0deg);
   --bs-accordion-btn-icon-transform-no-active: rotate(-90deg);
 }
-.accordion-button {
+#indexCategorie .accordion-button {
   padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
   padding-left: 0;
   padding-bottom: 0;
@@ -16,15 +16,15 @@
   overflow-anchor: none;
   transition: var(--bs-accordion-transition) !important;
 }
-.accordion-button:hover {
+#indexCategorie .accordion-button:hover {
   color: var(--gosu-second-transparent) !important;
 }
-.accordion-button:focus {
+#indexCategorie .accordion-button:focus {
   border-color: var(--bs-accordion-btn-focus-border-color) !important;
   outline: 0 !important;
   box-shadow: none !important;
 }
-.accordion-button::after {
+#indexCategorie .accordion-button::after {
   flex-shrink: 0;
   width: var(--bs-accordion-btn-icon-width);
   height: var(--bs-accordion-btn-icon-width);
@@ -36,17 +36,17 @@
   background-size: var(--bs-accordion-btn-icon-width);
   transition: var(--bs-accordion-btn-icon-transition) !;
 }
-.accordion-button:not(.collapsed) {
+#indexCategorie .accordion-button:not(.collapsed) {
   color: var(--gosu-black);
   background-color: var(--gosu-bg) !important;
   border-bottom: 1px solid #00000017;
 }
-.accordion-item {
+#indexCategorie .accordion-item {
   color: var(--bs-accordion-color);
   background-color: var(--gosu-bg) !important;
   border: 0 !important;
 }
-.accordion-button:not(.collapsed)::after {
+#indexCategorie .accordion-button:not(.collapsed)::after {
   background-image: var(--bs-accordion-btn-icon);
   transform: var(--bs-accordion-btn-icon-transform);
 }
@@ -107,4 +107,53 @@
 }
 .swiper-button-next:after, .swiper-button-prev:after {
     font-size: 20px !important;
+}
+
+#idCatalogs .accordion {
+  --bs-accordion-active-color: #ff0000 !important;
+}
+#idCatalogs .accordion-button {
+  padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+  padding: 0.5rem var(--bs-accordion-btn-padding-x);
+  font-size: 1rem;
+  color: var(--bs-accordion-btn-color);
+  text-align: left;
+  background-color: var(--gosu-bg) !important;
+  border: 0;
+  border-radius: 0;
+  overflow-anchor: none;
+  transition: var(--bs-accordion-transition) !important;
+}
+#idCatalogs .accordion-button:hover {
+  color: var(--gosu-second-transparent) !important;
+}
+#idCatalogs .accordion-button:focus {
+  border-color: var(--bs-accordion-btn-focus-border-color) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+#idCatalogs .accordion-button::after {
+  flex-shrink: 0;
+  width: var(--bs-accordion-btn-icon-width);
+  height: var(--bs-accordion-btn-icon-width);
+  margin-left: auto;
+  content: "";
+  background-image: none;
+}
+#idCatalogs .accordion-button:not(.collapsed) {
+  color: var(--gosu-black);
+  background-color: var(--gosu-grey) !important;
+  border-bottom: 0px !important;
+  padding: 0.5rem var(--bs-accordion-btn-padding-x);
+  border-radius: 1rem;
+}
+#idCatalogs .accordion-item {
+  background-color: var(--gosu-bg) !important;
+  border: 0 !important;
+}
+#idCatalogs .accordion-button:not(.collapsed)::after {
+  transform: var(--bs-accordion-btn-icon-transform); 
+}
+#idCatalogs .accordion-body {
+  padding: 0 var(--bs-accordion-body-padding-x);
 }

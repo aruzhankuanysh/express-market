@@ -1,11 +1,9 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Container } from "react-bootstrap";
-import "swiper/css";
-import "swiper/css/navigation";
 import ProductCard from "./product-card";
 
-const AdviceSlide = ({}): JSX.Element => {
+const Advice = ({}): JSX.Element => {
   return (
     <>
       <Row className="mb-5">
@@ -71,4 +69,4 @@ const AdviceSlide = ({}): JSX.Element => {
   );
 };
 
-export default AdviceSlide;
+export default Advice;
