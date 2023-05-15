@@ -68,7 +68,7 @@ function DropdownCart(): JSX.Element {
       <Dropdown.Menu show={show} className="dropdown_cart_wrapper">
         <h3>Каталог</h3>
         {cartProduct.map((productItem, index) => (
-          <Container  fluid>
+          <Container  fluid key={productItem.name}>
             <Row className="d-flex">
               <Col lg="3">
                 <img src={productItem.img} alt="" />
