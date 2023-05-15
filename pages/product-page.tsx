@@ -8,32 +8,37 @@ import Counter from "@/components/ui-elements/count-button";
 
 const Index: NextPage = () => {
   const images = ["img/bagette-diagonal.png", "img/bagette-vertical.svg"];
-
+  const productsTags = [
+    {
+      tag: "-40%",
+    },
+    {
+      tag: "Новинка",
+    },
+    {
+      tag: "Испекли сами",
+    },
+  ];
   return (
     <>
       <Header />
-      <Container>
-        <Container fluid className="my-5">
-          <Breadcrumb className="my-4">
-            <Breadcrumb.Item href="#">Главная</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Хлеб</Breadcrumb.Item>
-            <Breadcrumb.Item>Из лавки</Breadcrumb.Item>
-            <Breadcrumb.Item>Багет</Breadcrumb.Item>
-          </Breadcrumb>
-          <Container>
-            <a className="ms-2" href="">
-              -40%
-            </a>
-            <a className="ms-2" href="">
-              Новинка
-            </a>
-            <a className="ms-2" href="">
-              Испекли сами
-            </a>
+      <Container style={{ padding: "0" }} className="product_page_wrapper">
+        <Container style={{ padding: "0" }} className="my-5">
+          <h6 className="text-secondary">Главная &gt; Вам понравится</h6>
+
+          <Container style={{ padding: "0" }}>
+            {productsTags.map((productTag) => (
+              <a className="me-2 product_tag">{productTag.tag}</a>
+            ))}
           </Container>
-          <h1>Багет пшеничный из лавки</h1>
-          <Row>250г</Row>
+          <h1 style={{ fontSize: "64px", fontWeight: "700" }}>
+            Багет пшеничный из лавки
+          </h1>
+
           <Container fluid style={{ padding: "0" }}>
+            <Row>
+              <Col>250г</Col>
+            </Row>
             <Row>
               <Col>
                 <Slider images={images} />
@@ -44,8 +49,8 @@ const Index: NextPage = () => {
                     className="d-flex count_container"
                     style={{ flexDirection: "row" }}
                   >
-                    <div className="ms-3" style={{display:"flex"}}>
-                      <h2 className=" no-background me-3">305тг</h2>
+                    <div className="ms-3 mt-2" style={{ display: "flex" }}>
+                      <h2 className=" no-background me-3">305₸</h2>
                       <h4 className="position-relative mt-2 text-secondary">
                         350 ₸
                         <a className="text-strikethrough no-background">
@@ -54,13 +59,21 @@ const Index: NextPage = () => {
                       </h4>
                     </div>
                     <div>
-                      <Counter/>
+                      <Counter />
                     </div>
                   </Container>
-                  <Row style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.2)" }}>
-                    <h3 className="mt-4" style={{ padding: "0" }}>
-                      На 100 граммов
-                    </h3>
+                  <Row className="mt-4">
+                    <Col >
+                      <h3
+                        className="mt-4"
+                        style={{
+                          padding: "0",
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        На 100 граммов
+                      </h3>
+                    </Col>
                   </Row>
 
                   <Row className="my-4" style={{ width: "300px" }}>
@@ -81,10 +94,18 @@ const Index: NextPage = () => {
                       <span className="text_grey">ккал</span>
                     </Col>
                   </Row>
-                  <Row style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.2)" }}>
-                    <h3 className="mt-4" style={{ padding: "0" }}>
-                      О товаре
-                    </h3>
+                  <Row>
+                    <Col>
+                      <h3
+                        className="mt-4"
+                        style={{
+                          padding: "0",
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        О товаре
+                      </h3>
+                    </Col>
                   </Row>
                   <Col className="mt-4">
                     <span className="text_grey">Описание</span>

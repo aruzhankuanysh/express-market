@@ -1,4 +1,4 @@
-import { Button, Col, Image, Row, } from "react-bootstrap";
+import { Button, Col, Image, Row } from "react-bootstrap";
 
 function Cart(): JSX.Element {
   return (

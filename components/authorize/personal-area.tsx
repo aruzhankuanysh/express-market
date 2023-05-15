@@ -143,7 +143,7 @@ const PersonalArea = (): JSX.Element => {
         </Container>
         <Container>
           <Form.Group className="form_wrapper">
-            <Form.Label>Ваше имя</Form.Label>
+            <Form.Label xs={12} sm={6}>Ваше имя</Form.Label>
             <Form.Control className="form_input" />
           </Form.Group>
           <Form.Group className="form_wrapper">
@@ -168,13 +168,13 @@ const PersonalArea = (): JSX.Element => {
             <Col>
               <Button className="gradient_btn save_btn"> Сохранить</Button>
             </Col>
-            <Col className="d-block d-sm-none">
+            <Col className="d-none d-sm-block mt-1">
               <Button className="btn_primary logout_btn">Выйти</Button>
             </Col>
           </Row>
-          <Col className="d-none d-sm-block">
-            <Button className="btn_primary logout_btn">Выйти</Button>
-          </Col>
+            <Col className="d-block d-sm-none  ">
+              <Button className="btn_primary logout_btn">Выйти</Button>
+            </Col>
         </Container>
       </Container>
     </>

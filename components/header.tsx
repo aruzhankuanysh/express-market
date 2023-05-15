@@ -5,16 +5,20 @@ import { useRouter } from "next/router";
 import SearchBar from "./ui-elements/search-bar";
 import Login from "./authorize/login";
 import AdressBar from "./ui-elements/address-bar";
-import Cart from "@/components/cart";
+import Cart from "@/components/cart";       
 import DropdownMenu from "./ui-elements/dropdown-menu";
+import DropdownCart from "./ui-elements/dropdown-cart";
 
 function Header(): JSX.Element {
   const router = useRouter();
   return (
     <>
       <Navbar className="d-block d-lg-none header_container mb-4 px-4  ">
-      <Container className="d-flex ps-3">
+        <Container className="d-flex ps-3">
           <Row>
+            <Col>
+              <DropdownMenu />
+            </Col>
             <Col>
               <Image
                 fluid
@@ -24,7 +28,7 @@ function Header(): JSX.Element {
               />
             </Col>
             <Col>
-              <DropdownMenu />
+              <Cart/>
             </Col>
           </Row>
         </Container>
@@ -63,7 +67,7 @@ function Header(): JSX.Element {
         >
           {/* Нужно деоделать модальное окно */}
           <AdressBar />
-          <Cart />
+          <DropdownCart/>
           <Login />
         </Nav>
       </Navbar>

@@ -62,7 +62,7 @@ const SwitchButton: React.FC<SwitchButtonProps> = ({
   if (height) labelStyle.lineHeight = `calc(${height}px * 0.8)`;
 
   const switchClassName = `switch btn ${
-    checked ? `on btn-${color}` : `off btn-light`
+    checked ? `on btn-${color}` : `off `
   } ${size ? `btn-${size}` : ""} ${style}`;
 
   const switchOnClassName = `switch-on btn btn-${color} ${

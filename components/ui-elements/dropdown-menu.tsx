@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Container } from "react-bootstrap";
 import MenuSideNav from "../catalog/menu-side-nav";
 
 function DropdownMenu() {
@@ -23,7 +23,11 @@ function DropdownMenu() {
         <img className="burger_menu_image" src="img/burger.svg" />
       </Dropdown.Toggle>
       <Dropdown.Menu className="dropdown_wrapper">
-        <MenuSideNav />
+        <Container className="px-4">
+            <h1 style={{width:"80%", margin:"auto"}}>Каталог</h1>
+            <MenuSideNav />
+        </Container>
+         
       </Dropdown.Menu>
     </Dropdown>
   );
