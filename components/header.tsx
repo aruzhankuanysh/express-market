@@ -18,7 +18,7 @@ function Header(): JSX.Element {
             <Col>
               <Image
                 fluid
-                src="img/express-logo.svg"
+                src="/img/express-logo.svg"
                 alt=""
                 style={{ height: "42px" }}
               />

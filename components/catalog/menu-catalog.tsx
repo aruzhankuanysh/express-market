@@ -4370,7 +4370,7 @@ const Catalog = ({}): JSX.Element => {
                     <Button 
                       className="catalog_button" 
                       style={{backgroundImage:`url(${index.imageUrl})`}}
-                      onClick={() => router.push(`/menu/${index.productId}`)}
+                      onClick={() => router.push(`/${index.productId}`)}
                     >
                       <h4>{index.name}</h4>
                     </Button>

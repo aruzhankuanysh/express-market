@@ -223,7 +223,7 @@ const MenuSideNav = ({  }): JSX.Element => {
   ];
   return (
     <>
-      <Navbar>
+      <Navbar id='indexCategorie'>
         <Accordion defaultActiveKey="0" className='w-100'>
           {products.map((product) => (
           <Accordion.Item eventKey={product.id}>
