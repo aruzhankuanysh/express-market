@@ -1,6 +1,4 @@
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Button, Container, Navbar } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 
 
@@ -226,14 +224,14 @@ const MenuSideNav = ({  }): JSX.Element => {
       <Navbar id='indexCategorie'>
         <Accordion defaultActiveKey="0" className='w-100'>
           {products.map((product) => (
-          <Accordion.Item eventKey={product.id}>
+          <Accordion.Item eventKey={product.id} key={product.id}>
             <Accordion.Header>
               <img style={{width:'40px'}} className='me-1' src={`${product.imgCatalog}`} alt="" />
               {product.title}
             </Accordion.Header>
             <Accordion.Body className='d-flex flex-column' style={{paddingLeft:'30px'}}>
-              {(product.categories ?? []).map((index) => (
-                <Button key={index.productId} className='text-start'>{index.name}</Button>
+              {(product.categories ?? []).map((categorie, index) => (
+                <Button key={index} className='text-start'>{categorie.name}</Button>
               ))}
             </Accordion.Body>
           </Accordion.Item>
