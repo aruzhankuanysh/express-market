@@ -1,6 +1,6 @@
 import { Dropdown, Button, Container, Row, Col } from "react-bootstrap";
-import Cart from "../cart";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 function DropdownCart(): JSX.Element {
   const [show, setShow] = useState(false);
@@ -20,16 +20,12 @@ function DropdownCart(): JSX.Element {
       count: 1,
     },
   ]);
-  const handleMouseEnter = () => {
+  const handleClick = () => {
     setShow(true);
   };
 
-  const handleMouseLeave = () => {
-    setShow(false);
-  };
-
   const totalPrice = cartProduct.reduce(
-    (total, product) => total + product.price,
+    (total, product) => total + product.price * product.count,
     0
   );
 
@@ -40,25 +36,27 @@ function DropdownCart(): JSX.Element {
     }
     setCartProduct(updatedCartProduct);
   };
-
+  
   const increment = (index: number) => {
     const updatedCartProduct = [...cartProduct];
     updatedCartProduct[index].count++;
     setCartProduct(updatedCartProduct);
   };
-
+  const deliveryDifference = 10000 - totalPrice;
+  const deliveryText =
+  totalPrice >= 10000 ? "Бесплатная доставка" : `${deliveryDifference} UZS до бесплатной доставки`;
+  
+  const router = useRouter();
   return (
     <Dropdown
       align={{ lg: "end" }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <Dropdown.Toggle
         as={Button}
         className="cart_btn btn_orange_gradient rounded-4 height-3 ms-4 px-4"
       >
         <img
-          className=""
           src="img/cart.svg"
           alt=""
           style={{ height: "25px" }}
@@ -67,21 +65,26 @@ function DropdownCart(): JSX.Element {
       </Dropdown.Toggle>
       <Dropdown.Menu show={show} className="dropdown_cart_wrapper">
         <h3>Каталог</h3>
-        {cartProduct.map((productItem, index) => (
-          <Container  fluid key={productItem.name}>
+        <Container fluid style={{ borderBottom: "2px solid rgba(0, 0, 0, 0.2)" }}>
+
+          {cartProduct.map((productItem, index) => (
             <Row className="d-flex">
               <Col lg="3">
                 <img src={productItem.img} alt="" />
               </Col>
               <Col>
-                <h5>{productItem.name}</h5>
+                <p style={{fontSize:"15px", fontWeight:"500"}}>{productItem.name}</p>
                 <div className="product_params" >
                   <p className="me-2">{productItem.price} UZS</p>
                   <p >{productItem.weight} г</p>
                 </div>
               </Col>
               <Col>
-                <div className="cart_counter">
+                <Row>
+
+                </Row>
+                <Row>
+                  <div className="cart_counter">
                   <button className="ms-3 " onClick={() => decrement(index)}>
                     -
                   </button>
@@ -90,13 +93,34 @@ function DropdownCart(): JSX.Element {
                     +
                   </button>
                 </div>
+                </Row>
+                
               </Col>
             </Row>
-          </Container>
-        ))}
+          ))}
+        </Container>
+        <Container className="mt-4">
+          <Row>
+            <Col >
+                <img style={{backgroundColor:"rgba(0, 0, 0, 0.2)", padding:"15px", borderRadius:"15px"}} src="/img/cart-logo.svg" alt="" />
+            </Col>
+            <Col lg="9">
+                <p style={{fontSize:"15px", fontWeight:"500"}}>Доставка 30-40 мин</p>
+                <Row>
+                    <Col>5 UZS</Col>
+                    <Col lg="9"> {deliveryText} </Col>
+                </Row>
+            </Col>
+          </Row>
+        </Container>
+          <Button onClick={() => router.push(`/cart`)} className="btn_orange_gradient open_cart_btn rounded-5 mt-4">
+              <p className="m-3">Перейти в корзину</p>
+              <p className="m-3">{totalPrice} UZS</p>
+          </Button>
       </Dropdown.Menu>
     </Dropdown>
   );
 }
 
 export default DropdownCart;
+ 
