@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import SearchBar from "./ui-elements/search-bar";
 import Login from "./authorize/login";
 import AdressBar from "./ui-elements/address-bar";
-import Cart from "@/components/cart";       
+// import Cart from "@/components/cart";       
 import DropdownMenu from "./ui-elements/dropdown-menu";
 import DropdownCart from "./ui-elements/dropdown-cart";
 
@@ -28,7 +28,7 @@ function Header(): JSX.Element {
               />
             </Col>
             <Col>
-              <Cart/>
+              <DropdownCart/>
             </Col>
           </Row>
         </Container>
