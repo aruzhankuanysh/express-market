@@ -648,7 +648,17 @@ a {
   color: white !important;
   width: 100%;
   font-weight: 600;
-  
+}
+
+.orders_group {
+  font-weight: 500;
+}
+
+.payment_btn {
+  margin-left: -10px;
+  color: white !important;
+  font-weight: 600;
+  background: var(--gosu-red-gradient);
 }
 
 @media (max-width: 768px) {

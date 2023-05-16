@@ -45,6 +45,12 @@ const Index: NextPage = () => {
     0
   );
 
+  const removeProduct = (index: number) => {
+    const updatedCartProduct = [...cartProduct];
+    updatedCartProduct.splice(index, 1);
+    setCartProduct(updatedCartProduct);
+  };
+
   const deliveryPercentage = (totalPrice / 10000) * 100;
   const deliveryDifference = 10000 - totalPrice;
   const deliveryText =
@@ -109,6 +115,10 @@ const Index: NextPage = () => {
                         </button>
                       </div>
                     </Row>
+                  </Col>
+                  <Col >
+                    <Button  onClick={() => removeProduct(index)}><img className="ms-4" style={{height:"20px"}} src="/img/delete.svg"/></Button>
+                    <p className="mt-3" style={{ fontWeight: "700" }}>{productItem.price * productItem.count} UZS</p>
                   </Col>
                 </Row>
               </Container>
