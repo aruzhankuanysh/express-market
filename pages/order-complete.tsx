@@ -5,7 +5,9 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import MenuSideNav from "@/components/catalog/menu-side-nav";
 import { Form, InputGroup } from "react-bootstrap";
-import OrderDelivery from "@/components/order/order-complete";
+import OrderDelivery from "@/components/order/order-delivery";
+import OrderPay from "@/components/order/order-pay";
+import OrderProducts from "@/components/order/order-products";
 
 const OrderCompletePage = function () {
   return (
@@ -19,23 +21,35 @@ const OrderCompletePage = function () {
               <Form.Label htmlFor="phone-number">
                 <h4>Контактный нoмер</h4>
               </Form.Label>
-              <InputGroup className="mb-3 col-4">
-                <InputGroup.Text id="basic-addon1">+7</InputGroup.Text>
-                <Form.Control
-                  id="phone-number"
-                  placeholder=""
-                  aria-label="phone"
-                  aria-describedby="basic-addon1"
-                />
-              </InputGroup>
-            </Form>
+              <Col sm="4">
+                <InputGroup className="mb-3">
+                  <InputGroup.Text id="basic-addon1">+7</InputGroup.Text>
+                  <Form.Control
+                    id="phone-number"
+                    placeholder=""
+                    aria-label="phone"
+                    aria-describedby="basic-addon1"
+                  />
+                </InputGroup>
+              </Col>
 
-            <OrderDelivery />
-            
+              <OrderDelivery />
+
+              <OrderPay />
+
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>
+                  <h4>Комментарий к заказу</h4>
+                </Form.Label>
+                <Form.Control as="textarea" rows={3} />
+              </Form.Group>
+            </Form>
           </Col>
           <Col xs="3" lg="3" xl="3" className="">
-            <h5>Каталог</h5>
-            <MenuSideNav />
+            <OrderProducts />
           </Col>
         </Row>
       </Container>

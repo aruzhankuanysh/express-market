@@ -48,6 +48,7 @@ body {
   display: flex !important;
   align-items: center;
   justify-content: center;
+  color: #ffffff;
 }
 
 .btn_grey {
@@ -411,7 +412,7 @@ h1 {
 .cart_counter button {
   border-radius: 10px !important;
   width: 33px;
-  height: ;
+  /* height: ; */
   border: none;
   background-color: var(--gosu-transparent);
 }
