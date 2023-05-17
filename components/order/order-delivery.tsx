@@ -23,7 +23,7 @@ const OrderDelivery = ({}): JSX.Element => {
         <option key="4">4</option>
         <option key="5">5</option>
       </Form.Select>
-      <Row className="mt-2">
+      <Row className="mt-2 mb-3">
         <Col>
           <Form.Label htmlFor="home">
             <h6>Кв/офис</h6>
