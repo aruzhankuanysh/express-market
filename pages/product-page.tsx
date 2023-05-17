@@ -22,7 +22,7 @@ const Index: NextPage = () => {
   return (
     <>
       <Header />
-      <Container style={{ padding: "0" }} className="product_page_wrapper">
+      <Container style={{ padding: "15px" }} className="product_page_wrapper">
         <Container style={{ padding: "0" }} className="my-5">
           <h6 className="text-secondary">Главная &gt; Вам понравится</h6>
 

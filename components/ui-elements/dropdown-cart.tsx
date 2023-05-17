@@ -49,7 +49,7 @@ function DropdownCart(): JSX.Element {
   const router = useRouter();
   return (
     <Dropdown
-      align={{ lg: "end" }}
+      align="end"
       onClick={handleClick}
     >
       <Dropdown.Toggle
@@ -88,7 +88,7 @@ function DropdownCart(): JSX.Element {
                   <button className="ms-3 " onClick={() => decrement(index)}>
                     -
                   </button>
-                  <span>{productItem.count} </span>
+                  <span className="mx-2">{productItem.count} </span>
                   <button className="me-3 " onClick={() => increment(index)}>
                     +
                   </button>

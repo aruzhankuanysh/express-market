@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form, Modal, Image, Col, Row } from "react-bootstrap";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+// import CodeModal from "./first-step";
 
 function Login(): JSX.Element {
   const [show, setShow] = useState(false);
@@ -24,14 +27,17 @@ function Login(): JSX.Element {
         </Button>
 
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header className="modal_header" closeButton></Modal.Header>
+        <Modal.Header className="modal_header" closeButton/>
         <Image className="login_logo" src="img/login_logo.svg" />
 
         <Modal.Body>
-          <Modal.Title className="modal_heading">
-            Добро пожаловать в Express Market!
-          </Modal.Title>
-          <Modal.Title className="modal_subheading mt-1">
+          <Row>
+            <h1 className="  modal_heading">
+            Добро пожаловать в <br className="  d-block d-lg-none "/> Express Market!
+          </h1>
+          </Row>
+          
+          <Modal.Title className="modal_subheading my-3">
             Введите телефон для продолжения
           </Modal.Title>
           <Form>
@@ -49,8 +55,14 @@ function Login(): JSX.Element {
                 />
               </Col>
             </Form.Group>
-            <Button className="sms_btn">Получить код по СМС</Button>
-            <Button className="modal_login mt-3">Войти по почте</Button>
+            <Row onClick={handleClose}>
+              {/* <CodeModal /> */}
+            </Row>
+            {/* <Button className="sms_btn">Получить код по СМС</Button> */}
+            <Row >
+              <Button  className="modal_login mt-3">Войти по почте</Button>
+            </Row>
+            
           </Form>
         </Modal.Body>
       </Modal>

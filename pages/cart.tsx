@@ -93,12 +93,12 @@ const Index: NextPage = () => {
             {cartProduct.map((productItem, index) => (
               <Container>
                 <Row className="mt-5">
-                  <Col lg="3">
+                  <Col style={{maxWidth:"120px"}}  lg="3">
                     <img src={productItem.img} alt="" />
                   </Col>
-                  <Col lg="5">
-                    <Row style={{ fontWeight: "600" }}>{productItem.name}</Row>
-                    <Row>
+                  <Col lg="3" style={{maxWidth:"170px"}}  >
+                    <Row style={{ fontWeight: "600", maxWidth:"150px" }}>{productItem.name}</Row>
+                    <Row >
                       <div className="cart_product_count  mt-3">
                         <button
                           className="ms-3 "
@@ -124,7 +124,7 @@ const Index: NextPage = () => {
               </Container>
             ))}
           </Col>
-          <Col lg="4" className="ms-5 ">
+          <Col lg="4" className=" mt-4">
             <Container>
               <h2>Ваш заказ</h2>
               <p className="pricing">Доставка 25-35 мин</p>
