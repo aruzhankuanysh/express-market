@@ -11,7 +11,7 @@ import Col from "react-bootstrap/Col";
 import { Button, Image, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cart from "../cart";
+import BtnPay from "./step-payments";
 
 const OrderProducts = ({}): JSX.Element => {
   const [checked, setChecked] = useState(false);
@@ -63,7 +63,7 @@ const OrderProducts = ({}): JSX.Element => {
               <h5>305 ₸</h5>
             </Col>
           </Row>
-          <Button className="btn_orange_gradient w-100 rounded-pill">Перейти к оплате</Button>
+          <BtnPay />
         </Card.Footer>
       </Card>
     </>
