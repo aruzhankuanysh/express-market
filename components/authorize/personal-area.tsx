@@ -45,14 +45,12 @@ const PersonalArea = (): JSX.Element => {
       date: "16 апр 2023г.",
       status: "Отменен",
       price: 123,
-      paid: true,
     },
     {
       order_id: 124123,
       date: "13 апр 2023г.",
       status: "Ожидает доставки",
       price: 123,
-      paid: false,
     },
   ];
 
@@ -209,7 +207,6 @@ const PersonalArea = (): JSX.Element => {
                 <Col>Дата оформления</Col>
                 <Col>Статус</Col>
                 <Col>Сумма</Col>
-                <Col>Оплата</Col>
               </Row>
               {ordersHistory.map((order) => (
                 <Row className="mt-4">
@@ -217,13 +214,7 @@ const PersonalArea = (): JSX.Element => {
                   <Col>{order.date}</Col>
                   <Col>{order.status}</Col>
                   <Col>{order.price} UZS</Col>
-                  <Col>
-                    {order.paid ? (
-                      <Button className="payment_btn">Оплатить</Button>
-                    ) : (
-                      "Оплачено"
-                    )}
-                  </Col>
+                
                 </Row>
               ))}
             </Container>

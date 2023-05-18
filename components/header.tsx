@@ -13,10 +13,10 @@ function Header(): JSX.Element {
   const router = useRouter();
   return (
     <>
-      <Navbar className="d-block d-lg-none header_container mb-4 px-4  ">
+      <Navbar className="d-block d-lg-none header_container mb-4   ">
         <Container className="d-flex ps-3">
-          <Row>
-            <Col>
+          <Row  >
+            <Col className="me-5" style={{maxWidth:"60px"}}>
               <DropdownMenu />
             </Col>
             <Col>
@@ -27,7 +27,7 @@ function Header(): JSX.Element {
                 style={{ height: "42px" }}
               />
             </Col>
-            <Col>
+            <Col> 
               <DropdownCart/>
             </Col>
           </Row>

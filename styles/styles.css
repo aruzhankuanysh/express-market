@@ -332,12 +332,14 @@ h1 {
 }
 
 .sms_btn {
+  color: white;
   width: 80%;
   font-size: 18px !important;
   height: 46.73px;
   border-radius: 5px !important;
+  margin-top: 20px;
   margin-left: 10% !important;
-  background: var(--gosu-modal-gradient) !important;
+  background: var(--gosu-red-gradient) !important;
   border: var(--gosu-modal-gradient) !important;
 }
 
@@ -345,7 +347,7 @@ h1 {
   width: 410px;
   margin: auto !important;
   font-weight: 700 !important;
-  font-size: 22px !important;
+  font-size: 20px !important;
 }
 
 .modal_subheading {
@@ -357,7 +359,6 @@ h1 {
 }
 
 .modal_login {
-  margin-left: 35%;
   background: none !important;
   border: none !important;
   color: var(--gosu-red) !important;
@@ -372,7 +373,7 @@ h1 {
 }
 
 .dropdown_cart_wrapper {
-  width: 453px;
+  width: 433px;
   padding: 20px;
   margin-top: 10px !important;
   border: none !important;
@@ -385,6 +386,8 @@ h1 {
   font-weight: 700;
   font-size: 20px;
 }
+
+
 
 .btn_grey h5 {
   padding-top: 4px;
@@ -654,14 +657,20 @@ a {
   font-weight: 500;
 }
 
-.payment_btn {
-  margin-left: -10px;
-  color: white !important;
-  font-weight: 600;
-  background: var(--gosu-red-gradient);
+.cart_btn:active {
+  transition: all 2s ease-out !important;
+  background-color: rgba(0, 0, 0, 0.699) !important;
 }
 
-@media (max-width: 768px) {
+.get_code_btn {
+  width: 80%;
+  margin: auto;
+  color: white;
+  background: var(--gosu-red-gradient);
+  font-weight: 500;
+}
+
+@media (max-width: 992px) {
   .form_wrapper {
     display: block;
   }
@@ -672,5 +681,30 @@ a {
 
   .cart_btn h5 {
     display: none;
+  }
+
+  .dropdown_nav {
+    margin-right: -30px !important;
+  }
+
+
+  #adress_bar {
+    width: 150px;
+    margin-left: -1px !important;
+  }
+  .modal_heading {
+    text-align: center !important;
+  }
+  
+  .dropdown_cart_wrapper {
+    width: 350px;
+  }
+ 
+}
+
+
+@media (max-width: 300px) {
+  .dropdown_cart_wrapper {
+      width: 220px;  
   }
 }
