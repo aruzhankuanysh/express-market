@@ -662,6 +662,14 @@ a {
   background-color: rgba(0, 0, 0, 0.699) !important;
 }
 
+.get_code_btn {
+  width: 80%;
+  margin: auto;
+  color: white;
+  background: var(--gosu-red-gradient);
+  font-weight: 500;
+}
+
 @media (max-width: 992px) {
   .form_wrapper {
     display: block;

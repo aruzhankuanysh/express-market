@@ -57,13 +57,13 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
       <Modal.Header style={{ border: "none" }} closeButton />
       <Modal.Body>
         <Row style={{ width: "80%", margin: "auto" }}>
-          <h2>Введите код из письма</h2>
+          <h2>Введите код из SMS</h2>
         </Row>
         <Row style={{ width: "80%", margin: "auto" }}>
           <Form.Control />
         </Row>
         <Row >
-          <p className="mt-3" style={{textAlign:"center"}} >Код выслан на somemail@gmail.com</p>
+          <p className="mt-3" style={{textAlign:"center"}} >Код выслан на +9084325262873</p>
         </Row>
         {showButton ? (
           <Row >
