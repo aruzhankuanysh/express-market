@@ -11,11 +11,17 @@ import Col from "react-bootstrap/Col";
 import { Button, Image, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FirstStep from "./first-step";
+import SecondStep from "./second-step";
 
 const BtnPay = ({}): JSX.Element => {
   const [modalShow, setModalShow] = useState(false);
-  const [deliveryPaymentType, setDeliveryPaymentType] = useState(1);
-  const [deliveryType, setDeliveryType] = useState("DeliveryByCourier");
+  
+  
+  const [step, setStep] = useState(1);
+  const nextStep = () => setStep(step + 1);
+  const prevStep = () => setStep(step - 1);
+
   return (
     <>
       <Button
@@ -31,18 +37,8 @@ const BtnPay = ({}): JSX.Element => {
         centered
       >
         <Modal.Body className="text-center p-4">
-          <h4>Вы хотите изменить чаевые?</h4>
-          <p>Введите сумму</p>
-          <Col sm="5" className="mx-auto">
-            <Form.Control
-              type="number"
-              className="col-5"
-              placeholder="0 ₸"
-              aria-label="number"
-              aria-describedby="basic-addon1"
-            />
-            <Button className="btn_orange_gradient rounded-3 mt-4 mx-auto">Применить</Button>
-          </Col>
+          <FirstStep step={step} nextStep={nextStep} />
+          <SecondStep step={step} />
         </Modal.Body>
       </Modal>
     </>
