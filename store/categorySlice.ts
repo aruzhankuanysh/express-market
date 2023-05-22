@@ -1,4 +1,4 @@
-import { AnyAction, createSlice } from "@reduxjs/toolkit";
+import { AnyAction, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { Category } from "../specs/gosuTypes";
 
@@ -16,7 +16,7 @@ export const categorySlice = createSlice({
   name: "category",
   initialState,
   reducers: {
-    setCategory(state, action) {
+    setCategory(state, action:PayloadAction<Category[]>) {
       state.categories = action.payload;
     },
   },

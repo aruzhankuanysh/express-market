@@ -1,6 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import authReducer, { authSlice } from "./authSlice";
 import categoryReducer, { categorySlice } from "./categorySlice";
+import cartReducer, { cartSlice } from "./cartSlice";
+import stockReducer, { stockSlice } from "./stockSlice";
 
 import { nextReduxCookieMiddleware, wrapMakeStore } from "next-redux-cookie-wrapper";
 import { createWrapper } from "next-redux-wrapper";
@@ -9,6 +11,8 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 const rootReducer = combineReducers({
   [authSlice.name]: authReducer,
   [categorySlice.name]: categoryReducer,
+  [cartSlice.name]: cartReducer,
+  [stockSlice.name]: stockReducer,
 })
 
 const makeStore = wrapMakeStore(() =>
@@ -20,6 +24,8 @@ const makeStore = wrapMakeStore(() =>
         secure: true,
           subtrees: [
             "auth",
+            "cart",
+            "stock.currentStock",
           ],
         })
       ),

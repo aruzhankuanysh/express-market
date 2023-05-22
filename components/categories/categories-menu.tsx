@@ -1,5 +1,4 @@
-import Container from "react-bootstrap/Container";
-import CategoriesProducts from "@/components/categories/categories-products";
+import CategoriesProducts from "./categories-products";
 
 export default function CategoriesMenu() {
   return (
