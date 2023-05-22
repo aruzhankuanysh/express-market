@@ -7,24 +7,8 @@ import MenuSideNav from "@/components/catalog/menu-side-nav";
 import MenuSpecialOffers from "@/components/catalog/menu-offers";
 import AdviceSlide from "@/components/catalog/menu-advice-slide";
 import Catalog from "@/components/catalog/menu-catalog";
-import { useAppDispatch } from "@/store/store";
-import { useEffect } from "react";
-import { getCategory } from "@/specs/gosuService";
-import { setCategory } from "@/store/categorySlice";
 
 export default function Home() {
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    getCategory().then(res => {
-      console.log(res['Category']);
-      if (res) {
-        dispatch(setCategory(res['Category']));
-      }
-    })
-  }, []);
-
   return (
     <>
       <Header />

@@ -2,9 +2,11 @@ import { useAppSelector } from "@/store/store";
 import { useEffect } from "react";
 import { Button, Navbar } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
+import { useRouter } from "next/router";
 
 const MenuSideNav = ({}): JSX.Element => {
   const categories = useAppSelector((state) => state.category);
+  const router = useRouter();
 
   useEffect(() => {
     console.log(categories.categories);
@@ -35,7 +37,7 @@ const MenuSideNav = ({}): JSX.Element => {
                         </Accordion.Header>
                         <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>
                           {(children_category.brand ?? []).map((brand) => (
-                            <Button key={`brand-${brand.category_id}`} className="text-start">
+                            <Button key={`brand-${brand.category_id}`} className="text-start" onClick={() => {router.push(`/${main_category.category_id}?brand=${brand.category_id}`)}}>
                               {brand.name_category}
                             </Button>
                           ))}

@@ -23,7 +23,7 @@ const Catalog = ({}): JSX.Element => {
                     <Button 
                       className="catalog_button" 
                       style={{backgroundImage:`url(/imgCategories/${children_category.category_id}.svg)`}}
-                      onClick={() => router.push(`/${children_category.category_id}`)}
+                      onClick={() => router.push(`/${main_category.category_id}?children=${children_category.category_id}`)}
                     >
                       <h4>{children_category.name_category}</h4>
                     </Button>
