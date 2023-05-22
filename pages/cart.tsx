@@ -97,8 +97,8 @@ const Index: NextPage = () => {
                   <Col style={{maxWidth:"120px"}}  lg="2" >
                     <img src={productItem.img} alt="" />
                   </Col>
-                  <Col lg="2" style={{maxWidth:"170px"}}  >
-                    <Row style={{ fontWeight: "600", maxWidth:"150px" }}>{productItem.name}</Row>
+                  <Col lg="6" sm="6" xxs="6" >
+                    <Row style={{ fontWeight: "600",}}>{productItem.name}</Row>
                     <Row >
                       <div className="cart_product_count  mt-3">
                         <button

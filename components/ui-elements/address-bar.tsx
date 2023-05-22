@@ -1,24 +1,26 @@
 import { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
 
 function AdressBar(): JSX.Element {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const addresses = [
+    { id: 0, address: "Улица Пушкина" },
+    { id: 1, address: "Золотушкина" },
+  ];
   return (
     <>
-      <Button id="adress_bar" className="input rounded-4 height-3 ms-4" onClick={handleShow}></Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
-        </Modal.Header>
-        <Modal.Body></Modal.Body>
-        <Modal.Footer></Modal.Footer>
-      </Modal>
+      <Form.Select
+        aria-label="Default select example"
+        className="input rounded-4 height-3 ms-4"
+        id="adress_bar"
+      >
+        {addresses.map((addresses) => (
+          <option value={addresses.id}>{addresses.address}</option>
+        ))}
+      </Form.Select>
     </>
   );
 }
 
 export default AdressBar;
+
+// id="adress_bar" className="input rounded-4 height-3 ms-4"

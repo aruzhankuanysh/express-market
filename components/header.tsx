@@ -14,12 +14,12 @@ function Header(): JSX.Element {
   return (
     <>
       <Navbar className="d-block d-lg-none header_container mb-4   ">
-        <Container className="d-flex ps-3">
-          <Row  >
-            <Col className="me-5" style={{maxWidth:"60px"}}>
+        <Container className="d-flex ps-3 ">
+          <Row className="mobile_header" style={{width:"100%"}}>
+            <Col >
               <DropdownMenu />
             </Col>
-            <Col>
+            <Col  >
               <Image
                 fluid
                 src="/img/express-logo.svg"
@@ -27,7 +27,7 @@ function Header(): JSX.Element {
                 style={{ height: "42px" }}
               />
             </Col>
-            <Col> 
+            <Col style={{display:"flex", justifyContent:"center"}}> 
               <DropdownCart/>
             </Col>
           </Row>

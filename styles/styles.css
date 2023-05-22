@@ -125,6 +125,8 @@ h1 {
   margin-left: 40px;
 }
 
+
+
 .action-tag {
   background: var(--gosu-red-gradient) !important;
 
@@ -676,6 +678,16 @@ a {
 
 .details_container {
   justify-content: space-between !important;
+}
+
+.form-control {
+  background-color: var(--gosu-bg);
+  max-width: 320px;
+  height: 52px !important;
+}
+
+.mobile_header {
+  display: flex;
 }
 
 @media (max-width: 992px) {
