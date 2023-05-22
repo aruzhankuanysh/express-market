@@ -117,7 +117,8 @@ const Index: NextPage = () => {
                     </Row>
                   </Col>
                   <Col className="d-block d-lg-flex">
-                    <Button  onClick={() => removeProduct(index)}><img className="ms-4" style={{height:"20px"}} src="/img/delete.svg"/></Button>
+                    <Row><Button  onClick={() => removeProduct(index)}><img className="ms-4" style={{height:"20px"}} src="/img/delete.svg"/></Button></Row>
+                    Row
                     <p className="mt-3" style={{ fontWeight: "700" }}>{productItem.price * productItem.count} UZS</p>
                   </Col>
                 </Row>
