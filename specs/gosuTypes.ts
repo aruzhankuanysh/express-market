@@ -24,3 +24,14 @@ export type Category = {
   name_category: string;
   children_category: Array<SubCategory>;
 };
+
+export type Product = {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+};
+
+export type Stock = {
+  StockName: string;
+}
