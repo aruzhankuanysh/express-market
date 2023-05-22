@@ -68,7 +68,7 @@ function DropdownCart(): JSX.Element {
         <Container fluid style={{ borderBottom: "2px solid rgba(0, 0, 0, 0.2)" }}>
 
           {cartProduct.map((productItem, index) => (
-            <Row className="d-flex">
+            <Row key={`${productItem.name}-${index}`} className="d-flex">
               <Col lg="3">
                 <img src={productItem.img} alt="" />
               </Col>

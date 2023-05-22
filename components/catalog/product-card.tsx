@@ -22,8 +22,8 @@ const ProductCard = ({}): JSX.Element => {
             </h4>
           </Card.Title>
           <Card.Text className="pt-3">
-            <h5 className="">Вода Святой Источник негазированная</h5>
-            <h5 className="text-secondary">1,5 л</h5>
+            <span className="">Вода Святой Источник негазированная</span>
+            <span className="text-secondary">1,5 л</span>
           </Card.Text>
           <Button className="btn_orange_gradient rounded-4 w-100 text-light py-2"><h4>В корзину</h4></Button>
         </Card.Body>
