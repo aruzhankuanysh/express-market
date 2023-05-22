@@ -70,7 +70,7 @@ const OrderPay = ({}): JSX.Element => {
         <ButtonGroup>
           {tips.map((tip, indx) => (
             <ToggleButton
-              key={indx}
+              key={`${tip.name}-${indx}`}
               id={`radio-${indx}`}
               type="radio"
               variant={checked ? "outline-danger" : "outline-success"}

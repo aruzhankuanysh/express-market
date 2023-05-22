@@ -8,7 +8,7 @@ const ProductCard = ({}): JSX.Element => {
   const router = useRouter();
   return (
     <>
-      <Card className="rounded-4 btn_grey" style={{ width: "100%" }} onClick={() => {router.push('/product-page')}}>
+      <Card className="rounded-4 btn_grey" style={{ width: "100%", cursor: "pointer" }} onClick={() => {router.push('/product-page')}}>
         <Card.Header className="position-relative bg-transparent border-0">
           <Card.Img variant="top" src="/img/water1.svg" />
           <div className="bg-orange position-absolute bottom-0 mb-4 rounded-4 text-light fw-bold action-tag px-3">-40%</div>
@@ -22,8 +22,8 @@ const ProductCard = ({}): JSX.Element => {
             </h4>
           </Card.Title>
           <Card.Text className="pt-3">
-            <h5 className="">Вода Святой Источник негазированная</h5>
-            <h5 className="text-secondary">1,5 л</h5>
+            <span className="">Вода Святой Источник негазированная</span>
+            <span className="text-secondary">1,5 л</span>
           </Card.Text>
           <Button className="btn_orange_gradient rounded-4 w-100 text-light py-2"><h4>В корзину</h4></Button>
         </Card.Body>

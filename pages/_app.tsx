@@ -31,9 +31,7 @@ const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
               breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
               minBreakpoint="xxs"
             >
-              {/* <GoogleAnalytics trackPageViews /> */}
-              <Component {...pageProps} />
-              {/* <BackOnTop /> */}
+              <Component {...props} />
             </ThemeProvider>
         </Provider>
       </>

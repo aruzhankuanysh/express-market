@@ -2,276 +2,65 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Container, Navbar } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "@/store/store";
 
 const CategoriesNav = ({}): JSX.Element => {
-  const categories = [
-    {
-      productId: "1",
-      name: "Овощи, грибы и зелень",
-      imageUrl: "/imgCategories/Rectangle12.svg",
-      catalogs: [
-        {
-          catalogId: "1",
-          catalogName: "Помидоры",
-          catalogProducts: [
-            {
-              prodId: "1",
-              prodName: "Помидоры черри",
-              prodPrice: "100",
-            },
-            {
-              prodId: "2",
-              prodName: "Помидоры кокт",
-              prodPrice: "100",
-            },
-            {
-              prodId: "3",
-              prodName: "Помидоры сливовидные",
-              prodPrice: "100",
-            },
-          ],
-        },
-        {
-          catalogId: "2",
-          catalogName: "Огурцы",
-          catalogProducts: [
-            {
-              prodId: "1",
-              prodName: "Огурцы1",
-              prodPrice: "100",
-            },
-            {
-              prodId: "2",
-              prodName: "Огурцы2",
-              prodPrice: "100",
-            },
-            {
-              prodId: "3",
-              prodName: "Огурцы3",
-              prodPrice: "100",
-            },
-            {
-              prodId: "4",
-              prodName: "Огурцы4",
-              prodPrice: "100",
-            },
-            {
-              prodId: "5",
-              prodName: "Огурцы5",
-              prodPrice: "100",
-            },
-          ],
-        },
-        {
-          catalogId: "3",
-          catalogName: "Авакадо",
-          catalogProducts: [
-            {
-              prodId: "1",
-              prodName: "Авакадо1",
-              prodPrice: "100",
-            },
-            {
-              prodId: "2",
-              prodName: "Авакадо2",
-              prodPrice: "100",
-            },
-            {
-              prodId: "3",
-              prodName: "Авакадо3",
-              prodPrice: "100",
-            },
-            {
-              prodId: "4",
-              prodName: "Авакадо4",
-              prodPrice: "100",
-            },
-            {
-              prodId: "5",
-              prodName: "Авакадо5",
-              prodPrice: "100",
-            },
-          ],
-        },
-        {
-          catalogId: "4",
-          catalogName: "Картошки и батат",
-          catalogProducts: [
-            {
-              prodId: "1",
-              prodName: "Красный картофель",
-              prodPrice: "100",
-            },
-            {
-              prodId: "2",
-              prodName: "картофель мытый",
-              prodPrice: "100",
-            },
-            {
-              prodId: "3",
-              prodName: "картофель Беби",
-              prodPrice: "100",
-            },
-            {
-              prodId: "4",
-              prodName: "Картофель молодой",
-              prodPrice: "100",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      productId: "2",
-      name: "Фрукты и ягоды",
-      imageUrl: "/imgCategories/Rectangle13.svg",
-      catalogs: [
-        {
-          catalogId: "1",
-          catalogName: "aiaiai",
-          catalogProducts: [
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-          ],
-        },
-        {
-          catalogId: "1",
-          catalogName: "aiaiai",
-          catalogProducts: [
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-          ],
-        },
-        {
-          catalogId: "1",
-          catalogName: "aiaiai",
-          catalogProducts: [
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-          ],
-        },
-        {
-          catalogId: "1",
-          catalogName: "aiaiai",
-          catalogProducts: [
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-            {
-              prodId: "123",
-              prodName: "dasssssssss",
-              prodPrice: "100",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+  const router = useRouter();
+  const categories = useAppSelector((state) => state.category);
+
+  const [children, setChildren] = useState("");
+
+  useEffect(() => {
+    console.log(router.query["id"]);
+    console.log(router.query);
+    router.query["children"] ? setChildren(router.query["children"].toString()) : setChildren("");
+
+  }, [router.query]);
+
   return (
     <>
       <Navbar id="idCatalogs">
-        <Accordion defaultActiveKey="1" className="w-100">
-          {categories.map((categorie) => (
-            <Accordion.Item eventKey={categorie.productId}>
-              <Accordion.Header><h6 className="mb-1">{categorie.name}</h6></Accordion.Header>
-              <Accordion.Body
-                className="d-flex flex-column"
-                style={{ paddingLeft: "30px" }}
-              >
-                {(categorie.catalogs ?? []).map((index) => (
-                  <Button key={1} className="text-start">
-                    {index.catalogName}
-                  </Button>
-                ))}
-              </Accordion.Body>
-            </Accordion.Item>
-          ))}
+        <Accordion defaultActiveKey="0" className="w-100">
+          {(Array.isArray(categories.categories) ? categories.categories : [])
+            .filter((main_category) => {
+              return main_category.category_id === router.query["id"];
+            })
+            .map((main_category) => (
+              <Accordion.Item eventKey="0" key={main_category.category_id}>
+                <Accordion.Header>
+                  <h6 className="mb-1">{main_category.name_category}</h6>
+                </Accordion.Header>
+                <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>
+                  {(main_category.children_category ?? []).map((children_category) => (
+                      <Accordion defaultActiveKey="child-0" key={children_category.category_id}>
+                        <Accordion.Item eventKey={children === children_category.category_id ? 'child-0' : `child-${children_category.category_id}`}>
+                          <Accordion.Header>
+                            {children_category.name_category}
+                          </Accordion.Header>
+                          <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>
+                            {(children_category.brand ?? []).map((brand) => (
+                              <Button
+                                key={`brand-${brand.category_id}`}
+                                className="text-start"
+                                onClick={() => {
+                                  router.push(
+                                    `/${main_category.category_id}?brand=${brand.category_id}`
+                                  );
+                                }}
+                              >
+                                {brand.name_category}
+                              </Button>
+                            ))}
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    )
+                  )}
+                </Accordion.Body>
+              </Accordion.Item>
+            ))}
         </Accordion>
       </Navbar>
     </>

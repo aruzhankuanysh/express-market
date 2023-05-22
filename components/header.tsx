@@ -5,30 +5,48 @@ import { useRouter } from "next/router";
 import SearchBar from "./ui-elements/search-bar";
 import Login from "./authorize/login";
 import AdressBar from "./ui-elements/address-bar";
-// import Cart from "@/components/cart";       
+// import Cart from "@/components/cart";
 import DropdownMenu from "./ui-elements/dropdown-menu";
 import DropdownCart from "./ui-elements/dropdown-cart";
+import { useEffect } from "react";
+import { getCategory } from "@/specs/gosuService";
+import { useAppDispatch } from "@/store/store";
+import { setCategory } from "@/store/categorySlice";
 
 function Header(): JSX.Element {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    getCategory().then((res) => {
+      console.log(res["Category"]);
+      if (res) {
+        dispatch(setCategory(res["Category"]));
+      }
+    });
+  }, []);
+
   return (
     <>
       <Navbar className="d-block d-lg-none header_container mb-4   ">
         <Container className="d-flex ps-3 ">
-          <Row className="mobile_header" style={{width:"100%"}}>
-            <Col >
+          <Row className="mobile_header" style={{ width: "100%" }}>
+            <Col>
               <DropdownMenu />
             </Col>
-            <Col  >
+            <Col>
               <Image
                 fluid
-                src="/img/express-logo.svg"
-                alt=""
-                style={{ height: "42px" }}
+                src="img/express-logo.svg"
+                alt="express-logo"
+                style={{ height: "42px", cursor: "pointer" }}
+                onClick={() => {
+                  router.push("/");
+                }}
               />
             </Col>
-            <Col style={{display:"flex", justifyContent:"center"}}> 
-              <DropdownCart/>
+            <Col style={{ display: "flex", justifyContent: "center" }}>
+              <DropdownCart />
             </Col>
           </Row>
         </Container>
@@ -45,8 +63,11 @@ function Header(): JSX.Element {
               <Image
                 fluid
                 src="img/express-logo.svg"
-                alt=""
-                style={{ height: "42px" }}
+                alt="express-logo"
+                style={{ height: "42px", cursor: "pointer" }}
+                onClick={() => {
+                  router.push("/");
+                }}
               />
             </Col>
             <Col md="auto">
@@ -67,7 +88,7 @@ function Header(): JSX.Element {
         >
           {/* Нужно деоделать модальное окно */}
           <AdressBar />
-          <DropdownCart/>
+          <DropdownCart />
           <Login />
         </Nav>
       </Navbar>
