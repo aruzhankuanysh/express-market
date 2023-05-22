@@ -59,7 +59,7 @@ export const cartSlice = createSlice({
       .addCase(HYDRATE, (state, action: AnyAction) => {
         return {
           ...state,
-          ...action['payload']['categories'],
+          ...action['payload']['cart'],
         }
       })
   },

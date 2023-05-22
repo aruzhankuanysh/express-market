@@ -18,7 +18,10 @@ export const stockSlice = createSlice({
   reducers: {
     setStocks(state, action: PayloadAction<Stock[]>) {
         state.stocks = action.payload;
-        state.currentStock = action.payload[0];
+        const index = action.payload.findIndex((stock) => stock.StockName === state.currentStock?.StockName);
+        if (!state.currentStock || index < 0) {
+          state.currentStock = action.payload[0];
+        }
     },
     setCurrentStock(state, action: PayloadAction<Stock>) {
         state.currentStock = action.payload;
@@ -30,7 +33,7 @@ export const stockSlice = createSlice({
       .addCase(HYDRATE, (state, action: AnyAction) => {
         return {
           ...state,
-          ...action['payload']['categories'],
+          ...action['payload']['stock'],
         }
       })
   },
