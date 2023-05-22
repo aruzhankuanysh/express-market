@@ -8,6 +8,7 @@ import {
   Row,
   ToggleButton,
 } from "react-bootstrap";
+import DateTimePicker from "../datetimepicker";
 
 const PersonalArea = (): JSX.Element => {
   const [isProfileDisabled, setProfileDisabled] = useState(false);
@@ -18,6 +19,8 @@ const PersonalArea = (): JSX.Element => {
   const [selectedOrder, setSelectedOrder] = useState<number | null>(null);
   const [showOrderDetails, setShowOrderDetails] = useState(false);
 
+  const [birthday, setBirthday] = useState<Date>(); 
+  // () => (authState.user?.birthdate ? new Date(authState.user?.birthdate.split("T")[0]) : new Date())
   const radios = [
     { name: "Профиль", value: "1" },
     { name: "История заказов", value: "2" },
@@ -87,8 +90,9 @@ const PersonalArea = (): JSX.Element => {
             <h1>Профиль</h1>
           </Row>
 
-          <ButtonGroup className="">
+          <ButtonGroup style={{maxWidth:"350px"}}>
             {radios.map((radio, idx) => (
+              
               <ToggleButton
                 key={idx}
                 id={`radio-${idx}`}
@@ -126,8 +130,8 @@ const PersonalArea = (): JSX.Element => {
                 <Form.Control className="form_input" type="tel" />
               </Form.Group>
               <Form.Group className="form_wrapper">
-                <Form.Label>Дата рождения</Form.Label>
-                <Form.Control className="form_input" />
+                <Form.Label style={{marginRight:"22%"}}>Дата рождения</Form.Label>
+                <DateTimePicker  />
               </Form.Group>
               <Form.Group
                 className="form_wrapper"
@@ -265,35 +269,35 @@ const PersonalArea = (): JSX.Element => {
                         </Row>
                       </Container>
                       <Row className="mt-5 pb-4" style={{borderBottom:"1px solid rgba(0, 0, 0, 0.2)", maxWidth:"650px"}}>
-                        <Col style={{fontWeight:"700"}} lg="6" sm="6" >Название</Col>
-                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" >Цена</Col>
-                        <Col  style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2"  >Количество</Col>
-                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xs="2" >Сумма</Col>
+                        <Col style={{fontWeight:"700"}} lg="6" sm="6" xxs="4" >Название</Col>
+                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xxs="2">Цена</Col>
+                        <Col  style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xxs="4" >Количество</Col>
+                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xxs="2" >Сумма</Col>
                       </Row>
                       <Row className="mt-4 pb-4" style={{borderBottom:"1px solid rgba(0, 0, 0, 0.2)", maxWidth:"650px", fontSize:"15px", fontWeight:"400"}}>
-                        <Col className="text-danger" style={{fontWeight:"600", textDecorationLine:"underline"}} lg="6" sm="6">{order.title}</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2">{order.price} сумм</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2">{order.count}</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2">1000 сумм</Col>
+                        <Col className="text-danger" style={{fontWeight:"600", textDecorationLine:"underline"}} lg="6" sm="6" xxs="4">{order.title}</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">{order.price} сумм</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="4">{order.count}</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">1000 сумм</Col>
                       </Row>
                         <Row className="mt-3">
-                          <Col>Заказано товаров на сумму:</Col>
+                          <Col xxs="8">Заказано товаров на сумму:</Col>
                           <Col>{order.price} сумм</Col>
                         </Row>
                         <Row className="mt-3">
-                          <Col>Доставленные продукты:</Col>
+                          <Col xxs="8">Доставленные продукты:</Col>
                           <Col> 123 сумм</Col>
                         </Row>
                         <Row className="mt-3">
-                          <Col>Стоимость доставки:</Col>
+                          <Col xxs="8">Стоимость доставки:</Col>
                           <Col>0 сумм</Col>
                         </Row >
                         <Row className="mt-3">
-                          <Col>Чаевые:</Col>
+                          <Col xxs="8">Чаевые:</Col>
                           <Col>200 сумм</Col>
                         </Row>
                         <Row className="mt-3">
-                          <Col style={{fontWeight:"700"}} >Итоговая сумма</Col>
+                          <Col xxs="8" style={{fontWeight:"700"}} >Итоговая сумма</Col>
                           <Col style={{fontWeight:"700"}} >323 сумм</Col>
                         </Row>
                     </Container>

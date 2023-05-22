@@ -29,9 +29,9 @@ function Header(): JSX.Element {
   return (
     <>
       <Navbar className="d-block d-lg-none header_container mb-4   ">
-        <Container className="d-flex ps-3">
-          <Row>
-            <Col className="me-5" style={{ maxWidth: "60px" }}>
+        <Container className="d-flex ps-3 ">
+          <Row className="mobile_header" style={{ width: "100%" }}>
+            <Col>
               <DropdownMenu />
             </Col>
             <Col>
@@ -45,7 +45,7 @@ function Header(): JSX.Element {
                 }}
               />
             </Col>
-            <Col>
+            <Col style={{ display: "flex", justifyContent: "center" }}>
               <DropdownCart />
             </Col>
           </Row>
