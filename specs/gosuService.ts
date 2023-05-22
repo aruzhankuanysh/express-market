@@ -10,6 +10,16 @@ export const getCategory = async () => {
     }
 };
 
+// GET – получает массив с наименованием складов
+export const getStocks = async () => {
+    try {
+        const response = await api.get(`Stock`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 // ! Временно
 // const products = [
 //     {
