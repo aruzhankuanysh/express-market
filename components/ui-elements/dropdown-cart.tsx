@@ -1,6 +1,7 @@
 import { Dropdown, Button, Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useAppSelector } from "@/store/store";
 
 function DropdownCart(): JSX.Element {
   const [show, setShow] = useState(false);
@@ -24,10 +25,12 @@ function DropdownCart(): JSX.Element {
     setShow(true);
   };
 
-  const totalPrice = cartProduct.reduce(
-    (total, product) => total + product.price * product.count,
-    0
-  );
+  const totalPrice = useAppSelector(state => state.cart.total);
+
+  // const totalPrice = cartProduct.reduce(
+  //   (total, product) => total + product.price * product.count,
+  //   0
+  // );
 
   const decrement = (index: number) => {
     const updatedCartProduct = [...cartProduct];
