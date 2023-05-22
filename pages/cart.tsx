@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Advice from "@/components/catalog/menu-advice-slide";
 
+
 const Index: NextPage = () => {
   const [cartProduct, setCartProduct] = useState([
     {
@@ -93,10 +94,10 @@ const Index: NextPage = () => {
             {cartProduct.map((productItem, index) => (
               <Container>
                 <Row className="mt-5">
-                  <Col style={{maxWidth:"120px"}}  lg="3">
+                  <Col style={{maxWidth:"120px"}}  lg="2" >
                     <img src={productItem.img} alt="" />
                   </Col>
-                  <Col lg="3" style={{maxWidth:"170px"}}  >
+                  <Col lg="2" style={{maxWidth:"170px"}}  >
                     <Row style={{ fontWeight: "600", maxWidth:"150px" }}>{productItem.name}</Row>
                     <Row >
                       <div className="cart_product_count  mt-3">
@@ -116,7 +117,7 @@ const Index: NextPage = () => {
                       </div>
                     </Row>
                   </Col>
-                  <Col >
+                  <Col className="d-block d-lg-flex">
                     <Button  onClick={() => removeProduct(index)}><img className="ms-4" style={{height:"20px"}} src="/img/delete.svg"/></Button>
                     <p className="mt-3" style={{ fontWeight: "700" }}>{productItem.price * productItem.count} UZS</p>
                   </Col>

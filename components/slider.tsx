@@ -17,7 +17,7 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
         <img
           src={images[currentIndex]}
           alt={`Image ${currentIndex}`}
-          style={{ minWidth: '3400px', maxHeight: '400px', marginTop: '10px' }}
+          style={{ minWidth: '340px', maxHeight: '400px', marginTop: '10px' }}
         />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
