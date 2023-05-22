@@ -1,38 +1,22 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   ButtonGroup,
   Col,
   Container,
   Form,
-  Nav,
   Row,
-  Tab,
-  Table,
   ToggleButton,
-  ToggleButtonGroup,
 } from "react-bootstrap";
-import SwitchButton from "../ui-elements/swtich-button";
-
-// const customSwitchStyle: React.CSSProperties = {
-//   // backgroundolor: 'red', // Задайте свой цвет фона
-//   color: 'white', // Задайте свой цвет текста
-//   borderRadius: '10px', // Задайте свои радиусы границ
-//   // Другие пользовательские стили
-// };
 
 const PersonalArea = (): JSX.Element => {
-  // const authState = useSelector(selectAuthState);
-
-  // const [gender. setGender] = useState(authState?.user?.gender ?? "male");
-  // const [phone, setPhone] = useState(authState?.user?.phone ?? "");
-  // const [name, setName] = useState(authState?.user?.name ?? "");
-  const [checked, setChecked] = useState(false);
+  const [isProfileDisabled, setProfileDisabled] = useState(false);
+  const [isOrdersDisabled, setOrdersDisabled] = useState(false);
   const [radioValue, setRadioValue] = useState("1");
   const [showInput, setShowInput] = useState(true);
   const [showOrders, setShowOrders] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<number | null>(null);
+  const [showOrderDetails, setShowOrderDetails] = useState(false);
 
   const radios = [
     { name: "Профиль", value: "1" },
@@ -41,84 +25,59 @@ const PersonalArea = (): JSX.Element => {
 
   const ordersHistory = [
     {
-      order_id: 124123,
+      order_id: 121123,
+      title:"Яблоки Amal Bio Голден делишес кг",
       date: "16 апр 2023г.",
       status: "Отменен",
+      count:"1.123 кг",
       price: 123,
+      address:
+        "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
     },
     {
       order_id: 124123,
       date: "13 апр 2023г.",
+      title:"Яблоки Amal Bio Голден делишес кг",
       status: "Ожидает доставки",
+      count:"1.123 кг",
       price: 123,
+      address:
+        "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
     },
   ];
 
-  //   const dispatch = useDispatch();
-  const router = useRouter();
+  const handleButtonClick = (value: string) => {
+    if (value === "1") {
+      setShowInput(true);
+      setShowOrders(false);
+      setShowOrderDetails(false);
+      setSelectedOrder(null);
+    } else if (value === "2") {
+      setShowInput(false);
+      setShowOrders(true);
+      setShowOrderDetails(false);
+      setSelectedOrder(null);
+    }
+  };
 
-  // const [birthday, setBirthday] = useState<Date>(() => (authState.user?.birthday ? new Date(authState.user?.birthday.split("T")[0]) : new Date()));
-  // const [selectedBirthday, setSelectedBirthday] =  useState<Date>(() => (authState.user?.birthdate ? new Date(authState.user?.birthdate.split("T")[0]) : new Date()));
+  const handleOrderClick = (orderId: number) => {
+    setSelectedOrder(orderId);
+    handleOrderDetailsClick(orderId);
+  };
 
-  // const creationStatus = {
-  //   Error: "Отмена",
-  //   InProgress: "В Работе",
-  //   Succes: "Создан",
-  // };
+  const handleOrderDetailsClick = (orderId: number) => {
+    setShowOrderDetails(true);
+    setShowOrders(false);
+  };
+
+  const handleBackClick = () => {
+    setShowOrderDetails(false);
+    setShowOrders(true);
+  };
 
   function combineClasses(...classes: (string | undefined | false)[]): string {
     return classes.filter((c): c is string => typeof c === "string").join(" ");
   }
-
-  // const UpdateData = async () => {
-  //     const result = await getEmitHelpers(authState.authToken);
-  //     if(result) {
-  //         dispatch(setUser(result?.user));
-  //         dispatch(setAuthState(true));
-  //     } else {
-  //         dispatch(setAuthState(false));
-  //         router.push('/');
-  //     }
-  // }
-
-  // useEffect(() => {
-  //     if(authState?.user?.birthdate){
-  //         setSelectedBirthday( new Date (authState.user?.birthdate.split("T")[0]))
-  //     } else {
-  //         setSelectedBirthday(birthday)
-  //     }
-  // },[birthday, authState?.user])
-  // useEffect(() => {
-  //     if (authState?.authState === false) {
-  //       dispatch(setAccessToken(""));
-  //       router.push('/');
-  //     }
-  //     UpdateData()
-  //   }, [])
-
-  //   useEffect(() => {
-  //     setGender(authState?.user?.gender ?? "male");
-  //     setPhone(authState?.user?.phone ?? "");
-  //     setName(authState?.user?.name ?? "");
-  //   }, [authState?.user])
-  //   const [active, setActive] = useState(1);
-
-  //   const handleChange = (value) => {
-  //     setActive(value);
-  //     const toggleBtn = document.querySelector('.toggle_btn');
-  //     if (value === 1) {
-  //       toggleBtn.classList.add('profile');
-  //       toggleBtn.classList.remove('history');
-  //     } else {
-  //       toggleBtn.classList.add('history');
-  //       toggleBtn.classList.remove('profile');
-  //     }
-  //   };
-  const [orders, setOrders] = useState([]);
-  const handleButtonClick = () => {
-    setShowInput(!showInput);
-    setShowOrders(!showOrders);
-  };
 
   return (
     <>
@@ -127,21 +86,8 @@ const PersonalArea = (): JSX.Element => {
           <Row className="my-4 ">
             <h1>Профиль</h1>
           </Row>
-          <Container className="d-block d-md-none">
-            <SwitchButton
-              checked
-              disabled={false}
-              onlabel="Профиль"
-              offlabel="Заказы"
-              onstyle="success"
-              offstyle="sucess"
-              size="lg"
-              style="styles"
-              onChange={handleButtonClick}
-              color=""
-            />
-          </Container>
-          <ButtonGroup className="d-none d-md-flex">
+
+          <ButtonGroup className="">
             {radios.map((radio, idx) => (
               <ToggleButton
                 key={idx}
@@ -154,11 +100,14 @@ const PersonalArea = (): JSX.Element => {
                 value={radio.value}
                 checked={radioValue === radio.value}
                 onChange={(e) => setRadioValue(e.currentTarget.value)}
-                onClick={handleButtonClick}
+                onClick={() => handleButtonClick(radio.value)}
                 className={combineClasses(
                   "toggle_btn ",
                   radioValue === radio.value && ("selected-radio" as const)
                 )}
+                disabled={
+                  radio.value === "1" ? isProfileDisabled : isOrdersDisabled
+                }
               >
                 {radio.name}
               </ToggleButton>
@@ -201,22 +150,158 @@ const PersonalArea = (): JSX.Element => {
             </Container>
           )}
           {showOrders && (
-            <Container className="orders_group">
-              <Row className="mt-5 pb-4" style={{borderBottom:"1px solid grey"}}>
-                <Col>Номер заказа</Col>
-                <Col>Дата оформления</Col>
-                <Col>Статус</Col>
-                <Col>Сумма</Col>
-              </Row>
-              {ordersHistory.map((order) => (
-                <Row className="mt-4">
-                  <Col >{order.order_id}</Col>
-                  <Col>{order.date}</Col>
-                  <Col>{order.status}</Col>
-                  <Col>{order.price} UZS</Col>
-                
+            <>
+              <Container className="orders_group">
+                <Row
+                  className="mt-5 pb-4"
+                  style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.2)", maxWidth:"1000px"}}
+                >
+                  <Col>Номер заказа</Col>
+                  <Col>Дата оформления</Col>
+                  <Col>Статус</Col>
+                  <Col>Сумма</Col>
                 </Row>
-              ))}
+                {ordersHistory.map((order) => (
+                  <Container key={order.order_id}>
+                    <Row className="mt-4">
+                      <Col>
+                        <p
+                          style={{
+                            borderBottom: "1px solid",
+                            width: "50px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => handleOrderClick(order.order_id)}
+                        >
+                          {order.order_id}
+                        </p>
+                      </Col>
+                      <Col>{order.date}</Col>
+                      <Col>{order.status}</Col>
+                      <Col>{order.price} UZS</Col>
+                    </Row>
+                  </Container>
+                ))}
+              </Container>
+            </>
+          )}
+          {selectedOrder && showOrderDetails && (
+            <Container className="order_details">
+              {ordersHistory.map((order) => {
+                if (order.order_id === selectedOrder) {
+                  return (
+                    <Container
+                      style={{ fontWeight: "500" }}
+                      className="mt-5 "
+                      key={order.order_id}
+                    >
+                      <Row>
+                        <Col>
+                          <Button
+                            className="btn-primary back_btn "
+                            onClick={handleBackClick}
+                          >
+                            Назад
+                          </Button>
+                        </Col>
+                        <Col>
+                          <Button>Отменить заказ</Button>
+                        </Col>
+                      </Row>
+                      <Row className="my-4">
+                        <Col>
+                          <h1>Заказ {order.order_id}</h1>
+                        </Col>
+                        <Col>
+                          <h2 className="text-danger">{order.status}</h2>
+                        </Col>
+                      </Row>
+                      <Container
+                        className="d-flex details_container p-4"
+                        style={{
+                          boxShadow: "-1px 0px 13px rgba(0, 0, 0, 0.25)",
+                          borderRadius: "7px",
+                        }}
+                      >
+                        <Row style={{minWidth:"160px", textAlign:"center"}}>
+                          <Col >
+                            <Row className="text-secondary">
+                              <p>Оформлен</p>
+                            </Row>
+                            <Row>
+                              <p>{order.date}</p>
+                            </Row>
+                          </Col>
+                        </Row>
+                        <Row style={{minWidth:"160px,", textAlign:"center"}}>
+                          <Col >
+                            <Row className="text-secondary">
+                              <p>Общая сумма</p>
+                            </Row>
+                            <Row>
+                              <p>{order.price} сумм</p>
+                            </Row>
+                          </Col>
+                        </Row>
+                        <Row style={{minWidth:"160px", textAlign:"center"}}>
+                          <Col >
+                            <Row className="text-secondary">
+                              <p>Адрес</p>
+                            </Row>
+                            <Row style={{maxWidth:"210px", }}> 
+                              <p>{order.address}</p>
+                            </Row>
+                          </Col>
+                        </Row>
+                        <Row style={{minWidth:"180px", textAlign:"center"}}>
+                          <Col >
+                            <Row className="text-secondary" style={{textAlign:"center"}}>
+                              <p>Комментарий к заказу</p>
+                            </Row>
+                            <Row>
+                              <p>blablabla</p>
+                            </Row>
+                          </Col>
+                        </Row>
+                      </Container>
+                      <Row className="mt-5 pb-4" style={{borderBottom:"1px solid rgba(0, 0, 0, 0.2)", maxWidth:"650px"}}>
+                        <Col style={{fontWeight:"700"}} lg="6" sm="6" >Название</Col>
+                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" >Цена</Col>
+                        <Col  style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2"  >Количество</Col>
+                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xs="2" >Сумма</Col>
+                      </Row>
+                      <Row className="mt-4 pb-4" style={{borderBottom:"1px solid rgba(0, 0, 0, 0.2)", maxWidth:"650px", fontSize:"15px", fontWeight:"400"}}>
+                        <Col className="text-danger" style={{fontWeight:"600", textDecorationLine:"underline"}} lg="6" sm="6">{order.title}</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2">{order.price} сумм</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2">{order.count}</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2">1000 сумм</Col>
+                      </Row>
+                        <Row className="mt-3">
+                          <Col>Заказано товаров на сумму:</Col>
+                          <Col>{order.price} сумм</Col>
+                        </Row>
+                        <Row className="mt-3">
+                          <Col>Доставленные продукты:</Col>
+                          <Col> 123 сумм</Col>
+                        </Row>
+                        <Row className="mt-3">
+                          <Col>Стоимость доставки:</Col>
+                          <Col>0 сумм</Col>
+                        </Row >
+                        <Row className="mt-3">
+                          <Col>Чаевые:</Col>
+                          <Col>200 сумм</Col>
+                        </Row>
+                        <Row className="mt-3">
+                          <Col style={{fontWeight:"700"}} >Итоговая сумма</Col>
+                          <Col style={{fontWeight:"700"}} >323 сумм</Col>
+                        </Row>
+                    </Container>
+                    
+                  );
+                }
+                return null;
+              })}
             </Container>
           )}
         </Container>

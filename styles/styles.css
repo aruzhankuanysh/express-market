@@ -670,6 +670,14 @@ a {
   font-weight: 500;
 }
 
+.back_btn {
+  background-color: var(--gosu-second-grey) !important;
+}
+
+.details_container {
+  justify-content: space-between !important;
+}
+
 @media (max-width: 992px) {
   .form_wrapper {
     display: block;
