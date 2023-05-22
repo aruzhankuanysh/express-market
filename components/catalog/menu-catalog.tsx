@@ -1,7 +1,6 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Button, Container, Image, Navbar } from "react-bootstrap";
-import Accordion from "react-bootstrap/Accordion";
+import { Button, Container } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store/store";
 

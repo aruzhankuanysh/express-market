@@ -30,14 +30,14 @@ const MenuSideNav = ({}): JSX.Element => {
               <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>
                 {(main_category.children_category ?? []).map(
                   (children_category) => (
-                    <Accordion defaultActiveKey="0" key={children_category.category_id}>
+                    <Accordion defaultActiveKey="child-0" key={children_category.category_id}>
                       <Accordion.Item eventKey={`child-${children_category.category_id}`}>
                         <Accordion.Header>
                           {children_category.name_category}
                         </Accordion.Header>
                         <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>
                           {(children_category.brand ?? []).map((brand) => (
-                            <Button key={`brand-${brand.category_id}`} className="text-start" onClick={() => {router.push(`/${main_category.category_id}?brand=${brand.category_id}`)}}>
+                            <Button key={`brand-${brand.category_id}`} className="text-start" onClick={() => {router.push(`/${main_category.category_id}?children=${children_category.category_id}`)}}>
                               {brand.name_category}
                             </Button>
                           ))}
