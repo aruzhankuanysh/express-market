@@ -5,6 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 import { useRouter } from "next/router";
 
 const Catalog = ({}): JSX.Element => {
+  // /imgCategories/Rectangle12.svg
   const products = [
     {
       id: "1",
@@ -4362,7 +4363,7 @@ const Catalog = ({}): JSX.Element => {
     <>
       <Row className="mb-5">
         <Container>
-          {products.map((product) => (
+          {(products ?? []).map((product) => (
             <Row key={product.id} className="mb-5">
               <h1 className="mb-4">{product.title}</h1>
               {(product.categories ?? []).map((index) => (

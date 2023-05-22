@@ -1,9 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { AppState } from "./store";
+import { AnyAction, createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { User } from "../specs/gosuTypes";
 
-export interface AuthState {
+export interface IAuthState {
   user: User;
   authState: boolean;
   authToken: string;
@@ -13,8 +12,8 @@ export interface AuthState {
   acceptTerms: boolean;
 }
 
-const initialState: AuthState = {
-  user: { 
+const initialState: IAuthState = {
+  user: {
     id: "",
     name: "",
     phone: "",
@@ -36,17 +35,16 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action) {
-      state.user = {...action.payload};
+      state.user = { ...action.payload };
     },
     setAuthState(state, action) {
       state.authState = action.payload;
     },
-    setTokens(state, action) {
-      state.authToken = action.payload.authToken;
-      state.refreshToken = action.payload.refreshToken;
+    setRefreshTokens(state, action) {
+      state.refreshToken = action.payload;
     },
     setAccessToken(state, action) {
-      state.authToken = action.payload.authToken;
+      state.authToken = action.payload;
     },
     setSmsCode(state, action) {
       state.smsCode = action.payload;
@@ -61,17 +59,14 @@ export const authSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(HYDRATE, (state, action) => {
+      .addCase(HYDRATE, (state, action: AnyAction) => {
         return {
           ...state,
-          // ...action['payload']['auth'],
+          ...action['payload']['auth'],
         }
-    })
+      })
   },
 });
 
-export const { setUser, setAuthState, setTokens, setAccessToken, setSmsCode, setRememberMe, setAcceptTerms } = authSlice.actions;
-
-export const selectAuthState = (state: AppState) => state.auth;
-
+export const { setUser, setAuthState, setRefreshTokens, setAccessToken, setSmsCode, setRememberMe, setAcceptTerms } = authSlice.actions;
 export default authSlice.reducer;

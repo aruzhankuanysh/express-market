@@ -1,37 +1,37 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { authSlice } from "./authSlice";
-import {nextReduxCookieMiddleware, wrapMakeStore} from "next-redux-cookie-wrapper";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import authReducer, { authSlice } from "./authSlice";
+import categoryReducer, { categorySlice } from "./categorySlice";
+
+import { nextReduxCookieMiddleware, wrapMakeStore } from "next-redux-cookie-wrapper";
 import { createWrapper } from "next-redux-wrapper";
-import { useDispatch } from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
+const rootReducer = combineReducers({
+  [authSlice.name]: authReducer,
+  [categorySlice.name]: categoryReducer,
+})
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
-    reducer: {
-      [authSlice.name]: authSlice.reducer,
-    },
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().prepend(
-      nextReduxCookieMiddleware({
+      getDefaultMiddleware().prepend(
+        nextReduxCookieMiddleware({
         secure: true,
-        subtrees: [
-          "auth.user",
-          "auth.authState",
-        ],
-      })
-    ),
+          subtrees: [
+            "auth",
+          ],
+        })
+      ),
     devTools: true,
   }));
 
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore["getState"]>;
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = ReturnType<typeof makeStore>
+
 export type AppDispatch = AppStore["dispatch"];
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action
->;
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const wrapper = createWrapper<AppStore>(makeStore, {debug: false});
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: false });
