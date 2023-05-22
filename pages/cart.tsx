@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Advice from "@/components/catalog/menu-advice-slide";
 
-
 const Index: NextPage = () => {
   const [cartProduct, setCartProduct] = useState([
     {
@@ -94,12 +93,12 @@ const Index: NextPage = () => {
             {cartProduct.map((productItem, index) => (
               <Container>
                 <Row className="mt-5">
-                  <Col style={{maxWidth:"120px"}}  lg="2" >
+                  <Col style={{ maxWidth: "120px" }} lg="2">
                     <img src={productItem.img} alt="" />
                   </Col>
-                  <Col lg="6" sm="6" xxs="6" >
-                    <Row style={{ fontWeight: "600",}}>{productItem.name}</Row>
-                    <Row >
+                  <Col lg="7" sm="6" xxs="6">
+                    <Row style={{ fontWeight: "600" }}>{productItem.name}</Row>
+                    <Row>
                       <div className="cart_product_count  mt-3">
                         <button
                           className="ms-3 "
@@ -117,9 +116,21 @@ const Index: NextPage = () => {
                       </div>
                     </Row>
                   </Col>
-                  <Col className="d-block d-lg-flex">
-                    <Button  onClick={() => removeProduct(index)}><img className="ms-4" style={{height:"20px"}} src="/img/delete.svg"/></Button>
-                    <p className="mt-3" style={{ fontWeight: "700" }}>{productItem.price * productItem.count} UZS</p>
+                  <Col className="">
+                    <Row>
+                      <Button className="" onClick={() => removeProduct(index)}>
+                        <img
+                          // className="mb-5"
+                          style={{ height: "20px" }}
+                          src="/img/delete.svg"
+                        />
+                      </Button>
+                    </Row>
+                    <Row>
+                      <p className="mt-3" style={{ fontWeight: "700" }}>
+                        {productItem.price * productItem.count} сумм
+                      </p>
+                    </Row>
                   </Col>
                 </Row>
               </Container>
@@ -159,16 +170,17 @@ const Index: NextPage = () => {
                   {finalPrice} UZS
                 </Col>
               </Row>
-              <Button className="btn_orange_gradient payment_button rounded-5 mt-4">Перейти к оплате</Button>
+              <Button className="btn_orange_gradient payment_button rounded-5 mt-4">
+                Перейти к оплате
+              </Button>
             </Container>
           </Col>
         </Row>
         <Container className="mt-5">
-          <Advice/>
+          <Advice />
         </Container>
-        
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
 };
