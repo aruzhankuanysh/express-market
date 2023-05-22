@@ -46,7 +46,7 @@ const CategoriesNav = ({}): JSX.Element => {
                                 className="text-start"
                                 onClick={() => {
                                   router.push(
-                                    `/${main_category.category_id}?brand=${brand.category_id}`
+                                    `/catalog/${main_category.category_id}?brand=${brand.category_id}`
                                   );
                                 }}
                               >

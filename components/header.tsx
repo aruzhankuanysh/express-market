@@ -37,7 +37,7 @@ function Header(): JSX.Element {
             <Col>
               <Image
                 fluid
-                src="img/express-logo.svg"
+                src="/img/express-logo.svg"
                 alt="express-logo"
                 style={{ height: "42px", cursor: "pointer" }}
                 onClick={() => {
@@ -62,7 +62,7 @@ function Header(): JSX.Element {
             <Col>
               <Image
                 fluid
-                src="img/express-logo.svg"
+                src="/img/express-logo.svg"
                 alt="express-logo"
                 style={{ height: "42px", cursor: "pointer" }}
                 onClick={() => {

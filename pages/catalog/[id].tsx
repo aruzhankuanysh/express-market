@@ -1,7 +1,7 @@
 import CategoriesNav from "@/components/categories/categories-nav";
-import Header from "@/components/header";
 import { Col, Container, Row } from "react-bootstrap";
 import CategoriesMenu from '@/components/categories/categories-menu'
+import Header from "@/components/header";
 
 const Menu = (): JSX.Element => {
   return (

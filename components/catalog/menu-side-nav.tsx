@@ -37,7 +37,7 @@ const MenuSideNav = ({}): JSX.Element => {
                         </Accordion.Header>
                         <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>
                           {(children_category.brand ?? []).map((brand) => (
-                            <Button key={`brand-${brand.category_id}`} className="text-start" onClick={() => {router.push(`/${main_category.category_id}?children=${children_category.category_id}`)}}>
+                            <Button key={`brand-${brand.category_id}`} className="text-start" onClick={() => {router.push(`/catalog/${main_category.category_id}?children=${children_category.category_id}`)}}>
                               {brand.name_category}
                             </Button>
                           ))}
