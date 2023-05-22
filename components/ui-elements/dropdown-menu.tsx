@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dropdown, Container, Row, Col } from "react-bootstrap";
+import { Dropdown, Container, Row, Col, Image } from "react-bootstrap";
 import MenuSideNav from "../catalog/menu-side-nav";
 import SearchBar from "./search-bar";
 import Login from "../authorize/login";
@@ -26,7 +26,7 @@ function DropdownMenu() {
       
     >
       <Dropdown.Toggle  className="burger_menu" disabled>
-        <img className="burger_menu_image" src="img/burger.svg" />
+        <Image className="burger_menu_image" src="/img/burger.svg" />
       </Dropdown.Toggle>
       <Dropdown.Menu  className="dropdown_wrapper" >
         <Container className="px-4">
