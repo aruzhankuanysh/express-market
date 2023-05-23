@@ -94,7 +94,7 @@ const Index: NextPage = () => {
                   <Col style={{ maxWidth: "120px" }} lg="2">
                     <img src={productItem.img} alt="" />
                   </Col>
-                  <Col lg="7" sm="6" xxs="6">
+                  <Col lg="7" sm="6" xxs="5">
                     <Row style={{ fontWeight: "600" }}>{productItem.name}</Row>
                     <Row>
                       <div className="cart_product_count  mt-3">
@@ -114,7 +114,7 @@ const Index: NextPage = () => {
                       </div>
                     </Row>
                   </Col>
-                  <Col className="">
+                  <Col lg="3" xxs="2">
                     <Row>
                       <Button className="" onClick={() => removeProduct(index)}>
                         <img
