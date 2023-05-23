@@ -2,12 +2,12 @@ import CategoriesNav from "@/components/categories/categories-nav";
 import { Col, Container, Row } from "react-bootstrap";
 import CategoriesMenu from "@/components/categories/categories-menu";
 import Header from "@/components/header";
-import { getProducts } from "@/specs/gosuService";
 import PageContent from "@/components/page-content";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Product } from "@/specs/gosuTypes";
 import { useAppSelector } from "@/store/store";
+import AppService from "@/specs/gosuService";
 
 export interface IProductsCatalog {
   title: string;
@@ -23,7 +23,7 @@ const Menu = (): JSX.Element => {
   const [ProductsCatalog, setProductsCatalog] = useState<IProductsCatalog[] | null>(null);
   
   useEffect(() => {
-    getProducts(brand).then((products) => {
+    AppService.getProducts(brand).then((products) => {
       if (products) {
         setProductsList(products['Items']);
       }else {

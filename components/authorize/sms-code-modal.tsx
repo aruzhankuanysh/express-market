@@ -1,15 +1,23 @@
-import React, { useState, useEffect } from "react";
+import AppService from "@/specs/gosuService";
+import { useAppSelector } from "@/store/store";
+import { useRouter } from "next/router";
+import React, { useState, useEffect, useReducer } from "react";
 import { Button, Modal, Form, Row } from "react-bootstrap";
 
 type SmsModalProps = {
   onClose: () => void;
   show: boolean;
-  onBack: () => void;
+  onBack: (value: number) => void;
 };
 
 const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
   const [timeRemaining, setTimeRemaining] = useState(1 * 60); // Время в секундах
   const [showButton, setShowButton] = useState(false);
+  const [code, setCode] = useState("");
+
+  const auth = useAppSelector((state) => state.auth);
+  const router = useRouter();
+
   let interval: NodeJS.Timeout | null;
 
   useEffect(() => {
@@ -45,11 +53,21 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
     };
   }, [show]);
 
-  // Функция для форматирования времени в формат "мм:сс"
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  const handlerBack = () => {
+    onBack(0);
+    onClose();
+  };
+
+  const handlerVerCode = (value: string) => {
+    setTimeout(() => {
+      if (value.length < 6) {
+        setCode(value);
+      } else {
+        onBack(-1);
+        onClose();
+        router.push("/personal-area");
+      }
+    }, 50);
   };
 
   return (
@@ -60,23 +78,33 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
           <h2>Введите код из SMS</h2>
         </Row>
         <Row style={{ width: "80%", margin: "auto" }}>
-          <Form.Control />
+          <Form.Control
+            value={code}
+            onChange={(e) => handlerVerCode(e.target.value)}
+          />
         </Row>
-        <Row >
-          <p className="mt-3" style={{textAlign:"center"}} >Код выслан на +9084325262873</p>
+        <Row>
+          <p className="mt-3" style={{ textAlign: "center" }}>
+            Код выслан на +9{auth.user?.phone}
+          </p>
         </Row>
         {showButton ? (
-          <Row >
-            <Button  className="get_code_btn">Получить новый код</Button>
+          <Row>
+            <Button className="get_code_btn">Получить новый код</Button>
           </Row>
         ) : (
-          <Row > <p style={{textAlign:"center"}}>Получить новый код можно через {formatTime(timeRemaining)}</p> </Row>
+          <Row>
+            <p style={{ textAlign: "center" }}>
+              Получить новый код можно через{" "}
+              {AppService.formatTime(timeRemaining)}
+            </p>
+          </Row>
         )}
 
         <Button
-          style={{ fontSize: "14px",}}
+          style={{ fontSize: "14px" }}
           variant="secondary"
-          onClick={onBack}
+          onClick={() => handlerBack()}
         >
           Назад
         </Button>

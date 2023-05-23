@@ -9,23 +9,23 @@ import AdressBar from "./ui-elements/address-bar";
 import DropdownMenu from "./ui-elements/dropdown-menu";
 import DropdownCart from "./ui-elements/dropdown-cart";
 import { useEffect } from "react";
-import { getCategory, getStocks } from "@/specs/gosuService";
 import { useAppDispatch } from "@/store/store";
 import { setCategory } from "@/store/categorySlice";
 import { setStocks } from "@/store/stockSlice";
+import AppService from "@/specs/gosuService";
 
 function Header(): JSX.Element {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getCategory().then((res) => {
+    AppService.getCategory().then((res) => {
       // console.log(res["Category"]);
       if (res) {
         dispatch(setCategory(res["Category"]));
       }
     });
-    getStocks().then((res) => {
+    AppService.getStocks().then((res) => {
       console.log(res["Stock"]);
       if (res) {
         dispatch(setStocks(res["Stock"]));
