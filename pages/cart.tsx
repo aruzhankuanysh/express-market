@@ -114,7 +114,7 @@ const Index: NextPage = () => {
                       </div>
                     </Row>
                   </Col>
-                  <Col xxs="2">
+                  <Col lg="3" xxs="2">
                     <Row>
                       <Button className="" onClick={() => removeProduct(index)}>
                         <img
