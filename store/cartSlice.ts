@@ -18,7 +18,7 @@ const initialState: ICartState = {
 };
 
 const calcTotal = (cart: ICartProduct[]) => {
-    const total = cart.reduce((acc, cur) => acc + cur.item.price, 0);
+    const total = cart.reduce((acc, cur) => acc + cur.item.price * cur.count, 0);
     return total;
 }
 
@@ -37,6 +37,8 @@ export const cartSlice = createSlice({
             state.total = calcTotal(state.cart);
         } else {
             state.cart = [{"item":action.payload, "count": 1}];
+            state.total = calcTotal(state.cart);
+
         }
     },
     decProduct: (state, action: PayloadAction<Product>) => {

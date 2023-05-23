@@ -65,7 +65,7 @@ const Index: NextPage = () => {
     <PageContent>
       <Container
         className="cart_wrapper"
-        style={{ maxWidth: "1256px", height: "100%" }}
+        style={{ maxWidth: "1256px", height: "100vh" }}
       >
         <h6
           style={{ cursor: "pointer" }}

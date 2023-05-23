@@ -16,8 +16,7 @@ const CategoriesNav = ({}): JSX.Element => {
     console.log(router.query["id"]);
     console.log(router.query);
     router.query["children"] ? setChildren(router.query["children"].toString()) : setChildren("");
-
-  }, [router.query]);
+  }, [router.pathname, router.query]);
 
   return (
     <>
@@ -46,7 +45,7 @@ const CategoriesNav = ({}): JSX.Element => {
                                 className="text-start"
                                 onClick={() => {
                                   router.push(
-                                    `/catalog/${main_category.category_id}?brand=${brand.category_id}`
+                                    `/catalog/${main_category.category_id}?children=${children_category.category_id}&brand=${brand.category_id}`
                                   );
                                 }}
                               >

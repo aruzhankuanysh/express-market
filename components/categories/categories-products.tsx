@@ -4,34 +4,20 @@ import { Container } from "react-bootstrap";
 import "swiper/css";
 import "swiper/css/navigation";
 import ProductCard from "../catalog/product-card";
+import { Product } from "@/specs/gosuTypes";
 
-export default function CategoriesProducts() {
+export default function CategoriesProducts({ productList }: { productList: Array<Product>;}) {
   return (
     <>
-          <Row className='mb-5'>
-            <Col sm={3} className="mb-2 px-1" style={{minWidth: '20%'}}>
-              <ProductCard />
+      <Row className="mb-5">
+        {productList.map((product, index) => {
+          return (
+            <Col sm={3} className="mb-2 px-1" style={{ minWidth: "20%" }} key={index}>
+              <ProductCard product={product} />
             </Col>
-            <Col sm={3} className="mb-2 px-1" style={{minWidth: '20%'}}>
-              <ProductCard />
-            </Col>
-            <Col sm={3} className="mb-2 px-1" style={{minWidth: '20%'}}>
-              <ProductCard />
-            </Col>
-            <Col sm={3} className="mb-2 px-1" style={{minWidth: '20%'}}>
-              <ProductCard />
-            </Col>
-            <Col sm={3} className="mb-2 px-1" style={{minWidth: '20%'}}>
-              <ProductCard />
-            </Col>
-            <Col sm={3} className="mb-2 px-1" style={{minWidth: '20%'}}>
-              <ProductCard />
-            </Col>
-            <Col sm={3} className="mb-2 px-1" style={{minWidth: '20%'}}>
-              <ProductCard />
-            </Col>
-          </Row>
+          );
+        })}
+      </Row>
     </>
   );
-};
-
+}

@@ -32,8 +32,8 @@ function AdressBar(): JSX.Element {
         id="adress_bar"
         onChange={(e) => { handlerChengeCurrentAdress(e.target.value) }}
       >
-        {adress.map((addresses) => (
-          <option selected={addresses.address === stocks.currentStock?.StockName} value={addresses.id}>{addresses.address}</option>
+        {adress.map((addresses, index) => (
+          <option key={index} selected={addresses.address === stocks.currentStock?.StockName} value={addresses.id}>{addresses.address}</option>
         ))}
       </Form.Select>
     </>
