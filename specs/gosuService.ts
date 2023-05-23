@@ -20,6 +20,26 @@ export const getStocks = async () => {
     }
 };
 
+// GET – получает полный список всех товаров в массиве
+export const getProducts = async (CategoryId?: string) => {
+    if (CategoryId) {
+        try {
+            const response = await api.get(`Items?CategoryId=${CategoryId}`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    } else {
+        try {
+            const response = await api.get(`Items`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
+};
+
 // ! Временно
 // const products = [
 //     {

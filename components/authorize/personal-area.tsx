@@ -131,7 +131,7 @@ const PersonalArea = (): JSX.Element => {
               </Form.Group>
               <Form.Group className="form_wrapper">
                 <Form.Label style={{marginRight:"22%"}}>Дата рождения</Form.Label>
-                <DateTimePicker  />
+                {/* <DateTimePicker  /> */}
               </Form.Group>
               <Form.Group
                 className="form_wrapper"

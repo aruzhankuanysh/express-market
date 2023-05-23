@@ -1,10 +1,9 @@
 import { NextPage } from "next";
 import Advice from "@/components/catalog/menu-advice-slide";
-import Header from "@/components/header";
-import { Container, Breadcrumb, Row, Col, Form } from "react-bootstrap";
-import Footer from "@/components/footer";
+import { Container, Row, Col } from "react-bootstrap";
 import Slider from "@/components/slider";
 import Counter from "@/components/ui-elements/count-button";
+import PageContent from "@/components/page-content";
 
 const Index: NextPage = () => {
   const images = ["img/bagette-diagonal.png", "img/bagette-vertical.svg"];
@@ -20,8 +19,7 @@ const Index: NextPage = () => {
     },
   ];
   return (
-    <>
-      <Header />
+    <PageContent>
       <Container style={{ padding: "15px" }} className="product_page_wrapper">
         <Container style={{ padding: "0" }} className="my-5">
           <h6 className="text-secondary">Главная &gt; Вам понравится</h6>
@@ -148,8 +146,7 @@ const Index: NextPage = () => {
         </Container>
         <Advice />
       </Container>
-      <Footer />
-    </>
+    </PageContent>
   );
 };
 

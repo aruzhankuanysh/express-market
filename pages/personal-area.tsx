@@ -1,24 +1,17 @@
 import { NextPage } from "next";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Header from "@/components/header";
 import PersonalArea from "@/components/authorize/personal-area";
-import Footer from "@/components/footer";
+import PageContent from "@/components/page-content";
 
 const Index: NextPage = () => {
   return (
-    <>
-      <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-      >
-        <Header />
+    <PageContent>
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Container className="personal_wrapper flex-grow-1">
           <PersonalArea />
         </Container>
-        <Footer />
       </div>
-    </>
+    </PageContent>
   );
 };
 

@@ -28,8 +28,14 @@ export type Category = {
 export type Product = {
   id: string;
   name: string;
-  category: string;
+  category_id: string;
+  weight: string;
+  fats: string;
+  proteins: string;
+  carbohydrates: string;
+  type_price: string;
   price: number;
+  images: string[];
 };
 
 export type Stock = {

@@ -1,18 +1,15 @@
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import MenuSideNav from "@/components/catalog/menu-side-nav";
 import { Form, InputGroup } from "react-bootstrap";
 import OrderDelivery from "@/components/order/order-delivery";
 import OrderPay from "@/components/order/order-pay";
 import OrderProducts from "@/components/order/order-products";
+import PageContent from "@/components/page-content";
 
 const OrderCompletePage = function () {
   return (
-    <>
-      <Header />
+    <PageContent>
       <Container id="comp_content">
         <Row>
           <Col xs="9" lg="9" xl="9">
@@ -54,8 +51,7 @@ const OrderCompletePage = function () {
         </Row>
       </Container>
       <Container></Container>
-      <Footer />
-    </>
+    </PageContent>
   );
 };
 export default OrderCompletePage;

@@ -1,17 +1,15 @@
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import MenuSideNav from "@/components/catalog/menu-side-nav";
 import MenuSpecialOffers from "@/components/catalog/menu-offers";
 import AdviceSlide from "@/components/catalog/menu-advice-slide";
 import Catalog from "@/components/catalog/menu-catalog";
+import PageContent from "@/components/page-content";
 
 export default function Home() {
   return (
-    <>
-      <Header />
+    <PageContent>
       <Container id="comp_content">
         <Row>
           <Col xs="3" lg="3" xl="3" className="pe-4">
@@ -26,7 +24,6 @@ export default function Home() {
         </Row>
       </Container>
       <Container></Container>
-      <Footer />
-    </>
+    </PageContent>
   );
 }

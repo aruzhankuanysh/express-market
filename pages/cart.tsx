@@ -1,11 +1,10 @@
 import { NextPage } from "next";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Advice from "@/components/catalog/menu-advice-slide";
+import PageContent from "@/components/page-content";
 
 const Index: NextPage = () => {
   const [cartProduct, setCartProduct] = useState([
@@ -63,8 +62,7 @@ const Index: NextPage = () => {
 
   const router = useRouter();
   return (
-    <>
-      <Header />
+    <PageContent>
       <Container
         className="cart_wrapper"
         style={{ maxWidth: "1256px", height: "100%" }}
@@ -180,8 +178,7 @@ const Index: NextPage = () => {
           <Advice />
         </Container>
       </Container>
-      <Footer />
-    </>
+    </PageContent>
   );
 };
 
