@@ -1,26 +1,14 @@
 import { Dropdown, Button, Container, Row, Col, Image } from "react-bootstrap";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { useAppSelector } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { decProduct, incProduct } from "@/store/cartSlice";
 
 function DropdownCart(): JSX.Element {
   const [show, setShow] = useState(false);
-  // const [cartProduct, setCartProduct] = useState([
-  //   {
-  //     img: "/img/product_pineapple.png",
-  //     name: "Груша Конференс",
-  //     price: 3150,
-  //     weight: 500,
-  //     count: 1,
-  //   },
-  //   {
-  //     img: "/img/product_pineapple.png",
-  //     name: "Груша не Конференс",
-  //     price: 1252,
-  //     weight: 500,
-  //     count: 1,
-  //   },
-  // ]);
+
+  const dispath = useAppDispatch();
+
   const handleClick = () => {
     setShow(true);
   };
@@ -28,26 +16,8 @@ function DropdownCart(): JSX.Element {
   const totalPrice = useAppSelector(state => state.cart.total);
   const cartProduct = useAppSelector(state => state.cart.cart);
 
-  // const totalPrice = cartProduct.reduce(
-  //   (total, product) => total + product.price * product.count,
-  //   0
-  // );
-
-  // const decrement = (index: number) => {
-  //   const updatedCartProduct = [...cartProduct];
-  //   if (updatedCartProduct[index].count > 1) {
-  //     updatedCartProduct[index].count--;
-  //   }
-  //   setCartProduct(updatedCartProduct);
-  // };
-
-  // const increment = (index: number) => {
-  //   const updatedCartProduct = [...cartProduct];
-  //   updatedCartProduct[index].count++;
-  //   setCartProduct(updatedCartProduct);
-  // };
-  const deliveryDifference = 10000 - totalPrice;
-  const deliveryText = totalPrice >= 10000 ? "Бесплатная доставка" : `${deliveryDifference} UZS до бесплатной доставки`;
+  // const deliveryDifference = 10000 - totalPrice;
+  // const deliveryText = totalPrice >= 10000 ? "Бесплатная доставка" : `${deliveryDifference} UZS до бесплатной доставки`;
 
   const router = useRouter();
 
@@ -63,7 +33,7 @@ function DropdownCart(): JSX.Element {
           {(Array.isArray(cartProduct) ? cartProduct : []).map((productItem, index) => (
             <Row key={productItem.item.id} className="d-flex">
               <Col lg="3">
-                <Image src={`data:image/png;base64,${productItem.item.images[0]}`} alt="prod_img" />
+                <Image height={50} src={`data:image/png;base64,${productItem.item.images[0]}`} alt="prod_img" />
               </Col>
               <Col>
                 <p style={{ fontSize: "15px", fontWeight: "500" }}>
@@ -78,11 +48,15 @@ function DropdownCart(): JSX.Element {
                 <Row></Row>
                 <Row>
                   <div className="cart_counter">
-                    <button className="ms-3 " onClick={() => {}}>
+                    <button className="ms-3 " onClick={() => {
+                      dispath(decProduct(productItem.item))
+                    }}>
                       -
                     </button>
                     <span className="mx-2">{productItem.count} </span>
-                    <button className="me-3 " onClick={() => {}}>
+                    <button className="me-3 " onClick={() => {
+                      dispath(incProduct(productItem.item))
+                    }}>
                       +
                     </button>
                   </div>
@@ -91,7 +65,7 @@ function DropdownCart(): JSX.Element {
             </Row>
           ))}
         </Container>
-        <Container className="mt-4">
+        {/* <Container className="mt-4">
           <Row>
             <Col>
               <img
@@ -114,7 +88,7 @@ function DropdownCart(): JSX.Element {
               </Row>
             </Col>
           </Row>
-        </Container>
+        </Container> */}
         <Button
           onClick={() => router.push(`/cart`)}
           className="btn_orange_gradient open_cart_btn rounded-5 mt-4"

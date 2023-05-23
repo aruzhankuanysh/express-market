@@ -10,11 +10,13 @@ export interface ICartProduct {
 export interface ICartState {
   cart: ICartProduct[] | null;
   total: number;
+  discount: number;
 }
 
 const initialState: ICartState = {
   cart: null,
   total: 0,
+  discount: 0,
 };
 
 const calcTotal = (cart: ICartProduct[]) => {
@@ -53,6 +55,15 @@ export const cartSlice = createSlice({
                 state.total = calcTotal(state.cart);
             }
         }
+    },
+    removeProduct: (state, action: PayloadAction<Product>) => {
+      if (state.cart) {
+        const index = state.cart.findIndex(item => item.item.id === action.payload.id);
+        if (index >= 0) {
+          state.cart.splice(index, 1);
+        }
+        state.total = calcTotal(state.cart);
+      }
     }
   },
 
@@ -67,5 +78,5 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { incProduct, decProduct } = cartSlice.actions;
+export const { incProduct, decProduct, removeProduct } = cartSlice.actions;
 export default cartSlice.reducer;
