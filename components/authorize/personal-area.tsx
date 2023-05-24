@@ -8,7 +8,7 @@ import {
   Row,
   ToggleButton,
 } from "react-bootstrap";
-import DateTimePicker from "../datetimepicker";
+import MyDateTimePicker from "../datetimepicker";
 
 const PersonalArea = (): JSX.Element => {
   const [isProfileDisabled, setProfileDisabled] = useState(false);
@@ -131,7 +131,7 @@ const PersonalArea = (): JSX.Element => {
               </Form.Group>
               <Form.Group className="form_wrapper">
                 <Form.Label style={{marginRight:"22%"}}>Дата рождения</Form.Label>
-                {/* <DateTimePicker  /> */}
+                <MyDateTimePicker  />
               </Form.Group>
               <Form.Group
                 className="form_wrapper"

@@ -1,13 +1,21 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
-const Counter = ({increment, decrement, count = 0}:{increment: Function, decrement: Function, count: number}): JSX.Element => {
+const Counter = ({ increment, decrement, count = 0 }: { increment: Function, decrement: Function, count: number }): JSX.Element => {
   return (
     <>
-      < div className="counter_button">
-        <button className="ms-3" onClick={() => decrement()}>-</button>
+      {count > 0 ? 
+      <div className="rounded-4 w-100 text-light counter_button">
+        <Button className="ms-3" onClick={(e) => {e.stopPropagation(); decrement();}}>-</Button>
         <span>{count} шт.</span>
-        <button className="me-3" onClick={() => increment()}>+</button>
-      </div>
+        <Button className="me-3" onClick={(e) => {e.stopPropagation(); increment();}}>+</Button>
+      </div> :
+        <Button onClick={(e) => {
+          e.stopPropagation();
+          increment();
+        }} className="btn_orange_gradient rounded-4 w-100 text-light py-2">
+          <h4>В корзину</h4>
+        </Button>}
     </>
   );
 };

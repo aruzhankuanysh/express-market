@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { decProduct, incProduct } from "@/store/cartSlice";
 import PlaceImg from "./place-img";
+import { MiniProduct, Product } from "@/specs/gosuTypes";
+import AppService from "@/specs/gosuService";
 
 function DropdownCart(): JSX.Element {
   const [show, setShow] = useState(false);
@@ -34,7 +36,7 @@ function DropdownCart(): JSX.Element {
           {(Array.isArray(cartProduct) ? cartProduct : []).map((productItem, index) => (
             <Row key={productItem.item.id} className="d-flex">
               <Col lg="3">
-              <PlaceImg img_src={`data:image/png;base64,${productItem.item}`} alt="prod_img"/>
+                <PlaceImg img_src={`data:image/png;base64,${productItem.item}`} alt="prod_img"/>
               </Col>
               <Col>
                 <p style={{ fontSize: "15px", fontWeight: "500" }}>

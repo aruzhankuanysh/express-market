@@ -29,7 +29,7 @@ const Index: NextPage = () => {
   useEffect(() => {
     if(product && cart_products) {
       const prod_buf = cart_products.filter((p) => p.item.id === product.id)[0];
-      setCount(prod_buf.count);
+      setCount(prod_buf?.count ?? 0);
     }
   }, [cart_products, product])
 
