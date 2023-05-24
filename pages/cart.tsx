@@ -7,12 +7,13 @@ import Advice from "@/components/catalog/menu-advice-slide";
 import PageContent from "@/components/page-content";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { decProduct, incProduct, removeProduct } from "@/store/cartSlice";
+import PlaceImg from "@/components/ui-elements/place-img";
 
 const Index: NextPage = () => {
 
   const discount = useAppSelector(state => state.cart.discount);
   const totalPrice = useAppSelector(state => state.cart.total);
-  const cartProduct = useAppSelector(state => state.cart.cart);
+  const cartProduct = useAppSelector(state => state.cart.products);
   const dicpath = useAppDispatch();
 
   const [finalPrice, setFinalPrice] = useState(totalPrice);
@@ -33,7 +34,7 @@ const Index: NextPage = () => {
     <PageContent>
       <Container
         className="cart_wrapper"
-        style={{ maxWidth: "1256px", height: "100vh" }}
+        style={{ maxWidth: "1256px", minHeight: "100vh" }}
       >
         <h6
           style={{ cursor: "pointer" }}
@@ -60,7 +61,7 @@ const Index: NextPage = () => {
               <Container>
                 <Row className="mt-5">
                   <Col style={{ maxWidth: "120px" }} lg="2">
-                    <Image height={50} src={`data:image/png;base64,${productItem?.item?.images}`} alt="prod_icon" />
+                    <PlaceImg img_src={`data:image/png;base64,${productItem?.item}`} alt="prod_icon"/>
                   </Col>
                   <Col lg="7" sm="6" xxs="5">
                     <Row style={{ fontWeight: "600" }}>{productItem?.item?.name}</Row>

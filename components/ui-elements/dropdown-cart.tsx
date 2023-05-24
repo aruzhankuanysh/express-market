@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { decProduct, incProduct } from "@/store/cartSlice";
+import PlaceImg from "./place-img";
 
 function DropdownCart(): JSX.Element {
   const [show, setShow] = useState(false);
@@ -14,7 +15,7 @@ function DropdownCart(): JSX.Element {
   };
 
   const totalPrice = useAppSelector(state => state.cart.total);
-  const cartProduct = useAppSelector(state => state.cart.cart);
+  const cartProduct = useAppSelector(state => state.cart.products);
 
   // const deliveryDifference = 10000 - totalPrice;
   // const deliveryText = totalPrice >= 10000 ? "Бесплатная доставка" : `${deliveryDifference} UZS до бесплатной доставки`;
@@ -33,7 +34,7 @@ function DropdownCart(): JSX.Element {
           {(Array.isArray(cartProduct) ? cartProduct : []).map((productItem, index) => (
             <Row key={productItem.item.id} className="d-flex">
               <Col lg="3">
-                <Image height={50} src={`data:image/png;base64,${productItem.item.images[0]}`} alt="prod_img" />
+              <PlaceImg img_src={`data:image/png;base64,${productItem.item}`} alt="prod_img"/>
               </Col>
               <Col>
                 <p style={{ fontSize: "15px", fontWeight: "500" }}>

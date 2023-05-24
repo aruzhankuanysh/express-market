@@ -3,6 +3,7 @@ import authReducer, { authSlice } from "./authSlice";
 import categoryReducer, { categorySlice } from "./categorySlice";
 import cartReducer, { cartSlice } from "./cartSlice";
 import stockReducer, { stockSlice } from "./stockSlice";
+import productsReducer, { productsSlice } from "./productSlice";
 
 import { nextReduxCookieMiddleware, wrapMakeStore } from "next-redux-cookie-wrapper";
 import { createWrapper } from "next-redux-wrapper";
@@ -11,8 +12,9 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 const rootReducer = combineReducers({
   [authSlice.name]: authReducer,
   [categorySlice.name]: categoryReducer,
-  [cartSlice.name]: cartReducer,
   [stockSlice.name]: stockReducer,
+  [cartSlice.name]: cartReducer,
+  [productsSlice.name]: productsReducer,
 })
 
 const makeStore = wrapMakeStore(() =>
