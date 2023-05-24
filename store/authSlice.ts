@@ -7,7 +7,6 @@ export interface IAuthState {
   authState: boolean;
   authToken: string;
   refreshToken: string;
-  smsCode: "";
   rememberMe: boolean;
   acceptTerms: boolean;
 }
@@ -25,7 +24,6 @@ const initialState: IAuthState = {
   authState: false,
   authToken: "",
   refreshToken: "",
-  smsCode: "",
   rememberMe: false,
   acceptTerms: false,
 };
@@ -46,9 +44,6 @@ export const authSlice = createSlice({
     setAccessToken(state, action) {
       state.authToken = action.payload;
     },
-    setSmsCode(state, action) {
-      state.smsCode = action.payload;
-    },
     setRememberMe(state, action) {
       state.rememberMe = action.payload;
     },
@@ -68,5 +63,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setUser, setAuthState, setRefreshTokens, setAccessToken, setSmsCode, setRememberMe, setAcceptTerms } = authSlice.actions;
+export const { setUser, setAuthState, setRefreshTokens, setAccessToken, setRememberMe, setAcceptTerms } = authSlice.actions;
 export default authSlice.reducer;

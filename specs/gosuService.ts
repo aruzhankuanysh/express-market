@@ -1,4 +1,5 @@
 import api from "./axios";
+import { registerUser } from "./gosuTypes";
 
 class ApplicationService {
     // GET – получает полный список всех категорий товаров по иерархии 
@@ -21,7 +22,7 @@ class ApplicationService {
         }
     };
 
-    // GET – получает полный список всех товаров в массиве
+    // GET – получает список товаров в массиве
     getProducts = async (CategoryId?: string) => {
         if (CategoryId) {
             try {
@@ -30,16 +31,28 @@ class ApplicationService {
             } catch (error) {
                 console.error(error);
             }
-        } else {
-            try {
-                const response = await api.get(`Items`);
-                return response.data;
-            } catch (error) {
-                console.error(error);
-            }
         }
-
     };
+
+    // GET – получает полный список всех товаров в массиве
+    // getAllProducts = async () => {
+    //     try {
+    //         const response = await api.get(`Items`);
+    //         return response.data; //! Крашит браузер
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
+
+    // POST - регистрация пользователя
+    registerUser = async (user: registerUser) => {
+        try {
+            const response = await api.post(`Users`, user);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     // Функция для форматирования времени в формат "мм:сс"
     formatTime = (time: number) => {

@@ -8,6 +8,14 @@ export type User = {
   birthdate: string;
 } | null;
 
+export type registerUser = {
+  Name: string;
+  Sex: string;
+  Birthday: string;
+  Phone: string;
+  Legal: string; // "false"
+}
+
 export type Brand = {
   category_id: string;
   name_category: string;
@@ -28,7 +36,9 @@ export type Category = {
 export type Product = {
   id: string;
   name: string;
+  brand_id: string;
   category_id: string;
+  parent_category_id: string;
   weight: string;
   fats: string;
   proteins: string;
@@ -36,6 +46,16 @@ export type Product = {
   type_price: string;
   price: number;
   images: string[];
+};
+
+export type MiniProduct = {
+  id: string;
+  name: string;
+  brand_id: string;
+  category_id: string;
+  parent_category_id: string;
+  weight: string;
+  price: number;
 };
 
 export type Stock = {

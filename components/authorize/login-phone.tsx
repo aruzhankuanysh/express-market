@@ -59,7 +59,7 @@ function LoginPhone({
                 type="tel"
                 className="phone_num"
                 value={phoneNumber}
-                onChange={handlePhoneNumberChange}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 maxLength={14}
               />
             </Col>

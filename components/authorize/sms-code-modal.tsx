@@ -62,6 +62,18 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
     setTimeout(() => {
       if (value.length < 6) {
         setCode(value);
+        AppService.registerUser({
+          Name: "Новый пользователь", //Полное ФИО клиента
+          Sex: "Мужской", //Пол
+          Birthday: "1981-03-02T00:00:00", //Дата рождения
+          Phone: `9${auth?.user?.phone}`, //Номер телефона
+          Legal: "false",
+        }).then((res) => {
+          if (res) {
+            console.log(res);
+            router.push("/");
+          }
+        });
       } else {
         onBack(-1);
         onClose();
