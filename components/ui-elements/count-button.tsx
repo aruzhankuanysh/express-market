@@ -1,21 +1,12 @@
 import { useState } from "react";
 
-const Counter = (): JSX.Element => {
-  const [count, setCount] = useState(0);
-
-  const decrement = () => {
-    setCount(count - 1);
-  };
-  const increment = () => {
-    setCount(count + 1);
-  };
-
+const Counter = ({increment, decrement, count = 0}:{increment: Function, decrement: Function, count: number}): JSX.Element => {
   return (
     <>
       < div className="counter_button">
-        <button className="ms-3" onClick={decrement}>-</button>
+        <button className="ms-3" onClick={() => decrement()}>-</button>
         <span>{count} шт.</span>
-        <button className="me-3" onClick={increment}>+</button>
+        <button className="me-3" onClick={() => increment()}>+</button>
       </div>
     </>
   );

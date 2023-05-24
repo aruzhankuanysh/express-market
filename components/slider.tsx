@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Image } from 'react-bootstrap';
 
 interface SliderProps {
   images: string[];
@@ -14,18 +15,18 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <img
-          src={images[currentIndex]}
-          alt={`Image ${currentIndex}`}
+        <Image
+          src={`data:image/png;base64,${images[currentIndex]}`}
+          alt={`image_${currentIndex}`}
           style={{ minWidth: '340px', maxHeight: '400px', marginTop: '10px' }}
         />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         {images.map((image, index) => (
-          <img
+          <Image
             key={index}
-            src={image}
-            alt={`Image ${index}`}
+            src={`data:image/png;base64,${image}`}
+            alt={`image_${index}`}
             style={{
               width: '75px',
               height: '75px',

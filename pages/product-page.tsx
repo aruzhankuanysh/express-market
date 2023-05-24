@@ -4,9 +4,35 @@ import { Container, Row, Col } from "react-bootstrap";
 import Slider from "@/components/slider";
 import Counter from "@/components/ui-elements/count-button";
 import PageContent from "@/components/page-content";
+import { useEffect, useState } from "react";
+import { Product } from "@/specs/gosuTypes";
+import { useRouter } from "next/router";
+import AppService from "@/specs/gosuService";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { decProduct, incProduct } from "@/store/cartSlice";
 
 const Index: NextPage = () => {
-  const images = ["img/bagette-diagonal.png", "img/bagette-vertical.svg"];
+  const [product, setProduct] = useState<Product>();
+  const [count, setCount] = useState(0);
+  const route = useRouter();
+  const dispatch = useAppDispatch();
+  const cart_products = useAppSelector((state) => state.cart.products);
+
+  const increment = () => {
+    product ? dispatch(incProduct(product)) : null;
+  }
+
+  const decrement = () => {
+    product ? dispatch(decProduct(product)) : null;
+  }
+
+  useEffect(() => {
+    if(product && cart_products) {
+      const prod_buf = cart_products.filter((p) => p.item.id === product.id)[0];
+      setCount(prod_buf.count);
+    }
+  }, [cart_products, product])
+
   const productsTags = [
     {
       tag: "-40%",
@@ -18,6 +44,15 @@ const Index: NextPage = () => {
       tag: "Испекли сами",
     },
   ];
+
+  useEffect(() => {
+    AppService.getProduct(route.query["productId"]?.toString()).then((res) => {
+      if (res) {
+        setProduct(res["Items"][0]);
+      }
+    });
+  }, [route.pathname, route.query]);
+
   return (
     <Container style={{ padding: "15px" }} className="product_page_wrapper">
       <Container style={{ padding: "0" }} className="my-5">
@@ -29,16 +64,16 @@ const Index: NextPage = () => {
           ))}
         </Container>
         <h1 style={{ fontSize: "64px", fontWeight: "700" }}>
-          Багет пшеничный из лавки
+          {product?.name}
         </h1>
 
         <Container fluid style={{ padding: "0" }}>
           <Row>
-            <Col>250г</Col>
+            <Col>{product?.weight} г</Col>
           </Row>
           <Row>
             <Col>
-              <Slider images={images} />
+              <Slider images={product?.images ?? []} />
             </Col>
             <Col>
               <Container fluid style={{ padding: "0" }}>
@@ -47,16 +82,16 @@ const Index: NextPage = () => {
                   style={{ flexDirection: "row" }}
                 >
                   <div className="ms-3 mt-2" style={{ display: "flex" }}>
-                    <h2 className=" no-background me-3">305₸</h2>
+                    <h2 className=" no-background me-3">{product?.price} тг</h2>
                     <h4 className="position-relative mt-2 text-secondary">
-                      350 ₸
-                      <a className="text-strikethrough no-background">
+                      {product?.price} тг
+                      <b className="text-strikethrough no-background">
                         _______
-                      </a>
+                      </b>
                     </h4>
                   </div>
                   <div>
-                    <Counter />
+                    <Counter count={count} increment={increment} decrement={decrement} />
                   </div>
                 </Container>
                 <Row className="mt-4">
@@ -75,20 +110,20 @@ const Index: NextPage = () => {
 
                 <Row className="my-4" style={{ width: "300px" }}>
                   <Col>
-                    <h4>233</h4>
+                    <h4>{ ((product?.proteins ? parseInt(product?.proteins) : 0) * 4) + ((product?.fats ? parseInt(product?.fats) : 0) * 9) + ((product?.carbohydrates ? parseInt(product?.carbohydrates) : 0) * 4)}</h4>
                     <span className="text_grey">ккал</span>
                   </Col>
                   <Col>
-                    <h4>1</h4>
-                    <span className="text_grey">ккал</span>
+                    <h4>{product?.fats}</h4>
+                    <span className="text_grey">жир.</span>
                   </Col>
                   <Col>
-                    <h4>23</h4>
-                    <span className="text_grey">ккал</span>
+                    <h4>{product?.proteins}</h4>
+                    <span className="text_grey">белк.</span>
                   </Col>
                   <Col>
-                    <h4>36</h4>
-                    <span className="text_grey">ккал</span>
+                    <h4>{product?.carbohydrates}</h4>
+                    <span className="text_grey">углев.</span>
                   </Col>
                 </Row>
                 <Row>
@@ -132,11 +167,6 @@ const Index: NextPage = () => {
                   <span className="text_grey">Производитель, страна</span>
                   <br />
                   ООО «Партия Еды», Россия
-                </Col>
-                <Col className="mt-4">
-                  <span className="text_grey">Бренд</span>
-                  <br />
-                  Из Лавки
                 </Col>
               </Container>
             </Col>

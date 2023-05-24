@@ -12,7 +12,7 @@ const ProductCard = ({product}: {product: Product}): JSX.Element => {
   const dispath = useAppDispatch();
   return (
     <>
-      <Card className="rounded-4 btn_grey" style={{ width: "100%", cursor: "pointer" }} onClick={() => {router.push('/product-page')}}>
+      <Card className="rounded-4 btn_grey" style={{ width: "100%", cursor: "pointer" }} onClick={() => {router.push(`/product-page?productId=${product.id}`)}}>
         <Card.Header className="position-relative bg-transparent border-0">
           <Card.Img variant="top" src={`data:image/png;base64,${product?.images}`} />
           <div className="bg-orange position-absolute bottom-0 mb-4 rounded-4 text-light fw-bold action-tag px-3">-40%</div>

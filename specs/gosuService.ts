@@ -34,11 +34,23 @@ class ApplicationService {
         }
     };
 
-    // GET – получает полный список всех товаров в массиве
+    // GET – получает товар в массиве
+    getProduct = async (ItemId?: string | undefined) => {
+        if (ItemId) {
+            try {
+                const response = await api.get(`Items?ItemId=${ItemId}`);
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    };
+
+    // GET – получает полный список всех товаров в массиве //! Крашит браузер
     // getAllProducts = async () => {
     //     try {
     //         const response = await api.get(`Items`);
-    //         return response.data; //! Крашит браузер
+    //         return response.data; 
     //     } catch (error) {
     //         console.error(error);
     //     }
