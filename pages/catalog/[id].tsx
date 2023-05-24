@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { Product } from "@/specs/gosuTypes";
 import { useAppSelector } from "@/store/store";
 import AppService from "@/specs/gosuService";
+import BreadCrumbs from "@/components/ui-elements/bread-crumbs";
 
 export interface IProductsCatalog {
   title: string;
@@ -111,6 +112,7 @@ const Menu = (): JSX.Element => {
     <PageContent>
       <Container id="comp_content" style={{ minHeight: "100vh" }}>
         {/* content */}
+        <BreadCrumbs/>
         <Row>
           <Col xs="3" lg="3" xl="3" className="pe-4">
             <CategoriesNav />
