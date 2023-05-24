@@ -109,20 +109,18 @@ const Menu = (): JSX.Element => {
   ]);
 
   return (
-    <PageContent>
-      <Container id="comp_content" style={{ minHeight: "100vh" }}>
-        {/* content */}
-        <BreadCrumbs/>
-        <Row>
-          <Col xs="3" lg="3" xl="3" className="pe-4">
-            <CategoriesNav />
-          </Col>
-          <Col>
-            <CategoriesMenu ProductsCatalog={ProductsCatalog ?? []} />
-          </Col>
-        </Row>
-      </Container>
-    </PageContent>
+    <Container id="comp_content" style={{ minHeight: "100vh" }}>
+      {/* content */}
+      <BreadCrumbs/>
+      <Row>
+        <Col xs="3" lg="3" xl="3" className="pe-4">
+          <CategoriesNav />
+        </Col>
+        <Col>
+          <CategoriesMenu ProductsCatalog={ProductsCatalog ?? []} />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

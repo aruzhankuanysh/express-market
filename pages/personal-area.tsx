@@ -5,13 +5,11 @@ import PageContent from "@/components/page-content";
 
 const Index: NextPage = () => {
   return (
-    <PageContent>
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <Container className="personal_wrapper flex-grow-1">
-          <PersonalArea />
-        </Container>
-      </div>
-    </PageContent>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <Container className="personal_wrapper flex-grow-1">
+        <PersonalArea />
+      </Container>
+    </div>
   );
 };
 

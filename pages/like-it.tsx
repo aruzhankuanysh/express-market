@@ -5,10 +5,8 @@ import PageContent from "@/components/page-content";
 
 export default function LikeIt() {
   return (
-    <PageContent>
-      <Container id="comp_content">
-        <Advice />
-      </Container>
-    </PageContent>
+    <Container id="comp_content">
+      <Advice />
+    </Container>
   );
 }

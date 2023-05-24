@@ -9,21 +9,21 @@ import PageContent from "@/components/page-content";
 
 export default function Home() {
   return (
-    <PageContent>
+    <>
       <Container id="comp_content">
-        <Row>
-          <Col xs="3" lg="3" xl="3" className="pe-4">
-            <h5>Каталог</h5>
-            <MenuSideNav />
-          </Col>
-          <Col xs="9" lg="9" xl="9" className="pe-0">
-            <MenuSpecialOffers />
-            <AdviceSlide />
-            <Catalog />
-          </Col>
-        </Row>
-      </Container>
-      <Container></Container>
-    </PageContent>
+          <Row>
+            <Col xs="3" lg="3" xl="3" className="pe-4">
+              <h5>Каталог</h5>
+              <MenuSideNav />
+            </Col>
+            <Col xs="9" lg="9" xl="9" className="pe-0">
+              <MenuSpecialOffers />
+              <AdviceSlide />
+              <Catalog />
+            </Col>
+          </Row>
+        </Container>
+        <Container></Container>
+    </>
   );
 }

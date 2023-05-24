@@ -9,7 +9,7 @@ import PageContent from "@/components/page-content";
 
 const OrderCompletePage = function () {
   return (
-    <PageContent>
+    <>
       <Container id="comp_content">
         <Row>
           <Col xs="9" lg="9" xl="9">
@@ -51,7 +51,7 @@ const OrderCompletePage = function () {
         </Row>
       </Container>
       <Container></Container>
-    </PageContent>
+    </>
   );
 };
 export default OrderCompletePage;
