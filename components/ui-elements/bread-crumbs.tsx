@@ -27,18 +27,18 @@ export default function BreadCrumbs() {
           );
           if (brend_index >= 0) {
             setRout([
-              categories.categories[index],
               categories.categories[index].children_category[child_index],
-              categories.categories[index].children_category[child_index].brand[brend_index],
+              categories.categories[index].children_category[child_index].brand[
+                brend_index
+              ],
             ]);
           } else {
             setRout([
-              categories.categories[index],
               categories.categories[index].children_category[child_index],
             ]);
           }
         } else {
-          setRout([categories.categories[index]]);
+          setRout([]);
         }
       } else {
         setRout([]);
@@ -47,18 +47,28 @@ export default function BreadCrumbs() {
   }, [router.query, router.pathname, categories.categories]);
 
   return (
-    <div style={{display: "flex"}}>
+    <div style={{ display: "flex" }}>
       <>
+        <div style={{ cursor: "pointer" }} onClick={() => {router.push("/")}}>
+          {"Главная >"}
+        </div>
         {rout.map((item, index) => (
-          <div onClick={() => {
-            router.push({
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              router.push({
                 pathname: `/catalog/${router.query["id"]}`,
                 query: {
-                    children: index >= 1 ? router.query["children"] : undefined,
-                    brand: index >= 2 ? item.category_id : undefined,
+                  children: router.query["children"],
+                  brand: index >= 2 ? item.category_id : undefined,
                 },
               });
-          }} key={index}>{item.name_category}{">"}</div>
+            }}
+            key={index}
+          >
+            {item.name_category}
+            {" >"}
+          </div>
         ))}
       </>
     </div>
