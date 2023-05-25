@@ -5,33 +5,55 @@ import { useRouter } from "next/router";
 import SearchBar from "./ui-elements/search-bar";
 import Login from "./authorize/login";
 import AdressBar from "./ui-elements/address-bar";
-// import Cart from "@/components/cart";
 import DropdownMenu from "./ui-elements/dropdown-menu";
 import DropdownCart from "./ui-elements/dropdown-cart";
 import { useEffect } from "react";
-import { useAppDispatch } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setCategory } from "@/store/categorySlice";
 import { setStocks } from "@/store/stockSlice";
 import AppService from "@/specs/gosuService";
+import { IcartImg, removeProduct, setImages } from "@/store/cartSlice";
+import { Product } from "@/specs/gosuTypes";
 
 function Header(): JSX.Element {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const cart = useAppSelector(state => state.cart);
+
+  const resetImagesState = () => {
+    if (cart.products) {
+      let img_list: IcartImg[] = [];
+      cart.products.forEach(async (product, index) => {
+        const res = await AppService.getProduct(product.item.id);
+        if (res) {
+          const prod_buf:Product = res["Items"][0]
+          img_list = [...img_list, {id: prod_buf.id, src: prod_buf.images[0]}];
+        } else {
+          dispatch(removeProduct(product.item))
+        }
+        dispatch(setImages(img_list));
+      });
+    }
+  }
 
   useEffect(() => {
     AppService.getCategory().then((res) => {
-      // console.log(res["Category"]);
+      console.log("Category", res["Category"]);
       if (res) {
         dispatch(setCategory(res["Category"]));
       }
     });
     AppService.getStocks().then((res) => {
-      console.log(res["Stock"]);
+      console.log("Stock", res["Stock"]);
       if (res) {
         dispatch(setStocks(res["Stock"]));
       }
     });
   }, []);
+
+  useEffect(() => {
+    resetImagesState();
+  }, [cart.products?.length]);
 
   return (
     <>

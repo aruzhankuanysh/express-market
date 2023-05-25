@@ -14,6 +14,7 @@ const Index: NextPage = () => {
   const discount = useAppSelector(state => state.cart.discount);
   const totalPrice = useAppSelector(state => state.cart.total);
   const cartProduct = useAppSelector(state => state.cart.products);
+  const cartProductImg = useAppSelector(state => state.cart.images);
   const dicpath = useAppDispatch();
 
   const [finalPrice, setFinalPrice] = useState(totalPrice);
@@ -29,7 +30,18 @@ const Index: NextPage = () => {
     setFinalPrice(totalPrice - discount)
   }, [totalPrice, discount]);
 
+  const getImg = (prodId: string) => {
+    if (cartProductImg) {
+      const index = cartProductImg.findIndex(prod => prod.id === prodId);
+      if (index >= 0) {
+        return cartProductImg[index].src;
+      }
+      return "";
+    }
+  }
+
   const router = useRouter();
+
   return (
     <Container
       className="cart_wrapper"
@@ -60,7 +72,7 @@ const Index: NextPage = () => {
             <Container>
               <Row className="mt-5">
                 <Col style={{ maxWidth: "120px" }} lg="2">
-                  <PlaceImg img_src={`data:image/png;base64,${productItem?.item}`} alt="prod_icon"/>
+                  <PlaceImg img_src={`data:image/png;base64,${getImg(productItem.item.id)}`} alt="prod_icon"/>
                 </Col>
                 <Col lg="7" sm="6" xxs="5">
                   <Row style={{ fontWeight: "600" }}>{productItem?.item?.name}</Row>
@@ -84,7 +96,7 @@ const Index: NextPage = () => {
                 </Col>
                 <Col lg="3" xxs="2">
                   <Row>
-                    <Button className="" onClick={() => {console.log("ggg"); dicpath(removeProduct(productItem.item))}}>
+                    <Button className="" onClick={() => dicpath(removeProduct(productItem.item))}>
                       <Image
                         // className="mb-5"
                         style={{ height: "20px" }}

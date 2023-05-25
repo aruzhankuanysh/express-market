@@ -26,7 +26,9 @@ const makeStore = wrapMakeStore(() =>
         secure: true,
           subtrees: [
             "auth",
-            "cart",
+            "cart.discount",
+            "cart.total",
+            "cart.products",
             "stock.currentStock",
           ],
         })

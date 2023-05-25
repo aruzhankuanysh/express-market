@@ -18,6 +18,17 @@ function DropdownCart(): JSX.Element {
 
   const totalPrice = useAppSelector(state => state.cart.total);
   const cartProduct = useAppSelector(state => state.cart.products);
+  const cartProductImg = useAppSelector(state => state.cart.images);
+
+  const getImg = (prodId: string) => {
+    if (cartProductImg) {
+      const index = cartProductImg.findIndex(prod => prod.id === prodId);
+      if (index >= 0) {
+        return cartProductImg[index].src;
+      }
+      return "";
+    }
+  }
 
   // const deliveryDifference = 10000 - totalPrice;
   // const deliveryText = totalPrice >= 10000 ? "Бесплатная доставка" : `${deliveryDifference} UZS до бесплатной доставки`;
@@ -36,7 +47,7 @@ function DropdownCart(): JSX.Element {
           {(Array.isArray(cartProduct) ? cartProduct : []).map((productItem, index) => (
             <Row key={productItem.item.id} className="d-flex">
               <Col lg="3">
-                <PlaceImg img_src={`data:image/png;base64,${productItem.item}`} alt="prod_img"/>
+                <PlaceImg img_src={`data:image/png;base64,${getImg(productItem.item.id)}`} alt="prod_img"/>
               </Col>
               <Col>
                 <p style={{ fontSize: "15px", fontWeight: "500" }}>
