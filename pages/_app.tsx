@@ -13,6 +13,7 @@ import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { clarity } from "react-microsoft-clarity";
 import PageContent from "@/components/page-content";
+import ToUpBtn from "@/components/ui-elements/to-up-btn";
 
 const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
   const { store, props } = wrapper.useWrappedStore(pageProps);
@@ -34,6 +35,7 @@ const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
         >
           <PageContent>
             <Component {...props} />
+            <ToUpBtn/>
           </PageContent>
         </ThemeProvider>
       </Provider>
