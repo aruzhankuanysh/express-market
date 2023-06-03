@@ -22,7 +22,7 @@ function DropdownCart(): JSX.Element {
 
   const getImg = (prodId: string) => {
     if (cartProductImg) {
-      const index = cartProductImg.findIndex(prod => prod.id === prodId);
+      const index = cartProductImg.findIndex((prod: { id: string; }) => prod.id === prodId);
       if (index >= 0) {
         return cartProductImg[index].src;
       }
@@ -41,7 +41,7 @@ function DropdownCart(): JSX.Element {
         <Image src="/img/cart.svg" alt="cart_icon" style={{ height: "25px" }} />
         <h5 className="m-0 ps-3">{totalPrice} UZS</h5>
       </Dropdown.Toggle>
-      <Dropdown.Menu show={show} className="dropdown_cart_wrapper">
+      <Dropdown.Menu show={show} className="dropdown_cart_wrapper fade_in">
         <h3>Каталог</h3>
         <Container fluid style={{ borderBottom: "2px solid rgba(0, 0, 0, 0.2)" }}>
           {(Array.isArray(cartProduct) ? cartProduct : []).map((productItem, index) => (

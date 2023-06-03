@@ -6,29 +6,33 @@ import Login from "../authorize/login";
 import AdressBar from "./address-bar";
 
 function DropdownMenu() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [show, setshow] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    setshow(true);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setshow(false);
   };
+
+  const handleClick = () => {
+    setshow(!show)
+  }
 
   return (
     <Dropdown
       className="dropdowm_container"
-      show={isHovered}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      
-      
+      onClick={(e) => {e.stopPropagation(); handleClick()}}
+      show={show} 
+
     >
-      <Dropdown.Toggle  className="burger_menu" disabled>
+      <Dropdown.Toggle   className="burger_menu" disabled>
         <Image className="burger_menu_image" src="/img/burger.svg" />
       </Dropdown.Toggle>
-      <Dropdown.Menu  className="dropdown_wrapper" >
+      <Dropdown.Menu  onClick={(e) => {e.stopPropagation()}}  className="dropdown_wrapper fade_in"  >
         <Container className="px-4">
         <Row className="my-4 d-flex d-lg-none ">
             <Col className="dropdown_nav">

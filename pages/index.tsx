@@ -12,11 +12,11 @@ export default function Home() {
     <>
       <Container id="comp_content">
           <Row>
-            <Col xs="3" lg="3" xl="3" className="pe-4">
+            <Col xs="3" lg="3" xl="3" className="pe-4 d-none  d-lg-block    ">
               <h5>Каталог</h5>
               <MenuSideNav />
             </Col>
-            <Col xs="9" lg="9" xl="9" className="pe-0">
+            <Col xs="9" lg="9" xl="9" className="pe-0 ">
               <MenuSpecialOffers />
               <AdviceSlide />
               <Catalog />

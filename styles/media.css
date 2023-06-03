@@ -1,0 +1,72 @@
+@media (max-width: 992px) {
+    .form_wrapper {
+      display: block;
+    }
+  
+    .cart_btn {
+      width: 3rem;
+    }
+  
+    .cart_btn h5 {
+      display: none;
+    }
+  
+    .dropdown_nav {
+      margin-right: -30px !important;
+    }
+  
+  
+    #adress_bar {
+      width: 100px;
+      margin-left: -1px !important;
+    }
+    .modal_heading {
+      text-align: center !important;
+    }
+    
+    .dropdown_cart_wrapper {
+      width: 350px;
+    }
+  
+    /* .h2-responsive {
+      font-size: 16px;
+    } */
+   
+    .product_card {
+        font-size: 12px;
+    }
+
+    .count:active {
+        background-color: none !important;
+    }
+
+    .mobile-text {
+    font-size: 14px !important;
+    }
+    
+    .mobile-price {
+        font-size: 12px;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .price-mobile-card {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .swiper-button-next, .swiper-rtl  {
+        display: none !important;
+    }
+
+    .swiper-button-prev, .swiper-rtl {
+        display: none !important;
+    } 
+  }
+  
+  
+  @media (max-width: 300px) {
+    .dropdown_cart_wrapper {
+        width: 220px;  
+    }
+  }

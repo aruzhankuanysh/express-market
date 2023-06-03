@@ -5,6 +5,7 @@ import { ThemeProvider } from "react-bootstrap";
 import "../styles/styles.css";
 import "../styles/default.css";
 import "../styles/fonts.css";
+import "../styles/media.css"
 import { wrapper } from "../store/store";
 import { Provider } from "react-redux";
 import dynamic from "next/dynamic";
@@ -26,7 +27,7 @@ const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Expres Market</title>
+        <title>Express Market</title>
       </Head>
       <Provider store={store}>
         <ThemeProvider

@@ -32,14 +32,17 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
   return (
     <>
       <Card
-        className="rounded-4 btn_grey"
-        style={{ width: "100%", cursor: "pointer" }}
-        onClick={() => {
-          router.push(`/product-page?productId=${product.id}`);
-        }}
+        className="rounded-4 btn_grey mx-auto product_card"
+        style={{ width: "100%", cursor: "pointer", maxWidth: "210px" }}
       >
-        <Card.Header className="position-relative bg-transparent border-0">
+        <Card.Header
+          className="position-relative bg-transparent border-0 p-0"
+          onClick={() => {
+            router.push(`/product-page?productId=${product.id}`);
+          }}
+        >
           <Card.Img
+            className="rounded-4 "
             variant="top"
             src={`data:image/png;base64,${product?.images}`}
           />
@@ -48,18 +51,29 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
           </div>
         </Card.Header>
         <Card.Body className="text-start">
-          <Card.Title className="d-flex align-items-end">
-            <h2 className="text-danger me-3">{product?.price}тг</h2>
-            <h4 className="position-relative text-secondary">
-              {product?.price} тг
-              <b className="text-strikethrough">_______</b>
-            </h4>
+          <Card.Title className=" align-items-end price-mobile-card">
+            <p className="position-relative text-secondary ms-5 mb-0 mobile-price">
+              {product?.price} сумм
+              <b
+                className="text-strikethrough mobile-price "
+                style={{ left: "-3px", top: "-7px" }}
+              >
+                _______
+              </b>
+            </p>
+            <h4 className="text-danger  mobile-price ">{product?.price}сумм</h4>
           </Card.Title>
           <Card.Text className="pt-3">
-            <span className="">{product?.name}</span>
-            <span className="text-secondary">{product?.weight} г</span>
+            <span className="mobile-text ">{product?.name}</span>
+            <span className="text-secondary ">{product?.weight} г</span>
           </Card.Text>
-          <Counter count={count} increment={increment} decrement={decrement} />
+          <Row>
+            <Counter
+              count={count}
+              increment={increment}
+              decrement={decrement}
+            />
+          </Row>
         </Card.Body>
       </Card>
     </>

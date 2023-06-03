@@ -42,9 +42,11 @@ function LoginPhone({
     <Modal show={show} onHide={onClose} centered>
       <Modal.Header style={{ border: "none" }} closeButton />
       <Modal.Body>
-        <Image className="login_logo" src="/img/login_logo.svg" />
         <Row>
-          <h1 className="modal_heading">Добро пожаловать в Express Market!</h1>
+         <Image  className="login_logo" src="/img/login_logo.svg" />
+        </Row>
+        <Row className="mt-4">
+          <h1 className="modal_heading ">Добро пожаловать в Express Market!</h1>
         </Row>
         <Modal.Title className="modal_subheading my-3">
           Введите телефон для продолжения
@@ -54,7 +56,6 @@ function LoginPhone({
             <Form.Label column className="phone_label">
               +9
             </Form.Label>
-            <Col className="phone_num">
               <Form.Control
                 type="tel"
                 className="phone_num"
@@ -62,7 +63,6 @@ function LoginPhone({
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 maxLength={14}
               />
-            </Col>
           </Form.Group>
           <Row>
             <Button

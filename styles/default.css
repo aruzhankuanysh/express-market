@@ -98,11 +98,10 @@
 
 .swiper-button-next, .swiper-button-prev {
     position: absolute;
-    top: var(--swiper-navigation-top-offset,40%) !important;
     width: var(--swiper-navigation-size) !important;
     background-color: rgb(255, 255, 255);
     border-radius: 5rem;
-    z-index: 9;
+    z-index: 99 !important;
     color: var(--gosu-second-transparent) !important;
 }
 .swiper-button-next:after, .swiper-button-prev:after {

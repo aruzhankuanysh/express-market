@@ -10,14 +10,14 @@ export default function CategoriesMenu({ProductsCatalog}: {ProductsCatalog : IPr
   const [brand, setBrand] = useState("");
 
   useEffect(() => {
-    console.log(router.query["id"]);
-    console.log(router.query);
+    // console.log(router.query["id"]);
+    // console.log(router.query);
     router.query["children"] ? setChildren(router.query["children"].toString()) : setChildren("");
     router.query["brand"] ? setBrand(router.query["brand"].toString()) : setBrand("");
   }, [router.pathname, router.query]);
 
   useEffect(() => {
-    console.log(ProductsCatalog)
+    // console.log(ProductsCatalog)
   }, [ProductsCatalog]);
 
   return (

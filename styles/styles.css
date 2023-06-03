@@ -120,7 +120,7 @@ h1 {
 }
 
 #adress_bar {
-  width: 279.24px;
+  width: 170px;
   height: 48.74px;
   margin-left: 40px;
 }
@@ -320,12 +320,11 @@ h1 {
 }
 
 .phone_num {
-  width: 100% !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  width: 80% !important;
+  padding: 0 !important;
   border-color: var(--gosu-transparent) !important;
   border-radius: 0 5px 5px 0 !important;
-  height: 46.73px;
+  max-height: 46.73px !important;
   font-size: 18px !important;
 }
 
@@ -368,15 +367,36 @@ h1 {
   font-weight: 500 !important;
 }
 
+.fade_in {
+  opacity: 0;
+  animation-name: fade-in;
+  animation-duration: 200ms;
+  animation-fill-mode: forwards;
+}
+
+
+
 .dropdown_wrapper {
   border-radius: 20px !important;
   background-color: var(--gosu-bg) !important;
   width: 300px;
+
 }
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1; 
+  }
+}
+
 
 .dropdown_cart_wrapper {
   width: 433px;
   padding: 20px;
+  right: -31px !important;
   margin-top: 10px !important;
   border: none !important;
   border-radius: 20px;
@@ -690,41 +710,4 @@ a {
   display: flex;
 }
 
-@media (max-width: 992px) {
-  .form_wrapper {
-    display: block;
-  }
 
-  .cart_btn {
-    width: 5rem;
-  }
-
-  .cart_btn h5 {
-    display: none;
-  }
-
-  .dropdown_nav {
-    margin-right: -30px !important;
-  }
-
-
-  #adress_bar {
-    width: 150px;
-    margin-left: -1px !important;
-  }
-  .modal_heading {
-    text-align: center !important;
-  }
-  
-  .dropdown_cart_wrapper {
-    width: 350px;
-  }
- 
-}
-
-
-@media (max-width: 300px) {
-  .dropdown_cart_wrapper {
-      width: 220px;  
-  }
-}

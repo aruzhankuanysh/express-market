@@ -60,21 +60,21 @@ function Header(): JSX.Element {
       <Navbar className="d-block d-lg-none header_container mb-4   ">
         <Container className="d-flex ps-3 ">
           <Row className="mobile_header" style={{ width: "100%" }}>
-            <Col>
+            <Col  >
               <DropdownMenu />
             </Col>
-            <Col>
+            <Col >
               <Image
                 fluid
                 src="/img/express-logo.svg"
                 alt="express-logo"
-                style={{ height: "42px", cursor: "pointer" }}
+                style={{ height: "42px", cursor: "pointer", minWidth:"100px" }}
                 onClick={() => {
                   router.push("/");
                 }}
               />
             </Col>
-            <Col style={{ display: "flex", justifyContent: "center" }}>
+            <Col className="pe-0"  style={{ display: "flex", justifyContent: "end" }}>
               <DropdownCart />
             </Col>
           </Row>
@@ -93,7 +93,7 @@ function Header(): JSX.Element {
                 fluid
                 src="/img/express-logo.svg"
                 alt="express-logo"
-                style={{ height: "42px", cursor: "pointer" }}
+                style={{ height: "42px", cursor: "pointer", minWidth:"80px" }}
                 onClick={() => {
                   router.push("/");
                 }}
@@ -115,7 +115,6 @@ function Header(): JSX.Element {
             letterSpacing: "-0.5px",
           }}
         >
-          {/* Нужно деоделать модальное окно */}
           <AdressBar />
           <DropdownCart />
           <Login />
