@@ -11,7 +11,7 @@ const Advice = ({}): JSX.Element => {
           <h6 className="text-secondary">Главная &gt; Вам понравится</h6>
           <h1 className="fw-bolder mb-4">Вам понравится</h1>
           <Row>
-            <Col sm={2} className="mb-4" style={{minWidth: '20%'}}>
+            {/* <Col sm={2} className="mb-4" style={{minWidth: '20%'}}>
               <ProductCard />
             </Col>
             <Col sm={2} className="mb-4" style={{minWidth: '20%'}}>
@@ -61,7 +61,7 @@ const Advice = ({}): JSX.Element => {
             </Col>
             <Col sm={2} className="mb-4" style={{minWidth: '20%'}}>
               <ProductCard />
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </Row>
