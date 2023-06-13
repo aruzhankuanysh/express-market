@@ -45,7 +45,7 @@ export default function ToUpBtn() {
         right: "40px",
         cursor: "pointer",
       }}
-      className="counter_button"
+      className="up_button"
     >
       <span>^</span>
     </div>

@@ -49,7 +49,7 @@ export default function BreadCrumbs() {
   return (
     <div style={{ display: "flex" }}>
       <>
-        <div style={{ cursor: "pointer" }} onClick={() => {router.push("/")}}>
+        <div style={{ cursor: "pointer" }} onClick={() => {router.push("/")}} className="d-none d-md-flex">
           {"Главная >"}
         </div>
         {rout.map((item, index) => (

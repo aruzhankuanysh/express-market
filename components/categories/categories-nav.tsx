@@ -21,21 +21,21 @@ const CategoriesNav = ({}): JSX.Element => {
   return (
     <>
       <Navbar id="idCatalogs">
-        <Accordion defaultActiveKey="0" className="w-100">
+        <Accordion defaultActiveKey="0" className="w-100 d-none d-lg-block">
           {(Array.isArray(categories.categories) ? categories.categories : [])
             .filter((main_category) => {
               return main_category.category_id === router.query["id"];
             })
             .map((main_category) => (
               <Accordion.Item eventKey="0" key={main_category.category_id}>
-                <Accordion.Header>
-                  <h6 className="mb-1">{main_category.name_category}</h6>
+                <Accordion.Header style={{fontWeight:"500"}}>
+                  <h6 className="mb-1">{main_category.name_category} </h6>
                 </Accordion.Header>
-                <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>
+                <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px",  }}>
                   {(main_category.children_category ?? []).map((children_category) => (
                       <Accordion defaultActiveKey="child-0" key={children_category.category_id}>
-                        <Accordion.Item eventKey={children === children_category.category_id ? 'child-0' : `child-${children_category.category_id}`}>
-                          <Accordion.Header>
+                        <Accordion.Item  eventKey={children === children_category.category_id ? 'child-0' : `child-${children_category.category_id}`}>
+                          <Accordion.Header className="mt-2" >
                             {children_category.name_category}
                           </Accordion.Header>
                           <Accordion.Body className="d-flex flex-column" style={{ paddingLeft: "30px" }}>

@@ -466,12 +466,10 @@ h1 {
 }
 
 .counter_button {
-  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: var(--gosu-red-gradient);
-  width: 140px;
 }
 
 .counter_button button {
@@ -485,6 +483,12 @@ h1 {
 .counter_button span {
   color: white;
   font-weight: 600;
+}
+
+
+
+.up_button {
+
 }
 
 .catalog_button {

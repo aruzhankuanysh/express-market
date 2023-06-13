@@ -120,6 +120,7 @@ const Menu = (): JSX.Element => {
       <BreadCrumbs />
       <Row>
         <Col xs="3" lg="3" xl="3" className="pe-4">
+          
           <CategoriesNav />
         </Col>
         <Col>

@@ -18,7 +18,7 @@ const Catalog = ({}): JSX.Element => {
             <Row key={main_category.category_id} className="mb-5">
               <h1 className="mb-4">{main_category.name_category}</h1>
               {(main_category.children_category ?? []).map((children_category) => (
-                <Col xs={12} key={children_category.category_id} style={{padding: '0', minWidth: '20%'}}>
+                <Col className="category_wrap"  key={children_category.category_id} style={{padding: '0', minWidth: '20%'}}>
                     <Button 
                       className="catalog_button" 
                       style={{backgroundImage:`url(/imgCategories/${children_category.category_id}.svg)`}}
