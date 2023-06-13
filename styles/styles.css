@@ -125,7 +125,9 @@ h1 {
   margin-left: 40px;
 }
 
-
+#adress_bar:active{
+  border: none;
+}
 
 .action-tag {
   background: var(--gosu-red-gradient) !important;
@@ -456,6 +458,19 @@ h1 {
   color: var(--gosu-second-transparent);
 }
 
+.dropdown-toggle::after {
+  visibility: hidden;
+}
+
+.counter_button {
+  min-width: 182px !important;
+}
+
+.counter_button:hover {
+  transition: 300ms ease-in-out;
+  background-color: rgba(87, 82, 82, 0.726);
+}
+
 .open_cart_btn {
   display: flex !important;
   justify-content: space-between !important;
@@ -488,7 +503,7 @@ h1 {
 
 
 .up_button {
-
+  background-color: rgba(161, 149, 149, 0.719);
 }
 
 .catalog_button {

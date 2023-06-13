@@ -10,7 +10,7 @@ import PageContent from "@/components/page-content";
 const OrderCompletePage = function () {
   return (
     <>
-      <Container id="comp_content">
+      <Container id="comp_content" style={{minHeight: "80vh"}}>
         <Row>
           <Col xs="9" lg="9" xl="9">
             <h1 className="fw-bold mb-4">Оформление заказа</h1>

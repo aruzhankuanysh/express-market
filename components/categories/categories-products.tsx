@@ -12,7 +12,7 @@ export default function CategoriesProducts({ productList }: { productList: Array
       <Row className="mb-5">
         {productList.map((product, index) => {
           return (
-            <Col xxs={4} lg={3} md={3}  className="mb-2 px-1"  key={index}>
+            <Col xxs={4} lg={3} md={3}  className="mb-2 px-1"  key={index} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
               <ProductCard product={product} />
             </Col>
           );

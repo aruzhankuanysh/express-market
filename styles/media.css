@@ -69,6 +69,11 @@
         margin: 0 !important;
     }
 
+    .card_text_wrap {
+      word-break: break-all;
+      min-height: 70px !important;
+    }
+
     .swiper-button-next, .swiper-rtl  {
         display: none !important;
     }
@@ -80,6 +85,16 @@
     .product_card {
       font-size: 12px;
   }
+
+  .counter_button {
+    height: 30px !important;
+    min-width: 100px !important;
+  }
+
+  .count {
+    height: 30px !important;
+  }
+
   .counter_button h4 {
     font-size: 16px !important;
   }

@@ -99,7 +99,7 @@
 .swiper-button-next, .swiper-button-prev {
     position: absolute;
     width: var(--swiper-navigation-size) !important;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(223, 217, 217);
     border-radius: 5rem;
     z-index: 99 !important;
     color: var(--gosu-second-transparent) !important;

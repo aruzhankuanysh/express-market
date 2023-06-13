@@ -6,13 +6,30 @@ import { useAppDispatch, useAppSelector } from "@/store/store";
 import { decProduct, incProduct } from "@/store/cartSlice";
 import { Product } from "@/specs/gosuTypes";
 
-const maxTitleLength = 12; 
+const maxTitleLength = 15;
+const maxTitleLengthGlobal = 45;
 
 const ProductCard = ({ product }: { product: Product }): JSX.Element => {
   const [count, setCount] = useState(0);
+  const [windowWidth, setWindowWidth] = useState<number>(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
   const router = useRouter();
   const dispatch = useAppDispatch();
   const cart_products = useAppSelector((state) => state.cart.products);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    // Remove the listener when the component is unmounted
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   const increment = () => {
     product ? dispatch(incProduct(product)) : null;
@@ -29,16 +46,24 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
     }
   }, [cart_products, product]);
 
-  const truncateTitle = (title: string) => {
-    if (title.length > maxTitleLength) {
+  const truncateTitleSmallScreens = (title: string) => {
+    const smallScreenSize = 768;
+    if (windowWidth <= smallScreenSize && title.length > maxTitleLength) {
       return `${title.substring(0, maxTitleLength)}...`;
+    }
+    return title;
+  };
+
+  const truncateTitleGlobal = (title: string) => {
+    if (title.length > maxTitleLengthGlobal) {
+      return `${title.substring(0, maxTitleLengthGlobal)}...`;
     }
     return title;
   };
 
   return (
     <Card
-      className="rounded-4 btn_grey mx-auto product_card"
+      className="d-flex flex-column justify-content-between rounded-4 btn_grey mx-auto product_card"
       style={{ width: "100%", cursor: "pointer", maxWidth: "210px" }}
     >
       <Card.Header
@@ -56,26 +81,35 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
           -40%
         </div>
       </Card.Header>
-      <Card.Body className="text-start">
-        <Card.Title className="align-items-end price-mobile-card">
-          <p className="position-relative text-secondary ms-5 mb-0 mobile-price">
-            {product?.price} сумм
-            <b
-              className="text-strikethrough mobile-price"
-              style={{ left: "-3px", top: "-7px" }}
-            >
-              _______
-            </b>
-          </p>
-          <h4 className="text-danger mobile-price">{product?.price} сумм</h4>
-        </Card.Title>
-        <Card.Text className="pt-3">
-          <span className="mobile-text">
-            {truncateTitle(product?.name)}
-          </span>
-          <span className="text-secondary">{product?.weight} г</span>
-        </Card.Text>
-        <Row>
+      <Card.Body className="d-flex flex-column justify-content-between align-items-center text-start">
+        <div>
+          <Card.Title className="align-items-end price-mobile-card">
+            <p className="position-relative text-secondary ms-5 mb-0 mobile-price">
+              {product?.price} сумм
+              <b
+                className="text-strikethrough mobile-price"
+                style={{ left: "-3px", top: "-7px" }}
+              >
+                _______
+              </b>
+            </p>
+            <h4 className="text-danger mobile-price">{product?.price} сумм</h4>
+          </Card.Title>
+          <Card.Text
+            className="pt-3 card_text_wrap "
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "wrap",
+            }}
+          >
+            <span className="mobile-text">
+              {truncateTitleGlobal(truncateTitleSmallScreens(product?.name))}
+            </span>
+            <span className="text-secondary">{product?.weight} г</span>
+          </Card.Text>
+        </div>
+        <Row className="align-self-center ">
           <Counter count={count} increment={increment} decrement={decrement} />
         </Row>
       </Card.Body>

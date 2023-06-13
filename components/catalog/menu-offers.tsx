@@ -6,7 +6,7 @@ import Accordion from "react-bootstrap/Accordion";
 const MenuSpecialOffers = ({}): JSX.Element => {
   return (
     <>
-      <Row className="mb-5   mx-1 d-none d-lg-flex">
+      <Row className="mb-5   mx-1 d-none d-sm-flex">
         <Col
           lg="6"
           className="position-relative ps-0"
@@ -43,7 +43,7 @@ const MenuSpecialOffers = ({}): JSX.Element => {
           </Button>
         </Col>
       </Row>
-      <Container className="d-block d-lg-none">
+      <Container className="d-block d-sm-none">
         <Row>
           <Col className="">
           <Button className="position-relative text-light p-0 mb-3">

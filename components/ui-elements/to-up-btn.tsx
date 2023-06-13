@@ -32,8 +32,8 @@ export default function ToUpBtn() {
       hidden={!scrol}
       onClick={() => scrollTop()}
       style={{
-        width: "80px",
-        height: "80px",
+        width: "50px",
+        height: "50px",
         borderRadius: "100%",
         color: "white",
         display: "flex",
@@ -47,7 +47,7 @@ export default function ToUpBtn() {
       }}
       className="up_button"
     >
-      <span>^</span>
+      <span className="mt-2">^</span>
     </div>
   );
 }
