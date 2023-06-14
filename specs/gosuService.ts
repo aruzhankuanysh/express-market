@@ -65,7 +65,7 @@ class ApplicationService {
             console.error(error);
         }
     }
-
+ 
     // Функция для форматирования времени в формат "мм:сс"
     formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);
