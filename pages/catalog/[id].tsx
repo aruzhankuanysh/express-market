@@ -9,6 +9,7 @@ import { useAppSelector } from "@/store/store";
 import AppService from "@/specs/gosuService";
 import BreadCrumbs from "@/components/ui-elements/bread-crumbs";
 import GrowSpinner from "@/components/ui-elements/spinner";
+import ToUpBtn from "@/components/ui-elements/to-up-btn";
 
 export interface IProductsCatalog {
   title: string;
@@ -131,6 +132,8 @@ const Menu = (): JSX.Element => {
           )}
         </Col>
       </Row>
+      <ToUpBtn/>
+
     </Container>
   );
 };

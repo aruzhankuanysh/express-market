@@ -94,7 +94,6 @@ body {
 
 #search_bar {
   background-image: url(../public/img/search.svg);
-
   background-repeat: no-repeat;
   font-size: 16px;
   background-position: 10px 5px;
@@ -133,6 +132,12 @@ h1 {
   background: var(--gosu-red-gradient) !important;
 
   transform: rotate(-7.2deg);
+}
+
+.dropdown_cart_scroll {
+  max-height: 400px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
 }
 
 .text-strikethrough {
@@ -429,7 +434,7 @@ h1 {
 }
 
 .cart_counter {
-  width: 134px;
+  width: 154px;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -13,18 +13,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 const OrderPay = ({}): JSX.Element => {
   const [checked, setChecked] = useState(false);
-  const [radioValue, setRadioValue] = useState("1");
-  const [tipValue, setTipValue] = useState("1");
+  const [radioValue, setRadioValue] = useState("0");
+  const [tipValue, setTipValue] = useState("4");
   const radios = [
-    { name: "Онлайн банковской картой", value: "1" },
-    { name: "Наличными курьеру", value: "2" },
+    { name: "Онлайн банковской картой", value: "0" },
+    { name: "Наличными курьеру", value: "1" },
   ];
   const tips = [
-    { name: " 0₸", value: "1" },
-    { name: " 200₸", value: "2" },
-    { name: " 500₸", value: "3" },
-    { name: " 700₸", value: "4" },
-    { name: "Другая сумма", value: "5" },
+    { name: " 0₸", value: "3" },
+    { name: " 200₸", value: "4" },
+    { name: " 500₸", value: "5" },
+    { name: " 700₸", value: "6" },
+    { name: "Другая сумма", value: "7" },
   ];
   return (
     <>
@@ -59,7 +59,7 @@ const OrderPay = ({}): JSX.Element => {
           />
         </Col>
         <Col>
-          <Button className="btn_orange_gradient">Применить</Button>
+          <Button style={{height:"52px"}} className="btn_orange_gradient">Применить</Button>
         </Col>
       </Row>
 
@@ -70,11 +70,11 @@ const OrderPay = ({}): JSX.Element => {
         <ButtonGroup>
           {tips.map((tip, indx) => (
             <ToggleButton
-              key={`${tip.name}-${indx}`}
-              id={`radio-${indx}`}
+              key={indx}
+              id={`tip-radio-${indx}`}
               type="radio"
               variant={checked ? "outline-danger" : "outline-success"}
-              name="radio"
+              name="tip"
               value={tip.value}
               checked={tipValue === tip.value}
               onChange={(e) => setTipValue(e.currentTarget.value)}

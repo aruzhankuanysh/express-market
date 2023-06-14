@@ -25,8 +25,8 @@ const OrderDelivery = ({}): JSX.Element => {
       </Form.Select>
       <Row className="mt-2 mb-3">
         <Col>
-          <Form.Label htmlFor="home">
-            <h6>Кв/офис</h6>
+          <Form.Label htmlFor="home ">
+            <h6 className="mobile-text">Кв/офис</h6>
           </Form.Label>
           <Form.Control
             id="home"
@@ -37,7 +37,7 @@ const OrderDelivery = ({}): JSX.Element => {
         </Col>
         <Col>
           <Form.Label htmlFor="Entrance">
-            <h6>Подъезд</h6>
+            <h6 className="mobile-text">Подъезд</h6>
           </Form.Label>
           <Form.Control
             id="Entrance"
@@ -48,7 +48,7 @@ const OrderDelivery = ({}): JSX.Element => {
         </Col>
         <Col>
           <Form.Label htmlFor="Floor">
-            <h6>Этаж</h6>
+            <h6 className="mobile-text">Этаж</h6>
           </Form.Label>
           <Form.Control
             id="Floor"
@@ -59,7 +59,7 @@ const OrderDelivery = ({}): JSX.Element => {
         </Col>
         <Col>
           <Form.Label htmlFor="intercom">
-            <h6>Домофон</h6>
+            <h6 className="mobile-text">Домофон</h6>
           </Form.Label>
           <Form.Control
             id="intercom"

@@ -77,23 +77,23 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
           variant="top"
           src={`data:image/png;base64,${product?.images}`}
         />
-        <div className="bg-orange position-absolute bottom-0 mb-4 rounded-4 text-light fw-bold action-tag px-3">
+        {/* <div className="bg-orange position-absolute bottom-0 mb-4 rounded-4 text-light fw-bold action-tag px-3">
           -40%
-        </div>
+        </div> */}
       </Card.Header>
       <Card.Body className="d-flex flex-column justify-content-between align-items-center text-start">
         <div>
           <Card.Title className="align-items-end price-mobile-card">
-            <p className="position-relative text-secondary ms-5 mb-0 mobile-price">
-              {product?.price} сумм
+            {/* <p className="position-relative text-secondary ms-5 mb-0 mobile-price">
+              {product?.price} сум
               <b
                 className="text-strikethrough mobile-price"
                 style={{ left: "-3px", top: "-7px" }}
               >
                 _______
               </b>
-            </p>
-            <h4 className="text-danger mobile-price">{product?.price} сумм</h4>
+            </p> */}
+            <h4 className="text-danger mobile-price">{product?.price} сум</h4>
           </Card.Title>
           <Card.Text
             className="pt-3 card_text_wrap "
@@ -109,7 +109,7 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
             <span className="text-secondary">{product?.weight} г</span>
           </Card.Text>
         </div>
-        <Row className="align-self-center ">
+        <Row className="align-self-center mt-2">
           <Counter count={count} increment={increment} decrement={decrement} />
         </Row>
       </Card.Body>

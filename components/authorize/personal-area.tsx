@@ -243,7 +243,7 @@ const PersonalArea = (): JSX.Element => {
                               <p>Общая сумма</p>
                             </Row>
                             <Row>
-                              <p>{order.price} сумм</p>
+                              <p>{order.price} сум</p>
                             </Row>
                           </Col>
                         </Row>
@@ -276,29 +276,29 @@ const PersonalArea = (): JSX.Element => {
                       </Row>
                       <Row className="mt-4 pb-4" style={{borderBottom:"1px solid rgba(0, 0, 0, 0.2)", maxWidth:"650px", fontSize:"15px", fontWeight:"400"}}>
                         <Col className="text-danger" style={{fontWeight:"600", textDecorationLine:"underline"}} lg="6" sm="6" xxs="4">{order.title}</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">{order.price} сумм</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">{order.price} сум</Col>
                         <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="4">{order.count}</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">1000 сумм</Col>
+                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">1000 сум</Col>
                       </Row>
                         <Row className="mt-3">
                           <Col xxs="8">Заказано товаров на сумму:</Col>
-                          <Col>{order.price} сумм</Col>
+                          <Col>{order.price} сум</Col>
                         </Row>
                         <Row className="mt-3">
                           <Col xxs="8">Доставленные продукты:</Col>
-                          <Col> 123 сумм</Col>
+                          <Col> 123 сум</Col>
                         </Row>
                         <Row className="mt-3">
                           <Col xxs="8">Стоимость доставки:</Col>
-                          <Col>0 сумм</Col>
+                          <Col>0 сум</Col>
                         </Row >
                         <Row className="mt-3">
                           <Col xxs="8">Чаевые:</Col>
-                          <Col>200 сумм</Col>
+                          <Col>200 сум</Col>
                         </Row>
                         <Row className="mt-3">
                           <Col xxs="8" style={{fontWeight:"700"}} >Итоговая сумма</Col>
-                          <Col style={{fontWeight:"700"}} >323 сумм</Col>
+                          <Col style={{fontWeight:"700"}} >323 сум</Col>
                         </Row>
                     </Container>
                     

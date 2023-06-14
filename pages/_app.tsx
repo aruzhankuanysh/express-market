@@ -36,7 +36,6 @@ const CustomApp: AppType = ({ Component, pageProps }: AppProps) => {
         >
           <PageContent>
             <Component {...props} />
-            <ToUpBtn/>
           </PageContent>
         </ThemeProvider>
       </Provider>

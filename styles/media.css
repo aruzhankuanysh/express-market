@@ -2,7 +2,18 @@
     .form_wrapper {
       display: block;
     }
+    
+    .cart_counter {
+      font-size: 10px;
+      padding: 0 !important;
+      width: 100px !important;
+    }
   
+    .cart_counter button {
+      width: 60px !important;
+    }
+  
+
     .cart_btn {
       width: 3rem;
     }
@@ -80,8 +91,8 @@
 
     .swiper-button-prev, .swiper-rtl {
         display: none !important;
-    } 
-
+    }
+    
     .product_card {
       font-size: 12px;
   }
@@ -89,6 +100,16 @@
   .counter_button {
     height: 30px !important;
     min-width: 100px !important;
+  }
+
+  .cart_counter {
+    font-size: 10px;
+    padding: 0 !important;
+    width: 100px !important;
+  }
+
+  .cart_counter button {
+    width: 60px !important;
   }
 
   .count {

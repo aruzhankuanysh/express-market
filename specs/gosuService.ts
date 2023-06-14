@@ -34,6 +34,14 @@ class ApplicationService {
         }
     };
 
+    searchProducts = async (searchTerm: string) => {
+        try {
+            const response = await api.get(`Search?SearchItem=${searchTerm}`);
+            return response.data.Items; 
+        } catch (error) {
+            console.error(error);
+        }
+    };
     // GET – получает товар в массиве
     getProduct = async (ItemId?: string | undefined) => {
         if (ItemId) {
