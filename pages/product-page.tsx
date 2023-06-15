@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import AppService from "@/specs/gosuService";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { decProduct, incProduct } from "@/store/cartSlice";
+import BreadCrumbs from "@/components/ui-elements/bread-crumbs";
 
 const Index: NextPage = () => {
   const [product, setProduct] = useState<Product>();
@@ -56,7 +57,8 @@ const Index: NextPage = () => {
   return (
     <Container style={{ padding: "15px" }} className="product_page_wrapper">
       <Container style={{ padding: "0" }} className="my-5">
-        <h6 className="text-secondary">Главная &gt; Вам понравится</h6>
+        {/* <h6 className="text-secondary">Главная &gt; Вам понравится</h6> */}
+        <BreadCrumbs/>
 
         <Container style={{ padding: "0" }}>
           {productsTags.map((productTag) => (

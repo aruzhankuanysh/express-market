@@ -34,6 +34,16 @@ class ApplicationService {
         }
     };
 
+    // GET – получает список искомых товаров
+    getSearch = async (search?: string) => {
+        try {
+            const response = await api.get(`Search?SearchItem=${search}`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     // GET – получает товар в массиве
     getProduct = async (ItemId?: string | undefined) => {
         if (ItemId) {

@@ -1,4 +1,5 @@
-import { Brand, Category, SubCategory } from "@/specs/gosuTypes";
+import AppService from "@/specs/gosuService";
+import { Brand, Category, Product, SubCategory } from "@/specs/gosuTypes";
 import { useAppSelector } from "@/store/store";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -7,6 +8,20 @@ export default function BreadCrumbs() {
   const router = useRouter();
   const categories = useAppSelector((state) => state.category);
   const [rout, setRout] = useState<Category[] | SubCategory[] | Brand[]>([]);
+
+  const [product, setProduct] = useState<Product>();
+
+  useEffect(() => {
+    if(router.query?.productId) {
+      AppService.getProduct(router.query["productId"]?.toString()).then((res) => {
+        if (res) {
+          setProduct(res["Items"][0]);
+        }
+      });
+    } else {
+      setProduct(undefined)
+    }
+  }, [router.query]);
 
   useEffect(() => {
     if (categories.categories) {
@@ -49,9 +64,26 @@ export default function BreadCrumbs() {
   return (
     <div style={{ display: "flex" }}>
       <>
-        <div style={{ cursor: "pointer" }} onClick={() => {router.push("/")}} className="d-none d-md-flex">
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            router.push("/");
+          }}
+          className="d-none d-md-flex"
+        >
           {"Главная >"}
         </div>
+        {product ? (
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              router.push(`/product-page?productId=${router.query?.productId}`)
+            }}
+            className="d-none d-md-flex"
+          >
+            {product.name}
+          </div>
+        ) : null}
         {rout.map((item, index) => (
           <div
             style={{ cursor: "pointer" }}
