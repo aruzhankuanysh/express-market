@@ -44,13 +44,13 @@ function SearchBar(): JSX.Element {
         id="search_bar"
         className="input rounded-4 height-3"
       /> */}
-      <Col className="input rounded-4 height-3" id="search_bar">
+      <div className="rounded-4 height-3" id="search_bar">
         <Typeahead
           // clearButton //* можно поправить
           minLength={3}
           id="input-size-example"
           labelKey="name"
-          className="input rounded-4 height-3"
+          className="rounded-4 height-3"
           options={options}
           placeholder={"Найдите товар"}
           onChange={(e: any[]) => (e.length > 0 ? searchHandler(e[0]) : null)}
@@ -58,7 +58,7 @@ function SearchBar(): JSX.Element {
             setSearchText(e);
           }}
         />
-      </Col>
+      </div>
     </>
   );
 }
