@@ -34,6 +34,7 @@ class ApplicationService {
         }
     };
 
+// <<<<<<< HEAD
     searchProducts = async (searchTerm: string) => {
         try {
             const response = await api.get(`Search?SearchItem=${searchTerm}`);
@@ -42,6 +43,18 @@ class ApplicationService {
             console.error(error);
         }
     };
+// =======
+//     // GET – получает список искомых товаров
+//     getSearch = async (search?: string) => {
+//         try {
+//             const response = await api.get(`Search?SearchItem=${search}`);
+//             return response.data;
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+
+// >>>>>>> 9377a1d9fd9eb62d808a8272143975c125e85b1a
     // GET – получает товар в массиве
     getProduct = async (ItemId?: string | undefined) => {
         if (ItemId) {
@@ -73,7 +86,7 @@ class ApplicationService {
             console.error(error);
         }
     }
-
+ 
     // Функция для форматирования времени в формат "мм:сс"
     formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);

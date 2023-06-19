@@ -25,7 +25,6 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
 
     window.addEventListener("resize", handleWindowResize);
 
-    // Remove the listener when the component is unmounted
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };

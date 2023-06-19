@@ -10,7 +10,6 @@ import {
   Button,
 } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
-import MenuSideNav from "../catalog/menu-side-nav";
 import SearchBar from "./search-bar";
 import Login from "../authorize/login";
 import { useRouter } from "next/router";
@@ -62,11 +61,12 @@ function DropdownMenu() {
        
         />
       </Dropdown.Toggle>
-      <Dropdown.Menu
+      <Dropdown.Menu          
         onClick={(e) => {
           e.stopPropagation();
         }}
         className="dropdown_wrapper fade_in"
+        style={{top:"45px", boxShadow:"0px 0px 11px rgba(0, 0, 0, 0.25)", width:"90vw"}}
       >
         <Container className="px-4">
           <Row className="my-4 d-flex d-lg-none ">
@@ -74,7 +74,7 @@ function DropdownMenu() {
               <AdressBar />
             </Col>
             <Col className="dropdown_nav">
-              <Login />
+              <Login />                  
             </Col>
           </Row>
           <Row className="d-block d-lg-none ">

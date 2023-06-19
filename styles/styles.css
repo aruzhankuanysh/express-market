@@ -381,6 +381,29 @@ h1 {
   animation-fill-mode: forwards;
 }
 
+.custom-scrollbar {
+  overflow-y: auto;
+  top: 30px;
+  overflow-x: hidden;
+  scrollbar-width: thin; /* Ширина скроллбара */
+  scrollbar-color: #888888 #f4f4f4; /* Цвет скроллбара */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  border-radius: 10px;
+  width: 8px; /* Ширина скроллбара для WebKit браузеров */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  border-radius: 0 3px 3px 0;
+  background-color: #d8d8d8; /* Цвет трека скроллбара */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+
+  background-color: #888888; /* Цвет ползунка скроллбара */
+}
 
 
 .dropdown_wrapper {

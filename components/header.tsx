@@ -57,7 +57,7 @@ function Header(): JSX.Element {
 
   return (
     <>
-      <Navbar className="d-block d-lg-none header_container mb-4   ">
+      <Navbar className="d-block d-lg-none header_container mb-4 " sticky="top">
         <Container className="d-flex ps-3 ">
           <Row className="mobile_header" style={{ width: "100%" }}>
             <Col  >

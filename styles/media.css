@@ -59,7 +59,6 @@
       max-width: 100px !important;
     } */
 
-    
 
     .count:active {
         background-color: none !important;
@@ -73,6 +72,11 @@
         font-size: 12px;
         padding: 0 !important;
         margin: 0 !important;
+    }
+
+    .search_wrapper {
+      left: -10px !important;
+      width: 90vw !important;
     }
 
     .price-mobile-card {

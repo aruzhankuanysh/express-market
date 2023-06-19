@@ -44,6 +44,7 @@ export default function ToUpBtn() {
         bottom: "30px",
         right: "40px",
         cursor: "pointer",
+        boxShadow:"0px 0px 11px rgba(0, 0, 0, 0.25)"
       }}
       className="up_button"
     >
