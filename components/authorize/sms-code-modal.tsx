@@ -73,7 +73,7 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
           Legal: "false",
         }).then((res) => {
           if (res) {
-            console.log(res);
+            // console.log(res);
             // router.push("/");
           }
         });

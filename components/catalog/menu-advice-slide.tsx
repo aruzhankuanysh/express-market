@@ -35,7 +35,7 @@ const AdviceSlide = ({}): JSX.Element => {
  
   const products = [
     {
-      id: "1234312",
+      id: "12324312",
       name: "water",
       brand_id: "123",
       category_id: "123",
@@ -51,7 +51,7 @@ const AdviceSlide = ({}): JSX.Element => {
       ],
     },
     {
-      id: "1234312",
+      id: "12344312",
       name: "water1",
       brand_id: "123",
       category_id: "123",
@@ -67,7 +67,7 @@ const AdviceSlide = ({}): JSX.Element => {
       ],
     },
     {
-      id: "1234312",
+      id: "123454312",
       name: "water2",
       brand_id: "123",
       category_id: "123",
@@ -83,7 +83,7 @@ const AdviceSlide = ({}): JSX.Element => {
       ],
     },
     {
-      id: "1234312",
+      id: "123134312",
       name: "water3",
       brand_id: "123",
       category_id: "123",
@@ -99,7 +99,7 @@ const AdviceSlide = ({}): JSX.Element => {
       ],
     },
     {
-      id: "1234312",
+      id: "1243234312",
       name: "water4",
       brand_id: "123",
       category_id: "123",
@@ -115,7 +115,7 @@ const AdviceSlide = ({}): JSX.Element => {
       ],
     },
     {
-      id: "1234312",
+      id: "141234312",
       name: "water5",
       brand_id: "123",
       category_id: "123",
@@ -131,7 +131,7 @@ const AdviceSlide = ({}): JSX.Element => {
       ],
     },
     {
-      id: "1234312",
+      id: "124234312",
       name: "water6",
       brand_id: "123",
       category_id: "123",
@@ -147,7 +147,7 @@ const AdviceSlide = ({}): JSX.Element => {
       ],
     },
     {
-      id: "1234312",
+      id: "123244312",
       name: "water6",
       brand_id: "123",
       category_id: "123",

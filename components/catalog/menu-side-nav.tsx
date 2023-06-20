@@ -9,7 +9,7 @@ const MenuSideNav = ({}): JSX.Element => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(categories.categories);
+    // console.log(categories.categories);
   }, [categories.categories]);
 
   return (

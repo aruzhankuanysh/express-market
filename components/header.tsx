@@ -38,13 +38,11 @@ function Header(): JSX.Element {
 
   useEffect(() => {
     AppService.getCategory().then((res) => {
-      console.log("Category", res["Category"]);
       if (res) {
         dispatch(setCategory(res["Category"]));
       }
     });
     AppService.getStocks().then((res) => {
-      console.log("Stock", res["Stock"]);
       if (res) {
         dispatch(setStocks(res["Stock"]));
       }
@@ -57,7 +55,7 @@ function Header(): JSX.Element {
 
   return (
     <>
-      <Navbar className="d-block d-lg-none header_container mb-4 " sticky="top">
+      <Navbar className="d-block d-lg-none header_container mb-4 " >
         <Container className="d-flex ps-3 ">
           <Row className="mobile_header" style={{ width: "100%" }}>
             <Col  >

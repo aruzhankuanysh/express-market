@@ -81,7 +81,7 @@ const Index: NextPage = () => {
                       <Col lg="7" sm="6" xxs="5">
                         <Row
                           className="mobile-text"
-                          style={{ fontWeight: "600" }}
+                          style={{ fontWeight: "600", minHeight:"30px" }}
                         >
                           {productItem?.item?.name}
                         </Row>
@@ -96,7 +96,7 @@ const Index: NextPage = () => {
                               -
                             </button>
                             <span className="mobile-text">
-                              {productItem.count}{" "}
+                              {productItem.count}
                             </span>
                             <button
                               className="me-3 "
@@ -110,24 +110,24 @@ const Index: NextPage = () => {
                         </Row>
                       </Col>
                       <Col lg="3" xxs="2">
-                        <Row>
+                        <Row style={{display:"flex", justifyContent:"flex-end"}}>
                           <Button
-                            className=""
+                            style={{width:"10px", display:"flex", justifyContent:"space-around"}}
                             onClick={() =>
                               dicpath(removeProduct(productItem.item))
                             }
                           >
                             <Image
                               // className="mb-5"
-                              style={{ height: "20px" }}
+                              style={{ height: "20px", margin:"auto" }}
                               src="/img/delete.svg"
                             />
                           </Button>
                         </Row>
                         <Row>
                           <p
-                            className="mt-3 mobile-text"
-                            style={{ fontWeight: "700" }}
+                            className="mt-3 mobile-text p-0"
+                            style={{ fontWeight: "700", textAlign:"end" }}
                           >
                             {productItem?.item?.price * productItem.count} сум
                           </p>
@@ -145,7 +145,7 @@ const Index: NextPage = () => {
                 <Row className="mb-3">
                   <Col style={{ fontWeight: "600" }}>Товары</Col>
                   <Col style={{ textAlign: "right", fontWeight: "600" }}>
-                    {totalPrice} UZS
+                    {totalPrice} сум
                   </Col>
                 </Row>
 
@@ -156,7 +156,7 @@ const Index: NextPage = () => {
                       className="text-danger"
                       style={{ textAlign: "right", fontWeight: "600" }}
                     >
-                      -{discount} UZS
+                      -{discount} сум
                     </Col>
                   </Row>
                 ) : null}
@@ -164,7 +164,7 @@ const Index: NextPage = () => {
                 <Row className="mb-0">
                   <Col style={{ fontWeight: "600" }}>Стоимость доставки</Col>
                   <Col style={{ textAlign: "right", fontWeight: "600" }}>
-                    0 UZS
+                    0 сум
                   </Col>
                 </Row>
                 {/* <p className="pricing">{deliveryText}</p> */}
@@ -173,7 +173,7 @@ const Index: NextPage = () => {
                     <h5>К оплате</h5>
                   </Col>
                   <Col style={{ textAlign: "right", fontWeight: "600" }}>
-                    {finalPrice} UZS
+                    {finalPrice} сум
                   </Col>
                 </Row>
                 <Button

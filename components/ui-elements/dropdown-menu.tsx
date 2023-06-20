@@ -20,7 +20,7 @@ function DropdownMenu() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(categories.categories);
+    // console.log(categories.categories);
   }, [categories.categories]);
   const [show, setshow] = useState(false);
 
@@ -66,11 +66,11 @@ function DropdownMenu() {
           e.stopPropagation();
         }}
         className="dropdown_wrapper fade_in"
-        style={{top:"45px", boxShadow:"0px 0px 11px rgba(0, 0, 0, 0.25)", width:"90vw"}}
+        style={{top:"45px", boxShadow:"0px 0px 11px rgba(0, 0, 0, 0.25)", width:"90vw", maxWidth:"320px"}}
       >
         <Container className="px-4">
           <Row className="my-4 d-flex d-lg-none ">
-            <Col className="dropdown_nav">
+            <Col className="dropdown_nav" >
               <AdressBar />
             </Col>
             <Col className="dropdown_nav">
