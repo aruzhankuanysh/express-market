@@ -1,5 +1,8 @@
+import AppService from "@/specs/gosuService";
+import { User, registerUser } from "@/specs/gosuTypes";
 import { setUser } from "@/store/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, Col, Form, Image, Modal, Row } from "react-bootstrap";
 
@@ -17,26 +20,84 @@ function LoginPhone({
   const dispath = useAppDispatch();
   const auth = useAppSelector(state => state.auth);
 
-  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cleanedPhoneNumber = e.target.value.replace(/\D/g, "");
-    const truncatedPhoneNumber = cleanedPhoneNumber.slice(0, 11);
-    const formattedPhoneNumber = truncatedPhoneNumber.replace(
-      /(\d{2})(\d{2})(\d{3})(\d{2})(\d{2})/,
-      "$1 $2 $3 $4 $5"
-    );
-    setPhoneNumber(formattedPhoneNumber);
-  };
+  // const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const cleanedPhoneNumber = e.target.value.replace(/\D/g, "");
+  //   const truncatedPhoneNumber = cleanedPhoneNumber.slice(0, 11);
+  //   const formattedPhoneNumber = truncatedPhoneNumber.replace(
+  //     /(\d{2})(\d{2})(\d{3})(\d{2})(\d{2})/,
+  //     "$1 $2 $3 $4 $5"
+  //   );
+  //   setPhoneNumber(formattedPhoneNumber);
+  // };
 
   const handlerSendCode = () => {
     dispath(setUser({ ...auth.user, phone: phoneNumber }));
+
+    let d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setMilliseconds(0);
+
+    const user : registerUser = {
+      Name: "Новый пользователь",
+      Sex: "Мужской",
+      Birthday: d.toISOString().replace("0Z", ""),
+      Phone: `998${phoneNumber}`,
+      Legal: "false"
+    }
+
+    AppService.getUser(`998${phoneNumber}`).then((res) => {
+      if(res?.client){
+        console.log("🚀 ~ file: personal-area.tsx:57 ~ AppService.getUser ~ res:", res)
+
+        const db_user : User = {
+          id: res.client.ClientId,
+          name: res.client.Name,
+          role: "USER",
+          email: "",
+          gender: res.client.Sex,
+          birthdate: res.client.Birthday,
+          phone: phoneNumber
+        }
+
+        dispath(setUser(db_user));
+        
+      } else {
+        AppService.registerUser(user).then((res) => {
+          if (res) {
+            console.log("🚀 ~ file: personal-area.tsx:48 ~ AppService.registerUser ~ res:", res)
+            AppService.getUser(`998${phoneNumber}`).then((res) => {
+              if(res?.client){
+                console.log("🚀 ~ file: personal-area.tsx:57 ~ AppService.getUser ~ res:", res)
+        
+                const db_user : User = {
+                  id: res.client.ClientId,
+                  name: res.client.Name,
+                  role: "USER",
+                  email: "",
+                  gender: res.client.Sex,
+                  birthdate: res.client.Birthday,
+                  phone: phoneNumber
+                }
+        
+                dispath(setUser(db_user));
+              }
+            })
+          }
+        })
+      }
+    })
+
     onBack(1);
     onClose();
   }
 
-  const handlerSelectEmail = () => {
-    onBack(2);
-    onClose();
-  }
+  // const handlerSelectEmail = () => {
+  //   onBack(2);
+  //   onClose();
+  // }
+
+  const router = useRouter()
 
   return (
     <Modal show={show} onHide={onClose} centered>
@@ -54,10 +115,10 @@ function LoginPhone({
         <Form>
           <Form.Group as={Row} className="phone_num_row my-4">
             <Form.Label column className="phone_label">
-              +9
+              +998
             </Form.Label>
               <Form.Control
-                type="tel"
+                type="number"
                 className="phone_num"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -66,7 +127,7 @@ function LoginPhone({
           </Form.Group>
           <Row>
             <Button
-              disabled={!(phoneNumber.length >= 11)}
+              disabled={!(phoneNumber.length >= 9 && phoneNumber.length < 10)}
               className="sms_btn"
               onClick={() => handlerSendCode()}
             >
@@ -74,7 +135,7 @@ function LoginPhone({
             </Button>
           </Row>
           <Row>
-            <Button onClick={() => handlerSelectEmail()} className="modal_login mt-3">
+            <Button onClick={() => {router.push("/personal-area")}} className="modal_login mt-3">
               Войти по почте
             </Button>
           </Row>

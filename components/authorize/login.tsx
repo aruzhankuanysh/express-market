@@ -47,7 +47,7 @@ function Login(): JSX.Element {
         onBack={(value:number) => setRadio(value)}
       />
 
-      <LoginEmail
+      {/* <LoginEmail
         show={showModal3}
         onClose={() => setShowModal3(!showModal3)}
         onBack={(value:number) => setRadio(value)}
@@ -57,7 +57,7 @@ function Login(): JSX.Element {
         onClose={() => setShowModal4(!showModal4)}
         onBack={(value:number) => setRadio(value)}
       />
-      
+       */}
     </>
   );
 }

@@ -38,7 +38,7 @@ class ApplicationService {
     searchProducts = async (searchTerm: string) => {
         try {
             const response = await api.get(`Search?SearchItem=${searchTerm}`);
-            return response.data.Items; 
+            return response.data.Items;
         } catch (error) {
             console.error(error);
         }
@@ -76,16 +76,38 @@ class ApplicationService {
     //     }
     // };
 
-    // POST - регистрация пользователя
-    registerUser = async (user: registerUser) => {
+    getUser = async (ClientPhone: string) => {
         try {
-            const response = await api.post(`Users`, user);
+            const response = await api.get(`User?ClientPhone=${ClientPhone}`);
             return response.data;
         } catch (error) {
             console.error(error);
         }
     }
- 
+
+    postLogin = async (ClientPhone: string, password: string) => {
+        const data = {
+            login: ClientPhone,
+            password: password //"1111" 
+        }
+        try {
+            const response = await api.post(`getUser`, data);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // POST - регистрация пользователя
+    registerUser = async (user: registerUser) => {
+        try {
+            const response = await api.post(`User`, user);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     // Функция для форматирования времени в формат "мм:сс"
     formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);

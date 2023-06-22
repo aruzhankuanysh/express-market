@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Button,
   ButtonGroup,
   Col,
   Container,
   Form,
+  InputGroup,
   Row,
   ToggleButton,
 } from "react-bootstrap";
 import MyDateTimePicker from "../datetimepicker";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { registerUser } from "@/specs/gosuTypes";
+import { setAccessToken, setRefreshTokens, setUser } from "@/store/authSlice";
+import { useRouter } from "next/router";
 
 const PersonalArea = (): JSX.Element => {
   const [isProfileDisabled, setProfileDisabled] = useState(false);
@@ -19,8 +25,48 @@ const PersonalArea = (): JSX.Element => {
   const [selectedOrder, setSelectedOrder] = useState<number | null>(null);
   const [showOrderDetails, setShowOrderDetails] = useState(false);
 
-  const [birthday, setBirthday] = useState<Date>(); 
-  // () => (authState.user?.birthdate ? new Date(authState.user?.birthdate.split("T")[0]) : new Date())
+  const auth = useAppSelector((state) => state.auth);
+
+  const router = useRouter();
+
+  const [birthday, setBirthday] = useState<Date>(auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date());
+  const [name, setName] = useState(auth.user?.name ?? "");
+  const [phone, setPhone] = useState(auth.user?.phone ?? "");
+  const [email, setEmail] = useState(auth.user?.email ?? "");
+
+  useEffect(() => {
+    setBirthday(auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date());
+    setPhone(auth.user?.phone ?? "");
+    setName(auth.user?.name ?? "");
+    setEmail(auth.user?.email ?? "");
+  }, [auth.user])
+
+  const dispatch = useAppDispatch();
+
+  const handlerSave = () => {
+    let d = birthday
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setMilliseconds(0);
+
+    const user : registerUser = {
+      Name: name,
+      Sex: "Мужской",
+      Birthday: d.toISOString().replace("0Z", ""),
+      Phone: `998${phone}`,
+      Legal: "false"
+    }
+
+    console.log("🚀 ~ file: personal-area.tsx:44 ~ handlerSave ~ user:", user)
+  }
+
+  const handlerExit = () => {
+    dispatch(setUser(null));
+    dispatch(setAccessToken(""));
+    dispatch(setRefreshTokens(""));
+    router.push("/");
+  }
+
   const radios = [
     { name: "Профиль", value: "1" },
     { name: "История заказов", value: "2" },
@@ -29,10 +75,10 @@ const PersonalArea = (): JSX.Element => {
   const ordersHistory = [
     {
       order_id: 121123,
-      title:"Яблоки Amal Bio Голден делишес кг",
+      title: "Яблоки Amal Bio Голден делишес кг",
       date: "16 апр 2023г.",
       status: "Отменен",
-      count:"1.123 кг",
+      count: "1.123 кг",
       price: 123,
       address:
         "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
@@ -40,9 +86,9 @@ const PersonalArea = (): JSX.Element => {
     {
       order_id: 124123,
       date: "13 апр 2023г.",
-      title:"Яблоки Amal Bio Голден делишес кг",
+      title: "Яблоки Amal Bio Голден делишес кг",
       status: "Ожидает доставки",
-      count:"1.123 кг",
+      count: "1.123 кг",
       price: 123,
       address:
         "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
@@ -90,48 +136,75 @@ const PersonalArea = (): JSX.Element => {
             <h1>Профиль</h1>
           </Row>
 
-          <ButtonGroup style={{maxWidth:"350px"}}>
-            {radios.map((radio, idx) => (
-              
-              <ToggleButton
-                key={idx}
-                id={`radio-${idx}`}
-                type="radio"
-                variant={
-                  radioValue === radio.value ? "danger" : "outline-secondary"
-                }
-                name="radio"
-                value={radio.value}
-                checked={radioValue === radio.value}
-                onChange={(e) => setRadioValue(e.currentTarget.value)}
-                onClick={() => handleButtonClick(radio.value)}
-                className={combineClasses(
-                  "toggle_btn ",
-                  radioValue === radio.value && ("selected-radio" as const)
-                )}
-                disabled={
-                  radio.value === "1" ? isProfileDisabled : isOrdersDisabled
-                }
-              >
-                {radio.name}
-              </ToggleButton>
-            ))}
-          </ButtonGroup>
+          {auth.authState && (
+            <ButtonGroup style={{ maxWidth: "350px" }}>
+              {radios.map((radio, idx) => (
+                <ToggleButton
+                  key={idx}
+                  id={`radio-${idx}`}
+                  type="radio"
+                  variant={
+                    radioValue === radio.value ? "danger" : "outline-secondary"
+                  }
+                  name="radio"
+                  value={radio.value}
+                  checked={radioValue === radio.value}
+                  onChange={(e) => setRadioValue(e.currentTarget.value)}
+                  onClick={() => handleButtonClick(radio.value)}
+                  className={combineClasses(
+                    "toggle_btn ",
+                    radioValue === radio.value && ("selected-radio" as const)
+                  )}
+                  disabled={
+                    radio.value === "1" ? isProfileDisabled : isOrdersDisabled
+                  }
+                >
+                  {radio.name}
+                </ToggleButton>
+              ))}
+            </ButtonGroup>
+          )}
           {showInput && (
             <Container>
               <Form.Group className="form_wrapper">
                 <Form.Label xs={12} sm={6}>
-                  Ваше имя
+                  Ваше имя*
                 </Form.Label>
-                <Form.Control className="form_input" />
+                <Form.Control
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="form_input"
+                />
+              </Form.Group>
+
+              <Form.Group className="form_wrapper">
+                <Form.Label  style={{ marginRight: "-4%" }}>
+                  Мобильный телефон*{" "}
+                </Form.Label>
+                <Col style={{ maxWidth: "320px" }}>
+                  <InputGroup>
+                    <InputGroup.Text id="basic-addon1">+998</InputGroup.Text>
+                    <Form.Control
+                      type="number"
+                      id="phone-number"
+                      placeholder=""
+                      aria-label="phone"
+                      aria-describedby="basic-addon1"
+                      className="form_input"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </InputGroup>
+                </Col>
               </Form.Group>
               <Form.Group className="form_wrapper">
-                <Form.Label>Мобильный телефон </Form.Label>
-                <Form.Control className="form_input" type="tel" />
-              </Form.Group>
-              <Form.Group className="form_wrapper">
-                <Form.Label style={{marginRight:"22%"}}>Дата рождения</Form.Label>
-                <MyDateTimePicker  />
+                <Form.Label style={{ marginRight: "22%" }}>
+                  Дата рождения
+                </Form.Label>
+                <MyDateTimePicker
+                  birthday={birthday}
+                  setBirthday={setBirthday}
+                />
               </Form.Group>
               <Form.Group
                 className="form_wrapper"
@@ -139,26 +212,31 @@ const PersonalArea = (): JSX.Element => {
               >
                 <Form.Label>Электронная почта</Form.Label>
                 <Form.Control
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="form_input"
-                  placeholder="yourmail@gmail.com"
+                  // placeholder="yourmail@gmail.com"
                 />
               </Form.Group>
               <Row className="my-5 save_btn_wrap">
                 <Col>
-                  <Button className="gradient_btn save_btn"> Сохранить</Button>
+                  <Button onClick={() => handlerSave()} className="gradient_btn save_btn"> Сохранить</Button>
                 </Col>
               </Row>
               <Col>
-                <Button className="btn_primary logout_btn">Выйти</Button>
+                <Button onClick={() => handlerExit()} className="btn_primary logout_btn">Выйти</Button>
               </Col>
             </Container>
           )}
-          {showOrders && (
+          {showOrders && auth.authState && (
             <>
               <Container className="orders_group">
                 <Row
                   className="mt-5 pb-4"
-                  style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.2)", maxWidth:"1000px"}}
+                  style={{
+                    borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                    maxWidth: "1000px",
+                  }}
                 >
                   <Col>Номер заказа</Col>
                   <Col>Дата оформления</Col>
@@ -227,8 +305,8 @@ const PersonalArea = (): JSX.Element => {
                           borderRadius: "7px",
                         }}
                       >
-                        <Row style={{minWidth:"160px", textAlign:"center"}}>
-                          <Col >
+                        <Row style={{ minWidth: "160px", textAlign: "center" }}>
+                          <Col>
                             <Row className="text-secondary">
                               <p>Оформлен</p>
                             </Row>
@@ -237,8 +315,10 @@ const PersonalArea = (): JSX.Element => {
                             </Row>
                           </Col>
                         </Row>
-                        <Row style={{minWidth:"160px,", textAlign:"center"}}>
-                          <Col >
+                        <Row
+                          style={{ minWidth: "160px,", textAlign: "center" }}
+                        >
+                          <Col>
                             <Row className="text-secondary">
                               <p>Общая сумма</p>
                             </Row>
@@ -247,19 +327,22 @@ const PersonalArea = (): JSX.Element => {
                             </Row>
                           </Col>
                         </Row>
-                        <Row style={{minWidth:"160px", textAlign:"center"}}>
-                          <Col >
+                        <Row style={{ minWidth: "160px", textAlign: "center" }}>
+                          <Col>
                             <Row className="text-secondary">
                               <p>Адрес</p>
                             </Row>
-                            <Row style={{maxWidth:"210px", }}> 
+                            <Row style={{ maxWidth: "210px" }}>
                               <p>{order.address}</p>
                             </Row>
                           </Col>
                         </Row>
-                        <Row style={{minWidth:"180px", textAlign:"center"}}>
-                          <Col >
-                            <Row className="text-secondary" style={{textAlign:"center"}}>
+                        <Row style={{ minWidth: "180px", textAlign: "center" }}>
+                          <Col>
+                            <Row
+                              className="text-secondary"
+                              style={{ textAlign: "center" }}
+                            >
                               <p>Комментарий к заказу</p>
                             </Row>
                             <Row>
@@ -268,40 +351,115 @@ const PersonalArea = (): JSX.Element => {
                           </Col>
                         </Row>
                       </Container>
-                      <Row className="mt-5 pb-4" style={{borderBottom:"1px solid rgba(0, 0, 0, 0.2)", maxWidth:"650px"}}>
-                        <Col style={{fontWeight:"700"}} lg="6" sm="6" xxs="4" >Название</Col>
-                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xxs="2">Цена</Col>
-                        <Col  style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xxs="4" >Количество</Col>
-                        <Col style={{fontWeight:"700", textAlign:"center"}} lg="2" sm="2" xxs="2" >Сумма</Col>
+                      <Row
+                        className="mt-5 pb-4"
+                        style={{
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                          maxWidth: "650px",
+                        }}
+                      >
+                        <Col
+                          style={{ fontWeight: "700" }}
+                          lg="6"
+                          sm="6"
+                          xxs="4"
+                        >
+                          Название
+                        </Col>
+                        <Col
+                          style={{ fontWeight: "700", textAlign: "center" }}
+                          lg="2"
+                          sm="2"
+                          xxs="2"
+                        >
+                          Цена
+                        </Col>
+                        <Col
+                          style={{ fontWeight: "700", textAlign: "center" }}
+                          lg="2"
+                          sm="2"
+                          xxs="4"
+                        >
+                          Количество
+                        </Col>
+                        <Col
+                          style={{ fontWeight: "700", textAlign: "center" }}
+                          lg="2"
+                          sm="2"
+                          xxs="2"
+                        >
+                          Сумма
+                        </Col>
                       </Row>
-                      <Row className="mt-4 pb-4" style={{borderBottom:"1px solid rgba(0, 0, 0, 0.2)", maxWidth:"650px", fontSize:"15px", fontWeight:"400"}}>
-                        <Col className="text-danger" style={{fontWeight:"600", textDecorationLine:"underline"}} lg="6" sm="6" xxs="4">{order.title}</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">{order.price} сум</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="4">{order.count}</Col>
-                        <Col style={{textAlign:"center"}} lg="2" sm="2" xxs="2">1000 сум</Col>
+                      <Row
+                        className="mt-4 pb-4"
+                        style={{
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                          maxWidth: "650px",
+                          fontSize: "15px",
+                          fontWeight: "400",
+                        }}
+                      >
+                        <Col
+                          className="text-danger"
+                          style={{
+                            fontWeight: "600",
+                            textDecorationLine: "underline",
+                          }}
+                          lg="6"
+                          sm="6"
+                          xxs="4"
+                        >
+                          {order.title}
+                        </Col>
+                        <Col
+                          style={{ textAlign: "center" }}
+                          lg="2"
+                          sm="2"
+                          xxs="2"
+                        >
+                          {order.price} сум
+                        </Col>
+                        <Col
+                          style={{ textAlign: "center" }}
+                          lg="2"
+                          sm="2"
+                          xxs="4"
+                        >
+                          {order.count}
+                        </Col>
+                        <Col
+                          style={{ textAlign: "center" }}
+                          lg="2"
+                          sm="2"
+                          xxs="2"
+                        >
+                          1000 сум
+                        </Col>
                       </Row>
-                        <Row className="mt-3">
-                          <Col xxs="8">Заказано товаров на сумму:</Col>
-                          <Col>{order.price} сум</Col>
-                        </Row>
-                        <Row className="mt-3">
-                          <Col xxs="8">Доставленные продукты:</Col>
-                          <Col> 123 сум</Col>
-                        </Row>
-                        <Row className="mt-3">
-                          <Col xxs="8">Стоимость доставки:</Col>
-                          <Col>0 сум</Col>
-                        </Row >
-                        <Row className="mt-3">
-                          <Col xxs="8">Чаевые:</Col>
-                          <Col>200 сум</Col>
-                        </Row>
-                        <Row className="mt-3">
-                          <Col xxs="8" style={{fontWeight:"700"}} >Итоговая сумма</Col>
-                          <Col style={{fontWeight:"700"}} >323 сум</Col>
-                        </Row>
+                      <Row className="mt-3">
+                        <Col xxs="8">Заказано товаров на сумму:</Col>
+                        <Col>{order.price} сум</Col>
+                      </Row>
+                      <Row className="mt-3">
+                        <Col xxs="8">Доставленные продукты:</Col>
+                        <Col> 123 сум</Col>
+                      </Row>
+                      <Row className="mt-3">
+                        <Col xxs="8">Стоимость доставки:</Col>
+                        <Col>0 сум</Col>
+                      </Row>
+                      <Row className="mt-3">
+                        <Col xxs="8">Чаевые:</Col>
+                        <Col>200 сум</Col>
+                      </Row>
+                      <Row className="mt-3">
+                        <Col xxs="8" style={{ fontWeight: "700" }}>
+                          Итоговая сумма
+                        </Col>
+                        <Col style={{ fontWeight: "700" }}>323 сум</Col>
+                      </Row>
                     </Container>
-                    
                   );
                 }
                 return null;

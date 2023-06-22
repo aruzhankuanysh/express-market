@@ -1,5 +1,10 @@
 import AppService from "@/specs/gosuService";
-import { useAppSelector } from "@/store/store";
+import {
+  setAccessToken,
+  setAuthState,
+  setRefreshTokens,
+} from "@/store/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useRouter } from "next/router";
 import React, { useState, useEffect, useReducer } from "react";
 import { Button, Modal, Form, Row } from "react-bootstrap";
@@ -58,28 +63,26 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
     onClose();
   };
 
+  const dispath = useAppDispatch();
+
   const handlerVerCode = (value: string) => {
-    setTimeout(() => {
-      if (value.length < 6) {
-        setCode(value);
-      } else {
-        onBack(-1);
-        onClose();
-        AppService.registerUser({
-          Name: "Новый пользователь", //Полное ФИО клиента
-          Sex: "Мужской", //Пол
-          Birthday: "1981-03-02T00:00:00", //Дата рождения
-          Phone: `9${auth?.user?.phone}`, //Номер телефона
-          Legal: "false",
-        }).then((res) => {
-          if (res) {
-            // console.log(res);
-            // router.push("/");
-          }
-        });
-        router.push("/personal-area");
-      }
-    }, 50);
+    if (value.length < 4) {
+      setCode(value);
+    } else {
+      AppService.postLogin(auth.user?.phone ?? "", value).then((response) => {
+        if (response?.token) {
+          dispath(setAccessToken(response.token?.accessToken ?? ""));
+          dispath(setRefreshTokens(response.token?.refreshToken ?? ""));
+          dispath(setAuthState(true));
+          console.log( "🚀 ~ file: personal-area.tsx:79 ~ AppService.postLogin ~ response:", response);
+          onBack(-1);
+          onClose();
+          router.push("/personal-area");
+        } else {
+          dispath(setAuthState(false));
+        }
+      });
+    }
   };
 
   return (
@@ -97,12 +100,14 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
         </Row>
         <Row>
           <p className="mt-3" style={{ textAlign: "center" }}>
-            Код выслан на +9{auth.user?.phone}
+            Код выслан на +998{auth.user?.phone}
           </p>
         </Row>
         {showButton ? (
           <Row>
-            <Button className="get_code_btn">Получить новый код</Button>
+            <Button onClick={() => {}} className="get_code_btn">
+              Получить новый код
+            </Button>
           </Row>
         ) : (
           <Row>
