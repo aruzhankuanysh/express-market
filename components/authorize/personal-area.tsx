@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Button,
   ButtonGroup,
   Col,
   Container,
   Form,
+  InputGroup,
   Row,
   ToggleButton,
 } from "react-bootstrap";
 import MyDateTimePicker from "../datetimepicker";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { registerUser } from "@/specs/gosuTypes";
+import { setAccessToken, setRefreshTokens, setUser } from "@/store/authSlice";
+import { useRouter } from "next/router";
 
 const PersonalArea = (): JSX.Element => {
   const [isProfileDisabled, setProfileDisabled] = useState(false);
@@ -19,8 +25,48 @@ const PersonalArea = (): JSX.Element => {
   const [selectedOrder, setSelectedOrder] = useState<number | null>(null);
   const [showOrderDetails, setShowOrderDetails] = useState(false);
 
-  const [birthday, setBirthday] = useState<Date>();
-  // () => (authState.user?.birthdate ? new Date(authState.user?.birthdate.split("T")[0]) : new Date())
+  const auth = useAppSelector((state) => state.auth);
+
+  const router = useRouter();
+
+  const [birthday, setBirthday] = useState<Date>(auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date());
+  const [name, setName] = useState(auth.user?.name ?? "");
+  const [phone, setPhone] = useState(auth.user?.phone ?? "");
+  const [email, setEmail] = useState(auth.user?.email ?? "");
+
+  useEffect(() => {
+    setBirthday(auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date());
+    setPhone(auth.user?.phone ?? "");
+    setName(auth.user?.name ?? "");
+    setEmail(auth.user?.email ?? "");
+  }, [auth.user])
+
+  const dispatch = useAppDispatch();
+
+  const handlerSave = () => {
+    let d = birthday
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setMilliseconds(0);
+
+    const user : registerUser = {
+      Name: name,
+      Sex: "Мужской",
+      Birthday: d.toISOString().replace("0Z", ""),
+      Phone: `998${phone}`,
+      Legal: "false"
+    }
+
+    console.log("🚀 ~ file: personal-area.tsx:44 ~ handlerSave ~ user:", user)
+  }
+
+  const handlerExit = () => {
+    dispatch(setUser(null));
+    dispatch(setAccessToken(""));
+    dispatch(setRefreshTokens(""));
+    router.push("/");
+  }
+
   const radios = [
     { name: "Профиль", value: "1" },
     { name: "История заказов", value: "2" },
@@ -90,49 +136,75 @@ const PersonalArea = (): JSX.Element => {
             <h1>Профиль</h1>
           </Row>
 
-          <ButtonGroup style={{ maxWidth: "350px" }}>
-            {radios.map((radio, idx) => (
-              <ToggleButton
-                key={idx}
-                id={`radio-${idx}`}
-                type="radio"
-                variant={
-                  radioValue === radio.value ? "danger" : "outline-secondary"
-                }
-                name="radio"
-                value={radio.value}
-                checked={radioValue === radio.value}
-                onChange={(e) => setRadioValue(e.currentTarget.value)}
-                onClick={() => handleButtonClick(radio.value)}
-                className={combineClasses(
-                  "toggle_btn ",
-                  radioValue === radio.value && ("selected-radio" as const)
-                )}
-                disabled={
-                  radio.value === "1" ? isProfileDisabled : isOrdersDisabled
-                }
-              >
-                {radio.name}
-              </ToggleButton>
-            ))}
-          </ButtonGroup>
+          {auth.authState && (
+            <ButtonGroup style={{ maxWidth: "350px" }}>
+              {radios.map((radio, idx) => (
+                <ToggleButton
+                  key={idx}
+                  id={`radio-${idx}`}
+                  type="radio"
+                  variant={
+                    radioValue === radio.value ? "danger" : "outline-secondary"
+                  }
+                  name="radio"
+                  value={radio.value}
+                  checked={radioValue === radio.value}
+                  onChange={(e) => setRadioValue(e.currentTarget.value)}
+                  onClick={() => handleButtonClick(radio.value)}
+                  className={combineClasses(
+                    "toggle_btn ",
+                    radioValue === radio.value && ("selected-radio" as const)
+                  )}
+                  disabled={
+                    radio.value === "1" ? isProfileDisabled : isOrdersDisabled
+                  }
+                >
+                  {radio.name}
+                </ToggleButton>
+              ))}
+            </ButtonGroup>
+          )}
           {showInput && (
             <Container>
               <Form.Group className="form_wrapper">
                 <Form.Label xs={12} sm={6}>
-                  Ваше имя
+                  Ваше имя*
                 </Form.Label>
-                <Form.Control className="form_input" />
+                <Form.Control
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="form_input"
+                />
               </Form.Group>
+
               <Form.Group className="form_wrapper">
-                <Form.Label>Мобильный телефон </Form.Label>
-                <Form.Control className="form_input" type="tel" />
+                <Form.Label  style={{ marginRight: "-4%" }}>
+                  Мобильный телефон*{" "}
+                </Form.Label>
+                <Col style={{ maxWidth: "320px" }}>
+                  <InputGroup>
+                    <InputGroup.Text id="basic-addon1">+998</InputGroup.Text>
+                    <Form.Control
+                      type="number"
+                      id="phone-number"
+                      placeholder=""
+                      aria-label="phone"
+                      aria-describedby="basic-addon1"
+                      className="form_input"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </InputGroup>
+                </Col>
               </Form.Group>
               <Form.Group className="form_wrapper">
                 <Form.Label style={{ marginRight: "22%" }}>
                   Дата рождения
                 </Form.Label>
-                <MyDateTimePicker />
+                <MyDateTimePicker
+                  birthday={birthday}
+                  setBirthday={setBirthday}
+                />
               </Form.Group>
               <Form.Group
                 className="form_wrapper"
@@ -140,21 +212,23 @@ const PersonalArea = (): JSX.Element => {
               >
                 <Form.Label>Электронная почта</Form.Label>
                 <Form.Control
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="form_input"
-                  placeholder="yourmail@gmail.com"
+                  // placeholder="yourmail@gmail.com"
                 />
               </Form.Group>
               <Row className="my-5 save_btn_wrap">
                 <Col>
-                  <Button className="gradient_btn save_btn"> Сохранить</Button>
+                  <Button onClick={() => handlerSave()} className="gradient_btn save_btn"> Сохранить</Button>
                 </Col>
               </Row>
               <Col>
-                <Button className="btn_primary logout_btn">Выйти</Button>
+                <Button onClick={() => handlerExit()} className="btn_primary logout_btn">Выйти</Button>
               </Col>
             </Container>
           )}
-          {showOrders && (
+          {showOrders && auth.authState && (
             <>
               <Container className="orders_group">
                 <Row

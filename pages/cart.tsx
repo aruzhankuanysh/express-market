@@ -66,7 +66,7 @@ const Index: NextPage = () => {
               now={deliveryPercentage}
             />
           </Container> */}
-              {(Array.isArray(cartProduct) ? cartProduct : []).map(
+              {(cartProduct ?? []).map(
                 (productItem, index) => (
                   <Container>
                     <Row className="mt-5">
