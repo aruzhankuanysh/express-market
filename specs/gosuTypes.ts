@@ -61,3 +61,18 @@ export type MiniProduct = {
 export type Stock = {
   StockName: string;
 }
+
+export type ItemsOrder = {
+  IdItem: string;
+  QuantityItem: number;
+  PriceItem: number;  
+}
+
+export type Order = {
+  DateOrder: string | undefined;
+  Stock: string;
+  Comment: string;
+  ClientId: string | undefined;
+  TypePrices: string;
+  ItemsOrder: ItemsOrder[]
+}

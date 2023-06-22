@@ -15,14 +15,15 @@ import BtnPay from "./step-payments";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 
 
-const OrderProducts = ({}): JSX.Element => {
+const OrderProducts = ({handlerPostOrder, tipValue, setTipValue}:any): JSX.Element => {
   const [checked, setChecked] = useState(false);
   const [radioValue, setRadioValue] = useState("1");
-  const [tipValue, setTipValue] = useState("1");
+
   const radios = [
     { name: "Онлайн банковской картой", value: "1" },
     { name: "Наличными курьеру", value: "2" },
   ];
+  
   const tips = [
     { name: " 0₸", value: "1" },
     { name: " 200₸", value: "2" },
@@ -42,6 +43,7 @@ const OrderProducts = ({}): JSX.Element => {
   useEffect(() => {
     setFinalPrice(totalPrice - discount);
   }, [totalPrice, discount]);
+
   return (
     <>
       <Card className="border-0 bg-transparent">
@@ -77,7 +79,7 @@ const OrderProducts = ({}): JSX.Element => {
               <h5>{finalPrice} UZS</h5>
             </Col>
           </Row>
-          <BtnPay />
+          <BtnPay handlerPostOrder={handlerPostOrder} tipValue={tipValue} setTipValue={setTipValue}/>
         </Card.Footer>
       </Card>
     </>

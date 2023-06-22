@@ -4,11 +4,19 @@ import { Button, Image, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const FirstStep = ({ step, nextStep }: any): JSX.Element  => {
+const FirstStep = ({ step, nextStep, setTips, tips }: any): JSX.Element  => {
 
   const addTips = async () => {
     nextStep();
   };
+
+  const tipsList = [
+    { name: " 0₸", value: "1" },
+    { name: " 200₸", value: "2" },
+    { name: " 500₸", value: "3" },
+    { name: " 700₸", value: "4" },
+    { name: "Другая сумма", value: "5" },
+  ];
 
   return (
     <>
@@ -21,10 +29,12 @@ const FirstStep = ({ step, nextStep }: any): JSX.Element  => {
         <Col sm="5" className="mx-auto">
           <Form.Control
             type="number"
+            value={tips}
             className="col-5"
             placeholder="0 ₸"
             aria-label="number"
             aria-describedby="basic-addon1"
+            onChange={(e) => setTips(e.target.value)}
           />
           <Button
             className="btn_orange_gradient rounded-3 mt-4 mx-auto"

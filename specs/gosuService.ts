@@ -1,5 +1,5 @@
 import api from "./axios";
-import { registerUser } from "./gosuTypes";
+import { Order, registerUser } from "./gosuTypes";
 
 class ApplicationService {
     // GET – получает полный список всех категорий товаров по иерархии 
@@ -34,7 +34,7 @@ class ApplicationService {
         }
     };
 
-// <<<<<<< HEAD
+    // GET – получает список искомых товаров
     searchProducts = async (searchTerm: string) => {
         try {
             const response = await api.get(`Search?SearchItem=${searchTerm}`);
@@ -43,18 +43,7 @@ class ApplicationService {
             console.error(error);
         }
     };
-// =======
-//     // GET – получает список искомых товаров
-//     getSearch = async (search?: string) => {
-//         try {
-//             const response = await api.get(`Search?SearchItem=${search}`);
-//             return response.data;
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     }
 
-// >>>>>>> 9377a1d9fd9eb62d808a8272143975c125e85b1a
     // GET – получает товар в массиве
     getProduct = async (ItemId?: string | undefined) => {
         if (ItemId) {
@@ -64,6 +53,16 @@ class ApplicationService {
             } catch (error) {
                 console.error(error);
             }
+        }
+    };
+
+    // POST - создание нового заказа
+    postOrder = async (order: Order) => {
+        try {
+            const response = await api.post(`Orders`, order);
+            return response.data;
+        } catch (error) {
+            console.error(error);
         }
     };
 

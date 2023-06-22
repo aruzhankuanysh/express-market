@@ -14,9 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import FirstStep from "./first-step";
 import SecondStep from "./second-step";
 
-const BtnPay = ({}): JSX.Element => {
-  const [modalShow, setModalShow] = useState(false);
-  
+const BtnPay = ({handlerPostOrder, tipValue, setTipValue}: any): JSX.Element => {
+  const [modalShow, setModalShow] = useState(false);  
   
   const [step, setStep] = useState(1);
   const nextStep = () => setStep(step + 1);
@@ -26,7 +25,9 @@ const BtnPay = ({}): JSX.Element => {
     <>
       <Button
         className="btn_orange_gradient w-100 rounded-pill"
-        onClick={() => setModalShow(true)}
+        onClick={() => {
+          handlerPostOrder();
+        }}
       >
         Перейти к оплате
       </Button>
@@ -37,8 +38,8 @@ const BtnPay = ({}): JSX.Element => {
         centered
       >
         <Modal.Body className="text-center p-4">
-          <FirstStep step={step} nextStep={nextStep} />
-          <SecondStep step={step} />
+          <FirstStep step={step} nextStep={nextStep} tips={tipValue} setTips={setTipValue}/>
+          {/* <SecondStep step={step} /> */}
         </Modal.Body>
       </Modal>
     </>
