@@ -101,6 +101,18 @@ body {
   height: 48.74px;
 }
 
+.react-datepicker__navigation--next {
+  left: 85%;
+}
+
+.react-datepicker__time-list,  .react-datepicker__header--time  {
+  display: none !important;
+}
+
+.react-datepicker {
+  width: 242px !important;
+}
+
 .input {
   border: none !important;
   background-color: var(--gosu-grey) !important;

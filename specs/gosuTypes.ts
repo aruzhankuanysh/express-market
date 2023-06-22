@@ -58,6 +58,22 @@ export type MiniProduct = {
   price: number;
 };
 
+export type Order = {
+  id: string;
+  date_order: Date;
+  stock: string;
+  comment: string;
+  client_id: string; 
+  type_price: string;
+  items_order: Array<ItemsOrder>
+}
+
+export type ItemsOrder = {
+  id_item: string; 
+  quantity_item: number;
+  price: number;
+}
+
 export type Stock = {
   StockName: string;
 }

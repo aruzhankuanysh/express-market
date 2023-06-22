@@ -14,9 +14,8 @@ const MyDateTimePicker: React.FC = () => {
       selected={selectedDate}
       onChange={handleDateChange}
       showTimeSelect
-      timeFormat="HH:mm"
       timeIntervals={15}
-      dateFormat="dd/MM/yyyy hh:mm aa"
+      dateFormat="dd/MM/yyyy"
       className="form-control"
     />
   );
