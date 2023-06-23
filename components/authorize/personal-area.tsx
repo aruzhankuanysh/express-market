@@ -299,6 +299,12 @@ const PersonalArea = (): JSX.Element => {
           {selectedOrder && showOrderDetails && (
             <Container className="order_details">
               {ordersHistory.map((order) => {
+                let home = ""
+                let comment = ""
+                if(order?.Comment.includes("\"adress\"")) {
+                  home = JSON.parse(order?.Comment ?? "{}")?.adress?.Дом ?? ""
+                  comment = JSON.parse(order?.Comment ?? "{}")?.comment ?? ""
+                }
                 if (order.IdOrder === selectedOrder) {
                   return (
                     <Container
@@ -362,7 +368,7 @@ const PersonalArea = (): JSX.Element => {
                               <p>Адрес</p>
                             </Row>
                             <Row style={{ maxWidth: "210px" }}>
-                              <p>{order.Comment}</p> //! JSON.pars()
+                              <p>{order.StockOrder}{home}</p>
                             </Row>
                           </Col>
                         </Row>
@@ -375,7 +381,7 @@ const PersonalArea = (): JSX.Element => {
                               <p>Комментарий к заказу</p>
                             </Row>
                             <Row>
-                              <p>{order.Comment}</p>
+                              <p>{comment}</p>
                             </Row>
                           </Col>
                         </Row>
@@ -432,10 +438,12 @@ const PersonalArea = (): JSX.Element => {
                             }}
                           >
                             <Col
+                              onClick={() => router.push(`/product-page?productId=${item.IdItem}`)}
                               className="text-danger"
                               style={{
                                 fontWeight: "600",
                                 textDecorationLine: "underline",
+                                cursor: "pointer"
                               }}
                               lg="6"
                               sm="6"
@@ -449,7 +457,7 @@ const PersonalArea = (): JSX.Element => {
                               sm="2"
                               xxs="2"
                             >
-                              {item.SummItem} сум //! PriceItem
+                              {item.PriceItem} сум
                             </Col>
                             <Col
                               style={{ textAlign: "center" }}
@@ -484,7 +492,7 @@ const PersonalArea = (): JSX.Element => {
                       </Row> */}
                       <Row className="mt-3">
                         <Col xxs="8">Чаевые:</Col>
-                        <Col>{order.SumOrder} сум</Col> //! TipsOrder
+                        <Col>{order.TipsOrder} сум</Col>
                       </Row>
                       <Row className="mt-3">
                         <Col xxs="8" style={{ fontWeight: "700" }}>

@@ -84,7 +84,8 @@ export type OrderItemData = {
   СodeItem: string,
   BrandItem: string,
   QuantityItems: number,
-  SummItem: number
+  SummItem: number,
+  PriceItem: number,
 }
 
 export type OrderData = {
@@ -95,5 +96,6 @@ export type OrderData = {
   StatusOrder: string,
   Comment: string,
   StateOrder: string,
+  TipsOrder: number,
   ItemsOrder: OrderItemData[]
 }

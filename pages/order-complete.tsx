@@ -39,7 +39,7 @@ const OrderCompletePage = function () {
     if (phone.length >= 9 && phone.length <= 10 && home.length >= 1 && stocks.currentStock?.StockName) {
       let date = new Date();
       date.setMilliseconds(0);
-      const dataComment = `adress : {Контактный-нoмер: "+998${phone}", Дом:"${home}", Кв-офис:"${apartment}", Подъезд:"${entrance}", Этаж:"${floor}", Домофон:"${intercom}"}`
+      const dataComment = `"adress" : {"Контактный-нoмер": "+998${phone}", "Дом":"${home}", "Кв-офис":"${apartment}", "Подъезд":"${entrance}", "Этаж":"${floor}", "Домофон":"${intercom}"}`
 
       const items = (cartProduct ?? []).map((prod) => {
         const p: ItemsOrder = {
@@ -53,7 +53,7 @@ const OrderCompletePage = function () {
         Orders: {
           DateOrder: date.toISOString().replace("0Z", ""),
           Stock: stocks.currentStock?.StockName,
-          Comment: `{${dataComment}, comment : "${comment}"}`,
+          Comment: `{${dataComment}, "comment" : "${comment}"}`,
           ClientId: auth?.user?.id ??"",
           TypePrices: "Прайс-лист",
           ItemsOrder: items
