@@ -66,13 +66,15 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
   const dispath = useAppDispatch();
 
   const handlerVerCode = (value: string) => {
-    if (value.length < 4) {
+    console.log("🚀 ~ file: sms-code-modal.tsx:69 ~ handlerVerCode ~ value:", value)
+    if (value.length < 5) {
       setCode(value);
     } else {
-      AppService.postLogin(auth.user?.phone ?? "", value).then((response) => {
-        if (response?.token) {
-          dispath(setAccessToken(response.token?.accessToken ?? ""));
-          dispath(setRefreshTokens(response.token?.refreshToken ?? ""));
+      setCode(value);
+      AppService.postLogin(`998${auth.user?.phone ?? ""}`, value).then((response) => {
+        if (response?.Token?.accessToken) {
+          dispath(setAccessToken(response.Token?.accessToken ?? ""));
+          dispath(setRefreshTokens(response.Token?.refreshToken ?? ""));
           dispath(setAuthState(true));
           console.log( "🚀 ~ file: personal-area.tsx:79 ~ AppService.postLogin ~ response:", response);
           onBack(-1);

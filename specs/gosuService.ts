@@ -87,11 +87,11 @@ class ApplicationService {
 
     postLogin = async (ClientPhone: string, password: string) => {
         const data = {
-            login: ClientPhone,
-            password: password //"1111" 
+            Phone: ClientPhone,
+            code: password //"1111" 
         }
         try {
-            const response = await api.post(`getUser`, data);
+            const response = await api.post(`login`, data);
             return response.data;
         } catch (error) {
             console.error(error);
