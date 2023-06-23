@@ -66,6 +66,16 @@ class ApplicationService {
         }
     };
 
+    // POST - история заказов пользователя
+    postOrdersHistory = async (ClientId: string) => {
+        try {
+            const response = await api.get(`Orders?ClientId=${ClientId}`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     // GET – получает полный список всех товаров в массиве //! Крашит браузер
     // getAllProducts = async () => {
     //     try {
@@ -76,6 +86,7 @@ class ApplicationService {
     //     }
     // };
 
+    // GET – получает информацию о пользователе по номеру телефона
     getUser = async (ClientPhone: string) => {
         try {
             const response = await api.get(`User?ClientPhone=${ClientPhone}`);
@@ -85,6 +96,7 @@ class ApplicationService {
         }
     }
 
+    // POST - получение токенов пользователя
     postLogin = async (ClientPhone: string, password: string) => {
         const data = {
             Phone: ClientPhone,

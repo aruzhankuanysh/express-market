@@ -77,3 +77,23 @@ export type Order = {
   TypePrices: string;
   ItemsOrder: ItemsOrder[]
 }
+
+export type OrderItemData = {
+  NameItem: string,
+  IdItem: string,
+  СodeItem: string,
+  BrandItem: string,
+  QuantityItems: number,
+  SummItem: number
+}
+
+export type OrderData = {
+  IdOrder: string,
+  DateOrder: string,
+  SumOrder: number,
+  StockOrder: string,
+  StatusOrder: string,
+  Comment: string,
+  StateOrder: string,
+  ItemsOrder: OrderItemData[]
+}

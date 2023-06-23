@@ -12,9 +12,10 @@ import {
 } from "react-bootstrap";
 import MyDateTimePicker from "../datetimepicker";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { registerUser } from "@/specs/gosuTypes";
+import { OrderData, registerUser } from "@/specs/gosuTypes";
 import { setAccessToken, setRefreshTokens, setUser } from "@/store/authSlice";
 import { useRouter } from "next/router";
+import AppService from "@/specs/gosuService";
 
 const PersonalArea = (): JSX.Element => {
   const [isProfileDisabled, setProfileDisabled] = useState(false);
@@ -22,78 +23,84 @@ const PersonalArea = (): JSX.Element => {
   const [radioValue, setRadioValue] = useState("1");
   const [showInput, setShowInput] = useState(true);
   const [showOrders, setShowOrders] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState<number | null>(null);
+  const [selectedOrder, setSelectedOrder] = useState<string | null>(null);
   const [showOrderDetails, setShowOrderDetails] = useState(false);
 
   const auth = useAppSelector((state) => state.auth);
 
   const router = useRouter();
 
-  const [birthday, setBirthday] = useState<Date>(auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date());
+  const [birthday, setBirthday] = useState<Date>(
+    auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date()
+  );
   const [name, setName] = useState(auth.user?.name ?? "");
   const [phone, setPhone] = useState(auth.user?.phone ?? "");
   const [email, setEmail] = useState(auth.user?.email ?? "");
 
   useEffect(() => {
-    setBirthday(auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date());
+    setBirthday(
+      auth.user?.birthdate ? new Date(auth.user?.birthdate) : new Date()
+    );
     setPhone(auth.user?.phone ?? "");
     setName(auth.user?.name ?? "");
     setEmail(auth.user?.email ?? "");
-  }, [auth.user])
+  }, [auth.user]);
 
   const dispatch = useAppDispatch();
 
   const handlerSave = () => {
-    let d = birthday
+    let d = birthday;
     d.setHours(0);
     d.setMinutes(0);
     d.setMilliseconds(0);
 
-    const user : registerUser = {
+    const user: registerUser = {
       Name: name,
       Sex: "Мужской",
       Birthday: d.toISOString().replace("0Z", ""),
       Phone: `998${phone}`,
-      Legal: "false"
-    }
+      Legal: "false",
+    };
 
-    console.log("🚀 ~ file: personal-area.tsx:44 ~ handlerSave ~ user:", user)
-  }
+    console.log("🚀 ~ file: personal-area.tsx:44 ~ handlerSave ~ user:", user);
+  };
 
   const handlerExit = () => {
     dispatch(setUser(null));
     dispatch(setAccessToken(""));
     dispatch(setRefreshTokens(""));
     router.push("/");
-  }
+  };
 
   const radios = [
     { name: "Профиль", value: "1" },
     { name: "История заказов", value: "2" },
   ];
 
-  const ordersHistory = [
-    {
-      order_id: 121123,
-      title: "Яблоки Amal Bio Голден делишес кг",
-      date: "16 апр 2023г.",
-      status: "Отменен",
-      count: "1.123 кг",
-      price: 123,
-      address:
-        "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
-    },
-    {
-      order_id: 124123,
-      date: "13 апр 2023г.",
-      title: "Яблоки Amal Bio Голден делишес кг",
-      status: "Ожидает доставки",
-      count: "1.123 кг",
-      price: 123,
-      address:
-        "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
-    },
-  ];
+  const [ordersHistory, setOrdersHistory] = useState<OrderData[]>([]);
+
+  // const ordersHistory = [
+  //   {
+  //     order_id: 121123,
+  //     title: "Яблоки Amal Bio Голден делишес кг",
+  //     date: "16 апр 2023г.",
+  //     status: "Отменен",
+  //     count: "1.123 кг",
+  //     price: 123,
+  //     address:
+  //       "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
+  //   },
+  //   {
+  //     order_id: 124123,
+  //     date: "13 апр 2023г.",
+  //     title: "Яблоки Amal Bio Голден делишес кг",
+  //     status: "Ожидает доставки",
+  //     count: "1.123 кг",
+  //     price: 123,
+  //     address:
+  //       "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
+  //   },
+  // ];
 
   const handleButtonClick = (value: string) => {
     if (value === "1") {
@@ -109,12 +116,12 @@ const PersonalArea = (): JSX.Element => {
     }
   };
 
-  const handleOrderClick = (orderId: number) => {
+  const handleOrderClick = (orderId: string) => {
     setSelectedOrder(orderId);
     handleOrderDetailsClick(orderId);
   };
 
-  const handleOrderDetailsClick = (orderId: number) => {
+  const handleOrderDetailsClick = (orderId: string) => {
     setShowOrderDetails(true);
     setShowOrders(false);
   };
@@ -127,6 +134,17 @@ const PersonalArea = (): JSX.Element => {
   function combineClasses(...classes: (string | undefined | false)[]): string {
     return classes.filter((c): c is string => typeof c === "string").join(" ");
   }
+
+  useEffect(() => {
+    if (auth?.user?.id && auth?.user?.id.length > 0) {
+      AppService.postOrdersHistory(auth?.user?.id).then((response) => {
+        if (response) {
+          const Orders: OrderData[] = response?.Orders ?? [];
+          setOrdersHistory(Orders);
+        }
+      });
+    }
+  }, [auth?.user?.id]);
 
   return (
     <>
@@ -178,7 +196,7 @@ const PersonalArea = (): JSX.Element => {
               </Form.Group>
 
               <Form.Group className="form_wrapper">
-                <Form.Label  style={{ marginRight: "-4%" }}>
+                <Form.Label style={{ marginRight: "-4%" }}>
                   Мобильный телефон*{" "}
                 </Form.Label>
                 <Col style={{ maxWidth: "320px" }}>
@@ -220,11 +238,22 @@ const PersonalArea = (): JSX.Element => {
               </Form.Group>
               <Row className="my-5 save_btn_wrap">
                 <Col>
-                  <Button onClick={() => handlerSave()} className="gradient_btn save_btn"> Сохранить</Button>
+                  <Button
+                    onClick={() => handlerSave()}
+                    className="gradient_btn save_btn"
+                  >
+                    {" "}
+                    Сохранить
+                  </Button>
                 </Col>
               </Row>
               <Col>
-                <Button onClick={() => handlerExit()} className="btn_primary logout_btn">Выйти</Button>
+                <Button
+                  onClick={() => handlerExit()}
+                  className="btn_primary logout_btn"
+                >
+                  Выйти
+                </Button>
               </Col>
             </Container>
           )}
@@ -244,7 +273,7 @@ const PersonalArea = (): JSX.Element => {
                   <Col>Сумма</Col>
                 </Row>
                 {ordersHistory.map((order) => (
-                  <Container key={order.order_id}>
+                  <Container key={order.IdOrder}>
                     <Row className="mt-4">
                       <Col>
                         <p
@@ -253,14 +282,14 @@ const PersonalArea = (): JSX.Element => {
                             width: "50px",
                             cursor: "pointer",
                           }}
-                          onClick={() => handleOrderClick(order.order_id)}
+                          onClick={() => handleOrderClick(order.IdOrder)}
                         >
-                          {order.order_id}
+                          {order.IdOrder}
                         </p>
                       </Col>
-                      <Col>{order.date}</Col>
-                      <Col>{order.status}</Col>
-                      <Col>{order.price} UZS</Col>
+                      <Col>{order.DateOrder.split("T")[0]}</Col>
+                      <Col>{order.StatusOrder}</Col>
+                      <Col>{order.SumOrder} UZS</Col>
                     </Row>
                   </Container>
                 ))}
@@ -270,12 +299,12 @@ const PersonalArea = (): JSX.Element => {
           {selectedOrder && showOrderDetails && (
             <Container className="order_details">
               {ordersHistory.map((order) => {
-                if (order.order_id === selectedOrder) {
+                if (order.IdOrder === selectedOrder) {
                   return (
                     <Container
                       style={{ fontWeight: "500" }}
                       className="mt-5 "
-                      key={order.order_id}
+                      key={order.IdOrder}
                     >
                       <Row>
                         <Col>
@@ -292,10 +321,10 @@ const PersonalArea = (): JSX.Element => {
                       </Row>
                       <Row className="my-4">
                         <Col>
-                          <h1>Заказ {order.order_id}</h1>
+                          <h1>Заказ {order.IdOrder}</h1>
                         </Col>
                         <Col>
-                          <h2 className="text-danger">{order.status}</h2>
+                          <h2 className="text-danger">{order.StatusOrder}</h2>
                         </Col>
                       </Row>
                       <Container
@@ -311,7 +340,7 @@ const PersonalArea = (): JSX.Element => {
                               <p>Оформлен</p>
                             </Row>
                             <Row>
-                              <p>{order.date}</p>
+                              <p>{order.DateOrder.split("T")[0]}</p>
                             </Row>
                           </Col>
                         </Row>
@@ -323,7 +352,7 @@ const PersonalArea = (): JSX.Element => {
                               <p>Общая сумма</p>
                             </Row>
                             <Row>
-                              <p>{order.price} сум</p>
+                              <p>{order.SumOrder} сум</p>
                             </Row>
                           </Col>
                         </Row>
@@ -333,7 +362,7 @@ const PersonalArea = (): JSX.Element => {
                               <p>Адрес</p>
                             </Row>
                             <Row style={{ maxWidth: "210px" }}>
-                              <p>{order.address}</p>
+                              <p>{order.Comment}</p> //! JSON.pars()
                             </Row>
                           </Col>
                         </Row>
@@ -346,7 +375,7 @@ const PersonalArea = (): JSX.Element => {
                               <p>Комментарий к заказу</p>
                             </Row>
                             <Row>
-                              <p>blablabla</p>
+                              <p>{order.Comment}</p>
                             </Row>
                           </Col>
                         </Row>
@@ -391,55 +420,59 @@ const PersonalArea = (): JSX.Element => {
                           Сумма
                         </Col>
                       </Row>
-                      <Row
-                        className="mt-4 pb-4"
-                        style={{
-                          borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
-                          maxWidth: "650px",
-                          fontSize: "15px",
-                          fontWeight: "400",
-                        }}
-                      >
-                        <Col
-                          className="text-danger"
-                          style={{
-                            fontWeight: "600",
-                            textDecorationLine: "underline",
-                          }}
-                          lg="6"
-                          sm="6"
-                          xxs="4"
-                        >
-                          {order.title}
-                        </Col>
-                        <Col
-                          style={{ textAlign: "center" }}
-                          lg="2"
-                          sm="2"
-                          xxs="2"
-                        >
-                          {order.price} сум
-                        </Col>
-                        <Col
-                          style={{ textAlign: "center" }}
-                          lg="2"
-                          sm="2"
-                          xxs="4"
-                        >
-                          {order.count}
-                        </Col>
-                        <Col
-                          style={{ textAlign: "center" }}
-                          lg="2"
-                          sm="2"
-                          xxs="2"
-                        >
-                          1000 сум
-                        </Col>
-                      </Row>
-                      <Row className="mt-3">
+                      {(order?.ItemsOrder ?? []).map((item) => {
+                        return (
+                          <Row
+                            className="mt-4 pb-4"
+                            style={{
+                              borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                              maxWidth: "650px",
+                              fontSize: "15px",
+                              fontWeight: "400",
+                            }}
+                          >
+                            <Col
+                              className="text-danger"
+                              style={{
+                                fontWeight: "600",
+                                textDecorationLine: "underline",
+                              }}
+                              lg="6"
+                              sm="6"
+                              xxs="4"
+                            >
+                              {item.NameItem}
+                            </Col>
+                            <Col
+                              style={{ textAlign: "center" }}
+                              lg="2"
+                              sm="2"
+                              xxs="2"
+                            >
+                              {item.SummItem} сум //! PriceItem
+                            </Col>
+                            <Col
+                              style={{ textAlign: "center" }}
+                              lg="2"
+                              sm="2"
+                              xxs="4"
+                            >
+                              {item.QuantityItems}
+                            </Col>
+                            <Col
+                              style={{ textAlign: "center" }}
+                              lg="2"
+                              sm="2"
+                              xxs="2"
+                            >
+                              {item.SummItem} сум
+                            </Col>
+                          </Row>
+                        );
+                      })}
+                      {/* <Row className="mt-3">
                         <Col xxs="8">Заказано товаров на сумму:</Col>
-                        <Col>{order.price} сум</Col>
+                        <Col>{order.SumOrder} сум</Col>
                       </Row>
                       <Row className="mt-3">
                         <Col xxs="8">Доставленные продукты:</Col>
@@ -448,16 +481,16 @@ const PersonalArea = (): JSX.Element => {
                       <Row className="mt-3">
                         <Col xxs="8">Стоимость доставки:</Col>
                         <Col>0 сум</Col>
-                      </Row>
+                      </Row> */}
                       <Row className="mt-3">
                         <Col xxs="8">Чаевые:</Col>
-                        <Col>200 сум</Col>
+                        <Col>{order.SumOrder} сум</Col> //! TipsOrder
                       </Row>
                       <Row className="mt-3">
                         <Col xxs="8" style={{ fontWeight: "700" }}>
                           Итоговая сумма
                         </Col>
-                        <Col style={{ fontWeight: "700" }}>323 сум</Col>
+                        <Col style={{ fontWeight: "700" }}>{order.SumOrder} сум</Col>
                       </Row>
                     </Container>
                   );

@@ -20,9 +20,11 @@ const OrderCompletePage = function () {
   const [apartment, setApartment] = useState("");
   const [home, setHome] = useState("");
 
+  const auth = useAppSelector((state) => state.auth);
+
   const [comment, setComment] = useState("");
 
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(auth?.user?.phone ?? "");
 
   const [radioValue, setRadioValue] = useState("0");
 
@@ -51,8 +53,8 @@ const OrderCompletePage = function () {
         Orders: {
           DateOrder: date.toISOString().replace("0Z", ""),
           Stock: stocks.currentStock?.StockName,
-          Comment: `{${dataComment}, comment : ${comment}}`,
-          ClientId: "",
+          Comment: `{${dataComment}, comment : "${comment}"}`,
+          ClientId: auth?.user?.id ??"",
           TypePrices: "Прайс-лист",
           ItemsOrder: items
         }

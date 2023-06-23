@@ -4,6 +4,8 @@ import SmsModal from "./sms-code-modal";
 import EmailCode from "./email-code-modal";
 import LoginPhone from "./login-phone";
 import LoginEmail from "./login-email";
+import { useAppSelector } from "@/store/store";
+import { useRouter } from "next/router";
 
 function Login(): JSX.Element {
   const [radio, setRadio] = useState(-1);
@@ -11,6 +13,9 @@ function Login(): JSX.Element {
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
   const [showModal4, setShowModal4] = useState(false);
+
+  const auth = useAppSelector((state) => state.auth);
+  const router = useRouter();
 
   useEffect(() => {
     if (radio === 0) {
@@ -31,7 +36,13 @@ function Login(): JSX.Element {
     <>
       <Button
         className="btn_grey ms-4 rounded-4 height-3 px-3"
-        onClick={() => setShowModal1(true)}
+        onClick={() => {
+          if (auth.authState) {
+            router.push("/personal-area")
+          } else {
+            setShowModal1(true)
+          }
+        }}
       >
         <span className="text_size">Войти</span>
       </Button>
