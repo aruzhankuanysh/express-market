@@ -13,7 +13,7 @@ import {
 import MyDateTimePicker from "../datetimepicker";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { OrderData, registerUser } from "@/specs/gosuTypes";
-import { setAccessToken, setRefreshTokens, setUser } from "@/store/authSlice";
+import { setAccessToken, setAuthState, setRefreshTokens, setUser } from "@/store/authSlice";
 import { useRouter } from "next/router";
 import AppService from "@/specs/gosuService";
 
@@ -69,6 +69,7 @@ const PersonalArea = (): JSX.Element => {
     dispatch(setUser(null));
     dispatch(setAccessToken(""));
     dispatch(setRefreshTokens(""));
+    dispatch(setAuthState(false));
     router.push("/");
   };
 

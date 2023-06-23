@@ -70,7 +70,6 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
     if (value.length < 5) {
       setCode(value);
     } else {
-      setCode(value);
       AppService.postLogin(`998${auth.user?.phone ?? ""}`, value).then((response) => {
         if (response?.Token?.accessToken) {
           dispath(setAccessToken(response.Token?.accessToken ?? ""));
