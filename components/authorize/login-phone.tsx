@@ -38,7 +38,6 @@ function LoginPhone({
 
     AppService.getUser(`998${phoneNumber}`).then((res) => {
       if(res?.client){
-        console.log("🚀 ~ file: personal-area.tsx:57 ~ AppService.getUser ~ res:", res)
 
         const db_user : User = {
           id: res.client.ClientId,
@@ -55,10 +54,8 @@ function LoginPhone({
       } else {
         AppService.registerUser(user).then((res) => {
           if (res) {
-            console.log("🚀 ~ file: personal-area.tsx:48 ~ AppService.registerUser ~ res:", res)
             AppService.getUser(`998${phoneNumber}`).then((res) => {
               if(res?.client){
-                console.log("🚀 ~ file: personal-area.tsx:57 ~ AppService.getUser ~ res:", res)
         
                 const db_user : User = {
                   id: res.client.ClientId,
@@ -124,11 +121,7 @@ function LoginPhone({
               Получить код по СМС
             </Button>
           </Row>
-          <Row>
-            <Button onClick={() => {router.push("/personal-area")}} className="modal_login mt-3">
-              Войти по почте
-            </Button>
-          </Row>
+       
         </Form>
       </Modal.Body>
     </Modal>

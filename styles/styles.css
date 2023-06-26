@@ -207,7 +207,6 @@ h1 {
   border-top: none !important;
   border-left: none !important;
   border-right: none !important;
-  width: 203px !important;
   max-width: 203px !important;
 }
 
@@ -450,7 +449,6 @@ h1 {
   font-weight: 700;
   font-size: 20px;
 }
-
 
 
 .btn_grey h5 {

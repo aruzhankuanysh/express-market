@@ -9,6 +9,7 @@ import {
   InputGroup,
   Row,
   ToggleButton,
+  Modal
 } from "react-bootstrap";
 import MyDateTimePicker from "../datetimepicker";
 import { useAppDispatch, useAppSelector } from "@/store/store";
@@ -22,6 +23,8 @@ import {
 import { useRouter } from "next/router";
 import AppService from "@/specs/gosuService";
 
+const maxTitleLength = 15;
+
 const PersonalArea = (): JSX.Element => {
   const [isProfileDisabled, setProfileDisabled] = useState(false);
   const [isOrdersDisabled, setOrdersDisabled] = useState(false);
@@ -30,7 +33,31 @@ const PersonalArea = (): JSX.Element => {
   const [showOrders, setShowOrders] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<string | null>(null);
   const [showOrderDetails, setShowOrderDetails] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [orderToDelete, setOrderToDelete] = useState<string | null>(null);
+  const [windowWidth, setWindowWidth] = useState<number>(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
 
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
+  const truncateTitleSmallScreens = (title: string) => {
+    const smallScreenSize = 768;
+    if (windowWidth <= smallScreenSize && title.length > maxTitleLength) {
+      return `${title.substring(0, maxTitleLength)}...`;
+    }
+    return title;
+  };
   const auth = useAppSelector((state) => state.auth);
 
   const router = useRouter();
@@ -41,7 +68,7 @@ const PersonalArea = (): JSX.Element => {
   const [name, setName] = useState(auth.user?.name ?? "");
   const [phone, setPhone] = useState(auth.user?.phone ?? "");
   const [email, setEmail] = useState(auth.user?.email ?? "");
-  const [sex, setSex] = useState(auth.user?.gender ?? "");
+  const [sex, setSex] = useState(auth.user?.gender ?? "Мужской");
 
   useEffect(() => {
     setBirthday(
@@ -68,17 +95,10 @@ const PersonalArea = (): JSX.Element => {
       Token: auth.authToken,
     };
 
-    console.log("🚀 ~ file: personal-area.tsx:44 ~ handlerSave ~ user:", user);
-
     AppService.putUser(user).then((response) => {
       if (response) {
         AppService.getUser(`998${phone}`).then((res) => {
           if (res?.client) {
-            console.log(
-              "🚀 ~ file: personal-area.tsx:57 ~ AppService.getUser ~ res:",
-              res
-            );
-
             const db_user: User = {
               id: res.client.ClientId,
               name: res.client.Name,
@@ -101,6 +121,34 @@ const PersonalArea = (): JSX.Element => {
         });
       }
     });
+  };
+
+ 
+
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleShowDeleteModal = (orderId: string) => {
+    setOrderToDelete(orderId);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (orderToDelete) {
+      AppService.deleteOrder(orderToDelete)
+        .then((response) => {
+          if (response) {
+            console.log("Заказ удален");
+          } else {
+            console.log("Failed to delete order.");
+          }
+        })
+        .catch((error) => {
+          console.error("An error occurred while deleting the order:", error);
+        });
+      handleCloseDeleteModal();
+      setShowOrderDetails(false)
+      setShowInput(true);
+      setRadioValue('1')
+    }
   };
 
   const handlerExit = () => {
@@ -164,14 +212,29 @@ const PersonalArea = (): JSX.Element => {
 
   return (
     <>
-      <Container className="mb-5">
-        <Container style={{ maxWidth: "1000px" }}>
+       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Подтверждение удаления</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Вы уверены, что хотите удалить этот заказ?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Отмена
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Удалить
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Container className="mb-5 px-0">
+        <Container className="px-0" style={{ maxWidth: "1000px" }}>
           <Row className="my-4 ">
             <h1>Профиль</h1>
           </Row>
 
           {auth.authState && (
-            <ButtonGroup style={{ maxWidth: "350px" }}>
+            <ButtonGroup style={{ maxWidth: "350px", }}>
               {radios.map((radio, idx) => (
                 <ToggleButton
                   key={idx}
@@ -186,7 +249,7 @@ const PersonalArea = (): JSX.Element => {
                   onChange={(e) => setRadioValue(e.currentTarget.value)}
                   onClick={() => handleButtonClick(radio.value)}
                   className={combineClasses(
-                    "toggle_btn ",
+                    "toggle_btn mobile-text ",
                     radioValue === radio.value && ("selected-radio" as const)
                   )}
                   disabled={
@@ -240,40 +303,6 @@ const PersonalArea = (): JSX.Element => {
                   setBirthday={setBirthday}
                 />
               </Form.Group>
-        
-              <Form.Group className="form_wrapper">
-                <Form.Label style={{ marginRight: "22%" }}>Пол</Form.Label>
-                <ButtonGroup style={{ maxWidth: "320px" }}>
-                  <ToggleButton
-                    id={`radio-m`}
-                    type="radio"
-                    variant={
-                      sex === "Мужской" ? "outline-success" : "outline-danger"
-                    }
-                    name="radio"
-                    value={"Мужской"}
-                    checked={sex === "Мужской"}
-                    onChange={(e) => setSex(e.currentTarget.value)}
-                    style={{ zIndex: 0 }}
-                  >
-                    {"Мужской"}
-                  </ToggleButton>
-                  <ToggleButton
-                    id={`radio-w`}
-                    type="radio"
-                    variant={
-                      sex === "Женский" ? "outline-success" : "outline-danger"
-                    }
-                    name="radio"
-                    value={"Женский"}
-                    checked={sex === "Женский"}
-                    onChange={(e) => setSex(e.currentTarget.value)}
-                    style={{ zIndex: 0 }}
-                  >
-                    {"Женский"}
-                  </ToggleButton>
-                </ButtonGroup>
-              </Form.Group>
 
               <Row className="my-5 save_btn_wrap">
                 <Col>
@@ -288,7 +317,7 @@ const PersonalArea = (): JSX.Element => {
               </Row>
               <Col>
                 <Button
-                  onClick={() => handlerExit()}
+                  onClick={() => {handlerExit(); router.push("/");}}
                   className="btn_primary logout_btn"
                 >
                   Выйти
@@ -306,30 +335,32 @@ const PersonalArea = (): JSX.Element => {
                     maxWidth: "1000px",
                   }}
                 >
-                  <Col  >Номер заказа</Col>
-                  <Col>Дата оформления</Col>
-                  <Col>Статус</Col>
-                  <Col>Сумма</Col>
+                  <Col className="mobile-text-small">Номер заказа</Col>
+                  <Col className="mobile-text-small">Дата оформления</Col>
+                  {/* <Col className="mobile-text-small">Статус</Col> */}
+                  <Col className="mobile-text-small">Сумма</Col>
                 </Row>
                 {(Array.isArray(ordersHistory) ? ordersHistory : []).map(
                   (order) => (
                     <Container key={order.IdOrder}>
                       <Row className="mt-4">
-                        <Col >
+                        <Col xxs="4">
                           <p
+                            className="mobile-text-small"
                             style={{
-                              borderBottom: "1px solid",
-                              width: "50px",
+                              textDecoration:"underline",
                               cursor: "pointer",
                             }}
-                            onClick={() => handleOrderClick(order.IdOrder)}
+                            onClick={() => {handleOrderClick(order.IdOrder);} }
                           >
                             {order.IdOrder}
                           </p>
                         </Col>
-                        <Col>{order.DateOrder.split("T")[0]}</Col>
-                        <Col>{order.StatusOrder}</Col>
-                        <Col>{order.SumOrder} UZS</Col>
+                        <Col className="mobile-text-small" xxs="4">
+                          {order.DateOrder.split("T")[0]}
+                        </Col>
+                        {/* <Col className="mobile-text-smallest">{order.StatusOrder}</Col> */}
+                        <Col className="mobile-text-small" xxs="4">{order.SumOrder} UZS</Col>
                       </Row>
                     </Container>
                   )
@@ -350,7 +381,7 @@ const PersonalArea = (): JSX.Element => {
                   return (
                     <Container
                       style={{ fontWeight: "500" }}
-                      className="mt-5 "
+                      className="mt-5 p-0"
                       key={order.IdOrder}
                     >
                       <Row>
@@ -363,108 +394,123 @@ const PersonalArea = (): JSX.Element => {
                           </Button>
                         </Col>
                         <Col>
-                          <Button>Отменить заказ</Button>
+                          <Button onClick={() => handleShowDeleteModal(order.IdOrder)} className="btn-primary back_btn">Отменить заказ</Button>
                         </Col>
                       </Row>
                       <Row className="my-4">
                         <Col>
-                          <h1>Заказ {order.IdOrder}</h1>
+                          <h1 className="mobile-heading">Заказ {order.IdOrder}</h1>
                         </Col>
                         <Col>
-                          <h2 className="text-danger">{order.StatusOrder}</h2>
+                          <h2 className="text-danger mobile-heading">{order.StatusOrder}</h2>
                         </Col>
                       </Row>
                       <Container
-                        className="d-flex details_container p-4"
+                        className="d-flex details_container px-1 p-lg-4 "
                         style={{
                           boxShadow: "-1px 0px 13px rgba(0, 0, 0, 0.25)",
                           borderRadius: "7px",
                         }}
                       >
-                        <Row style={{ minWidth: "160px", textAlign: "center" }}>
+                        <Row style={{ textAlign: "center" }}>
                           <Col>
                             <Row className="text-secondary">
-                              <p>Оформлен</p>
+                              <p className="mobile-text-small">Оформлен</p>
                             </Row>
                             <Row>
-                              <p>{order.DateOrder.split("T")[0]}</p>
+                              <p className="mobile-text-smallest">
+                                {order.DateOrder.split("T")[0]}
+                              </p>
                             </Row>
                           </Col>
                         </Row>
-                        <Row
-                          style={{ minWidth: "160px,", textAlign: "center" }}
-                        >
+                        <Row style={{ textAlign: "center" }}>
                           <Col>
-                            <Row className="text-secondary">
-                              <p>Общая сумма</p>
+                            <Row className="text-secondary  px-3 px-lg-0">
+                              <p className="mobile-text-small ">Cумма</p>
                             </Row>
                             <Row>
-                              <p>{order.SumOrder} сум</p>
+                              <p className="mobile-text-smallest">
+                                {order.SumOrder} сум
+                              </p>
                             </Row>
                           </Col>
                         </Row>
-                        <Row style={{ minWidth: "160px", textAlign: "center" }}>
+                        <Row style={{ textAlign: "center" }}>
                           <Col>
-                            <Row className="text-secondary">
-                              <p>Адрес</p>
+                            <Row className="text-secondary mobile-text-small">
+                              <p className="mobile-text-small">Адрес</p>
                             </Row>
-                            <Row style={{ maxWidth: "210px" }}>
-                              <p>
+                            <Row style={{  textAlign: "center"  }}>
+                              <p
+                                className="mobile-text-smallest"
+                                
+                              >
                                 {order.StockOrder}
                                 {home}
                               </p>
                             </Row>
                           </Col>
                         </Row>
-                        <Row style={{ minWidth: "180px", textAlign: "center" }}>
+                        <Row style={{ textAlign: "center" }}>
                           <Col>
                             <Row
-                              className="text-secondary"
+                              className="text-secondary mobile-text-small"
                               style={{ textAlign: "center" }}
                             >
-                              <p>Комментарий к заказу</p>
+                              <p className="mobile-text-small">
+                                Комментарий 
+                              </p>
                             </Row>
                             <Row>
-                              <p>{comment}</p>
+                              <p className="mobile-text-smallest">{comment}</p>
                             </Row>
                           </Col>
                         </Row>
                       </Container>
                       <Row
-                        className="mt-5 pb-4"
+                        className="mt-5 pb-4 "
                         style={{
                           borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
                           maxWidth: "650px",
                         }}
                       >
                         <Col
+                          className="mobile-text"
                           style={{ fontWeight: "700" }}
                           lg="6"
-                          sm="6"
+                          sm="4"
+                          md="4"
                           xxs="4"
                         >
                           Название
                         </Col>
                         <Col
+                          className="mobile-text"
                           style={{ fontWeight: "700", textAlign: "center" }}
                           lg="2"
-                          sm="2"
+                          sm="3"
+                          md="3"
                           xxs="2"
                         >
                           Цена
                         </Col>
                         <Col
+                          className="mobile-text"
                           style={{ fontWeight: "700", textAlign: "center" }}
                           lg="2"
-                          sm="2"
+                          sm="3"
+                          md="3"
                           xxs="4"
                         >
                           Количество
                         </Col>
                         <Col
+                          className="mobile-text"
                           style={{ fontWeight: "700", textAlign: "center" }}
                           lg="2"
                           sm="2"
+                          md="2"
                           xxs="2"
                         >
                           Сумма
@@ -487,35 +533,38 @@ const PersonalArea = (): JSX.Element => {
                                   `/product-page?productId=${item.IdItem}`
                                 )
                               }
-                              className="text-danger"
+                              className="text-danger mobile-text"
                               style={{
                                 fontWeight: "600",
                                 textDecorationLine: "underline",
                                 cursor: "pointer",
                               }}
                               lg="6"
-                              sm="6"
+                              sm="4"
                               xxs="4"
                             >
-                              {item.NameItem}
+                              {truncateTitleSmallScreens(item.NameItem)}
                             </Col>
                             <Col
+                              className="mobile-text"
                               style={{ textAlign: "center" }}
                               lg="2"
-                              sm="2"
+                              sm="3"
                               xxs="2"
                             >
                               {item.PriceItem} сум
                             </Col>
                             <Col
+                              className="mobile-text"
                               style={{ textAlign: "center" }}
                               lg="2"
-                              sm="2"
+                              sm="3"
                               xxs="4"
                             >
                               {item.QuantityItems}
                             </Col>
                             <Col
+                              className="mobile-text"
                               style={{ textAlign: "center" }}
                               lg="2"
                               sm="2"
@@ -526,27 +575,24 @@ const PersonalArea = (): JSX.Element => {
                           </Row>
                         );
                       })}
-                      {/* <Row className="mt-3">
-                        <Col xxs="8">Заказано товаров на сумму:</Col>
-                        <Col>{order.SumOrder} сум</Col>
+                      <Row className="mt-3">
+                        <Col className="mobile-text" xxs="8">
+                          Чаевые:
+                        </Col>
+                        <Col className="mobile-text">{order.TipsOrder} сум</Col>
                       </Row>
-                      <Row className="mt-3">
-                        <Col xxs="8">Доставленные продукты:</Col>
-                        <Col> 123 сум</Col>
-                      </Row>
-                      <Row className="mt-3">
-                        <Col xxs="8">Стоимость доставки:</Col>
-                        <Col>0 сум</Col>
-                      </Row> */}
-                      <Row className="mt-3">
-                        <Col xxs="8">Чаевые:</Col>
-                        <Col>{order.TipsOrder} сум</Col>
-                      </Row>
-                      <Row className="mt-3">
-                        <Col xxs="8" style={{ fontWeight: "700" }}>
+                      <Row className="mt-3 ">
+                        <Col
+                          className="mobile-text"
+                          xxs="8"
+                          style={{ fontWeight: "700" }}
+                        >
                           Итоговая сумма
                         </Col>
-                        <Col style={{ fontWeight: "700" }}>
+                        <Col
+                          className="mobile-text"
+                          style={{ fontWeight: "700" }}
+                        >
                           {order.SumOrder} сум
                         </Col>
                       </Row>

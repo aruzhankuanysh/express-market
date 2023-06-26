@@ -4,6 +4,7 @@ import SmsModal from "./sms-code-modal";
 import EmailCode from "./email-code-modal";
 import LoginPhone from "./login-phone";
 import LoginEmail from "./login-email";
+import PersonIcon from '@mui/icons-material/Person';
 import { useAppSelector } from "@/store/store";
 import { useRouter } from "next/router";
 
@@ -38,24 +39,26 @@ function Login(): JSX.Element {
         className="btn_grey ms-4 rounded-4 height-3 px-3"
         onClick={() => {
           if (auth.authState) {
-            router.push("/personal-area")
+            router.push("/personal-area");
           } else {
-            setShowModal1(true)
+            setShowModal1(true);
           }
         }}
       >
-        <span className="text_size">Войти</span>
+        <span className="text_size">
+          <PersonIcon/>
+        </span>
       </Button>
 
       <LoginPhone
         show={showModal1}
         onClose={() => setShowModal1(!showModal1)}
-        onBack={(value:number) => setRadio(value)}
+        onBack={(value: number) => setRadio(value)}
       />
       <SmsModal
         show={showModal2}
         onClose={() => setShowModal2(!showModal2)}
-        onBack={(value:number) => setRadio(value)}
+        onBack={(value: number) => setRadio(value)}
       />
 
       {/* <LoginEmail
