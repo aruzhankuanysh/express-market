@@ -20,16 +20,6 @@ function LoginPhone({
   const dispath = useAppDispatch();
   const auth = useAppSelector(state => state.auth);
 
-  // const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const cleanedPhoneNumber = e.target.value.replace(/\D/g, "");
-  //   const truncatedPhoneNumber = cleanedPhoneNumber.slice(0, 11);
-  //   const formattedPhoneNumber = truncatedPhoneNumber.replace(
-  //     /(\d{2})(\d{2})(\d{3})(\d{2})(\d{2})/,
-  //     "$1 $2 $3 $4 $5"
-  //   );
-  //   setPhoneNumber(formattedPhoneNumber);
-  // };
-
   const handlerSendCode = () => {
     dispath(setUser({ ...auth.user, phone: phoneNumber }));
 

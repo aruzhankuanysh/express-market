@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import MyDateTimePicker from "../datetimepicker";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { OrderData, registerUser, updateUser } from "@/specs/gosuTypes";
+import { OrderData, User, registerUser, updateUser } from "@/specs/gosuTypes";
 import {
   setAccessToken,
   setAuthState,
@@ -50,7 +50,7 @@ const PersonalArea = (): JSX.Element => {
     setPhone(auth.user?.phone ?? "");
     setName(auth.user?.name ?? "");
     setEmail(auth.user?.email ?? "");
-    setSex(auth.user?.gender ?? "Мужской")
+    setSex(auth.user?.gender ?? "Мужской");
   }, [auth.user]);
 
   const dispatch = useAppDispatch();
@@ -72,18 +72,35 @@ const PersonalArea = (): JSX.Element => {
 
     AppService.putUser(user).then((response) => {
       if (response) {
-        console.log("🚀 ~ file: personal-area.tsx:75 ~ AppService.putUser ~ response:", response)
-        
+        AppService.getUser(`998${phone}`).then((res) => {
+          if (res?.client) {
+            console.log(
+              "🚀 ~ file: personal-area.tsx:57 ~ AppService.getUser ~ res:",
+              res
+            );
+
+            const db_user: User = {
+              id: res.client.ClientId,
+              name: res.client.Name,
+              role: "USER",
+              email: "",
+              gender: res.client.Sex,
+              birthdate: res.client.Birthday,
+              phone: phone,
+            };
+
+            dispatch(setUser(db_user));
+          }
+        });
       } else {
         AppService.postRefresh(auth.refreshToken).then((response) => {
           if (response?.token?.accessToken) {
-            console.log("🚀 ~ file: personal-area.tsx:80 ~ AppService.postRefresh ~ response:", response)
             dispatch(setAccessToken(response?.token?.accessToken));
             dispatch(setRefreshTokens(response?.token?.refreshToken));
           }
-        })
+        });
       }
-    })
+    });
   };
 
   const handlerExit = () => {
@@ -223,18 +240,7 @@ const PersonalArea = (): JSX.Element => {
                   setBirthday={setBirthday}
                 />
               </Form.Group>
-              {/* <Form.Group
-                className="form_wrapper"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Электронная почта</Form.Label>
-                <Form.Control
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="form_input"
-                  // placeholder="yourmail@gmail.com"
-                />
-              </Form.Group> */}
+        
               <Form.Group className="form_wrapper">
                 <Form.Label style={{ marginRight: "22%" }}>Пол</Form.Label>
                 <ButtonGroup style={{ maxWidth: "320px" }}>
@@ -248,7 +254,7 @@ const PersonalArea = (): JSX.Element => {
                     value={"Мужской"}
                     checked={sex === "Мужской"}
                     onChange={(e) => setSex(e.currentTarget.value)}
-                    style={{zIndex: 0}} 
+                    style={{ zIndex: 0 }}
                   >
                     {"Мужской"}
                   </ToggleButton>
@@ -262,7 +268,7 @@ const PersonalArea = (): JSX.Element => {
                     value={"Женский"}
                     checked={sex === "Женский"}
                     onChange={(e) => setSex(e.currentTarget.value)}
-                    style={{zIndex: 0}} 
+                    style={{ zIndex: 0 }}
                   >
                     {"Женский"}
                   </ToggleButton>
@@ -300,32 +306,34 @@ const PersonalArea = (): JSX.Element => {
                     maxWidth: "1000px",
                   }}
                 >
-                  <Col>Номер заказа</Col>
+                  <Col  >Номер заказа</Col>
                   <Col>Дата оформления</Col>
                   <Col>Статус</Col>
                   <Col>Сумма</Col>
                 </Row>
-                {(Array.isArray(ordersHistory) ? ordersHistory : []).map((order) => (
-                  <Container key={order.IdOrder}>
-                    <Row className="mt-4">
-                      <Col>
-                        <p
-                          style={{
-                            borderBottom: "1px solid",
-                            width: "50px",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => handleOrderClick(order.IdOrder)}
-                        >
-                          {order.IdOrder}
-                        </p>
-                      </Col>
-                      <Col>{order.DateOrder.split("T")[0]}</Col>
-                      <Col>{order.StatusOrder}</Col>
-                      <Col>{order.SumOrder} UZS</Col>
-                    </Row>
-                  </Container>
-                ))}
+                {(Array.isArray(ordersHistory) ? ordersHistory : []).map(
+                  (order) => (
+                    <Container key={order.IdOrder}>
+                      <Row className="mt-4">
+                        <Col >
+                          <p
+                            style={{
+                              borderBottom: "1px solid",
+                              width: "50px",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => handleOrderClick(order.IdOrder)}
+                          >
+                            {order.IdOrder}
+                          </p>
+                        </Col>
+                        <Col>{order.DateOrder.split("T")[0]}</Col>
+                        <Col>{order.StatusOrder}</Col>
+                        <Col>{order.SumOrder} UZS</Col>
+                      </Row>
+                    </Container>
+                  )
+                )}
               </Container>
             </>
           )}
