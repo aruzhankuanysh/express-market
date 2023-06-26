@@ -1,5 +1,5 @@
 import api from "./axios";
-import { Order, registerUser } from "./gosuTypes";
+import { Order, registerUser, updateUser } from "./gosuTypes";
 
 class ApplicationService {
     // GET – получает полный список всех категорий товаров по иерархии 
@@ -96,6 +96,16 @@ class ApplicationService {
         }
     }
 
+    // POST - обновление пользователя
+    putUser = async (user: updateUser) => {
+        try {
+            const response = await api.post(`putUser`, user);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     // POST - получение токенов пользователя
     postLogin = async (ClientPhone: string, password: string) => {
         const data = {
@@ -104,6 +114,19 @@ class ApplicationService {
         }
         try {
             const response = await api.post(`login`, data);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // POST - получение токенов пользователя
+    postRefresh = async (Token: string) => {
+        const data = {
+            Token: Token
+        }
+        try {
+            const response = await api.post(`RefreshToken`, data);
             return response.data;
         } catch (error) {
             console.error(error);

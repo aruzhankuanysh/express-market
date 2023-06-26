@@ -16,6 +16,13 @@ export type registerUser = {
   Legal: string; // "false"
 }
 
+export type updateUser = {
+  Name: string;
+  Sex: string;
+  Birthday: string;
+  Token: string;
+}
+
 export type Brand = {
   category_id: string;
   name_category: string;

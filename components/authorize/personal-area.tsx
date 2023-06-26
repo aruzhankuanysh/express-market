@@ -12,8 +12,13 @@ import {
 } from "react-bootstrap";
 import MyDateTimePicker from "../datetimepicker";
 import { useAppDispatch, useAppSelector } from "@/store/store";
-import { OrderData, registerUser } from "@/specs/gosuTypes";
-import { setAccessToken, setAuthState, setRefreshTokens, setUser } from "@/store/authSlice";
+import { OrderData, registerUser, updateUser } from "@/specs/gosuTypes";
+import {
+  setAccessToken,
+  setAuthState,
+  setRefreshTokens,
+  setUser,
+} from "@/store/authSlice";
 import { useRouter } from "next/router";
 import AppService from "@/specs/gosuService";
 
@@ -36,6 +41,7 @@ const PersonalArea = (): JSX.Element => {
   const [name, setName] = useState(auth.user?.name ?? "");
   const [phone, setPhone] = useState(auth.user?.phone ?? "");
   const [email, setEmail] = useState(auth.user?.email ?? "");
+  const [sex, setSex] = useState(auth.user?.gender ?? "");
 
   useEffect(() => {
     setBirthday(
@@ -44,6 +50,7 @@ const PersonalArea = (): JSX.Element => {
     setPhone(auth.user?.phone ?? "");
     setName(auth.user?.name ?? "");
     setEmail(auth.user?.email ?? "");
+    setSex(auth.user?.gender ?? "Мужской")
   }, [auth.user]);
 
   const dispatch = useAppDispatch();
@@ -54,15 +61,29 @@ const PersonalArea = (): JSX.Element => {
     d.setMinutes(0);
     d.setMilliseconds(0);
 
-    const user: registerUser = {
+    const user: updateUser = {
       Name: name,
-      Sex: "Мужской",
+      Sex: sex,
       Birthday: d.toISOString().replace("0Z", ""),
-      Phone: `998${phone}`,
-      Legal: "false",
+      Token: auth.authToken,
     };
 
     console.log("🚀 ~ file: personal-area.tsx:44 ~ handlerSave ~ user:", user);
+
+    AppService.putUser(user).then((response) => {
+      if (response) {
+        console.log("🚀 ~ file: personal-area.tsx:75 ~ AppService.putUser ~ response:", response)
+        
+      } else {
+        AppService.postRefresh(auth.refreshToken).then((response) => {
+          if (response?.token?.accessToken) {
+            console.log("🚀 ~ file: personal-area.tsx:80 ~ AppService.postRefresh ~ response:", response)
+            dispatch(setAccessToken(response?.token?.accessToken));
+            dispatch(setRefreshTokens(response?.token?.refreshToken));
+          }
+        })
+      }
+    })
   };
 
   const handlerExit = () => {
@@ -79,29 +100,6 @@ const PersonalArea = (): JSX.Element => {
   ];
 
   const [ordersHistory, setOrdersHistory] = useState<OrderData[]>([]);
-
-  // const ordersHistory = [
-  //   {
-  //     order_id: 121123,
-  //     title: "Яблоки Amal Bio Голден делишес кг",
-  //     date: "16 апр 2023г.",
-  //     status: "Отменен",
-  //     count: "1.123 кг",
-  //     price: 123,
-  //     address:
-  //       "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
-  //   },
-  //   {
-  //     order_id: 124123,
-  //     date: "13 апр 2023г.",
-  //     title: "Яблоки Amal Bio Голден делишес кг",
-  //     status: "Ожидает доставки",
-  //     count: "1.123 кг",
-  //     price: 123,
-  //     address:
-  //       "улица Гоголя, 117/127 / улица Гоголя, 117 (код домофона 5), кв.1 (2 подъезд, 1 этаж), 050000",
-  //   },
-  // ];
 
   const handleButtonClick = (value: string) => {
     if (value === "1") {
@@ -225,7 +223,7 @@ const PersonalArea = (): JSX.Element => {
                   setBirthday={setBirthday}
                 />
               </Form.Group>
-              <Form.Group
+              {/* <Form.Group
                 className="form_wrapper"
                 controlId="exampleForm.ControlInput1"
               >
@@ -236,7 +234,41 @@ const PersonalArea = (): JSX.Element => {
                   className="form_input"
                   // placeholder="yourmail@gmail.com"
                 />
+              </Form.Group> */}
+              <Form.Group className="form_wrapper">
+                <Form.Label style={{ marginRight: "22%" }}>Пол</Form.Label>
+                <ButtonGroup style={{ maxWidth: "320px" }}>
+                  <ToggleButton
+                    id={`radio-m`}
+                    type="radio"
+                    variant={
+                      sex === "Мужской" ? "outline-success" : "outline-danger"
+                    }
+                    name="radio"
+                    value={"Мужской"}
+                    checked={sex === "Мужской"}
+                    onChange={(e) => setSex(e.currentTarget.value)}
+                    style={{zIndex: 0}} 
+                  >
+                    {"Мужской"}
+                  </ToggleButton>
+                  <ToggleButton
+                    id={`radio-w`}
+                    type="radio"
+                    variant={
+                      sex === "Женский" ? "outline-success" : "outline-danger"
+                    }
+                    name="radio"
+                    value={"Женский"}
+                    checked={sex === "Женский"}
+                    onChange={(e) => setSex(e.currentTarget.value)}
+                    style={{zIndex: 0}} 
+                  >
+                    {"Женский"}
+                  </ToggleButton>
+                </ButtonGroup>
               </Form.Group>
+
               <Row className="my-5 save_btn_wrap">
                 <Col>
                   <Button
@@ -273,7 +305,7 @@ const PersonalArea = (): JSX.Element => {
                   <Col>Статус</Col>
                   <Col>Сумма</Col>
                 </Row>
-                {ordersHistory.map((order) => (
+                {(Array.isArray(ordersHistory) ? ordersHistory : []).map((order) => (
                   <Container key={order.IdOrder}>
                     <Row className="mt-4">
                       <Col>
@@ -300,11 +332,11 @@ const PersonalArea = (): JSX.Element => {
           {selectedOrder && showOrderDetails && (
             <Container className="order_details">
               {ordersHistory.map((order) => {
-                let home = ""
-                let comment = ""
-                if(order?.Comment.includes("\"adress\"")) {
-                  home = JSON.parse(order?.Comment ?? "{}")?.adress?.Дом ?? ""
-                  comment = JSON.parse(order?.Comment ?? "{}")?.comment ?? ""
+                let home = "";
+                let comment = "";
+                if (order?.Comment.includes('"adress"')) {
+                  home = JSON.parse(order?.Comment ?? "{}")?.adress?.Дом ?? "";
+                  comment = JSON.parse(order?.Comment ?? "{}")?.comment ?? "";
                 }
                 if (order.IdOrder === selectedOrder) {
                   return (
@@ -369,7 +401,10 @@ const PersonalArea = (): JSX.Element => {
                               <p>Адрес</p>
                             </Row>
                             <Row style={{ maxWidth: "210px" }}>
-                              <p>{order.StockOrder}{home}</p>
+                              <p>
+                                {order.StockOrder}
+                                {home}
+                              </p>
                             </Row>
                           </Col>
                         </Row>
@@ -439,12 +474,16 @@ const PersonalArea = (): JSX.Element => {
                             }}
                           >
                             <Col
-                              onClick={() => router.push(`/product-page?productId=${item.IdItem}`)}
+                              onClick={() =>
+                                router.push(
+                                  `/product-page?productId=${item.IdItem}`
+                                )
+                              }
                               className="text-danger"
                               style={{
                                 fontWeight: "600",
                                 textDecorationLine: "underline",
-                                cursor: "pointer"
+                                cursor: "pointer",
                               }}
                               lg="6"
                               sm="6"
@@ -499,7 +538,9 @@ const PersonalArea = (): JSX.Element => {
                         <Col xxs="8" style={{ fontWeight: "700" }}>
                           Итоговая сумма
                         </Col>
-                        <Col style={{ fontWeight: "700" }}>{order.SumOrder} сум</Col>
+                        <Col style={{ fontWeight: "700" }}>
+                          {order.SumOrder} сум
+                        </Col>
                       </Row>
                     </Container>
                   );
