@@ -66,7 +66,6 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
   const dispath = useAppDispatch();
 
   const handlerVerCode = (value: string) => {
-    console.log("🚀 ~ file: sms-code-modal.tsx:69 ~ handlerVerCode ~ value:", value)
     if (value.length < 5) {
       setCode(value);
     } else {
@@ -75,7 +74,6 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
           dispath(setAccessToken(response.Token?.accessToken ?? ""));
           dispath(setRefreshTokens(response.Token?.refreshToken ?? ""));
           dispath(setAuthState(true));
-          console.log( "🚀 ~ file: personal-area.tsx:79 ~ AppService.postLogin ~ response:", response);
           onBack(-1);
           onClose();
           router.push("/personal-area");
@@ -106,7 +104,7 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
         </Row>
         {showButton ? (
           <Row>
-            <Button onClick={() => {}} className="get_code_btn">
+            <Button onClick={() => {}} className="get_code_btn my-3">
               Получить новый код
             </Button>
           </Row>

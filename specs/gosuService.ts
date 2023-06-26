@@ -76,6 +76,15 @@ class ApplicationService {
         }
     };
 
+    deleteOrder = async (OrderId:string) => {
+        try {
+            const response = await api.delete(`Orders?IdOrder=${OrderId}`)
+            return response.data;
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
     // GET – получает полный список всех товаров в массиве //! Крашит браузер
     // getAllProducts = async () => {
     //     try {

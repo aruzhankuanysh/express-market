@@ -56,12 +56,12 @@ function Header(): JSX.Element {
   return (
     <>
       <Navbar className="d-block d-lg-none header_container mb-4 " >
-        <Container className="d-flex ps-3 ">
+        <Container className="d-flex ">
           <Row className="mobile_header" style={{ width: "100%" }}>
-            <Col  >
+            <Col  xxs="3" md="3">
               <DropdownMenu />
             </Col>
-            <Col >
+            <Col  xxs="6" md="6">
               <Image
                 fluid
                 src="/img/express-logo.svg"
@@ -72,7 +72,7 @@ function Header(): JSX.Element {
                 }}
               />
             </Col>
-            <Col className="pe-0"  style={{ display: "flex", justifyContent: "end" }}>
+            <Col xxs="3" md="3" className="pe-0"  >
               <DropdownCart />
             </Col>
           </Row>
