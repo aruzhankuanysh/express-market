@@ -9,7 +9,7 @@ import {
   InputGroup,
   Row,
   ToggleButton,
-  Modal
+  Modal,
 } from "react-bootstrap";
 import MyDateTimePicker from "../datetimepicker";
 import { useAppDispatch, useAppSelector } from "@/store/store";
@@ -123,8 +123,6 @@ const PersonalArea = (): JSX.Element => {
     });
   };
 
- 
-
   const handleCloseDeleteModal = () => setShowDeleteModal(false);
   const handleShowDeleteModal = (orderId: string) => {
     setOrderToDelete(orderId);
@@ -133,23 +131,29 @@ const PersonalArea = (): JSX.Element => {
 
   const handleConfirmDelete = () => {
     if (orderToDelete) {
-      AppService.deleteOrder(orderToDelete)
+      const requestBody = {
+        IdOrder: orderToDelete,
+        token: '' 
+      };
+  
+      AppService.deleteOrder(requestBody)
         .then((response) => {
           if (response) {
-            console.log("Заказ удален");
+            console.log("Заказ удален", requestBody);
+            window.location.reload();
           } else {
-            console.log("Failed to delete order.");
+            console.log("Ошибка");
           }
         })
         .catch((error) => {
-          console.error("An error occurred while deleting the order:", error);
+          console.error("Ошибка во время удаления:", error);
         });
+  
       handleCloseDeleteModal();
-      setShowOrderDetails(false)
-      setShowInput(true);
-      setRadioValue('1')
+      setShowOrderDetails(false);
+      setShowOrders(true);
     }
-  };
+};
 
   const handlerExit = () => {
     dispatch(setUser(null));
@@ -212,7 +216,7 @@ const PersonalArea = (): JSX.Element => {
 
   return (
     <>
-       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
         <Modal.Header closeButton>
           <Modal.Title>Подтверждение удаления</Modal.Title>
         </Modal.Header>
@@ -234,7 +238,7 @@ const PersonalArea = (): JSX.Element => {
           </Row>
 
           {auth.authState && (
-            <ButtonGroup style={{ maxWidth: "350px", }}>
+            <ButtonGroup style={{ maxWidth: "350px" }}>
               {radios.map((radio, idx) => (
                 <ToggleButton
                   key={idx}
@@ -317,7 +321,10 @@ const PersonalArea = (): JSX.Element => {
               </Row>
               <Col>
                 <Button
-                  onClick={() => {handlerExit(); router.push("/");}}
+                  onClick={() => {
+                    handlerExit();
+                    router.push("/");
+                  }}
                   className="btn_primary logout_btn"
                 >
                   Выйти
@@ -348,10 +355,12 @@ const PersonalArea = (): JSX.Element => {
                           <p
                             className="mobile-text-small"
                             style={{
-                              textDecoration:"underline",
+                              textDecoration: "underline",
                               cursor: "pointer",
                             }}
-                            onClick={() => {handleOrderClick(order.IdOrder);} }
+                            onClick={() => {
+                              handleOrderClick(order.IdOrder);
+                            }}
                           >
                             {order.IdOrder}
                           </p>
@@ -360,7 +369,9 @@ const PersonalArea = (): JSX.Element => {
                           {order.DateOrder.split("T")[0]}
                         </Col>
                         {/* <Col className="mobile-text-smallest">{order.StatusOrder}</Col> */}
-                        <Col className="mobile-text-small" xxs="4">{order.SumOrder} UZS</Col>
+                        <Col className="mobile-text-small" xxs="4">
+                          {order.SumOrder} UZS
+                        </Col>
                       </Row>
                     </Container>
                   )
@@ -394,15 +405,24 @@ const PersonalArea = (): JSX.Element => {
                           </Button>
                         </Col>
                         <Col>
-                          <Button onClick={() => handleShowDeleteModal(order.IdOrder)} className="btn-primary back_btn">Отменить заказ</Button>
+                          <Button
+                            onClick={() => handleShowDeleteModal(order.IdOrder)}
+                            className="btn-primary back_btn"
+                          >
+                            Отменить заказ
+                          </Button>
                         </Col>
                       </Row>
                       <Row className="my-4">
                         <Col>
-                          <h1 className="mobile-heading">Заказ {order.IdOrder}</h1>
+                          <h1 className="mobile-heading">
+                            Заказ {order.IdOrder}
+                          </h1>
                         </Col>
                         <Col>
-                          <h2 className="text-danger mobile-heading">{order.StatusOrder}</h2>
+                          <h2 className="text-danger mobile-heading">
+                            {order.StatusOrder}
+                          </h2>
                         </Col>
                       </Row>
                       <Container
@@ -441,11 +461,8 @@ const PersonalArea = (): JSX.Element => {
                             <Row className="text-secondary mobile-text-small">
                               <p className="mobile-text-small">Адрес</p>
                             </Row>
-                            <Row style={{  textAlign: "center"  }}>
-                              <p
-                                className="mobile-text-smallest"
-                                
-                              >
+                            <Row style={{ textAlign: "center" }}>
+                              <p className="mobile-text-smallest">
                                 {order.StockOrder}
                                 {home}
                               </p>
@@ -458,9 +475,7 @@ const PersonalArea = (): JSX.Element => {
                               className="text-secondary mobile-text-small"
                               style={{ textAlign: "center" }}
                             >
-                              <p className="mobile-text-small">
-                                Комментарий 
-                              </p>
+                              <p className="mobile-text-small">Комментарий</p>
                             </Row>
                             <Row>
                               <p className="mobile-text-smallest">{comment}</p>
