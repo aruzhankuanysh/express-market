@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   Alert,
   Button,
@@ -94,6 +94,8 @@ const PersonalArea = (): JSX.Element => {
       Birthday: d.toISOString().replace("0Z", ""),
       Token: auth.authToken,
     };
+
+    
 
     AppService.putUser(user).then((response) => {
       if (response) {
@@ -214,6 +216,15 @@ const PersonalArea = (): JSX.Element => {
     }
   }, [auth?.user?.id]);
 
+  const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    if (inputValue.length <= 9) {
+      setPhone(inputValue);
+    } else if (inputValue.length > 9) {
+      setPhone(inputValue.slice(0, 9));
+    }
+  };
+
   return (
     <>
       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
@@ -293,7 +304,8 @@ const PersonalArea = (): JSX.Element => {
                       aria-describedby="basic-addon1"
                       className="form_input"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      maxLength={9}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {setPhone(e.target.value); handlePhoneNumberChange(e); }}
                     />
                   </InputGroup>
                 </Col>
@@ -312,9 +324,8 @@ const PersonalArea = (): JSX.Element => {
                 <Col>
                   <Button
                     onClick={() => handlerSave()}
-                    className="gradient_btn save_btn"
+                    className="gradient_btn save_btn animate_button"
                   >
-                    {" "}
                     Сохранить
                   </Button>
                 </Col>
@@ -325,7 +336,7 @@ const PersonalArea = (): JSX.Element => {
                     handlerExit();
                     router.push("/");
                   }}
-                  className="btn_primary logout_btn"
+                  className="btn_primary logout_btn animate_button"
                 >
                   Выйти
                 </Button>

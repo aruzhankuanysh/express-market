@@ -767,4 +767,13 @@ a {
   display: flex;
 }
 
+.animate_button:hover {
+  transition: 300ms ease-in-out !important;
+  background-color: #54535379 !important;
+}
 
+.animate_button:active {
+  transition: 500ms ease-in-out !important;
+  background-color: #38383879 !important;
+  transform:scale(0.8, 0.8);
+}

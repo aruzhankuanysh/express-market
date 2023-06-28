@@ -78,7 +78,7 @@ class ApplicationService {
 
     deleteOrder = async (data:{ IdOrder: string, token: string }) => {
         try {
-            const response = await api.delete(`Orders`, {data})
+            const response = await api.post(`Orders`, {data})
             return response.data;
         } catch (error) {
             console.error(error)

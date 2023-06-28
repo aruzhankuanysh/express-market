@@ -70,7 +70,7 @@ function LoginEmail({
             </Button>
           </Row>
           <Row>
-            <Button onClick={() => handlerSelectPhone()} className="modal_login mt-3">
+            <Button  onClick={() => handlerSelectPhone()} className="modal_login mt-3 animate_button">
               Войти по SMS
             </Button>
           </Row>

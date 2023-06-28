@@ -90,7 +90,7 @@ const SmsModal: React.FC<SmsModalProps> = ({ onClose, show, onBack }) => {
         </Row>
         {showButton ? (
           <Row>
-            <Button className="get_code_btn">Получить новый код</Button>
+            <Button className="get_code_btn animate_button">Получить новый код</Button>
           </Row>
         ) : (
           <Row>

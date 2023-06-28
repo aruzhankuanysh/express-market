@@ -6,7 +6,6 @@ import MenuSpecialOffers from "@/components/catalog/menu-offers";
 import AdviceSlide from "@/components/catalog/menu-advice-slide";
 import Catalog from "@/components/catalog/menu-catalog";
 import ToUpBtn from "@/components/ui-elements/to-up-btn";
-import PageContent from "@/components/page-content";
 
 export default function Home() {
   return (
