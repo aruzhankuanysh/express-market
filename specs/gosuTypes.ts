@@ -13,6 +13,7 @@ export type registerUser = {
   Sex: string;
   Birthday: string;
   Phone: string;
+  Password: string;
   Legal: string; // "false"
 }
 

@@ -1,6 +1,6 @@
 import AppService from "@/specs/gosuService";
 import { User, registerUser } from "@/specs/gosuTypes";
-import { setUser } from "@/store/authSlice";
+import { setAccessToken, setAuthState, setRefreshTokens, setUser } from "@/store/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
@@ -20,6 +20,8 @@ function LoginPhone({
   const dispath = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
 
+  const [password, setPassword] = useState("");
+
   const handlerSendCode = () => {
     dispath(setUser({ ...auth.user, phone: phoneNumber }));
 
@@ -33,7 +35,25 @@ function LoginPhone({
       Sex: "Мужской",
       Birthday: d.toISOString().replace("0Z", ""),
       Phone: `998${phoneNumber}`,
+      Password: password,
       Legal: "false",
+    };
+
+    const handlerVerCode = (value: string, phone: string) => {
+      AppService.postLogin(`998${phone}`, value).then((response) => {
+        console.log("🚀 ~ file: login-phone.tsx:45 ~ AppService.postLogin ~ response:", response)
+
+        if (response?.Token?.accessToken) {
+          dispath(setAccessToken(response.Token?.accessToken ?? ""));
+          dispath(setRefreshTokens(response.Token?.refreshToken ?? ""));
+          dispath(setAuthState(true));
+          onBack(-1);
+          onClose();
+          router.push("/personal-area");
+        } else {
+          dispath(setAuthState(false));
+        }
+      });
     };
 
     AppService.getUser(`998${phoneNumber}`).then((res) => {
@@ -49,6 +69,8 @@ function LoginPhone({
         };
 
         dispath(setUser(db_user));
+        handlerVerCode(password, phoneNumber);
+
       } else {
         AppService.registerUser(user).then((res) => {
           if (res) {
@@ -65,6 +87,7 @@ function LoginPhone({
                 };
 
                 dispath(setUser(db_user));
+                handlerVerCode(password, phoneNumber);
               }
             });
           }
@@ -72,7 +95,7 @@ function LoginPhone({
       }
     });
 
-    onBack(1);
+    // onBack(1);
     onClose();
   };
 
@@ -103,7 +126,7 @@ function LoginPhone({
           <h1 className="modal_heading ">Добро пожаловать в Express Market!</h1>
         </Row>
         <Modal.Title className="modal_subheading my-3">
-          Введите телефон для продолжения
+          Введите телефон и пароль для продолжения
         </Modal.Title>
         <Form>
           <Form.Group as={Row} className="phone_num_row my-4">
@@ -121,13 +144,25 @@ function LoginPhone({
               maxLength={9}
             />
           </Form.Group>
+          <Form.Group as={Row} className="phone_num_row my-4">
+            <Form.Control
+              type="password"
+              className="phone_num ms-5 my-2"
+              value={password}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setPassword(e.target.value);
+              }}
+              maxLength={9}
+            />
+          </Form.Group>
+
           <Row>
             <Button
-              disabled={!(phoneNumber.length >= 9 && phoneNumber.length < 10)}
+              disabled={!(phoneNumber.length >= 9 && phoneNumber.length < 10 && password.length >= 5)}
               className="sms_btn animate_button"
               onClick={() => handlerSendCode()}
             >
-              Получить код по СМС
+              Воход / Регистрация 
             </Button>
           </Row>
         </Form>
