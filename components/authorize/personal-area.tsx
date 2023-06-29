@@ -51,6 +51,19 @@ const PersonalArea = (): JSX.Element => {
     };
   }, []);
 
+  const fetchOrders = () => {
+    if (auth?.user?.id && auth?.user?.id.length > 0) {
+      AppService.postOrdersHistory(auth?.user?.id).then((response) => {
+        if (response) {
+          const Orders: OrderData[] = response?.Orders ?? [];
+          setOrdersHistory(Orders);
+        }
+      });
+    }
+  };
+
+ 
+
   const truncateTitleSmallScreens = (title: string) => {
     const smallScreenSize = 768;
     if (windowWidth <= smallScreenSize && title.length > maxTitleLength) {
@@ -142,7 +155,7 @@ const PersonalArea = (): JSX.Element => {
         .then((response) => {
           if (response) {
             console.log("Заказ удален", requestBody);
-            window.location.reload();
+            fetchOrders(); // обновляем список заказов
           } else {
             console.log("Ошибка");
           }
@@ -150,12 +163,10 @@ const PersonalArea = (): JSX.Element => {
         .catch((error) => {
           console.error("Ошибка во время удаления:", error);
         });
-  
-      handleCloseDeleteModal();
-      setShowOrderDetails(false);
-      setShowOrders(true);
     }
-};
+  };
+  
+
 
   const handlerExit = () => {
     dispatch(setUser(null));
@@ -224,6 +235,10 @@ const PersonalArea = (): JSX.Element => {
       setPhone(inputValue.slice(0, 9));
     }
   };
+
+  useEffect(() => {
+    fetchOrders();
+  }, [auth?.user?.id]);
 
   return (
     <>
