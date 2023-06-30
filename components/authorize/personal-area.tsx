@@ -100,6 +100,7 @@ const PersonalArea = (): JSX.Element => {
     d.setHours(0);
     d.setMinutes(0);
     d.setMilliseconds(0);
+    d.setDate(d.getDate() + 1);
 
     const user: updateUser = {
       Name: name,
