@@ -33,8 +33,10 @@ function DropdownMenu() {
   };
 
   const handleClick = () => {
-    setshow(!show);
-  };
+    if (window.innerWidth <= 768) { 
+        setshow(!show);
+    }
+};
 
   const handleClose = () => {
     setshow(false);
