@@ -102,7 +102,12 @@ const ProductCard = ({ product }: { product: Product }): JSX.Element => {
               flexWrap: "wrap",
             }}
           >
-            <span className="mobile-text">
+            <span
+              onClick={() => {
+                router.push(`/product-page?productId=${product.id}`);
+              }}
+              className="mobile-text"
+            >
               {truncateTitleGlobal(truncateTitleSmallScreens(product?.name))}
             </span>
             <span className="text-secondary">{product?.weight} г</span>
