@@ -161,6 +161,9 @@ const PersonalArea = (): JSX.Element => {
           console.error("Ошибка во время удаления:", error);
         });
     }
+    setShowDeleteModal(false);
+    setShowOrderDetails(false);
+    setShowOrders(true);
   };
 
   const handlerExit = () => {

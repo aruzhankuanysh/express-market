@@ -6,7 +6,7 @@ import PageContent from "@/components/page-content";
 export default function LikeIt() {
   return (
     <Container id="comp_content">
-      <Advice />
+      {/* <Advice /> */}
     </Container>
   );
 }

@@ -14,6 +14,8 @@ function SearchBar(): JSX.Element {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const maxTitleLength = 35;
+const maxTitleLengthGlobal = 40;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,6 +62,14 @@ function SearchBar(): JSX.Element {
     return title;
   };
 
+  const truncateTitleGlobal = (title: string) => {
+    if (title.length > maxTitleLengthGlobal) {
+      return `${title.substring(0, maxTitleLengthGlobal)}...`;
+    }
+    return title;
+  };
+
+
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -99,7 +109,7 @@ function SearchBar(): JSX.Element {
                   handleClick()
                 }}
               >
-                 {truncateTitleSmallScreens(product?.name)}
+                 {truncateTitleGlobal(truncateTitleSmallScreens(product?.name))}
               </Dropdown.Item>
             ))
           ) : (

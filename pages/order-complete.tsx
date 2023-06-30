@@ -28,7 +28,7 @@ const OrderCompletePage = function () {
 
   const [radioValue, setRadioValue] = useState("0");
 
-  const [tipValue, setTipValue] = useState("1");
+  const [tipValue, setTipValue] = useState("0");
 
   const cartProduct = useAppSelector((state) => state.cart.products);
 

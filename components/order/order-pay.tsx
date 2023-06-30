@@ -32,10 +32,10 @@ const OrderPay = ({
     { name: "Наличными курьеру", value: "0" },
   ];
   const tips = [
-    { name: " 0₸", value: "1", sum: 0 },
-    { name: " 200₸", value: "2", sum: 200 },
-    { name: " 500₸", value: "3", sum: 500 },
-    { name: " 700₸", value: "4", sum: 700 },
+    { name: " 0", value: "1", sum: 0 },
+    { name: " 200", value: "2", sum: 200 },
+    { name: " 500", value: "3", sum: 500 },
+    { name: " 700", value: "4", sum: 700 },
     { name: "Другая сумма", value: "5", sum: 0 },
   ];
 

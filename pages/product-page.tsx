@@ -175,7 +175,7 @@ const Index: NextPage = () => {
           </Row>
         </Container>
       </Container>
-      <Advice />
+      {/* <Advice /> */}
     </Container>
   );
 };
