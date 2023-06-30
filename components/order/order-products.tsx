@@ -76,7 +76,7 @@ const OrderProducts = ({handlerPostOrder, tipValue, setTipValue}:any): JSX.Eleme
               <h5>К оплате</h5>
             </Col>
             <Col sm="auto">
-              <h5>{finalPrice} UZS</h5>
+              <h5>{finalPrice + (parseInt(tipValue).toString() === "NaN" ? 0 : parseInt(tipValue))} UZS</h5>
             </Col>
           </Row>
           <BtnPay handlerPostOrder={handlerPostOrder} tipValue={tipValue} setTipValue={setTipValue}/>

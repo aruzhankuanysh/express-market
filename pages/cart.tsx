@@ -68,7 +68,7 @@ const Index: NextPage = () => {
           </Container> */}
               {(cartProduct ?? []).map(
                 (productItem, index) => (
-                  <Container>
+                  <Container key={index+"prod"}>
                     <Row className="mt-5">
                       <Col style={{ maxWidth: "120px" }} lg="2">
                         <PlaceImg
