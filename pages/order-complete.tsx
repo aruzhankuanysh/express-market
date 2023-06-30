@@ -56,9 +56,11 @@ const OrderCompletePage = function () {
           Comment: `{${dataComment}, "comment" : "${comment}"}`,
           ClientId: auth?.user?.id ??"",
           TypePrices: "Прайс-лист",
-          ItemsOrder: items
+          ItemsOrder: items,
+          TipsOrder: tipValue
         }
       }
+      console.log("🚀 ~ file: order-complete.tsx:63 ~ handlerPostOrder ~ order: any.Orders.tipValue:", tipValue)
       console.log("🚀 ~ file: order-complete.tsx:49 ~ handlerPostOrder ~ order:", order)
       AppService.postOrder(order).then((response) => {
         if (response?.Order?.IdOrder) {
