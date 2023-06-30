@@ -25,10 +25,10 @@ const OrderProducts = ({handlerPostOrder, tipValue, setTipValue}:any): JSX.Eleme
   ];
   
   const tips = [
-    { name: " 0₸", value: "1" },
-    { name: " 200₸", value: "2" },
-    { name: " 500₸", value: "3" },
-    { name: " 700₸", value: "4" },
+    { name: " 0", value: "1" },
+    { name: " 200", value: "2" },
+    { name: " 500", value: "3" },
+    { name: " 700", value: "4" },
     { name: "Другая сумма", value: "5" },
   ];
 
