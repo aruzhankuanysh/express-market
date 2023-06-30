@@ -62,8 +62,6 @@ const PersonalArea = (): JSX.Element => {
     }
   };
 
- 
-
   const truncateTitleSmallScreens = (title: string) => {
     const smallScreenSize = 768;
     if (windowWidth <= smallScreenSize && title.length > maxTitleLength) {
@@ -109,8 +107,6 @@ const PersonalArea = (): JSX.Element => {
       Token: auth.authToken,
     };
 
-    
-
     AppService.putUser(user).then((response) => {
       if (response) {
         AppService.getUser(`998${phone}`).then((res) => {
@@ -149,9 +145,9 @@ const PersonalArea = (): JSX.Element => {
     if (orderToDelete) {
       const requestBody = {
         IdOrder: orderToDelete,
-        token: '' 
+        token: "",
       };
-  
+
       AppService.deleteOrder(requestBody)
         .then((response) => {
           if (response) {
@@ -166,8 +162,6 @@ const PersonalArea = (): JSX.Element => {
         });
     }
   };
-  
-
 
   const handlerExit = () => {
     dispatch(setUser(null));
@@ -321,7 +315,10 @@ const PersonalArea = (): JSX.Element => {
                       className="form_input"
                       value={phone}
                       maxLength={9}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => {setPhone(e.target.value); handlePhoneNumberChange(e); }}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setPhone(e.target.value);
+                        handlePhoneNumberChange(e);
+                      }}
                     />
                   </InputGroup>
                 </Col>
@@ -617,27 +614,31 @@ const PersonalArea = (): JSX.Element => {
                           </Row>
                         );
                       })}
-                      <Row className="mt-3">
-                        <Col className="mobile-text" xxs="8">
-                          Чаевые:
-                        </Col>
-                        <Col className="mobile-text">{order.TipsOrder} сум</Col>
-                      </Row>
-                      <Row className="mt-3 ">
-                        <Col
-                          className="mobile-text"
-                          xxs="8"
-                          style={{ fontWeight: "700" }}
-                        >
-                          Итоговая сумма
-                        </Col>
-                        <Col
-                          className="mobile-text"
-                          style={{ fontWeight: "700" }}
-                        >
-                          {order.SumOrder} сум
-                        </Col>
-                      </Row>
+                      <Container style={{maxWidth:"650px"}} className="mx-0 px-0">
+                        <Row className="mt-3">
+                          <Col className="mobile-text" xxs="8">
+                            Чаевые:
+                          </Col>
+                          <Col className="mobile-text">
+                            {order.TipsOrder} сум
+                          </Col>
+                        </Row>
+                        <Row className="mt-3 ">
+                          <Col
+                            className="mobile-text"
+                            xxs="8"
+                            style={{ fontWeight: "700" }}
+                          >
+                            Итоговая сумма
+                          </Col>
+                          <Col
+                            className="mobile-text"
+                            style={{ fontWeight: "700" }}
+                          >
+                            {order.SumOrder} сум
+                          </Col>
+                        </Row>
+                      </Container>
                     </Container>
                   );
                 }
