@@ -245,15 +245,15 @@ const PersonalArea = (): JSX.Element => {
     <>
       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Подтверждение удаления</Modal.Title>
+          <Modal.Title>Подтверждение отмены</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Вы уверены, что хотите удалить этот заказ?</Modal.Body>
+        <Modal.Body>Вы уверены, что хотите отменить этот заказ?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDeleteModal}>
-            Отмена
+            Назад
           </Button>
           <Button variant="danger" onClick={handleConfirmDelete}>
-            Удалить
+            Отменить
           </Button>
         </Modal.Footer>
       </Modal>
