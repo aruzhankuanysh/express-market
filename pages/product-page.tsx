@@ -35,15 +35,15 @@ const Index: NextPage = () => {
   }, [cart_products, product])
 
   const productsTags = [
-    {
-      tag: "-40%",
-    },
-    {
-      tag: "Новинка",
-    },
-    {
-      tag: "Испекли сами",
-    },
+    // {
+    //   tag: "-40%",
+    // },
+    // {
+    //   tag: "Новинка",
+    // },
+    // {
+    //   tag: "Испекли сами",
+    // },
   ];
 
   useEffect(() => {
@@ -60,11 +60,11 @@ const Index: NextPage = () => {
         {/* <h6 className="text-secondary">Главная &gt; Вам понравится</h6> */}
         <BreadCrumbs/>
 
-        <Container style={{ padding: "0" }}>
+        {/* <Container style={{ padding: "0" }}>
           {productsTags.map((productTag) => (
             <a className="me-2 product_tag">{productTag.tag}</a>
           ))}
-        </Container>
+        </Container> */}
         <h1 style={{ fontSize: "64px", fontWeight: "700" }}>
           {product?.name}
         </h1>
@@ -84,13 +84,13 @@ const Index: NextPage = () => {
                   style={{ flexDirection: "row" }}
                 >
                   <div className="ms-3 mt-2" style={{ display: "flex" }}>
-                    <h2 className=" no-background me-3">{product?.price} тг</h2>
-                    <h4 className="position-relative mt-2 text-secondary">
-                      {product?.price} тг
+                    <h2 className=" no-background me-3">{product?.price} сум</h2>
+                    {/* <h4 className="position-relative mt-2 text-secondary">
+                      {product?.price} сум
                       <b className="text-strikethrough no-background">
                         _______
                       </b>
-                    </h4>
+                    </h4> */}
                   </div>
                   <div>
                     <Counter count={count} increment={increment} decrement={decrement} />

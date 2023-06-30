@@ -188,9 +188,9 @@ const Index: NextPage = () => {
             </Col>
           </Row>
         </Container>
-        <Container className=" p-1">
+        {/* <Container className=" p-1">
           <Advice />
-        </Container>
+        </Container> */}
       </Container>
     </>
   );
