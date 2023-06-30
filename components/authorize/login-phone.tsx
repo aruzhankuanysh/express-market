@@ -162,7 +162,7 @@ function LoginPhone({
               className="sms_btn animate_button"
               onClick={() => handlerSendCode()}
             >
-              Воход / Регистрация 
+              Вход / Регистрация 
             </Button>
           </Row>
         </Form>

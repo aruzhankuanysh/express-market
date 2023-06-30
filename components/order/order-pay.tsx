@@ -28,8 +28,8 @@ const OrderPay = ({
   const [tipValue, setTipValue] = useState("1");
   const [] = useState("0");
   const radios = [
-    { name: "Онлайн банковской картой", value: "0" },
-    { name: "Наличными курьеру", value: "1" },
+    // { name: "Онлайн банковской картой", value: "0" },
+    { name: "Наличными курьеру", value: "0" },
   ];
   const tips = [
     { name: " 0₸", value: "1", sum: 0 },
@@ -59,7 +59,7 @@ const OrderPay = ({
         ))}
       </ButtonGroup>
 
-      <Row className="my-3">
+      {/* <Row className="my-3">
         <Form.Label htmlFor="promo">
           <h4>Промокод</h4>
         </Form.Label>
@@ -76,7 +76,7 @@ const OrderPay = ({
             Применить
           </Button>
         </Col>
-      </Row>
+      </Row> */}
 
       <Row className="my-3">
         <Form.Label htmlFor="promo">

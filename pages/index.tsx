@@ -17,8 +17,8 @@ export default function Home() {
               <MenuSideNav />
             </Col>
             <Col xs="9" lg="9" xl="9" className="pe-0 ">
-              <MenuSpecialOffers />
-              <AdviceSlide />
+              {/* <MenuSpecialOffers /> */}
+              {/* <AdviceSlide /> */}
               <Catalog />
             </Col>
           </Row>
