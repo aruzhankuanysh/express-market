@@ -29,7 +29,7 @@ const BtnPay = ({handlerPostOrder, tipValue, setTipValue}: any): JSX.Element => 
           handlerPostOrder();
         }}
       >
-        Перейти к оплате
+        Заказать
       </Button>
       <Modal
         show={modalShow}
