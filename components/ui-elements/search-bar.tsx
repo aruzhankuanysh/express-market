@@ -34,7 +34,7 @@ const maxTitleLengthGlobal = 40;
       }
     };
 
-    fetchData();
+    fetchData(); 
   }, [searchTerm]);
 
   useEffect(() => {
