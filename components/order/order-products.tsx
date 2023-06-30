@@ -51,7 +51,7 @@ const OrderProducts = ({handlerPostOrder, tipValue, setTipValue}:any): JSX.Eleme
           <h4>Ваш заказ</h4>
           <h6 className="text-secondary mb-0">Доставка 25–35 мин</h6>
         </Card.Header>
-        <Card.Body className="px-0">
+        <Card.Body className="px-0"> 
           <Row>
             <Col>
               <h6>Товары</h6>
