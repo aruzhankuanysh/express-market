@@ -18,7 +18,7 @@ import { Product } from "@/specs/gosuTypes";
 function Header(): JSX.Element {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const cart = useAppSelector(state => state.cart);
+  const cart = useAppSelector((state) => state.cart);
 
   const resetImagesState = () => {
     if (cart.products) {
@@ -26,15 +26,18 @@ function Header(): JSX.Element {
       cart.products.forEach(async (product, index) => {
         const res = await AppService.getProduct(product.item.id);
         if (res) {
-          const prod_buf:Product = res["Items"][0]
-          img_list = [...img_list, {id: prod_buf.id, src: prod_buf.images[0]}];
+          const prod_buf: Product = res["Items"][0];
+          img_list = [
+            ...img_list,
+            { id: prod_buf.id, src: prod_buf.images[0] },
+          ];
         } else {
-          dispatch(removeProduct(product.item))
+          dispatch(removeProduct(product.item));
         }
         dispatch(setImages(img_list));
       });
     }
-  }
+  };
 
   useEffect(() => {
     AppService.getCategory().then((res) => {
@@ -55,28 +58,41 @@ function Header(): JSX.Element {
 
   return (
     <>
-      <Navbar className="d-block d-lg-none header_container mb-4 " >
-        <Container className="d-flex ">
-          <Row className="mobile_header" style={{ width: "100%" }}>
-            <Col  xxs="3" md="3">
+      <Navbar className="d-block d-lg-none header_container mb-4 ">
+        <Row className="mobile_header" style={{ width: "100%" }}>
+          <Col xxs="3" md="4">
+            <Container
+              className="d-flex"
+              style={{ justifyContent: "space-around" }}
+            >
               <DropdownMenu />
-            </Col>
-            <Col  xxs="6" md="6">
+            </Container>
+          </Col>
+          <Col xxs="6" md="4">
+            <Container
+              className="d-flex"
+              style={{ justifyContent: "space-around" }}
+            >
               <Image
                 fluid
                 src="/img/express-logo.svg"
                 alt="express-logo"
-                style={{ height: "42px", cursor: "pointer", minWidth:"100px" }}
+                style={{ height: "42px", cursor: "pointer", minWidth: "100px" }}
                 onClick={() => {
                   router.push("/");
                 }}
               />
-            </Col>
-            <Col xxs="3" md="3" className="pe-0"  >
+            </Container>
+          </Col>
+          <Col xxs="3" md="4" className="pe-0">
+            <Container
+              className="d-flex"
+              style={{ justifyContent: "space-around" }}
+            >
               <DropdownCart />
-            </Col>
-          </Row>
-        </Container>
+            </Container>
+          </Col>
+        </Row>
       </Navbar>
 
       <Navbar
@@ -91,7 +107,7 @@ function Header(): JSX.Element {
                 fluid
                 src="/img/express-logo.svg"
                 alt="express-logo"
-                style={{ height: "42px", cursor: "pointer", minWidth:"80px" }}
+                style={{ height: "42px", cursor: "pointer", minWidth: "80px" }}
                 onClick={() => {
                   router.push("/");
                 }}
