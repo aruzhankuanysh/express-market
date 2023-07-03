@@ -33,12 +33,7 @@
     text-align: center !important;
   }
 
-  .dropdown_cart_wrapper {
-  
-
-    width: 100vw;
-  }
-
+ 
   /* .h2-responsive {
       font-size: 16px;
     } */
@@ -130,6 +125,13 @@
   .counter_button h4 {
     font-size: 13px !important;
   }
+
+  .dropdown_cart_wrapper {
+    top: 10 !important;
+    right: 0 !important;
+    width: 90vw !important;
+  }
+
 }
 
 @media (max-width: 300px) {
