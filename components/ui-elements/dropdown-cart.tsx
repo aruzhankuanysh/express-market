@@ -100,7 +100,7 @@ function DropdownCart(): JSX.Element {
         }}
         className="dropdown_cart_wrapper fade_in "
       >
-        <h3>Каталог</h3>
+        <h3>Корзина</h3>
         <Container
           className={`p-0 ${addScroll ? "dropdown_cart_scroll" : ""}`}
           fluid
