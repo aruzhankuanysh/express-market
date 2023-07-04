@@ -5,7 +5,6 @@ const api = axios.create({
     headers: {
         "content-type":"application/json",
         "Accept":"application/json",
-        // "mode": 'no-cors'
     }
 })
 
