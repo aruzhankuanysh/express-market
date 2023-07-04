@@ -5,6 +5,7 @@ const api = axios.create({
     headers: {
         "content-type":"application/json",
         "Accept":"application/json",
+        "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
     }
 })
 
