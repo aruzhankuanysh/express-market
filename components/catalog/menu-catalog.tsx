@@ -12,7 +12,7 @@ const Catalog = ({}): JSX.Element => {
 
   return (
     <>
-      <Row className="mb-5">
+      <Row className="mb-5 ">
         <Container>
           {(Array.isArray(categories.categories) ? categories.categories : []).map((main_category) => (
             <Row key={main_category.category_id} className="mb-5">

@@ -16,7 +16,7 @@ export default function Home() {
               <h5>Каталог</h5>
               <MenuSideNav />
             </Col>
-            <Col xs="9" lg="9" xl="9" className="pe-0 ">
+            <Col xs="9" lg="9" xl="9" className=" ">
               {/* <MenuSpecialOffers /> */}
               {/* <AdviceSlide /> */}
               <Catalog />

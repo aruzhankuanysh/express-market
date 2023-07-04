@@ -98,7 +98,7 @@ function DropdownCart(): JSX.Element {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="dropdown_cart_wrapper fade_in pe-0"
+        className="dropdown_cart_wrapper fade_in "
       >
         <h3>Каталог</h3>
         <Container
@@ -188,7 +188,7 @@ function DropdownCart(): JSX.Element {
             router.push(`/cart`);
             handleClose();
           }}
-          className="btn_orange_gradient open_cart_btn rounded-5 mt-4 "
+          className="btn_orange_gradient open_cart_btn rounded-5 mt-4 mx-auto"
         >
           <p className="m-3 mobile-text">Перейти в корзину</p>
           <p className="m-3 mobile-text">{totalPrice} UZS</p>
