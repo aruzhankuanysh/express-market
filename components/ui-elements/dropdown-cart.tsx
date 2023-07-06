@@ -86,7 +86,7 @@ function DropdownCart(): JSX.Element {
       <div style={{position: "relative"}}>
         <Dropdown.Toggle
           as={Button}
-          className="cart_btn btn_orange_gradient rounded-4 height-3 ms-4 px-4"
+          className="cart_btn btn_orange_gradient rounded-4 height-3 px-4"
         >
           <Image src="/img/cart.svg" alt="cart_icon" style={{ height: "25px" }} />
           <h5 className="m-0 ps-3">{totalPrice} UZS</h5>

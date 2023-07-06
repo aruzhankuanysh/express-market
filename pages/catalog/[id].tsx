@@ -10,6 +10,7 @@ import AppService from "@/specs/gosuService";
 import BreadCrumbs from "@/components/ui-elements/bread-crumbs";
 import GrowSpinner from "@/components/ui-elements/spinner";
 import ToUpBtn from "@/components/ui-elements/to-up-btn";
+import MobileHeader from "@/components/header-mobile";
 
 export interface IProductsCatalog {
   title: string;
@@ -117,6 +118,7 @@ const Menu = (): JSX.Element => {
 
   return (
     <Container id="comp_content" style={{ minHeight: "100vh" }}>
+
       {/* content */}
       <BreadCrumbs />
       <Row>

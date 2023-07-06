@@ -28,7 +28,7 @@ function AdressBar(): JSX.Element {
     <>
       <Form.Select
         aria-label="Default select example"
-        className="input rounded-4 height-3 ms-4"
+        className="input rounded-4 height-3 "
         id="adress_bar"
         onChange={(e) => { handlerChengeCurrentAdress(e.target.value) }}
       >

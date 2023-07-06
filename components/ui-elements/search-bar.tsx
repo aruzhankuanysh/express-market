@@ -85,7 +85,7 @@ const maxTitleLengthGlobal = 40;
         placeholder="Найдите товар"
         id="search_bar"
         autoComplete="off"
-        className="input rounded-4 height-3"
+        className="input rounded-4 height-3 "
         value={searchTerm}
         onChange={handleSearchChange}
       />

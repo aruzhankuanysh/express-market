@@ -3,6 +3,7 @@ import Col from "react-bootstrap/Col";
 import { Button, Container } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store/store";
+import MobileHeader from "../header-mobile";
 
 const Catalog = ({}): JSX.Element => {
   // /imgCategories/Rectangle12.svg
@@ -12,6 +13,7 @@ const Catalog = ({}): JSX.Element => {
 
   return (
     <>
+      <MobileHeader/>
       <Row className="mb-5 ">
         <Container>
           {(Array.isArray(categories.categories) ? categories.categories : []).map((main_category) => (
