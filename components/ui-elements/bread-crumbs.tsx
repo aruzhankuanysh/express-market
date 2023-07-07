@@ -86,7 +86,7 @@ export default function BreadCrumbs() {
         ) : null}
         {rout.map((item, index) => (
           <div
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", fontSize:"16px", fontWeight:"600",  }}
             onClick={() => {
               router.push({
                 pathname: `/catalog/${router.query["id"]}`,
@@ -99,7 +99,6 @@ export default function BreadCrumbs() {
             key={index}
           >
             {item.name_category}
-            {" >"}
           </div>
         ))}
       </>
