@@ -46,7 +46,7 @@ export default function ToUpBtn() {
         cursor: "pointer",
         boxShadow:"0px 0px 11px rgba(0, 0, 0, 0.25)"
       }}
-      className="up_button"
+      className="up_button d-none d-lg-flex"
     >
       <span className="mt-2">^</span>
     </div>
