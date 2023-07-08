@@ -159,7 +159,7 @@ const Index: NextPage = () => {
                       -{discount} сум
                     </Col>
                   </Row>
-                ) : null}
+                ) : null}  
 
                 <Row className="mb-0">
                   <Col style={{ fontWeight: "600" }}>Стоимость доставки</Col>
