@@ -4,8 +4,6 @@ import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { decProduct, incProduct } from "@/store/cartSlice";
 import PlaceImg from "./place-img";
-import { MiniProduct, Product } from "@/specs/gosuTypes";
-import AppService from "@/specs/gosuService";
 
 function DropdownCart(): JSX.Element {
   const [show, setShow] = useState(false);
