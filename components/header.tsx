@@ -139,9 +139,9 @@ function Header(): JSX.Element {
         className=" mb-4 me-0 px-0 py-3 d-none d-lg-flex"
       >
         <Row className="px-0 " style={{ width: "100vw" }}>
-          <Col className="d-flex " lg={3} 	xxl={3}>
+          <Col className="d-flex " lg={3} 	xxl={3} xl={3}> 
             <Row>
-              <Col>
+              <Col className="ps-5">
                 <Image
                   fluid
                   src="/img/express-logo.svg"
@@ -161,18 +161,18 @@ function Header(): JSX.Element {
               </Col>
             </Row>
           </Col>
-          <Col lg={4} 	xxl={6}>
+          <Col lg={4} 	xxl={5} xl={5}>
             <SearchBar />
           </Col>
-          <Col lg={5} 	xxl={4} className="pe-0" style={{maxWidth:"500px"}}>
+          <Col lg={5} 	xxl={4} xl={4} className="pe-0" style={{maxWidth:"500px"}}>
             <Row className="p-0  m-0">
-              <Col lg={6} 	xxl={6}>
+              <Col lg={6} 	xxl={6} xl={6}>
                 <AdressBar />
               </Col>
-              <Col lg={4} 	xxl={4}>
+              <Col lg={4} 	xxl={4} xl={4}>
                 <DropdownCart />
               </Col>
-              <Col className="ps-3" lg={2} 	xxl={2}>
+              <Col className="ps-3" lg={2} 	xxl={2} xl={2}>
                 <Login />
               </Col>
             </Row>

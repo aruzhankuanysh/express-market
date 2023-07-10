@@ -763,3 +763,13 @@ a {
 .category_wrap {
   background-size: cover;
 }
+
+.categories_nav {
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  background-color: #cec9c9;
+}
+

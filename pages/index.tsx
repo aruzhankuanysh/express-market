@@ -6,6 +6,7 @@ import MenuSpecialOffers from "@/components/catalog/menu-offers";
 import AdviceSlide from "@/components/catalog/menu-advice-slide";
 import Catalog from "@/components/catalog/menu-catalog";
 import ToUpBtn from "@/components/ui-elements/to-up-btn";
+import MobileCart from "@/components/ui-elements/mobile-cart";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
             </Col>
           </Row>
           <ToUpBtn/>
+          <MobileCart/>
         </Container>
     </>
   );

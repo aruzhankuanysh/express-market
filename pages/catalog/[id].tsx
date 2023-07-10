@@ -10,9 +10,13 @@ import AppService from "@/specs/gosuService";
 import BreadCrumbs from "@/components/ui-elements/bread-crumbs";
 import GrowSpinner from "@/components/ui-elements/spinner";
 import ToUpBtn from "@/components/ui-elements/to-up-btn";
-import MobileHeader from "@/components/header-mobile";
+import SearchIcon from "@mui/icons-material/Search";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Link from "next/link";
+import MobileCart from "@/components/ui-elements/mobile-cart";
 
 export interface IProductsCatalog {
+  brand_id: string;
   title: string;
   ProductsList: Array<Product>;
 }
@@ -21,8 +25,10 @@ const Menu = (): JSX.Element => {
   const router = useRouter();
   const [children, setChildren] = useState("");
   const [brand, setBrand] = useState("");
+  const [showAllCategories, setShowAllCategories] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [ProductsList, setProductsList] = useState<Product[] | null>(null);
+  const [expanded, setExpanded] = useState(false);
   const categories = useAppSelector((state) => state.category);
   const [ProductsCatalog, setProductsCatalog] = useState<
     IProductsCatalog[] | null
@@ -86,6 +92,9 @@ const Menu = (): JSX.Element => {
                 categories.categories[index].children_category[child_index]
                   .brand[brend_index].name_category,
               ProductsList: ProductsList ?? [],
+              brand_id:
+                categories.categories[index].children_category[child_index]
+                  .brand[brend_index].category_id,
             };
             setProductsCatalog([buf]);
           } else {
@@ -98,6 +107,7 @@ const Menu = (): JSX.Element => {
               );
               buf_list.push({
                 title: brand_item.name_category,
+                brand_id: brand_item.category_id,
                 ProductsList: prod_buf ?? [],
               });
             });
@@ -118,25 +128,109 @@ const Menu = (): JSX.Element => {
 
   return (
     <Container id="comp_content" style={{ minHeight: "100vh" }}>
+      <div className="mobile_category_nav">
+        <Row
+          className="d-flex d-lg-none mt-3 "
+          style={{
+            height: "50px",
+            bottom: "94.5%",
+            width: "100vw",
+            borderBottom: " solid 1px rgba(0, 0, 0, 0.2)",
+            position: "fixed",
+            background: "rgb(245, 245, 245)",
+            alignContent: "center",
+            zIndex: "99",
+          }}
+        >
+          <Col xxs={2} onClick={() => router.push("/")}>
+            <ArrowBackIcon />
+          </Col>
 
-      {/* content */}
-      <BreadCrumbs />
+          <Col xxs={8} className="d-flex" style={{ justifyContent: "center" }}>
+            <BreadCrumbs />
+          </Col>
+          <Col
+            xxs={2}
+            className="d-flex"
+            style={{ justifyContent: "flex-end" }}
+          >
+            <SearchIcon />
+          </Col>
+        </Row>
+        <div style={{ marginTop: "70px" }} className="d-block d-lg-none ">
+          {categories?.categories &&
+          router.query["id"] &&
+          router.query["children"]
+            ? categories.categories
+                .filter(
+                  (main_category) =>
+                    main_category.category_id === router.query["id"]
+                )
+                .flatMap((main_category) => main_category.children_category)
+                .filter(
+                  (children_category) =>
+                    children_category.category_id === router.query["children"]
+                )
+                .flatMap(
+                  (selected_child_category) => selected_child_category.brand
+                )
+                .slice(0, showAllCategories ? undefined : 5)
+                .map((brand_item) => (
+                  <Link
+                    key={brand_item.category_id}
+                    href={`#${brand_item.category_id}`}
+                    // passHref
+                  >
+                    <span className="categories_nav mx-1 px-2 py-1 rounded-4 mt-2">
+                      {brand_item.name_category}
+                    </span>
+                  </Link>
+                ))
+            : null}
+
+          {categories?.categories &&
+            router.query["id"] &&
+            router.query["children"] &&
+            categories.categories
+              .filter(
+                (main_category) =>
+                  main_category.category_id === router.query["id"]
+              )
+              .flatMap((main_category) => main_category.children_category)
+              .filter(
+                (children_category) =>
+                  children_category.category_id === router.query["children"]
+              )
+              .flatMap(
+                (selected_child_category) => selected_child_category.brand
+              ).length > 5 && (
+              <button
+                className="categories_nav mx-1 px-2 py-1 rounded-4 mt-2"
+                style={{ border: "none" }}
+                onClick={() => setShowAllCategories(!showAllCategories)}
+              >
+                {showAllCategories ? "<" : "Показать все"}
+              </button>
+            )}
+        </div>
+      </div>
+
       <Row>
         <Col xs="3" lg="3" xl="3" className="pe-4">
-          
           <CategoriesNav />
         </Col>
         <Col>
           {isLoading ? (
-            <GrowSpinner/>
+            <GrowSpinner />
           ) : (
             <CategoriesMenu ProductsCatalog={ProductsCatalog ?? []} />
           )}
         </Col>
       </Row>
-      <ToUpBtn/>
-
+      <ToUpBtn />
+       <MobileCart/>
     </Container>
+   
   );
 };
 

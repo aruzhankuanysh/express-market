@@ -63,7 +63,7 @@ function MobileHeader(): JSX.Element {
   return (
     <>
       <Navbar className="d-block d-lg-none mb-4 ">
-        <Row className="px-2">
+        <Row className="px-2 mt-2">
           <Col
             style={{
               display: "flex",
@@ -71,27 +71,29 @@ function MobileHeader(): JSX.Element {
               justifyContent: "flex-start",
             }}
             xxs={2}
+            md={1}
             className="p-0"
           >
-            <Sidebar />
+            <DropdownMenu />
           </Col>
-          <Col xxs={10} className="mt-2 px-0">
+          <Col xxs={10} md={11} className="px-0">
             <AdressBar />
           </Col>
         </Row>
         <Row className="mt-3 px-2 mb-3">
-          <Col xss={10} className="px-0">
+          <Col xxs={10}  md={11} className="px-0">
             <Form.Control
               placeholder="Найдите товар"
               id="search_bar"
               autoComplete="off"
+              style={{height:"48px"}}
               className="input rounded-4 height-3"
               // onClick={() => {
               //   router.push("/orders");
               // }}
             />
           </Col>
-          <Col xxs={2}>
+          <Col xxs={2} md={1} className="px-0" style={{display:"flex", justifyContent:"flex-end"}}>
             <Login />
           </Col>
         </Row>
@@ -109,7 +111,7 @@ function MobileHeader(): JSX.Element {
 
               return filteredSubcategories.length > 0 ? (
                 <Row key={main_category.category_id}>
-                  {filteredSubcategories.map((children_category) => ( 
+                  {filteredSubcategories.map((children_category) => (
                     <Col
                       key={children_category.category_id}
                       style={{ padding: "0", width: "33%" }}
