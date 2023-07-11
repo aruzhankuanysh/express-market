@@ -18,7 +18,7 @@ export default function search() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const categories = useAppSelector((state) => state.category);
   const router = useRouter();
-  const maxTitleLength = 35;
+  const maxTitleLength = 35; 
   const maxTitleLengthGlobal = 40;
 
   useEffect(() => {
