@@ -62,8 +62,6 @@ function Header(): JSX.Element {
 
   return (
     <>
-     
-
       <Navbar
         style={{
           borderBottom: " solid 1px rgba(0, 0, 0, 0.2)",
@@ -71,7 +69,7 @@ function Header(): JSX.Element {
         }}
         className=" mb-4 me-0 px-0 py-3 d-none d-md-flex"
       >
-        <Row className="px-0 " style={{ width: "100vw" }}>
+        <Row className="px-0 " style={{ width: "100vw", justifyContent: "space-evenly" }}>
           <Col className="d-flex " lg={3} 	xxl={3} xl={3} md={4}> 
             <Row>
               <Col className="ps-5 ">
