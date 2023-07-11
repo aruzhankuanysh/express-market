@@ -26,7 +26,7 @@ function MobileHeader(): JSX.Element {
 
   const checkScroll = () => {
     if (window.scrollY > 0) {
-      setIsScrolled(true);
+      setIsScrolled(true); 
     } else {
       setIsScrolled(false);
     }
