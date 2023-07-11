@@ -4,6 +4,7 @@ import { Button, Container } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { useAppSelector } from "@/store/store";
 import MobileHeader from "../header-mobile";
+import AdviceSlide from "./menu-advice-slide";
 
 const Catalog = ({}): JSX.Element => {
   // /imgCategories/Rectangle12.svg
@@ -13,23 +14,40 @@ const Catalog = ({}): JSX.Element => {
 
   return (
     <>
-      <MobileHeader/>
+      <MobileHeader />
+      {/* <AdviceSlide /> */}
+
       <Row className="mb-5 ">
         <Container>
-          {(Array.isArray(categories.categories) ? categories.categories : []).map((main_category) => (
+          {(Array.isArray(categories.categories)
+            ? categories.categories
+            : []
+          ).map((main_category) => (
             <Row key={main_category.category_id} className="mb-5">
               <h1 className="mb-4">{main_category.name_category}</h1>
-              {(main_category.children_category ?? []).map((children_category) => (
-                <Col className="category_wrap"  key={children_category.category_id} style={{padding: '0', minWidth: '20%'}}>
-                    <Button 
-                      className="catalog_button" 
-                      style={{backgroundImage:`url(/imgCategories/${children_category.category_id}.svg)`}}
-                      onClick={() => router.push(`/catalog/${main_category.category_id}?children=${children_category.category_id}`)}
+              {(main_category.children_category ?? []).map(
+                (children_category) => (
+                  <Col
+                    className="category_wrap"
+                    key={children_category.category_id}
+                    style={{ padding: "0", minWidth: "20%" }}
+                  >
+                    <Button
+                      className="catalog_button"
+                      style={{
+                        backgroundImage: `url(/imgCategories/${children_category.category_id}.svg)`,
+                      }}
+                      onClick={() =>
+                        router.push(
+                          `/catalog/${main_category.category_id}?children=${children_category.category_id}`
+                        )
+                      }
                     >
                       <h4>{children_category.name_category}</h4>
                     </Button>
-                </Col>
-              ))}
+                  </Col>
+                )
+              )}
             </Row>
           ))}
         </Container>

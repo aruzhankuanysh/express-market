@@ -81,17 +81,18 @@ function DropdownCart(): JSX.Element {
       }}
       show={show}
     >
-      <div style={{position: "relative"}}>
+      {/* <div style={{position: "relative"}}> */}
         <Dropdown.Toggle
+          
           as={Button}
           className="cart_btn btn_orange_gradient rounded-4 height-3 px-4"
         >
           <Image src="/img/cart.svg" alt="cart_icon" style={{ height: "25px" }} />
           <h5 className="m-0 ps-3">{totalPrice} UZS</h5>
-          <h4 className="d-block d-lg-none ms-2 mt-0" style={{backgroundColor:"rgba(141, 126, 126, 0.623)", borderRadius:"100%", position:"absolute", width:"18px", left:"44px", bottom:"19px", fontSize:"14px"}}>{cartProduct && cartProduct?.length > 0 ? <span >{cartProduct?.length ?? 0}</span> : null}</h4>
+          {/* <h4 className="d-block d-lg-none ms-2 mt-0" style={{backgroundColor:"rgba(141, 126, 126, 0.623)", borderRadius:"100%", position:"absolute", width:"18px", left:"44px", bottom:"19px", fontSize:"14px"}}>{cartProduct && cartProduct?.length > 0 ? <span >{cartProduct?.length ?? 0}</span> : null}</h4> */}
         </Dropdown.Toggle>
         
-      </div>
+      {/* </div> */}
       <Dropdown.Menu
         onClick={(e) => {
           e.stopPropagation();

@@ -5,16 +5,15 @@ import { useRouter } from "next/router";
 import SearchBar from "./ui-elements/search-bar";
 import Login from "./authorize/login";
 import AdressBar from "./ui-elements/address-bar";
-import DropdownMenu from "./ui-elements/dropdown-menu";
-import DropdownCart from "./ui-elements/dropdown-cart";
-import { useEffect } from "react";
+import DropdownMenu from "./ui-elements/mobile-dropdown";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setCategory } from "@/store/categorySlice";
 import { setStocks } from "@/store/stockSlice";
 import AppService from "@/specs/gosuService";
+import { CSSTransition } from "react-transition-group";
 import { IcartImg, removeProduct, setImages } from "@/store/cartSlice";
 import { Product } from "@/specs/gosuTypes";
-import Sidebar from "./sidebar";
 
 function MobileHeader(): JSX.Element {
   const router = useRouter();
@@ -23,6 +22,22 @@ function MobileHeader(): JSX.Element {
   const categories = useAppSelector((state) => state.category);
 
   const subcategoriesToShow = ["00-00000013", "00-00000047", "00-00000182"];
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const checkScroll = () => {
+    if (window.scrollY > 0) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", checkScroll);
+    return () => {
+      window.removeEventListener("scroll", checkScroll);
+    };
+  }, []);
 
   const resetImagesState = () => {
     if (cart.products) {
@@ -62,8 +77,45 @@ function MobileHeader(): JSX.Element {
 
   return (
     <>
-      <Navbar className="d-block d-lg-none mb-4 ">
-        <Row className="px-2 mt-2">
+      <CSSTransition
+        in={isScrolled}
+        timeout={300}
+        classNames="show"
+        unmountOnExit
+      >
+        <Row
+          key={isScrolled ? "visible" : "hidden"}
+          className={`d-flex d-lg-none p-2 ${
+            isScrolled ? "flowed" : "inFlowed"
+          }`}
+          style={{
+            position: "fixed",
+            top: "0px",
+            height: "70px",
+            backgroundColor: "rgb(245, 245, 245)",
+            width: "100vw",
+            zIndex: "99",
+            justifyContent: "space-around",
+            borderRadius: "0 0 25px 25px",
+            boxShadow: "1px 1px 7px 2px grey ",
+          }}
+        >
+          <Col xxs={9} md={11} className="px-0">
+            <SearchBar />
+          </Col>
+          <Col
+            xxs={2}
+            md={1}
+            className="px-0"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <Login />
+          </Col>
+        </Row>
+      </CSSTransition>
+
+      <Navbar className="d-block d-md-none mb-4 ">
+        <Row className="px-2 mt-2" style={{ justifyContent: "space-around" }}>
           <Col
             style={{
               display: "flex",
@@ -76,24 +128,28 @@ function MobileHeader(): JSX.Element {
           >
             <DropdownMenu />
           </Col>
-          <Col xxs={10} md={11} className="px-0">
+          <Col xxs={9} md={11} className="px-0">
             <AdressBar />
           </Col>
         </Row>
-        <Row className="mt-3 px-2 mb-3">
-          <Col xxs={10}  md={11} className="px-0">
+        <Row
+          className="mt-3 px-2 mb-3 "
+          style={{ justifyContent: "space-around" }}
+        >
+          <Col xxs={9} md={11} className="px-0">
             <Form.Control
               placeholder="Найдите товар"
-              id="search_bar"
               autoComplete="off"
-              style={{height:"48px"}}
-              className="input rounded-4 height-3"
-              // onClick={() => {
-              //   router.push("/orders");
-              // }}
+              className="input rounded-4 height-3 search_bar"
+              onClick={ () => {router.push('search')}}
             />
           </Col>
-          <Col xxs={2} md={1} className="px-0" style={{display:"flex", justifyContent:"flex-end"}}>
+          <Col
+            xxs={2}
+            md={1}
+            className="px-0"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
             <Login />
           </Col>
         </Row>
@@ -127,7 +183,7 @@ function MobileHeader(): JSX.Element {
                           )
                         }
                       >
-                        <h4 style={{ fontSize: "1rem" }}>
+                        <h4 style={{ fontSize: "0.9rem" }}>
                           {children_category.name_category}
                         </h4>
                       </Button>

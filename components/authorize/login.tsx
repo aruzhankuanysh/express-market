@@ -36,7 +36,8 @@ function Login(): JSX.Element {
   return (
     <>
       <Button
-        className="btn_grey  rounded-4 height-3 px-3 animate_button"
+        style={{height:"48.74px"}}
+        className="btn_grey  rounded-4 px-3 animate_button"
         onClick={() => {
           if (auth.authState) {
             router.push("/personal-area");

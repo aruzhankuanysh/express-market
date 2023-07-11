@@ -33,7 +33,7 @@ function DropdownMenu() {
   };
 
   const handleClick = () => {
-    if (window.innerWidth <= 768) { 
+    if (window.innerWidth <= 1000) { 
         setshow(!show);
     }
 };
@@ -71,18 +71,7 @@ function DropdownMenu() {
         style={{top:"45px", boxShadow:"0px 0px 11px rgba(0, 0, 0, 0.25)", width:"90vw", maxWidth:"320px"}}
       >
         <Container className="px-4">
-          <Row className="my-4 d-flex d-lg-none ">
-            <Col className="dropdown_nav" >
-              <AdressBar />
-            </Col>
-            <Col className="dropdown_nav">
-              <Login />                  
-            </Col>
-          </Row>
-          <Row className="d-block d-lg-none ">
-            <SearchBar />
-          </Row>
-
+        
           <h1 className="mt-3" style={{ width: "80%", margin: "auto" }}>
             Каталог
           </h1>

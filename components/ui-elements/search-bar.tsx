@@ -83,9 +83,8 @@ const maxTitleLengthGlobal = 40;
     <>
       <Form.Control
         placeholder="Найдите товар"
-        id="search_bar"
         autoComplete="off"
-        className="input rounded-4 height-3 "
+        className="input search_bar rounded-4 height-3 "
         value={searchTerm}
         onChange={handleSearchChange}
       />

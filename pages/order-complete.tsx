@@ -12,6 +12,7 @@ import { ItemsOrder, Order } from "@/specs/gosuTypes";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { removeAllProducts } from "@/store/cartSlice";
 import { useRouter } from "next/router";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const OrderCompletePage = function () {
   const [intercom, setIntercom] = useState("");
@@ -36,36 +37,41 @@ const OrderCompletePage = function () {
   const router = useRouter();
 
   const handlerPostOrder = () => {
-    if (phone.length >= 9 && phone.length <= 10 && home.length >= 1 && stocks.currentStock?.StockName) {
+    if (
+      phone.length >= 9 &&
+      phone.length <= 10 &&
+      home.length >= 1 &&
+      stocks.currentStock?.StockName
+    ) {
       let date = new Date();
       date.setMilliseconds(0);
-      const dataComment = `"adress" : {"Контактный-нoмер": "+998${phone}", "Дом":"${home}", "Кв-офис":"${apartment}", "Подъезд":"${entrance}", "Этаж":"${floor}", "Домофон":"${intercom}"}`
+      const dataComment = `"adress" : {"Контактный-нoмер": "+998${phone}", "Дом":"${home}", "Кв-офис":"${apartment}", "Подъезд":"${entrance}", "Этаж":"${floor}", "Домофон":"${intercom}"}`;
 
       const items = (cartProduct ?? []).map((prod) => {
         const p: ItemsOrder = {
           IdItem: prod.item.id,
           QuantityItem: prod.count,
-          PriceItem: prod.item.price
-        }
+          PriceItem: prod.item.price,
+        };
         return p;
-      })
+      });
       const order: any = {
         Orders: {
           DateOrder: date.toISOString().replace("0Z", ""),
           Stock: stocks.currentStock?.StockName,
           Comment: `{${dataComment}, "comment" : "${comment}"}`,
-          ClientId: auth?.user?.id ??"",
+          ClientId: auth?.user?.id ?? "",
           TypePrices: "Прайс-лист",
           ItemsOrder: items,
-          TipsOrder: tipValue
-        }
-      }
+          TipsOrder: tipValue,
+        },
+      };
       AppService.postOrder(order).then((response) => {
         if (response?.Order?.IdOrder) {
           dispatch(removeAllProducts());
-          router.push("/")
+          router.push("/");
         }
-      })
+      });
     }
   };
 
@@ -76,7 +82,14 @@ const OrderCompletePage = function () {
       <Container id="comp_content" style={{ minHeight: "80vh" }}>
         <Row>
           <Col xs="9" lg="9" xl="9">
-            <h1 className="fw-bold mb-4">Оформление заказа</h1>
+            <h1 className="fw-bold mb-4 d-flex mobile-heading-large" style={{alignItems:"center"}}>
+              <span onClick={() => {
+                router.push('/')
+              }} className="d-block d-lg-none">
+                <ArrowBackIcon />
+              </span>
+              <span className="mx-auto">Оформление заказа</span>
+            </h1>
             <Form>
               <Form.Label htmlFor="phone-number">
                 <h4>Контактный нoмер*</h4>
@@ -142,13 +155,13 @@ const OrderCompletePage = function () {
         </Row>
         <Row>
           <Alert variant={"warning"} className="bg-transparent border-none">
-            {!(phone.length >= 9 && phone.length <= 10 )? (
+            {!(phone.length >= 9 && phone.length <= 10) ? (
               <p>
                 <i className="bi bi-exclamation-circle-fill text-warning"></i>{" "}
                 Укажите номер телефона
               </p>
             ) : null}
-            {!(home.length >= 1)? (
+            {!(home.length >= 1) ? (
               <p>
                 <i className="bi bi-exclamation-circle-fill text-warning"></i>{" "}
                 Укажите номер дома

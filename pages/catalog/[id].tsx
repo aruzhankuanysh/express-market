@@ -130,10 +130,10 @@ const Menu = (): JSX.Element => {
     <Container id="comp_content" style={{ minHeight: "100vh" }}>
       <div className="mobile_category_nav">
         <Row
-          className="d-flex d-lg-none mt-3 "
+          className="d-flex d-md-none "
           style={{
             height: "50px",
-            bottom: "94.5%",
+            top: "0px",
             width: "100vw",
             borderBottom: " solid 1px rgba(0, 0, 0, 0.2)",
             position: "fixed",
@@ -154,7 +154,11 @@ const Menu = (): JSX.Element => {
             className="d-flex"
             style={{ justifyContent: "flex-end" }}
           >
-            <SearchIcon />
+            <span onClick={() => {
+              router.push('/search')
+            }}>
+              <SearchIcon />
+            </span>
           </Col>
         </Row>
         <div style={{ marginTop: "70px" }} className="d-block d-lg-none ">
@@ -228,9 +232,8 @@ const Menu = (): JSX.Element => {
         </Col>
       </Row>
       <ToUpBtn />
-       <MobileCart/>
+      <MobileCart />
     </Container>
-   
   );
 };
 

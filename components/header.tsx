@@ -62,86 +62,19 @@ function Header(): JSX.Element {
 
   return (
     <>
-      {/* <Navbar className="d-block d-lg-none mb-4 px-4">
-        <Row>
-          <Col
-            style={{
-              display: "flex",
-              alignItems: " center",
-              justifyContent: "flex-start",
-            }}
-            xxs={2}
-            className="p-0"
-          >
-            <Sidebar />
-          </Col>
-          <Col xxs={10} className="mt-2">
-            <AdressBar />
-          </Col>
-        </Row>
-        <Row className="mt-3">
-          <Col xss={12} className="px-0">
-            <Form.Control
-              placeholder="Найдите товар"
-              id="search_bar"
-              autoComplete="off"
-              className="input rounded-4 height-3"
-              // onClick={() => {
-              //   router.push("/orders");
-              // }}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Container>
-            {(Array.isArray(categories.categories)
-              ? categories.categories
-              : []
-            ).map((main_category) => (
-              <Row key={main_category.category_id} className="mb-5">
-                {(main_category.children_category ?? []).map(
-                  (children_category) =>
-                    subcategoriesToShow.includes(
-                      children_category.category_id
-                    ) ? (
-                      <Col
-                        className="category_wrap"
-                        key={children_category.category_id}
-                        style={{ padding: "0", minWidth: "20%" }}
-                      >
-                        <Button
-                          className="catalog_button"
-                          style={{
-                            backgroundImage: `url(/imgCategories/${children_category.category_id}.svg)`,
-                          }}
-                          onClick={() =>
-                            router.push(
-                              `/catalog/${main_category.category_id}?children=${children_category.category_id}`
-                            )
-                          }
-                        >
-                          <h4>{children_category.name_category}</h4>
-                        </Button>
-                      </Col>
-                    ) : null
-                )}
-              </Row>
-            ))}
-          </Container>
-        </Row>
-      </Navbar> */}
+     
 
       <Navbar
         style={{
           borderBottom: " solid 1px rgba(0, 0, 0, 0.2)",
-          width: "100vw",
+          width: "100%",
         }}
-        className=" mb-4 me-0 px-0 py-3 d-none d-lg-flex"
+        className=" mb-4 me-0 px-0 py-3 d-none d-md-flex"
       >
         <Row className="px-0 " style={{ width: "100vw" }}>
-          <Col className="d-flex " lg={3} 	xxl={3} xl={3}> 
+          <Col className="d-flex " lg={3} 	xxl={3} xl={3} md={4}> 
             <Row>
-              <Col className="ps-5">
+              <Col className="ps-5 ">
                 <Image
                   fluid
                   src="/img/express-logo.svg"
@@ -161,18 +94,18 @@ function Header(): JSX.Element {
               </Col>
             </Row>
           </Col>
-          <Col lg={4} 	xxl={5} xl={5}>
+          <Col lg={3} 	xxl={5} xl={4} md={4}>
             <SearchBar />
           </Col>
-          <Col lg={5} 	xxl={4} xl={4} className="pe-0" style={{maxWidth:"500px"}}>
+          <Col lg={6} 	xxl={4} xl={6} md={4} className="pe-0 px-0" style={{maxWidth:"500px"}}>
             <Row className="p-0  m-0">
-              <Col lg={6} 	xxl={6} xl={6}>
+              <Col lg={6} 	xxl={6} xl={6} md={6}>
                 <AdressBar />
               </Col>
-              <Col lg={4} 	xxl={4} xl={4}>
+              <Col lg={4} xxl={4} xl={4} md={3}>
                 <DropdownCart />
               </Col>
-              <Col className="ps-3" lg={2} 	xxl={2} xl={2}>
+              <Col className="d-flex pe-0" lg={2} 	xxl={2} xl={2} md={3} style={{justifyContent:"center"}}>
                 <Login />
               </Col>
             </Row>

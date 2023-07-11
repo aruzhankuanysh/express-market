@@ -36,7 +36,7 @@ const MobileCart = (): null | JSX.Element => {
 
   return (
     <>
-      <Container
+      <div
         className={`px-0 d-block d-lg-none showAnimation ${
           startHiding ? "hideAnimation" : ""
         }`}
@@ -63,7 +63,7 @@ const MobileCart = (): null | JSX.Element => {
           <p className="m-2 ">Перейти в корзину</p>
           <p className="m-2 ">{totalPrice} UZS</p>
         </Button>
-      </Container>
+      </div>
     </>
   );
 };

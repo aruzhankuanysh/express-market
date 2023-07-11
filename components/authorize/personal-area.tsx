@@ -22,6 +22,7 @@ import {
 } from "@/store/authSlice";
 import { useRouter } from "next/router";
 import AppService from "@/specs/gosuService";
+import CloseIcon from "@mui/icons-material/Close";
 
 const maxTitleLength = 15;
 
@@ -240,6 +241,23 @@ const PersonalArea = (): JSX.Element => {
 
   return (
     <>
+      <div className="d-block d-md-none"
+        onClick={() => {
+          router.push("/");
+        }}
+        style={{
+          padding: "5px",
+          position: "fixed",
+          zIndex: "99",
+          top:"20px",
+          left:"85%",
+          background: "rgb(245, 245, 245)",
+          boxShadow: "0px 2px 1px 3px rgba(217, 217, 217, 0.9)",
+          borderRadius: "100%",
+        }}
+      >
+        <CloseIcon />
+      </div>
       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
         <Modal.Header closeButton>
           <Modal.Title>Подтверждение отмены</Modal.Title>
@@ -617,7 +635,10 @@ const PersonalArea = (): JSX.Element => {
                           </Row>
                         );
                       })}
-                      <Container style={{maxWidth:"650px"}} className="mx-0 px-0">
+                      <Container
+                        style={{ maxWidth: "650px" }}
+                        className="mx-0 px-0"
+                      >
                         <Row className="mt-3">
                           <Col className="mobile-text" xxs="8">
                             Чаевые:
