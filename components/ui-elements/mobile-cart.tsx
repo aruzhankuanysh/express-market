@@ -6,19 +6,19 @@ import { useRouter } from "next/router";
 const MobileCart = (): null | JSX.Element => {
   const dispath = useAppDispatch();
   const [isHidden, setIsHidden] = useState(true); 
-  const totalPrice = useAppSelector((state) => state.cart.total);
+  const totalProd = useAppSelector((state) => state.cart.products);
   const [startHiding, setStartHiding] = useState(false);
-  const cartProduct = useAppSelector((state) => state.cart.products);
+  const totalPrice = useAppSelector((state) => state.cart.total);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (totalPrice > 0 && isHidden) {
+    if ((totalProd?.length ?? 0) > 0 && isHidden) {
       setIsHidden(false);
-    } else if (totalPrice <= 0 && !isHidden && !startHiding) {
+    } else if ((totalProd?.length ?? 0) <= 0 && !isHidden && !startHiding) {
       setStartHiding(true); 
     }
-  }, [totalPrice]);
+  }, [totalProd]);
 
   useEffect(() => {
     if (startHiding) {
