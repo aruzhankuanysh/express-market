@@ -1,12 +1,18 @@
 import { setCurrentStock } from "@/store/stockSlice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useEffect, useState } from "react";
-import Form from "react-bootstrap/Form";
+import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
+import { Container, Modal, Button } from "react-bootstrap";
 
 function AdressBar(): JSX.Element {
+  const [show, setShow] = useState(false)
   const stocks = useAppSelector(state => state.stock);
   const [adress, setAdress] = useState<any[]>([]);
   const dispatch = useAppDispatch();
+  const defaultState = {
+    center: [46, 72],
+    zoom: 5,
+  }
 
   useEffect(() => {
     setAdress(stocks.stocks ? stocks.stocks.map((stock, index) => {
@@ -24,18 +30,29 @@ function AdressBar(): JSX.Element {
     }
   }
 
+  const showHandler = () => { 
+    setShow(!show)
+  } 
+
   return (
     <>
-      <Form.Select
+      <Button
         aria-label="Default select example"
         className="input rounded-4 height-3 "
         id="adress_bar"
-        onChange={(e) => { handlerChengeCurrentAdress(e.target.value) }}
+        onClick={showHandler}
       >
         {adress.map((addresses, index) => (
           <option key={index} selected={addresses.address === stocks.currentStock?.StockName} value={addresses.id}>{addresses.address}</option>
         ))}
-      </Form.Select>
+      </Button>
+      <Modal centered onHide={() => setShow(false)} show={show}>
+          <YMaps >
+            <Map defaultState={defaultState}>
+                <Placemark geometry={[43.3, 77]}/>
+            </Map>
+          </YMaps>
+      </Modal>
     </>
   );
 }
