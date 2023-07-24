@@ -33,8 +33,8 @@ const OrderDelivery = ({
   return (
     <>
       <Row className="mt-2 mb-3">
-        <h4>ЖК</h4>
-        <span>{stocks?.currentStock?.StockName}</span>
+        <h4>Адрес</h4>
+        <span>{stocks?.deliveredAddress?.Aderss}</span>
         <Col>
           <Form.Label htmlFor="home">
             <h6 className="mobile-text">Дом*</h6>

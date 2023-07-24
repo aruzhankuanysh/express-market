@@ -41,7 +41,7 @@ const OrderCompletePage = function () {
       phone.length >= 9 &&
       phone.length <= 10 &&
       home.length >= 1 &&
-      stocks.currentStock?.StockName
+      stocks.deliveredAddress?.zone
     ) {
       let date = new Date();
       date.setMilliseconds(0);
@@ -58,7 +58,7 @@ const OrderCompletePage = function () {
       const order: any = {
         Orders: {
           DateOrder: date.toISOString().replace("0Z", ""),
-          Stock: stocks.currentStock?.StockName,
+          Stock: stocks.deliveredAddress.Aderss,
           Comment: `{${dataComment}, "comment" : "${comment}"}`,
           ClientId: auth?.user?.id ?? "",
           TypePrices: "Прайс-лист",
@@ -155,6 +155,12 @@ const OrderCompletePage = function () {
         </Row>
         <Row>
           <Alert variant={"warning"} className="bg-transparent border-none">
+            {!(stocks.deliveredAddress?.zone) ? (
+              <p>
+                <i className="bi bi-exclamation-circle-fill text-warning"></i>{" "}
+                Данный адрес вне зоны доставки
+              </p>
+            ) : null}
             {!(phone.length >= 9 && phone.length <= 10) ? (
               <p>
                 <i className="bi bi-exclamation-circle-fill text-warning"></i>{" "}

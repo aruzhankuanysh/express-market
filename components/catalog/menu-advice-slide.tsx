@@ -37,6 +37,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "12324312",
       name: "water",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -53,6 +54,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "12344312",
       name: "water1",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -69,6 +71,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "123454312",
       name: "water2",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -85,6 +88,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "123134312",
       name: "water3",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -101,6 +105,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "1243234312",
       name: "water4",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -117,6 +122,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "141234312",
       name: "water5",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -133,6 +139,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "124234312",
       name: "water6",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -149,6 +156,7 @@ const AdviceSlide = ({}): JSX.Element => {
     {
       id: "123244312",
       name: "water6",
+      description: "",
       brand_id: "123",
       category_id: "123",
       parent_category_id: "1231",
@@ -204,6 +212,7 @@ const AdviceSlide = ({}): JSX.Element => {
                     product={{
                       id: productCard.id,
                       name: productCard.name,
+                      description: productCard.description,
                       brand_id: productCard.brand_id,
                       category_id: productCard.category_id,
                       parent_category_id: productCard.parent_category_id,
