@@ -9,6 +9,10 @@ import {
 import { Modal, Button } from "react-bootstrap";
 
 import zons from "../../data/zone-config.json";
+import { useDispatch } from "react-redux";
+import { DeliveredAdres } from "@/specs/gosuTypes";
+import { setDeliveredAddress } from "@/store/stockSlice";
+import { useAppSelector } from "@/store/store";
 
 interface Coordinate {
   lat: number;
@@ -16,15 +20,18 @@ interface Coordinate {
 }
 
 function AdressBar(): JSX.Element {
-  const [show, setShow] = useState(false);
-  const [city, setCity] = useState<any>();
-  const [street, setStreet] = useState<any>();
-  const [house, setHouse] = useState<any>();
-  const [cord, setCord] = useState<any>([41.311, 69.24]);
-  const [mapCenter, setMapCenter] = useState([41.311, 69.24]);
-  const [insidePolygon, setInsidePolygon] = useState(false);
+  const coordinatesAndZone = useAppSelector((state) => state.stock.deliveredAddress);
 
+  const [show, setShow] = useState(false);
+  const [city, setCity] = useState<any>(coordinatesAndZone?.city);
+  const [street, setStreet] = useState<any>(coordinatesAndZone?.street);
+  const [house, setHouse] = useState<any>(coordinatesAndZone?.house);
+  const [cord, setCord] = useState<any>(coordinatesAndZone?.cords ?? [41.311, 69.24]);
+  const [mapCenter, setMapCenter] = useState(coordinatesAndZone?.cords ?? [41.311, 69.24]);
+  const [insidePolygon, setInsidePolygon] = useState(false);
   const [adress, setAdress] = useState("");
+
+  const dispatch = useDispatch();
   
   function isPointInsidePolygon(point: Coordinate, polygon: Coordinate[]): boolean {
     const n = polygon.length;
@@ -111,11 +118,24 @@ function AdressBar(): JSX.Element {
             lng: cord[1]
           }
 
+          let zone = undefined;
+
           for (const zons_list of zons.zone ) {
             if(isPointInsidePolygon(target_point, zons_list.cord)){
+              zone = zons_list
               setInsidePolygon(true);
             }
           }
+
+          const delivered_data:DeliveredAdres = {
+            house: house.join(" ").length > 0 ? house.join(" ") : undefined,
+            street: district.join(" ").length > 0 ? district.join(" ") : undefined,
+            city: locality.join(" ").length > 0 ? locality.join(" ") : undefined,
+            zone: zone?.name,
+            cords: cord
+          }
+
+          dispatch(setDeliveredAddress(delivered_data));
 
           setMapCenter(cord);
         } catch (error) {
@@ -179,7 +199,7 @@ function AdressBar(): JSX.Element {
         onClick={showHandler}
       >
         <span style={{ textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-          {"Укажите адрес доставки"}
+          {adress.length > 2 ? adress : "Укажите адрес доставки"}
         </span>
       </Button>
       <Modal centered onHide={() => setShow(false)} show={show}>
