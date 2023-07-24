@@ -20,32 +20,41 @@ interface Coordinate {
 }
 
 function AdressBar(): JSX.Element {
-  const coordinatesAndZone = useAppSelector((state) => state.stock.deliveredAddress);
+  const coordinatesAndZone = useAppSelector(
+    (state) => state.stock.deliveredAddress
+  );
 
   const [show, setShow] = useState(false);
   const [city, setCity] = useState<any>(coordinatesAndZone?.city);
   const [street, setStreet] = useState<any>(coordinatesAndZone?.street);
   const [house, setHouse] = useState<any>(coordinatesAndZone?.house);
-  const [cord, setCord] = useState<any>(coordinatesAndZone?.cords ?? [41.311, 69.24]);
-  const [mapCenter, setMapCenter] = useState(coordinatesAndZone?.cords ?? [41.311, 69.24]);
+  const [cord, setCord] = useState<any>(
+    coordinatesAndZone?.cords ?? [41.311, 69.24]
+  );
+  const [mapCenter, setMapCenter] = useState(
+    coordinatesAndZone?.cords ?? [41.311, 69.24]
+  );
   const [insidePolygon, setInsidePolygon] = useState(false);
   const [adress, setAdress] = useState("");
 
   const dispatch = useDispatch();
-  
-  function isPointInsidePolygon(point: Coordinate, polygon: Coordinate[]): boolean {
+
+  function isPointInsidePolygon(
+    point: Coordinate,
+    polygon: Coordinate[]
+  ): boolean {
     const n = polygon.length;
     let isInside = false;
-  
+
     const { lat: x, lng: y } = point;
-  
+
     let p1x = polygon[0].lat;
     let p1y = polygon[0].lng;
-  
+
     for (let i = 1; i <= n; i++) {
       const p2x = polygon[i % n].lat;
       const p2y = polygon[i % n].lng;
-  
+
       if (y > Math.min(p1y, p2y)) {
         if (y <= Math.max(p1y, p2y)) {
           if (x <= Math.max(p1x, p2x)) {
@@ -58,11 +67,11 @@ function AdressBar(): JSX.Element {
           }
         }
       }
-  
+
       p1x = p2x;
       p1y = p2y;
     }
-  
+
     return isInside;
   }
 
@@ -77,18 +86,20 @@ function AdressBar(): JSX.Element {
 
   useEffect(() => {
     if (cord.length > 1) {
-
       setInsidePolygon(false);
 
       const reverseGeocode = async () => {
         try {
-          const lang = ru;
+          const lang = `ru`;
           // Запрос к Yandex Geocoder API для получения адреса по координатам
           const response = await fetch(
             `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=89f71fc5-78a5-4747-ad3a-3e9659826490&geocode=${cord[1]},${cord[0]}&lang=${lang}`
           );
           const data = await response.json();
-          console.log("🚀 ~ file: address-bar.tsx:41 ~ reverseGeocode ~ data:", data)
+          console.log(
+            "🚀 ~ file: address-bar.tsx:41 ~ reverseGeocode ~ data:",
+            data
+          );
 
           const address_data =
             data.response.GeoObjectCollection.featureMember[0]?.GeoObject
@@ -110,18 +121,37 @@ function AdressBar(): JSX.Element {
           setStreet(district.join(" ").length > 0 ? district.join(" ") : "");
           setHouse(house.join(" ").length > 0 ? house.join(" ") : "");
 
-          const adress_text = `${locality.join(" ").length > 0 ? locality.join(" ") : ""}, ${district.join(" ").length > 0 ? district.join(" ") : ""}, ${house.join(" ").length > 0 ? house.join(" ") : ""}`
+          const adress_text = `${
+            locality.join(" ").length > 0 ? locality.join(" ") : ""
+          }, ${district.join(" ").length > 0 ? district.join(" ") : ""}, ${
+            house.join(" ").length > 0 ? house.join(" ") : ""
+          }`;
           setAdress(adress_text);
           const target_point: Coordinate = {
             lat: cord[0],
             lng: cord[1],
           };
 
+          let zone = undefined;
+
           for (const zons_list of zons.zone) {
             if (isPointInsidePolygon(target_point, zons_list.cord)) {
+              zone = zons_list;
               setInsidePolygon(true);
             }
           }
+
+          const delivered_data: DeliveredAdres = {
+            house: house.join(" ").length > 0 ? house.join(" ") : undefined,
+            street:
+              district.join(" ").length > 0 ? district.join(" ") : undefined,
+            city:
+              locality.join(" ").length > 0 ? locality.join(" ") : undefined,
+            zone: zone?.name,
+            cords: cord,
+          };
+
+          dispatch(setDeliveredAddress(delivered_data));
 
           setMapCenter(cord);
         } catch (error) {
@@ -192,9 +222,9 @@ function AdressBar(): JSX.Element {
           <input
             className="mx-2 input"
             style={{
-              width: "80%",
+              width: "75%",
               border: "none",
-              padding:"4px 3px 7px 10px"
+              padding: "4px 3px 7px 10px",
             }}
             value={adress}
             onChange={(e) => setAdress(e.target.value ?? "")}
@@ -207,7 +237,7 @@ function AdressBar(): JSX.Element {
             Поиск
           </Button>
         </div>
-        <YMaps
+        <YMaps                            
           query={{
             lang: "ru_RU",
             // apikey: "89f71fc5-78a5-4747-ad3a-3e9659826490",
