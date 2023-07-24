@@ -10,7 +10,7 @@ function AdressBar(): JSX.Element {
   const [adress, setAdress] = useState<any[]>([]);
   const dispatch = useAppDispatch();
   const defaultState = {
-    center: [46, 72],
+    center: [ 41,2646 , 69,2163 ],
     zoom: 5,
   }
 
@@ -49,7 +49,7 @@ function AdressBar(): JSX.Element {
       <Modal centered onHide={() => setShow(false)} show={show}>
           <YMaps >
             <Map defaultState={defaultState}>
-                <Placemark geometry={[43.3, 77]}/>
+                <Placemark geometry={[41,2646, 69,2163 ]}/>
             </Map>
           </YMaps>
       </Modal>
