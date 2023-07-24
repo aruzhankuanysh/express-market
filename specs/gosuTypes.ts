@@ -72,6 +72,18 @@ export type Stock = {
   StockName: string;
 }
 
+export interface DeliveredAdres {
+  house: string;
+  street: string;
+  city: string;
+  zone: string | undefined;
+  cords: number[] | undefined;
+}
+
+export interface Delivered extends DeliveredAdres {
+  Aderss: string;
+}
+
 export type ItemsOrder = {
   IdItem: string;
   QuantityItem: number;

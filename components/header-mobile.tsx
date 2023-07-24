@@ -9,7 +9,7 @@ import DropdownMenu from "./ui-elements/mobile-dropdown";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setCategory } from "@/store/categorySlice";
-import { setStocks } from "@/store/stockSlice";
+// import { setStocks } from "@/store/stockSlice";
 import AppService from "@/specs/gosuService";
 import { CSSTransition } from "react-transition-group";
 import { IcartImg, removeProduct, setImages } from "@/store/cartSlice";
@@ -64,11 +64,11 @@ function MobileHeader(): JSX.Element {
         dispatch(setCategory(res["Category"]));
       }
     });
-    AppService.getStocks().then((res) => {
-      if (res) {
-        dispatch(setStocks(res["Stock"]));
-      }
-    });
+    // AppService.getStocks().then((res) => {
+    //   if (res) {
+    //     dispatch(setStocks(res["Stock"]));
+    //   }
+    // });
   }, []);
 
   useEffect(() => {

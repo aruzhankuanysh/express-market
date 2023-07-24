@@ -10,7 +10,7 @@ import DropdownCart from "./ui-elements/dropdown-cart";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setCategory } from "@/store/categorySlice";
-import { setStocks } from "@/store/stockSlice";
+// import { setStocks } from "@/store/stockSlice";
 import AppService from "@/specs/gosuService";
 import { IcartImg, removeProduct, setImages } from "@/store/cartSlice";
 import { Product } from "@/specs/gosuTypes";
@@ -49,11 +49,11 @@ function Header(): JSX.Element {
         dispatch(setCategory(res["Category"]));
       }
     });
-    AppService.getStocks().then((res) => {
-      if (res) {
-        dispatch(setStocks(res["Stock"]));
-      }
-    });
+    // AppService.getStocks().then((res) => {
+    //   if (res) {
+    //     dispatch(setStocks(res["Stock"]));
+    //   }
+    // });
   }, []);
 
   useEffect(() => {

@@ -29,7 +29,7 @@ const makeStore = wrapMakeStore(() =>
             "cart.discount",
             "cart.total",
             "cart.products",
-            "stock.currentStock",
+            "stock",
           ],
         })
       ),
