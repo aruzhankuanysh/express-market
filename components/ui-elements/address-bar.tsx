@@ -316,7 +316,7 @@ function AdressBar(): JSX.Element {
           </Map>
         </YMaps>
       </Modal>
-    </>
+    </> 
   );
 }
 
