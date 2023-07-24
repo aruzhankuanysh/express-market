@@ -25,20 +25,23 @@ function AdressBar(): JSX.Element {
   const [insidePolygon, setInsidePolygon] = useState(false);
 
   const [adress, setAdress] = useState("");
-  
-  function isPointInsidePolygon(point: Coordinate, polygon: Coordinate[]): boolean {
+
+  function isPointInsidePolygon(
+    point: Coordinate,
+    polygon: Coordinate[]
+  ): boolean {
     const n = polygon.length;
     let isInside = false;
-  
+
     const { lat: x, lng: y } = point;
-  
+
     let p1x = polygon[0].lat;
     let p1y = polygon[0].lng;
-  
+
     for (let i = 1; i <= n; i++) {
       const p2x = polygon[i % n].lat;
       const p2y = polygon[i % n].lng;
-  
+
       if (y > Math.min(p1y, p2y)) {
         if (y <= Math.max(p1y, p2y)) {
           if (x <= Math.max(p1x, p2x)) {
@@ -51,11 +54,11 @@ function AdressBar(): JSX.Element {
           }
         }
       }
-  
+
       p1x = p2x;
       p1y = p2y;
     }
-  
+
     return isInside;
   }
 
@@ -70,7 +73,6 @@ function AdressBar(): JSX.Element {
 
   useEffect(() => {
     if (cord.length > 1) {
-
       setInsidePolygon(false);
 
       const reverseGeocode = async () => {
@@ -81,7 +83,10 @@ function AdressBar(): JSX.Element {
             `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=89f71fc5-78a5-4747-ad3a-3e9659826490&geocode=${cord[1]},${cord[0]}&lang=${lang}`
           );
           const data = await response.json();
-          console.log("🚀 ~ file: address-bar.tsx:41 ~ reverseGeocode ~ data:", data)
+          console.log(
+            "🚀 ~ file: address-bar.tsx:41 ~ reverseGeocode ~ data:",
+            data
+          );
 
           const address_data =
             data.response.GeoObjectCollection.featureMember[0]?.GeoObject
@@ -103,16 +108,20 @@ function AdressBar(): JSX.Element {
           setStreet(district.join(" ").length > 0 ? district.join(" ") : "");
           setHouse(house.join(" ").length > 0 ? house.join(" ") : "");
 
-          const adress_text = `${locality.join(" ").length > 0 ? locality.join(" ") : ""}, ${district.join(" ").length > 0 ? district.join(" ") : ""}, ${house.join(" ").length > 0 ? house.join(" ") : ""}`
-          
-          setAdress(adress_text)
-          const target_point:Coordinate = {
-            lat: cord[0],
-            lng: cord[1]
-          }
+          const adress_text = `${
+            locality.join(" ").length > 0 ? locality.join(" ") : ""
+          }, ${district.join(" ").length > 0 ? district.join(" ") : ""}, ${
+            house.join(" ").length > 0 ? house.join(" ") : ""
+          }`;
 
-          for (const zons_list of zons.zone ) {
-            if(isPointInsidePolygon(target_point, zons_list.cord)){
+          setAdress(adress_text);
+          const target_point: Coordinate = {
+            lat: cord[0],
+            lng: cord[1],
+          };
+
+          for (const zons_list of zons.zone) {
+            if (isPointInsidePolygon(target_point, zons_list.cord)) {
               setInsidePolygon(true);
             }
           }
@@ -126,36 +135,35 @@ function AdressBar(): JSX.Element {
     }
   }, [cord]);
 
-  useEffect(() => {}, [])
+  useEffect(() => {}, []);
 
-  const getLocation = async (adress : string) => {
+  const getLocation = async (adress: string) => {
     try {
       let new_adress = (adress ?? "")
-        .replace('koʻchasi', '')
-        .replace('ʻ', '')
-        .replace('улица', '')
-        .replace(',', '');
-       
+        .replace("koʻchasi", "")
+        .replace("ʻ", "")
+        .replace("улица", "")
+        .replace(",", "");
+
       const response = await fetch(
         `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=89f71fc5-78a5-4747-ad3a-3e9659826490&geocode=${encodeURIComponent(
-          new_adress,
-        )}`,
+          new_adress
+        )}`
       );
       const data = await response.json();
 
       // Парсинг координат из ответа
       const coordinates =
         data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos.split(
-          ' ',
+          " "
         );
       const lat = parseFloat(coordinates[1]);
-      console.log("🚀 ~ file: address-bar.tsx:157 ~ getLocation ~ lat:", lat)
+      console.log("🚀 ~ file: address-bar.tsx:157 ~ getLocation ~ lat:", lat);
       const lng = parseFloat(coordinates[0]);
-      console.log("🚀 ~ file: address-bar.tsx:159 ~ getLocation ~ lng:", lng)
+      console.log("🚀 ~ file: address-bar.tsx:159 ~ getLocation ~ lng:", lng);
 
-      const cord_buf = [lat, lng]
-      setCord(cord_buf)
-
+      const cord_buf = [lat, lng];
+      setCord(cord_buf);
     } catch (err) {
       console.log(err);
     }
@@ -183,9 +191,24 @@ function AdressBar(): JSX.Element {
         </span>
       </Button>
       <Modal centered onHide={() => setShow(false)} show={show}>
-        <div>
-          <input value={adress} onChange={(e) => setAdress(e.target.value ?? "")} />
-          <Button onClick={() => {getLocation(adress)}}>Поиск</Button>
+        <div className="my-2">
+          <input
+            className="mx-2 input"
+            style={{
+              width: "80%",
+              border: "none",
+              padding:"4px 3px 7px 10px"
+            }}
+            value={adress}
+            onChange={(e) => setAdress(e.target.value ?? "")}
+          />
+          <Button
+            onClick={() => {
+              getLocation(adress);
+            }}
+          >
+            Поиск
+          </Button>
         </div>
         <YMaps
           query={{
@@ -204,7 +227,7 @@ function AdressBar(): JSX.Element {
               width: "100%",
               height: "420px",
             }}
-            modules={['geoObject.addon.balloon', 'geoObject.addon.hint']}
+            modules={["geoObject.addon.balloon", "geoObject.addon.hint"]}
           >
             <ZoomControl />
             {/* <GeolocationControl options={{ float: "right" }} /> */}
@@ -255,8 +278,12 @@ function AdressBar(): JSX.Element {
               }}
               properties={{
                 iconContent: `📦`, // пару символов помещается
-                hintContent: `<em>${insidePolygon ? "Мы доставляем сюда" : "Вне зоны доставки"}</em>`,
-                iconCaption: `${insidePolygon ? "Мы доставляем сюда" : "Вне зоны доставки"}`,
+                hintContent: `<em>${
+                  insidePolygon ? "Мы доставляем сюда" : "Вне зоны доставки"
+                }</em>`,
+                iconCaption: `${
+                  insidePolygon ? "Мы доставляем сюда" : "Вне зоны доставки"
+                }`,
               }}
             />
           </Map>

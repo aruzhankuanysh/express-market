@@ -162,7 +162,7 @@ function LoginPhone({
           <Row>
             <Button
               disabled={!(phoneNumber.length >= 9 && phoneNumber.length < 10 && password.length >= 5)}
-              className="sms_btn animate_button"
+              className="mt-0 mb-2 sms_btn animate_button "
               onClick={() => handlerSendCode()}
             >
               Вход / Регистрация 

@@ -121,6 +121,10 @@ body {
   background-blend-mode: multiply !important;
 }
 
+.input:focus {
+  border: none !important;
+}
+
 h1 {
   font-size: 32px !important;
 }
