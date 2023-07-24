@@ -36,17 +36,17 @@ const Index: NextPage = () => {
     }
   }, [cart_products, product]);
 
-  const productsTags = [
-    // {
-    //   tag: "-40%",
-    // },
-    // {
-    //   tag: "Новинка",
-    // },
-    // {
-    //   tag: "Испекли сами",
-    // },
-  ];
+  // const productsTags = [
+  //   // {
+  //   //   tag: "-40%",
+  //   // },
+  //   // {
+  //   //   tag: "Новинка",
+  //   // },
+  //   // {
+  //   //   tag: "Испекли сами",
+  //   // },
+  // ];
 
   useEffect(() => {
     AppService.getProduct(route.query["productId"]?.toString()).then((res) => {
@@ -173,14 +173,14 @@ const Index: NextPage = () => {
                   </h3>
                 </Col>
               </Row>
-              <Col className="mt-4">
+              {/* <Col className="mt-4">
                 <span className="text_grey">Описание</span>
                 <br />
                 Классика французской кухни — багет на пшеничной муке с хрустящей
                 корочкой и нежным, слегка пористым мякишем.
-              </Col>
+              </Col> */}
               <Col className="mt-4">
-                <span className="text_grey">Состав</span> <br />
+                {/* <span className="text_grey">Состав</span> <br />
                 Мука пшеничная хлебопекарная высшего сорта, вода питьевая, соль
                 пищевая, дрожжи хлебопекарные прессованные,улучшитель
                 хлебопекарный лучшитель хлебопекарный (мука пшеничная
@@ -189,9 +189,11 @@ const Index: NextPage = () => {
                 хлебопекарный (мука пшеничная, стабилизатор карбонат кальция,
                 эмульгатор (Е472е), антиокислитель аскорбиновая кислота,
                 вещество для обработки муки L-цистеин, ферменты (альфа-амилазы,
-                ксиланаза, липаза)).
+                ксиланаза, липаза)). */}
+                <p>{product?.description}</p>
               </Col>
-              <Col className="mt-4">
+
+              {/* <Col className="mt-4">
                 <span className="text_grey">
                   Срок годности, условия хранения
                 </span>
@@ -201,7 +203,7 @@ const Index: NextPage = () => {
                 <span className="text_grey">Производитель, страна</span>
                 <br />
                 ООО «Партия Еды», Россия
-              </Col>
+              </Col> */}
             </Container>
           </Row>
         </Container>

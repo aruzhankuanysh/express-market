@@ -129,11 +129,12 @@ function LoginPhone({
           Введите телефон и пароль для продолжения
         </Modal.Title>
         <Form>
-          <Form.Group as={Row} className="phone_num_row my-4">
+          <Form.Group as={Row} className="phone_num_row my-4 m-auto">
             <Form.Label column className="phone_label">
               +998
             </Form.Label>
             <Form.Control
+            style={{width:"80%"}}
               type="tel"
               className="phone_num"
               value={phoneNumber}
@@ -144,11 +145,13 @@ function LoginPhone({
               maxLength={9}
             />
           </Form.Group>
-          <Form.Group as={Row} className="phone_num_row my-4">
+          <Form.Group as={Row} className=" my-4 m-auto">
             <Form.Control
+              style={{width:"75%"}}
               type="password"
-              className="phone_num ms-5 my-2"
+              className="ms-5 my-2"
               value={password}
+              placeholder="Введите пароль"
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 setPassword(e.target.value);
               }}

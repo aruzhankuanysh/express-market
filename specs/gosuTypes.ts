@@ -45,6 +45,7 @@ export type Product = {
   id: string;
   name: string;
   brand_id: string;
+  description: string;
   category_id: string;
   parent_category_id: string;
   weight: string;
