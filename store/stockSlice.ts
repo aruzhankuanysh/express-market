@@ -34,7 +34,7 @@ export const stockSlice = createSlice({
       const street = action.payload.street;
       const city = action.payload.city
 
-      const adress = `${city}, ${street}, ${house}`
+      const adress = `${city ?? ""}, ${street ?? ""}`
 
       const date: Delivered = {...action.payload, Aderss: adress}
       state.deliveredAddress = date;

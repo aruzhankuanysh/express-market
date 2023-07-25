@@ -20,7 +20,6 @@ function DropdownMenu() {
   const router = useRouter();
 
   useEffect(() => {
-    // console.log(categories.categories);
   }, [categories.categories]);
   const [show, setshow] = useState(false);
 

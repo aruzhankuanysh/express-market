@@ -96,10 +96,6 @@ function AdressBar(): JSX.Element {
             `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=89f71fc5-78a5-4747-ad3a-3e9659826490&geocode=${cord[1]},${cord[0]}&lang=${lang}`
           );
           const data = await response.json();
-          console.log(
-            "🚀 ~ file: address-bar.tsx:41 ~ reverseGeocode ~ data:",
-            data
-          );
 
           const address_data =
             data.response.GeoObjectCollection.featureMember[0]?.GeoObject
@@ -185,14 +181,12 @@ function AdressBar(): JSX.Element {
           " "
         );
       const lat = parseFloat(coordinates[1]);
-      console.log("🚀 ~ file: address-bar.tsx:157 ~ getLocation ~ lat:", lat);
       const lng = parseFloat(coordinates[0]);
-      console.log("🚀 ~ file: address-bar.tsx:159 ~ getLocation ~ lng:", lng);
 
       const cord_buf = [lat, lng];
       setCord(cord_buf);
     } catch (err) {
-      console.log(err);
+      console.log('Ошибка', err);
     }
   };
 

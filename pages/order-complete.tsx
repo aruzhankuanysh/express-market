@@ -15,11 +15,13 @@ import { useRouter } from "next/router";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const OrderCompletePage = function () {
+  const stocks = useAppSelector((state) => state.stock);
+
   const [intercom, setIntercom] = useState("");
   const [floor, setFloor] = useState("1");
   const [entrance, setEntrance] = useState("");
   const [apartment, setApartment] = useState("");
-  const [home, setHome] = useState("");
+  const [home, setHome] = useState(stocks.deliveredAddress?.house ?? "");
 
   const auth = useAppSelector((state) => state.auth);
 
@@ -58,8 +60,9 @@ const OrderCompletePage = function () {
       const order: any = {
         Orders: {
           DateOrder: date.toISOString().replace("0Z", ""),
-          Stock: stocks.deliveredAddress.Aderss,
-          Comment: `{${dataComment}, "comment" : "${comment}"}`,
+          // Stock: stocks.deliveredAddress.Aderss,
+          address: stocks.deliveredAddress.Aderss,
+          Comment: `{${dataComment}, "comment" : "${comment}", "cords" : "${stocks.deliveredAddress.cords ? stocks.deliveredAddress.cords[0] : 0}, ${stocks.deliveredAddress.cords ? stocks.deliveredAddress.cords[1] : 0}"}`,
           ClientId: auth?.user?.id ?? "",
           TypePrices: "Прайс-лист",
           ItemsOrder: items,
@@ -74,8 +77,6 @@ const OrderCompletePage = function () {
       });
     }
   };
-
-  const stocks = useAppSelector((state) => state.stock);
 
   return (
     <>

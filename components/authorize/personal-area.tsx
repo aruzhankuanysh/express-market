@@ -427,6 +427,7 @@ const PersonalArea = (): JSX.Element => {
           {selectedOrder && showOrderDetails && (
             <Container className="order_details">
               {ordersHistory.map((order) => {
+                console.log("🚀 ~ file: personal-area.tsx:671 ~ {ordersHistory.map ~ order:", order)
                 let home = "";
                 let comment = "";
                 if (order?.Comment.includes('"adress"')) {

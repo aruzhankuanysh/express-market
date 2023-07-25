@@ -41,8 +41,6 @@ function LoginPhone({
 
     const handlerVerCode = (value: string, phone: string) => {
       AppService.postLogin(`998${phone}`, value).then((response) => {
-        console.log("🚀 ~ file: login-phone.tsx:45 ~ AppService.postLogin ~ response:", response)
-
         if (response?.Token?.accessToken) {
           dispath(setAccessToken(response.Token?.accessToken ?? ""));
           dispath(setRefreshTokens(response.Token?.refreshToken ?? ""));

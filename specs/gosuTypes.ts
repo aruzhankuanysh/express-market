@@ -92,7 +92,8 @@ export type ItemsOrder = {
 
 export type Order = {
   DateOrder: string | undefined;
-  Stock: string;
+  // Stock: string;
+  address: string;
   Comment: string;
   ClientId: string | undefined;
   TypePrices: string;

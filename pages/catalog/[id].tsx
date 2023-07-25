@@ -59,8 +59,6 @@ const Menu = (): JSX.Element => {
   }, [brand, children]);
 
   useEffect(() => {
-    console.log(router.query["id"]);
-    console.log(router.query);
     router.query["children"]
       ? setChildren(router.query["children"].toString())
       : setChildren("");
@@ -115,7 +113,6 @@ const Menu = (): JSX.Element => {
           }
         }
       }
-      console.log("fff", categories.categories[index]);
     }
   }, [
     ProductsList,

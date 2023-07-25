@@ -13,8 +13,6 @@ const CategoriesNav = ({}): JSX.Element => {
   const [children, setChildren] = useState("");
 
   useEffect(() => {
-    // console.log(router.query["id"]);
-    // console.log(router.query);
     router.query["children"] ? setChildren(router.query["children"].toString()) : setChildren("");
   }, [router.pathname, router.query]);
 

@@ -1,5 +1,4 @@
 import { useAppSelector } from "@/store/store";
-import { useEffect } from "react";
 import { Button, Navbar } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import { useRouter } from "next/router";
@@ -7,10 +6,6 @@ import { useRouter } from "next/router";
 const MenuSideNav = ({}): JSX.Element => {
   const categories = useAppSelector((state) => state.category);
   const router = useRouter();
-
-  useEffect(() => {
-    // console.log(categories.categories);
-  }, [categories.categories]);
 
   return (
     <>

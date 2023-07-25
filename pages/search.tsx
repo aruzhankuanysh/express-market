@@ -82,7 +82,6 @@ export default function search() {
   };
 
   useEffect(() => {
-    // console.log(categories.categories);
   }, [categories.categories]);
   const [show, setshow] = useState(false);
 

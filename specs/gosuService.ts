@@ -13,14 +13,14 @@ class ApplicationService {
     };
 
     // GET – получает массив с наименованием складов
-    getStocks = async () => {
-        try {
-            const response = await api.get(`Stock`);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    // getStocks = async () => {
+    //     try {
+    //         const response = await api.get(`Stock`);
+    //         return response.data;
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
 
     // GET – получает список товаров в массиве
     getProducts = async (CategoryId?: string) => {
