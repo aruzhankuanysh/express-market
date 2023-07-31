@@ -26,11 +26,11 @@ function Footer(): JSX.Element {
               </Container>
               <Container className="About_wrapper">
                 <Row>
-                  <Col>Главная</Col>
+                  {/* <Col>Главная</Col>
                   <Col>Акции</Col>
-                  <Col>Доставка</Col>
+                  <Col>Доставка</Col> */}
                 </Row>
-                <Col>О нас</Col>
+                {/* <Col>О нас</Col> */}
               </Container>
               <Container className="social_wrapper">
                 <Row>

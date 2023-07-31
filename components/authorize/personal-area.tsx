@@ -427,7 +427,6 @@ const PersonalArea = (): JSX.Element => {
           {selectedOrder && showOrderDetails && (
             <Container className="order_details">
               {ordersHistory.map((order) => {
-                console.log("🚀 ~ file: personal-area.tsx:671 ~ {ordersHistory.map ~ order:", order)
                 let home = "";
                 let comment = "";
                 if (order?.Comment.includes('"adress"')) {
@@ -509,7 +508,7 @@ const PersonalArea = (): JSX.Element => {
                             </Row>
                             <Row style={{ textAlign: "center" }}>
                               <p className="mobile-text-smallest">
-                                {order.StockOrder}
+                                {order.StockOrder}{", "}
                                 {home}
                               </p>
                             </Row>
