@@ -57,7 +57,7 @@ pnpm build
 #### Настройка и создание ".env.local"
 
 - Создайте файл `.env.local` в корневом каталоге проекта.
-- Используя как референс `exemplle.env.local.txt` создайте переменную среды содержащую API_KEY для работы с [YandexAPI](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
+- Используя как референс `exemple.env.local.txt` создайте переменную среды содержащую API_KEY для работы с [YandexAPI](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
 - Для получения ключа необходимо перейти в [Кабинета разработчика Яндекс](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
 - Во всплывающем окне вам нужно выбрать тип ключа «JavaScript API и HTTP Геокодер».
 - На следующем шаге заполните поля.
