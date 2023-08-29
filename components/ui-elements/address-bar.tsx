@@ -19,6 +19,8 @@ interface Coordinate {
   lng: number;
 }
 
+const YANDEX_GEOCODER_API_KEY = process.env.NEXT_PUBLIC_YANDEX_GEOCODER_API_KEY
+
 function AdressBar(): JSX.Element {
   const coordinatesAndZone = useAppSelector(
     (state) => state.stock.deliveredAddress
@@ -93,7 +95,7 @@ function AdressBar(): JSX.Element {
           const lang = `ru`;
           // Запрос к Yandex Geocoder API для получения адреса по координатам
           const response = await fetch(
-            `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=89f71fc5-78a5-4747-ad3a-3e9659826490&geocode=${cord[1]},${cord[0]}&lang=${lang}`
+            `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${YANDEX_GEOCODER_API_KEY}&geocode=${cord[1]},${cord[0]}&lang=${lang}`
           );
           const data = await response.json();
 
@@ -169,7 +171,7 @@ function AdressBar(): JSX.Element {
         .replace(",", "");
 
       const response = await fetch(
-        `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=89f71fc5-78a5-4747-ad3a-3e9659826490&geocode=${encodeURIComponent(
+        `https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${YANDEX_GEOCODER_API_KEY}&geocode=${encodeURIComponent(
           new_adress
         )}`
       );

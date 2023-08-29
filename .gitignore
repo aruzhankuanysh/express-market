@@ -122,3 +122,4 @@ apps/ys-mobile-e2e/artifacts
 
 # Next.js
 .next
+.env.local

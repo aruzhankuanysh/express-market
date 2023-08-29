@@ -6,7 +6,7 @@ import {
 } from "@/store/authSlice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Form, Row } from "react-bootstrap";
 
 type SmsModalProps = {
