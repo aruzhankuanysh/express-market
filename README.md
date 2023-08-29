@@ -1,9 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Проект по разработке сайта интернет-магазина для компании Express Market
 
-## Getting Started
+[![Figma - Экраны](https://github.com/GOSUKZ/ys/blob/master/figma.svg)](https://www.figma.com/file/Yd2IZSeZ51BGiLbtF6fyUF/Express-dark-store?type=design&node-id=0%3A1&mode=design&t=UDZVWDfoAvsoQRQB-1)
+[![Vercel - Развёртывания](https://github.com/GOSUKZ/ys/blob/master/vercel.svg)](https://express-market.vercel.app)
 
-First, run the development server:
+## Как начать работать над приложением
 
+#### Init project
+
+```bash
+npm i
+# or
+yarn add
+# or
+pnpm i
+```
+
+#### Run development
+ 
 ```bash
 npm run dev
 # or
@@ -12,27 +25,43 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Run production
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### Настройка и создание ".env.local"
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
++ Создайте файл `.env.local` в корневом каталоге проекта.
++ Используя как референс `exemplle.env.local.txt` создайте переменную среды содержащую API_KEY для работы с [YandexAPI](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
++ Для получения ключа необходимо перейти в [Кабинета разработчика Яндекс](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
++ Во всплывающем окне вам нужно выбрать тип ключа «JavaScript API и HTTP Геокодер».
++ На следующем шаге заполните поля.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Развёртывание проекта на Vercel
+
++ Переходим на [Vercel.com](https://vercel.com/new).
++ В форме "Import Git Repository" выбераем свой репозиторий.
++ Нажимаем Import
++ В форме "Configure Project" устанавлеваем следующие настройки:
+
+```
+	Project Name : `ExpressMarket`
+	Framework Preset : `Next.js`
+	Root Directory : `./`
+```
+
++ Во вкладке "Environment Variables" добавте переменную среды.
++ Получение данных для переменной (см. шаг `Настройка и создание ".env.local"`)
++ Нажимаем Deploy
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
