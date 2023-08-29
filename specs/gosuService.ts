@@ -76,9 +76,10 @@ class ApplicationService {
         }
     };
 
-    deleteOrder = async (data:{ IdOrder: string, token: string }) => {
+    // GET – удалить/отменить заказ
+    deleteOrder = async (data: { IdOrder: string, token: string }) => {
         try {
-            const response = await api.delete(`Orders`, {data})
+            const response = await api.delete(`Orders`, { data })
             return response.data;
         } catch (error) {
             console.error(error)

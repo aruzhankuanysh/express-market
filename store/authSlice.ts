@@ -32,21 +32,27 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    // Задать пользователя 
     setUser(state, action) {
       state.user = { ...action.payload };
     },
+    // Задать состояние авторизации
     setAuthState(state, action) {
       state.authState = action.payload;
     },
+    // Задать refreshToken
     setRefreshTokens(state, action) {
       state.refreshToken = action.payload;
     },
+    // Задать authToken
     setAccessToken(state, action) {
       state.authToken = action.payload;
     },
+    // Задать состояние флага rememberMe
     setRememberMe(state, action) {
       state.rememberMe = action.payload;
     },
+    // Задать состояние флага acceptTerms
     setAcceptTerms(state, action) {
       state.acceptTerms = action.payload;
     }

@@ -8,8 +8,8 @@ export interface IcartImg {
 }
 
 export interface ICartProduct {
-    count: number;
-    item: MiniProduct;
+  count: number;
+  item: MiniProduct;
 }
 
 export interface ICartState {
@@ -26,7 +26,7 @@ const initialState: ICartState = {
   discount: 0,
 };
 
-const MiniProduct = (prod:Product | MiniProduct) => {
+const MiniProduct = (prod: Product | MiniProduct) => {
   return {
     id: prod.id,
     name: prod.name,
@@ -39,44 +39,47 @@ const MiniProduct = (prod:Product | MiniProduct) => {
 }
 
 const calcTotal = (cart: ICartProduct[]) => {
-    const total = cart.reduce((acc, cur) => acc + cur.item.price * cur.count, 0);
-    return total;
+  const total = cart.reduce((acc, cur) => acc + cur.item.price * cur.count, 0);
+  return total;
 }
 
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // Добавить 1 продукт
     incProduct: (state, action: PayloadAction<Product | MiniProduct>) => {
-        if (state.products) {
-            const index = state.products.findIndex(item => item.item.id === action.payload.id);
-            if (index >= 0) {
-                state.products[index].count += 1;
-            } else {
-                const mini_buf:MiniProduct = MiniProduct(action.payload);
-                state.products = [...state.products, {"item":mini_buf, "count": 1}];
-            }
-            state.total = calcTotal(state.products);
+      if (state.products) {
+        const index = state.products.findIndex(item => item.item.id === action.payload.id);
+        if (index >= 0) {
+          state.products[index].count += 1;
         } else {
-          const mini_buf:MiniProduct = MiniProduct(action.payload);
-          state.products = [{"item":mini_buf, "count": 1}];
-          state.total = calcTotal(state.products);
+          const mini_buf: MiniProduct = MiniProduct(action.payload);
+          state.products = [...state.products, { "item": mini_buf, "count": 1 }];
+        }
+        state.total = calcTotal(state.products);
+      } else {
+        const mini_buf: MiniProduct = MiniProduct(action.payload);
+        state.products = [{ "item": mini_buf, "count": 1 }];
+        state.total = calcTotal(state.products);
 
-        }
+      }
     },
+    // Уддалить 1 продукт
     decProduct: (state, action: PayloadAction<Product | MiniProduct>) => {
-        if (state.products) {
-            const index = state.products.findIndex(item => item.item.id === action.payload.id);
-            if (index >= 0) {
-                if (state.products[index].count >= 2) {
-                    state.products[index].count -= 1;
-                }else {
-                    state.products.splice(index, 1);
-                }
-                state.total = calcTotal(state.products);
-            }
+      if (state.products) {
+        const index = state.products.findIndex(item => item.item.id === action.payload.id);
+        if (index >= 0) {
+          if (state.products[index].count >= 2) {
+            state.products[index].count -= 1;
+          } else {
+            state.products.splice(index, 1);
+          }
+          state.total = calcTotal(state.products);
         }
+      }
     },
+    // Уддалить продукт
     removeProduct: (state, action: PayloadAction<Product | MiniProduct>) => {
       if (state.products) {
         const index = state.products.findIndex(item => item.item.id === action.payload.id);
@@ -86,12 +89,14 @@ export const cartSlice = createSlice({
         state.total = calcTotal(state.products);
       }
     },
+    // Очистить карзину
     removeAllProducts: (state) => {
       if (state.products) {
         state.products = null;
         state.total = 0;
       }
     },
+    // Инициализация списка изображений 
     setImages: (state, action: PayloadAction<IcartImg[] | null>) => {
       state.images = action.payload;
     }

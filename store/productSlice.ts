@@ -14,6 +14,7 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+      // Инициализация списка продуктов
     setProducts(state, action:PayloadAction<Product[]>) {
       // state.products = action.payload;
     },

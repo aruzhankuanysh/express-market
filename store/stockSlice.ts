@@ -29,6 +29,7 @@ export const stockSlice = createSlice({
     //     state.currentStock = action.payload;
     // }
 
+    // Инициализация адреса ддоставки
     setDeliveredAddress(state, action: PayloadAction<DeliveredAdres>) {
       const house =  action.payload.house;
       const street = action.payload.street;
