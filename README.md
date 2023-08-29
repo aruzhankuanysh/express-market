@@ -3,6 +3,16 @@
 [![Figma - Экраны](https://github.com/GOSUKZ/ys/blob/master/figma.svg)](https://www.figma.com/file/Yd2IZSeZ51BGiLbtF6fyUF/Express-dark-store?type=design&node-id=0%3A1&mode=design&t=UDZVWDfoAvsoQRQB-1)
 [![Vercel - Развёртывания](https://github.com/GOSUKZ/ys/blob/master/vercel.svg)](https://express-market.vercel.app)
 
+## Команда
+
+| Имя          | Telegram                             | E-mail (для доступа к сервисам) | Зона ответственности              |
+| ------------ | ------------------------------------ | ------------------------------- | --------------------------------- |
+| Саидов Дамир | [@kemar1k](https://t.me/kemar1k)     | saidov.d@gosu.kz                | Скрам мастер, управление задачами |
+| Максим       | [@ElPepegus](https://t.me/ElPepegus) | -                               | фронтенд (вёрстка)                |
+| Аружан       | [@aruka_345](https://t.me/aruka_345) | -                               | фронтенд (вёрстка)                |
+| Артем        | [@void314](https://t.me/void314)     | -                               | фронтенд (pnpm, vercel)           |
+| Влад         | [@Luxidas](https://t.me/Luxidas)     | -                               | бэкенд (API, 1C)                  |
+
 ## Как начать работать над приложением
 
 #### Init project
@@ -16,7 +26,7 @@ pnpm i
 ```
 
 #### Run development
- 
+
 ```bash
 npm run dev
 # or
@@ -37,18 +47,18 @@ pnpm build
 
 #### Настройка и создание ".env.local"
 
-+ Создайте файл `.env.local` в корневом каталоге проекта.
-+ Используя как референс `exemplle.env.local.txt` создайте переменную среды содержащую API_KEY для работы с [YandexAPI](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
-+ Для получения ключа необходимо перейти в [Кабинета разработчика Яндекс](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
-+ Во всплывающем окне вам нужно выбрать тип ключа «JavaScript API и HTTP Геокодер».
-+ На следующем шаге заполните поля.
+- Создайте файл `.env.local` в корневом каталоге проекта.
+- Используя как референс `exemplle.env.local.txt` создайте переменную среды содержащую API_KEY для работы с [YandexAPI](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
+- Для получения ключа необходимо перейти в [Кабинета разработчика Яндекс](https://passport.yandex.ru/auth/list?retpath=https%3A%2F%2Fdeveloper.tech.yandex.ru%2F&origin=apikeys).
+- Во всплывающем окне вам нужно выбрать тип ключа «JavaScript API и HTTP Геокодер».
+- На следующем шаге заполните поля.
 
 ## Развёртывание проекта на Vercel
 
-+ Переходим на [Vercel.com](https://vercel.com/new).
-+ В форме "Import Git Repository" выбераем свой репозиторий.
-+ Нажимаем Import
-+ В форме "Configure Project" устанавлеваем следующие настройки:
+- Переходим на [Vercel.com](https://vercel.com/new).
+- В форме "Import Git Repository" выбераем свой репозиторий.
+- Нажимаем Import
+- В форме "Configure Project" устанавлеваем следующие настройки:
 
 ```
 	Project Name : `ExpressMarket`
@@ -56,9 +66,9 @@ pnpm build
 	Root Directory : `./`
 ```
 
-+ Во вкладке "Environment Variables" добавте переменную среды.
-+ Получение данных для переменной (см. шаг `Настройка и создание ".env.local"`)
-+ Нажимаем Deploy
+- Во вкладке "Environment Variables" добавте переменную среды.
+- Получение данных для переменной (см. шаг `Настройка и создание ".env.local"`)
+- Нажимаем Deploy
 
 ## Learn More
 
