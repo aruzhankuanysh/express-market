@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Advice from "@/components/catalog/menu-advice-slide";
 import { Container, Row, Col } from "react-bootstrap";
-import Slider from "@/components/slider";
+import Slider from "@/components/catalog/slider";
 import Counter from "@/components/ui-elements/count-button";
 import PageContent from "@/components/page-content";
 import { useEffect, useState } from "react";

@@ -11,7 +11,7 @@ import {
   ToggleButton,
   Modal,
 } from "react-bootstrap";
-import MyDateTimePicker from "../datetimepicker";
+import MyDateTimePicker from "../ui-elements/datetimepicker";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { OrderData, User, registerUser, updateUser } from "@/specs/gosuTypes";
 import {
